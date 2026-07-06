@@ -1,0 +1,176 @@
+@use 'fluid' as *;
+
+$font-family-primary: 'Inter Tight', Arial, sans-serif;
+$font-family-heading: 'Oceanic Grotesk Condensed', 'Inter Tight', Arial, sans-serif;
+$font-family: $font-family-primary;
+
+$viewport-min: 375px;
+$viewport-max: 1440px;
+
+$content-width: rem(1280px);
+$container-offset: rem(24px);
+$container-width: $content-width + ($container-offset * 2);
+
+$breakpoint-tablet: rem(1024px);
+$breakpoint-mobile: rem(767px);
+
+$white: #ffffff;
+$black: #000000;
+
+$gray-25: #fcfcfc;
+$gray-50: #fafafa;
+$gray-100: #f4f4f5;
+$gray-200: #e4e4e7;
+$gray-300: #d1d1d6;
+$gray-400: #a0a0ab;
+$gray-500: #70707b;
+$gray-600: #51525c;
+$gray-700: #3f3f46;
+$gray-800: #26272b;
+$gray-900: #18181b;
+$gray-950: #131316;
+
+$red-100: #ffe4e8;
+$red-200: #fecdd6;
+$red-300: #fea3b4;
+$red-400: #fd6f8e;
+$red-500: #f63d68;
+$red-600: #e31b54;
+$red-700: #c01048;
+$red-800: #a11043;
+$red-900: #89123e;
+
+$violet-100: #ece9fe;
+$violet-200: #ddd6fe;
+$violet-300: #c3b5fd;
+$violet-400: #9b8afb;
+$violet-500: #875bf7;
+$violet-600: #7839ee;
+$violet-700: #6927da;
+$violet-800: #5720b7;
+$violet-900: #491c96;
+
+$cyan-100: #cff9fe;
+$cyan-200: #a5f0fc;
+$cyan-300: #67e3f9;
+$cyan-400: #22ccee;
+$cyan-500: #06aed4;
+$cyan-600: #088ab2;
+$cyan-700: #0e7090;
+$cyan-800: #0e7090;
+$cyan-900: #164c63;
+
+$teal-100: #ccfbef;
+$teal-200: #99f6e0;
+$teal-300: #5fe9d0;
+$teal-400: #22ccee;
+$teal-500: #15b79e;
+$teal-600: #0e9384;
+$teal-700: #107569;
+$teal-800: #107569;
+$teal-900: #134e48;
+
+$yellow-100: #fef7c3;
+$yellow-200: #feee95;
+$yellow-300: #fde272;
+$yellow-400: #fac515;
+$yellow-500: #eaaa08;
+$yellow-600: #ca8504;
+$yellow-700: #a15c07;
+$yellow-800: #854a0e;
+$yellow-900: #713b12;
+
+$orange-100: #fff6d5;
+$orange-200: #ffdbaf;
+$orange-300: #ff9c66;
+$orange-400: #ff692e;
+$orange-500: #ff4405;
+$orange-600: #e62e05;
+$orange-700: #bc1b06;
+$orange-800: #97180c;
+$orange-900: #771a0d;
+
+$blue-100: #d1e0ff;
+$blue-200: #b2ccff;
+$blue-300: #84adff;
+$blue-400: #528bff;
+$blue-500: #2970ff;
+$blue-600: #155eef;
+$blue-700: #004eeb;
+$blue-800: #0040c1;
+$blue-900: #00359e;
+
+$color-bg: $black;
+$color-bg-inverse: $white;
+$color-surface: $gray-950;
+$color-surface-soft: $gray-900;
+$color-text: $white;
+$color-text-inverse: $black;
+$color-muted: $gray-400;
+$color-border: rgba($white, 0.16);
+$color-accent: $red-500;
+$color-accent-hover: $red-600;
+$color-accent-active: $red-700;
+$color-secondary: $violet-500;
+$color-secondary-hover: $violet-600;
+$color-secondary-active: $violet-700;
+
+$color-dark: $gray-950;
+$color-light: $white;
+
+$radius-xs: rem(8px);
+$radius-sm: rem(12px);
+$radius-md: rem(16px);
+$radius-lg: rem(24px);
+$radius-pill: 999rem;
+
+$space-2: rem(2px);
+$space-4: rem(4px);
+$space-6: rem(6px);
+$space-8: rem(8px);
+$space-10: rem(10px);
+$space-12: rem(12px);
+$space-16: rem(16px);
+$space-20: rem(20px);
+$space-24: rem(24px);
+$space-28: rem(28px);
+$space-32: rem(32px);
+$space-36: rem(36px);
+$space-40: rem(40px);
+$space-48: rem(48px);
+$space-56: rem(56px);
+$space-64: rem(64px);
+$space-72: rem(72px);
+$space-80: rem(80px);
+$space-96: rem(96px);
+
+$z-base: 1;
+$z-header: 100;
+$z-overlay: 400;
+$z-modal: 500;
+$z-tooltip: 600;
+
+$duration-fast: 160ms;
+$duration-base: 240ms;
+$ease-base: ease;
+
+$focus-outline-width: rem(2px);
+$focus-outline-offset: rem(3px);
+$focus-color: $violet-300;
+
+$font-size-h0: fluid(46px, 76px, $viewport-min, $viewport-max);
+$font-size-h1: fluid(38px, 58px, $viewport-min, $viewport-max);
+$font-size-h2: fluid(28px, 34px, $viewport-min, $viewport-max);
+$font-size-t1: fluid(16px, 18px, $viewport-min, $viewport-max);
+$font-size-t2: rem(14px);
+$font-size-label: rem(11px);
+
+$line-height-heading: 0.9;
+$line-height-text: 1.25;
+$line-height-label: 1;
+
+$space-ui-kit-y: fluid(48px, 72px, $viewport-min, $viewport-max);
+$space-ui-kit-y-end: fluid(72px, 96px, $viewport-min, $viewport-max);
+$space-ui-kit-hero-bottom: fluid(40px, 56px, $viewport-min, $viewport-max);
+$space-ui-kit-section-y: fluid(36px, 48px, $viewport-min, $viewport-max);
+$space-ui-kit-gap: fluid(20px, 28px, $viewport-min, $viewport-max);

@@ -1,0 +1,17 @@
+@use 'mixins' as *;
+
+@include font-face('Inter Tight', 'InterTight-VariableFont_wght.ttf', 100 900, normal, 'truetype');
+@include font-face(
+  'Inter Tight',
+  'InterTight-Italic-VariableFont_wght.ttf',
+  100 900,
+  italic,
+  'truetype'
+);
+@include font-face(
+  'Oceanic Grotesk Condensed',
+  'OceanicGroteskCondensed-Extrabold.woff2',
+  800,
+  normal,
+  'woff2'
+);

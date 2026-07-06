@@ -1,0 +1,31 @@
+@use '../vars' as *;
+
+.section {
+  padding: $space-80 0;
+}
+
+.section--compact {
+  padding: $space-48 0;
+}
+
+.section--light {
+  background-color: $color-bg-inverse;
+  color: $color-text-inverse;
+}
+
+.section__header {
+  display: grid;
+  gap: $space-16;
+  margin-bottom: $space-40;
+  max-width: 46rem;
+}
+
+@media (max-width: $breakpoint-mobile) {
+  .section {
+    padding: $space-56 0;
+  }
+
+  .section--compact {
+    padding: $space-36 0;
+  }
+}
