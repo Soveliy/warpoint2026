@@ -1,13 +1,124 @@
-<header class="header">
-  <div class="container header__container">
-    <a class="header__logo" href="/">Warpoint</a>
-    <nav class="header__nav nav" aria-label="Основная навигация">
-      <a class="nav__link is-active" href="/">Главная</a>
-      <a class="nav__link" href="#ui-kit-components">Компоненты</a>
-      <a class="nav__link" href="#ui-kit-colors">Цвета</a>
-    </nav>
-    <button class="header__burger burger" type="button" aria-label="Открыть меню">
-      <span class="burger__line" aria-hidden="true"></span>
-    </button>
+<header class="header" data-theme="brand">
+  <div class="container">
+    <div class="header__top">
+      <div class="header__row">
+        <div class="header__item header__item--location">
+          <div class="city-confirm" data-city-confirm>
+            <span class="city-confirm__question">
+              Ваш город <strong data-city-confirm-name>Екатеринбург</strong>?
+            </span>
+            <button class="city-confirm__answer button-reset" type="button" data-city-confirm-yes>
+              Да
+            </button>
+            <button
+              class="city-confirm__change button-reset"
+              type="button"
+              aria-haspopup="dialog"
+              aria-controls="location-modal"
+              data-location-open="city"
+            >
+              Выбрать другой
+            </button>
+          </div>
+
+          <div class="city-confirm__current" data-city-confirm-current hidden>
+            <button
+              class="city-confirm__selection button-reset"
+              type="button"
+              aria-haspopup="dialog"
+              aria-controls="location-modal"
+              data-location-open="city"
+            >
+              <span data-header-city>Екатеринбург</span>
+              <svg class="city-confirm__selection-icon" aria-hidden="true">
+                <use href="/img/sprite.svg#icon-cvervron_down"></use>
+              </svg>
+            </button>
+            <button
+              class="city-confirm__selection city-confirm__selection--location button-reset"
+              type="button"
+              aria-haspopup="dialog"
+              aria-controls="location-modal"
+              data-location-open="location"
+            >
+              <span class="city-confirm__address" data-header-address>
+                пр-т Космонавтов, 108 Д
+              </span>
+              <svg class="city-confirm__selection-icon" aria-hidden="true">
+                <use href="/img/sprite.svg#icon-cvervron_down"></use>
+              </svg>
+            </button>
+          </div>
+        </div>
+        <div class="header__item header__item--desk">
+          <div class="select header__select">
+            <button class="select__button button-reset">
+              <span class="select__button-text">Мессенджеры</span>
+              <svg class="icon select__button-icon" aria-hidden="true">
+                <use href="/img/sprite.svg#icon-cvervron_down"></use>
+              </svg>
+            </button>
+          </div>
+          <a href="tel:+73433000000" class="header__link link">+7 (343) 300-00-00</a>
+        </div>
+      </div>
+    </div>
+    <div class="header__bottom">
+      <div class="header__row">
+        <a href="/" class="header__logo">
+          <img src="img/logo.svg" alt="" />
+        </a>
+        <nav class="header__menu menu">
+          <ul class="menu__list">
+            <li class="menu__item">
+              <a href="#" class="menu__link">
+                Игры
+                <svg class="icon menu__link-icon" aria-hidden="true">
+                  <use href="/img/sprite.svg#icon-cvervron_down"></use>
+                </svg>
+              </a>
+            </li>
+            <li class="menu__item">
+              <a href="#" class="menu__link">
+                Тарифы
+                <svg class="icon menu__link-icon" aria-hidden="true">
+                  <use href="/img/sprite.svg#icon-cvervron_down"></use>
+                </svg>
+              </a>
+            </li>
+            <li class="menu__item">
+              <a href="#" class="menu__link">
+                Мероприятия
+                <svg class="icon menu__link-icon" aria-hidden="true">
+                  <use href="/img/sprite.svg#icon-cvervron_down"></use>
+                </svg>
+              </a>
+            </li>
+            <li class="menu__item">
+              <a href="#" class="menu__link"> Сертификаты </a>
+            </li>
+            <li class="menu__item">
+              <a href="#" class="menu__link"> О компании </a>
+            </li>
+            <li class="menu__item">
+              <a href="#" class="menu__link"> Контакты </a>
+            </li>
+          </ul>
+        </nav>
+        <div class="header__buttons">
+          <button class="header__button button-reset" data-js-auth>
+            <svg class="icon header__button-icon" aria-hidden="true">
+              <use href="/img/sprite.svg#icon-user"></use>
+            </svg>
+          </button>
+          <button class="header__burger burger button-reset">
+            <div class="burger__line"></div>
+          </button>
+          <button class="header__booking button-reset" type="button" data-booking-open>
+            Забронировать
+          </button>
+        </div>
+      </div>
+    </div>
   </div>
 </header>

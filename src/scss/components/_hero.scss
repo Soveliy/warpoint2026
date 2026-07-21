@@ -1,0 +1,124 @@
+@use '../vars' as *;
+@use '../fluid' as *;
+.hero {
+  position: relative;
+  overflow: hidden;
+  background-color: $color-bg;
+  &__image {
+    position: absolute;
+    right: 0;
+    height: 100%;
+    object-fit: contain;
+    width: 100%;
+    object-position: right bottom;
+  }
+  &__content {
+    position: relative;
+    z-index: 10;
+  }
+  &__wrap {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    max-width: 29.5rem;
+    min-height: 100dvh;
+  }
+  &__pretitle {
+    position: relative;
+    padding-left: 1rem;
+    margin: 0 0 12px 0;
+    font-weight: 600;
+    font-size: rem(14px);
+    line-height: 110%;
+    &:before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      height: 10px;
+      width: 10px;
+      background-color: $red-900;
+    }
+  }
+  &__title {
+    margin: 0;
+    font-family: $font-family-heading;
+    font-size: fluid(52px, 64px);
+    line-height: 88%;
+    font-weight: 800;
+    text-transform: uppercase;
+  }
+  &__buttons {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    bottom: 24px;
+    display: flex;
+    gap: rem(12px);
+  }
+  &__button {
+    border: 1.5px solid $violet-600;
+    border-radius: 24px;
+    padding: 36px 39px;
+    font-size: 11px;
+    line-height: 100%;
+    letter-spacing: 0.08em;
+    font-weight: 700;
+    text-transform: uppercase;
+    text-align: center;
+    &--red {
+      color: $red-500;
+      border-color: $red-500;
+      background: linear-gradient(135deg, rgba(246, 61, 104, 0.2) 0%, rgba(161, 16, 67, 0.2) 100%);
+    }
+    &--purple {
+      color: $violet-600;
+      border-color: $violet-600;
+      background: linear-gradient(135deg, rgba(135, 91, 247, 0.2) 0%, rgba(87, 32, 183, 0.2) 100%);
+    }
+  }
+  &__allerts {
+    max-width: 348px;
+    position: absolute;
+    right: rem(24px);
+    bottom: rem(24px);
+  }
+}
+
+@media (max-width: $breakpoint-mobile) {
+  .hero {
+    &__wrap {
+      align-items: flex-start;
+      justify-content: flex-start;
+      padding-top: rem(126px);
+      gap: rem(12px);
+    }
+    &__title {
+      order: -1;
+    }
+    &__buttons {
+      display: none;
+    }
+    &__pretitle {
+      margin-bottom: 0;
+      text-indent: rem(16px);
+      padding-left: 0;
+      &:before {
+        top: 4px;
+        transform: none;
+      }
+    }
+    &__allerts {
+      display: none;
+    }
+    &__image {
+      width: 1055px;
+      height: 710px;
+      max-width: initial;
+      right: rem(-161px);
+      bottom: rem(-195px);
+    }
+  }
+}

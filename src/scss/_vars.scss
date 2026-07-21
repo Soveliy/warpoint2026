@@ -5,10 +5,10 @@ $font-family-heading: 'Oceanic Grotesk Condensed', 'Inter Tight', Arial, sans-se
 $font-family: $font-family-primary;
 
 $viewport-min: 375px;
-$viewport-max: 1440px;
+$viewport-max: 1472px;
 
-$content-width: rem(1280px);
-$container-offset: rem(24px);
+$content-width: rem(1472px);
+$container-offset: rem(20px);
 $container-width: $content-width + ($container-offset * 2);
 
 $breakpoint-tablet: rem(1024px);
@@ -38,7 +38,7 @@ $red-500: #f63d68;
 $red-600: #e31b54;
 $red-700: #c01048;
 $red-800: #a11043;
-$red-900: #89123e;
+$red-900: #f23764;
 
 $violet-100: #ece9fe;
 $violet-200: #ddd6fe;
@@ -100,7 +100,7 @@ $blue-700: #004eeb;
 $blue-800: #0040c1;
 $blue-900: #00359e;
 
-$color-bg: $black;
+$color-bg: #010000;
 $color-bg-inverse: $white;
 $color-surface: $gray-950;
 $color-surface-soft: $gray-900;

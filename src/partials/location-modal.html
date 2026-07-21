@@ -1,0 +1,134 @@
+<div class="location-modal" id="location-modal" aria-hidden="true" data-location-modal>
+  <div
+    class="location-modal__dialog"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="location-modal-title"
+    tabindex="-1"
+    data-location-dialog
+  >
+    <header class="location-modal__header">
+      <h2 class="location-modal__heading" id="location-modal-title">
+        Выберите страну, город и локацию
+      </h2>
+      <button
+        class="location-modal__close button-reset"
+        type="button"
+        aria-label="Закрыть окно выбора локации"
+        data-location-close
+      >
+        <span></span>
+        <span></span>
+      </button>
+    </header>
+
+    <div class="location-modal__body">
+      <aside class="location-modal__sidebar">
+        <nav class="location-modal__steps" aria-label="Этапы выбора локации">
+          <button
+            class="location-modal__step is-active button-reset"
+            type="button"
+            data-location-step="country"
+          >
+            <img
+              class="location-modal__step-flag"
+              src="img/country/ru_flag.svg"
+              width="33"
+              height="25"
+              alt=""
+              data-location-selected-flag
+            />
+            <span data-location-country-label>Россия</span>
+            <svg class="location-modal__step-icon" aria-hidden="true">
+              <use href="/img/sprite.svg#icon-cvervron_down"></use>
+            </svg>
+          </button>
+          <button class="location-modal__step button-reset" type="button" data-location-step="city">
+            <span data-location-city-label>Екатеринбург</span>
+            <svg class="location-modal__step-icon" aria-hidden="true">
+              <use href="/img/sprite.svg#icon-cvervron_down"></use>
+            </svg>
+          </button>
+          <button
+            class="location-modal__step button-reset"
+            type="button"
+            data-location-step="location"
+          >
+            <span data-location-location-label>ТРЦ Veer Mall</span>
+            <svg class="location-modal__step-icon" aria-hidden="true">
+              <use href="/img/sprite.svg#icon-cvervron_down"></use>
+            </svg>
+          </button>
+        </nav>
+
+        <img
+          class="location-modal__person"
+          src="img/country/default.png"
+          width="292"
+          height="687"
+          alt=""
+          aria-hidden="true"
+          data-location-person
+        />
+
+        <div class="location-modal__actions">
+          <button
+            class="location-modal__action location-modal__action--cancel button-reset"
+            type="button"
+            data-location-cancel
+          >
+            Отмена
+          </button>
+          <button
+            class="location-modal__action location-modal__action--confirm button-reset"
+            type="button"
+            data-location-confirm
+          >
+            ОК
+          </button>
+        </div>
+      </aside>
+
+      <div class="location-modal__content">
+        <section
+          class="location-modal__view"
+          aria-labelledby="country-view-title"
+          data-location-view="country"
+        >
+          <h3 class="visually-hidden" id="country-view-title">Выберите страну</h3>
+          <div class="location-modal__countries" data-location-country-list></div>
+        </section>
+
+        <section
+          class="location-modal__view"
+          aria-labelledby="city-view-title"
+          data-location-view="city"
+          hidden
+        >
+          <h3 class="visually-hidden" id="city-view-title">Выберите город</h3>
+          <label class="visually-hidden" for="location-city-search">Найти город</label>
+          <input
+            class="location-modal__search"
+            id="location-city-search"
+            type="search"
+            placeholder="Найти город"
+            autocomplete="off"
+            data-location-city-search
+          />
+          <div class="location-modal__cities" data-location-city-list></div>
+          <p class="location-modal__empty" data-location-city-empty hidden>Город не найден</p>
+        </section>
+
+        <section
+          class="location-modal__view"
+          aria-labelledby="location-view-title"
+          data-location-view="location"
+          hidden
+        >
+          <h3 class="visually-hidden" id="location-view-title">Выберите локацию</h3>
+          <div class="location-modal__locations" data-location-list></div>
+        </section>
+      </div>
+    </div>
+  </div>
+</div>

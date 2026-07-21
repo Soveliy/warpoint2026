@@ -32,7 +32,7 @@ async function ensureDir(dirPath) {
 
 async function readFileIfExists(filePath) {
   try {
-    return await fs.readFile(filePath);
+    return await runWithRetry(() => fs.readFile(filePath));
   } catch (error) {
     if (error.code === 'ENOENT') {
       return null;
@@ -77,7 +77,7 @@ async function writeFileIfChanged(filePath, content) {
 }
 
 async function copyFileIfChanged(source, target) {
-  const sourceContent = await fs.readFile(source);
+  const sourceContent = await runWithRetry(() => fs.readFile(source));
   const currentContent = await readFileIfExists(target);
 
   if (currentContent && currentContent.equals(sourceContent)) {

@@ -1,0 +1,42 @@
+@use '../vars' as *;
+
+.has-pixel-transition {
+  position: relative;
+}
+
+.pixelated-scroll-transition {
+  position: absolute;
+  z-index: $z-base + 9;
+  inset: auto 0 0;
+  color: var(--pixel-color, $black);
+  pointer-events: none;
+}
+
+.pixelated-scroll-transition__panel {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+
+.pixelated-scroll-transition__column {
+  display: flex;
+  flex: 1 1 0%;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: flex-end;
+  min-width: 0;
+}
+
+.pixelated-scroll-transition__pixel {
+  width: 100%;
+  aspect-ratio: 1;
+  background-color: currentcolor;
+  backface-visibility: hidden;
+  will-change: opacity;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pixelated-scroll-transition {
+    display: none;
+  }
+}

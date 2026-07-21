@@ -1,0 +1,332 @@
+@use '../fluid' as *;
+@use '../mixins/disable-mob-hover' as *;
+@use '../vars' as *;
+
+.reviews {
+  position: relative;
+  overflow: hidden;
+  min-height: 100vh;
+  background-color: $white;
+  color: $black;
+
+  &__sticky {
+    display: grid;
+    grid-template-columns: minmax(0, rem(480px)) minmax(0, 1fr);
+    gap: rem(32px);
+    height: 100vh;
+    padding-left: $container-offset;
+  }
+
+  &__intro {
+    align-self: center;
+    max-width: rem(430px);
+  }
+
+  &__title {
+    margin: 0;
+    font-family: $font-family-heading;
+    font-size: rem(64px);
+    font-weight: 800;
+    line-height: 0.86;
+    letter-spacing: 0;
+    text-transform: uppercase;
+  }
+
+  &__lead {
+    max-width: rem(410px);
+    margin: rem(8px) 0 0;
+    font-size: rem(18px);
+    font-weight: 650;
+    line-height: 1.2;
+  }
+
+  &__previews {
+    display: flex;
+    gap: rem(4px);
+    margin-top: rem(16px);
+  }
+
+  &__preview {
+    @include hover {
+      transform: translateY(rem(-2px));
+    }
+
+    position: relative;
+    flex: 0 0 auto;
+    width: rem(72px);
+    aspect-ratio: 1;
+    border: rem(3px) solid transparent;
+    border-radius: 50%;
+    transition:
+      border-color $duration-fast $ease-base,
+      transform $duration-fast $ease-base;
+
+    img {
+      width: 100%;
+      height: 100%;
+      border-radius: inherit;
+      object-fit: cover;
+    }
+
+    &.is-active {
+      border-color: $red-500;
+    }
+
+    &:focus-visible {
+      outline: rem(2px) solid $focus-color;
+      outline-offset: rem(2px);
+    }
+  }
+
+  &__viewport {
+    display: flex;
+    align-items: center;
+    min-width: 0;
+    overflow: hidden;
+  }
+
+  &__track {
+    display: flex;
+    flex: 0 0 auto;
+    gap: rem(16px);
+    width: max-content;
+    will-change: transform;
+  }
+
+  &__score,
+  &__card {
+    flex: 0 0 auto;
+    height: min(rem(716px), calc(100vh - rem(96px)));
+    aspect-ratio: 403 / 716;
+    border-radius: fluid(28px, 40px);
+  }
+
+  &__score {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: fluid(28px, 40px);
+    background-color: $violet-500;
+    color: $white;
+  }
+
+  &__services {
+    display: grid;
+  }
+
+  &__service {
+    display: grid;
+    grid-template-columns: rem(40px) minmax(0, 1fr) auto;
+    align-items: center;
+    gap: rem(12px);
+    min-height: rem(64px);
+    border-bottom: rem(1px) solid rgba($white, 0.16);
+  }
+
+  &__service-icon {
+    width: rem(40px);
+    height: rem(40px);
+    object-fit: contain;
+  }
+
+  &__service-name,
+  &__service-count {
+    font-size: rem(17px);
+    font-weight: 700;
+    line-height: 1;
+    white-space: nowrap;
+  }
+
+  &__service-count::after {
+    content: '↗';
+    margin-left: rem(3px);
+  }
+
+  &__rating {
+    text-align: center;
+  }
+
+  &__rating-label {
+    margin: 0;
+    font-size: rem(17px);
+    font-weight: 700;
+    line-height: 1.15;
+  }
+
+  &__rating-value {
+    margin-top: rem(12px);
+    font-family: $font-family-heading;
+    font-size: rem(286px);
+    font-weight: 800;
+    line-height: 0.72;
+    letter-spacing: 0;
+  }
+
+  &__card {
+    position: relative;
+    overflow: hidden;
+    background-color: $gray-900;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+  &__card-top {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding: 40px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  &__card-name,
+  &__card__value {
+    font-family: $font-family-heading;
+    font-weight: 800;
+    font-size: 36px;
+    line-height: 92%;
+    text-transform: uppercase;
+
+    color: #fff;
+  }
+  &__card-place {
+    font-weight: 700;
+    font-size: 11px;
+    line-height: 100%;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #fff;
+    margin-top: 11px;
+  }
+}
+
+@media (max-width: $breakpoint-tablet) {
+  .reviews {
+    &__sticky {
+      grid-template-columns: minmax(0, rem(330px)) minmax(0, 1fr);
+      gap: rem(24px);
+    }
+
+    &__title {
+      font-size: rem(54px);
+    }
+
+    &__lead {
+      font-size: rem(16px);
+    }
+
+    &__preview {
+      width: rem(58px);
+    }
+
+    &__score,
+    &__card {
+      height: min(rem(640px), calc(100vh - rem(96px)));
+    }
+
+    &__score {
+      padding: rem(28px);
+    }
+
+    &__service-name,
+    &__service-count,
+    &__rating-label {
+      font-size: rem(14px);
+    }
+
+    &__rating-value {
+      font-size: rem(240px);
+    }
+  }
+}
+
+@media (max-width: $breakpoint-mobile) {
+  .reviews {
+    min-height: auto;
+    padding: rem(72px) 0;
+
+    &__sticky {
+      display: block;
+      height: auto;
+      padding: 0;
+    }
+
+    &__intro {
+      max-width: none;
+      padding: 0 rem(16px);
+    }
+
+    &__title {
+      max-width: rem(340px);
+      font-size: rem(48px);
+    }
+
+    &__lead {
+      max-width: rem(360px);
+    }
+
+    &__previews {
+      gap: rem(2px);
+    }
+
+    &__preview {
+      width: rem(54px);
+      border-width: rem(2px);
+    }
+
+    &__viewport {
+      display: block;
+      overflow-x: auto;
+      margin-top: rem(40px);
+      padding-left: rem(16px);
+      scroll-snap-type: x mandatory;
+      scrollbar-width: none;
+
+      &::-webkit-scrollbar {
+        display: none;
+      }
+    }
+
+    &__track {
+      padding-right: rem(16px);
+      will-change: auto;
+    }
+
+    &__score,
+    &__card {
+      width: calc(100vw - rem(48px));
+      height: auto;
+      aspect-ratio: 403 / 716;
+      scroll-snap-align: center;
+    }
+
+    &__score {
+      padding: rem(28px);
+    }
+
+    &__service {
+      grid-template-columns: rem(40px) minmax(0, 1fr) auto;
+      gap: rem(8px);
+    }
+
+    &__rating-value {
+      font-size: rem(232px);
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reviews__viewport {
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .reviews__track {
+    will-change: auto;
+  }
+}

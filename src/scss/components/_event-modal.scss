@@ -1,0 +1,541 @@
+@use '../fluid' as *;
+@use '../mixins/disable-mob-hover' as *;
+@use '../vars' as *;
+
+.event-modal {
+  position: fixed;
+  z-index: $z-modal;
+  inset: 0;
+  display: none;
+  background-color: $black;
+  color: $white;
+
+  &.is-open {
+    display: block;
+  }
+
+  &__dialog {
+    display: grid;
+    grid-template-rows: rem(31px) minmax(0, 1fr);
+    width: 100%;
+    height: 100dvh;
+    background-color: $black;
+  }
+
+  &__header {
+    position: relative;
+    display: flex;
+    align-items: center;
+    min-width: 0;
+    padding: 0 rem(24px);
+    border-bottom: rem(1px) solid $gray-800;
+  }
+
+  &__title {
+    margin: 0;
+    font-size: rem(12px);
+    font-weight: 600;
+    line-height: 1;
+  }
+
+  &__close {
+    @include hover {
+      color: $red-500;
+    }
+
+    position: absolute;
+    top: 50%;
+    right: rem(16px);
+    width: rem(28px);
+    height: rem(28px);
+    color: $white;
+    transform: translateY(-50%);
+    transition: color $duration-fast $ease-base;
+
+    span {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: rem(16px);
+      height: rem(1px);
+      background-color: currentcolor;
+
+      &:first-child {
+        transform: translate(-50%, -50%) rotate(45deg);
+      }
+
+      &:last-child {
+        transform: translate(-50%, -50%) rotate(-45deg);
+      }
+    }
+  }
+
+  &__form {
+    display: grid;
+    grid-template-rows: minmax(0, 1fr) rem(107px);
+    min-height: 0;
+  }
+
+  &__content {
+    position: relative;
+    min-height: 0;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    scrollbar-color: $gray-700 transparent;
+    scrollbar-width: thin;
+  }
+
+  &__intro {
+    position: absolute;
+    z-index: 2;
+    top: rem(16px);
+    left: 50%;
+    margin: 0;
+    font-size: rem(18px);
+    font-weight: 650;
+    line-height: 1.15;
+    text-align: center;
+    transform: translateX(-50%);
+  }
+
+  &__step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100%;
+    padding: fluid(132px, 180px) rem(24px) rem(32px);
+
+    &[hidden] {
+      display: none;
+    }
+
+    &--services,
+    &--finish {
+      padding-top: fluid(104px, 112px);
+    }
+  }
+
+  &__heading {
+    max-width: rem(980px);
+    margin: 0 0 fluid(38px, 48px);
+    font-family: $font-family-heading;
+    font-size: fluid(46px, 62px);
+    font-weight: 800;
+    line-height: 0.9;
+    text-align: center;
+    text-transform: uppercase;
+
+    &:focus {
+      outline: 0;
+    }
+  }
+
+  &__options {
+    width: 100%;
+    max-width: rem(1464px);
+    margin: 0;
+    padding: 0;
+    border: 0;
+
+    &--events {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: rem(14px);
+    }
+
+    &--guests {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: rem(14px);
+    }
+
+    &--services {
+      display: grid;
+      grid-template-columns: repeat(10, minmax(0, 1fr));
+      gap: rem(14px);
+
+      .event-modal__card {
+        grid-column: span 2;
+      }
+
+      .event-modal__card:nth-of-type(6) {
+        grid-column: 2 / span 2;
+      }
+    }
+  }
+
+  &__card {
+    @include hover {
+      border-color: rgba($white, 0.72);
+    }
+
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    overflow: hidden;
+    min-width: 0;
+    border: rem(1px) solid $gray-500;
+    border-radius: fluid(24px, 40px);
+    cursor: pointer;
+    transition:
+      border-color $duration-fast $ease-base,
+      transform $duration-fast $ease-base;
+
+    &:has(input:checked) {
+      border-color: $red-500;
+      box-shadow: inset 0 0 0 rem(1px) $red-500;
+    }
+
+    &:has(input:focus-visible) {
+      outline: rem(2px) solid $focus-color;
+      outline-offset: rem(3px);
+    }
+
+    &:active {
+      transform: scale(0.99);
+    }
+
+    &--image {
+      aspect-ratio: 284 / 425;
+      background-color: $gray-950;
+
+      &::after {
+        content: '';
+        position: absolute;
+        inset: 45% 0 0;
+        background: linear-gradient(transparent, rgba($black, 0.82));
+        pointer-events: none;
+      }
+
+      img {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+
+    &--plain {
+      aspect-ratio: 1.09;
+      background-color: $black;
+    }
+
+    &--service {
+      grid-column: span 2;
+      aspect-ratio: 1.08;
+      background-color: $black;
+
+      > img {
+        position: absolute;
+        top: 48%;
+        left: 50%;
+        width: 58%;
+        height: 58%;
+        object-fit: contain;
+        opacity: 0.9;
+        transform: translate(-50%, -50%);
+      }
+    }
+  }
+
+  &__card-label {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    min-height: rem(62px);
+    padding: rem(12px) rem(14px) rem(26px);
+    color: $white;
+    font-size: rem(18px);
+    font-weight: 650;
+    line-height: 1.1;
+    text-align: center;
+  }
+
+  &__calendar {
+    width: min(100%, rem(426px));
+  }
+
+  &__selected-date {
+    min-height: rem(18px);
+    margin: rem(12px) 0 0;
+    color: $gray-300;
+    font-size: rem(13px);
+    line-height: 1.2;
+    text-align: center;
+  }
+
+  &__footer {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    gap: rem(20px);
+    margin: 0 rem(24px);
+    border-top: rem(1px) solid $gray-800;
+  }
+
+  &__nav {
+    min-width: rem(105px);
+    min-height: rem(58px);
+    border-radius: rem(16px);
+
+    &--back {
+      justify-self: start;
+    }
+
+    &--next {
+      justify-self: end;
+    }
+  }
+
+  &__progress {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: rem(5px);
+    min-width: rem(100px);
+    font-size: rem(11px);
+    font-weight: 700;
+    line-height: 1;
+    text-transform: uppercase;
+  }
+
+  &__progress-dots {
+    display: grid;
+    grid-template-columns: repeat(5, rem(12px));
+    gap: rem(3px);
+
+    i {
+      display: block;
+      height: rem(2px);
+      background-color: $gray-300;
+      transition: background-color $duration-fast $ease-base;
+
+      &.is-active {
+        background-color: $red-500;
+      }
+
+      &.is-complete {
+        background-color: $white;
+      }
+    }
+  }
+
+  .air-datepicker {
+    width: 100%;
+    padding: rem(15px) rem(22px) rem(19px);
+    border: 0;
+    border-radius: rem(28px);
+    background-color: $gray-800;
+    box-shadow: none;
+    color: $white;
+    font-family: $font-family-primary;
+  }
+
+  .air-datepicker-nav {
+    min-height: rem(56px);
+    padding: 0;
+    border-bottom-color: rgba($white, 0.3);
+  }
+
+  .air-datepicker-nav--title {
+    color: $white;
+    font-size: rem(18px);
+    font-weight: 650;
+
+    i {
+      color: inherit;
+    }
+  }
+
+  .air-datepicker-nav--action {
+    width: rem(42px);
+    color: $white;
+
+    path {
+      stroke: currentcolor;
+    }
+
+    &:hover {
+      background-color: rgba($white, 0.08);
+    }
+  }
+
+  .air-datepicker-body--day-names {
+    margin: rem(16px) 0 rem(8px);
+  }
+
+  .air-datepicker-body--day-name {
+    color: $white;
+    font-size: rem(11px);
+    font-weight: 650;
+  }
+
+  .air-datepicker-body--cells.-days- {
+    grid-auto-rows: rem(48px);
+  }
+
+  .air-datepicker-cell {
+    border-radius: 50%;
+    color: $white;
+    font-size: rem(18px);
+    font-weight: 650;
+
+    &.-day-.-other-month-,
+    &.-disabled- {
+      color: $gray-600;
+    }
+
+    &.-current- {
+      color: $violet-300;
+    }
+
+    &.-selected-,
+    &.-selected-.-current- {
+      background-color: $violet-600;
+      color: $white;
+    }
+
+    &:hover,
+    &.-focus- {
+      background-color: rgba($violet-500, 0.28);
+    }
+  }
+}
+
+@media (max-width: $breakpoint-tablet) {
+  .event-modal {
+    &__step {
+      padding-right: rem(20px);
+      padding-left: rem(20px);
+    }
+
+    &__heading {
+      font-size: rem(48px);
+    }
+
+    &__options--events,
+    &__options--services {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    &__options--events .event-modal__card {
+      flex: 0 1 calc(33.333% - rem(10px));
+    }
+
+    &__options--services .event-modal__card {
+      flex: 0 1 calc(33.333% - rem(10px));
+    }
+  }
+}
+
+@media (max-width: $breakpoint-mobile) {
+  .event-modal {
+    &__dialog {
+      grid-template-rows: rem(44px) minmax(0, 1fr);
+    }
+
+    &__header {
+      padding: 0 rem(16px);
+    }
+
+    &__title {
+      max-width: calc(100% - rem(38px));
+      font-size: rem(11px);
+    }
+
+    &__form {
+      grid-template-rows: minmax(0, 1fr) rem(84px);
+    }
+
+    &__intro {
+      top: rem(14px);
+      width: calc(100% - rem(32px));
+      font-size: rem(14px);
+    }
+
+    &__step,
+    &__step--services,
+    &__step--finish {
+      min-height: auto;
+      padding: rem(90px) rem(16px) rem(28px);
+    }
+
+    &__heading {
+      margin-bottom: rem(30px);
+      font-size: rem(38px);
+    }
+
+    &__options--events,
+    &__options--services {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: rem(10px);
+    }
+
+    &__options--events .event-modal__card,
+    &__options--services .event-modal__card {
+      grid-column: auto;
+    }
+
+    &__options--guests {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: rem(10px);
+    }
+
+    &__card {
+      border-radius: rem(24px);
+
+      &--plain,
+      &--service {
+        aspect-ratio: 1;
+      }
+    }
+
+    &__card-label {
+      min-height: rem(52px);
+      padding: rem(10px) rem(8px) rem(18px);
+      font-size: rem(15px);
+    }
+
+    &__calendar {
+      max-width: rem(390px);
+    }
+
+    &__footer {
+      gap: rem(8px);
+      margin: 0 rem(16px);
+    }
+
+    &__nav {
+      min-width: rem(82px);
+      min-height: rem(48px);
+      padding-right: rem(14px);
+      padding-left: rem(14px);
+      border-radius: rem(12px);
+    }
+
+    &__progress {
+      min-width: rem(82px);
+      font-size: rem(10px);
+    }
+
+    .air-datepicker {
+      padding: rem(10px) rem(12px) rem(14px);
+      border-radius: rem(20px);
+    }
+
+    .air-datepicker-body--cells.-days- {
+      grid-auto-rows: rem(42px);
+    }
+
+    .air-datepicker-cell {
+      font-size: rem(15px);
+    }
+  }
+}

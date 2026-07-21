@@ -1,0 +1,205 @@
+@use '../fluid' as *;
+@use '../mixins/disable-mob-hover' as *;
+@use '../vars' as *;
+
+.bloggers {
+  position: relative;
+  overflow: hidden;
+  min-height: 100vh;
+  padding: fluid(88px, 104px) 0 fluid(48px, 64px);
+  background-color: $white;
+  color: $black;
+  scroll-snap-align: start;
+
+  &__title {
+    margin: 0;
+    font-family: $font-family-heading;
+    font-size: rem(64px);
+    font-weight: 800;
+    line-height: 0.86;
+    letter-spacing: 0;
+    text-align: center;
+    text-transform: uppercase;
+  }
+
+  &__slider {
+    overflow: visible;
+    margin-top: fluid(32px, 38px);
+  }
+
+  &__slide {
+    --bloggers-side-scale: 0.76;
+    --bloggers-side-shift: 12%;
+
+    width: min(rem(968px), calc(100vw - rem(160px)));
+    transform: scale(var(--bloggers-side-scale));
+    transition: transform 650ms $ease-base;
+    will-change: transform;
+
+    &.swiper-slide-prev {
+      transform: translateX(var(--bloggers-side-shift)) scale(var(--bloggers-side-scale));
+    }
+
+    &.swiper-slide-next {
+      transform: translateX(calc(var(--bloggers-side-shift) * -1)) scale(var(--bloggers-side-scale));
+    }
+
+    &.swiper-slide-active {
+      z-index: 1;
+      transform: translateX(0) scale(1);
+    }
+  }
+
+  &__media {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    border-radius: fluid(28px, 48px);
+    background-color: $gray-200;
+  }
+
+  &__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 650ms $ease-base;
+  }
+
+  &__play {
+    @include hover {
+      background-color: rgba($black, 0.72);
+      transform: translate(-50%, -50%) scale(1.05);
+    }
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: fluid(68px, 88px);
+    aspect-ratio: 1;
+    border: rem(1px) solid rgba($white, 0.2);
+    border-radius: fluid(18px, 24px);
+    background-color: rgba($black, 0.56);
+    color: $white;
+    backdrop-filter: blur(rem(12px));
+    transform: translate(-50%, -50%);
+    transition:
+      background-color $duration-fast $ease-base,
+      transform $duration-fast $ease-base;
+  }
+
+  &__play-icon {
+    width: fluid(22px, 28px);
+    height: fluid(22px, 28px);
+    fill: currentcolor;
+  }
+
+  &__caption {
+    min-height: rem(18px);
+    margin: rem(14px) rem(20px) 0;
+    font-size: rem(16px);
+    font-weight: 700;
+    line-height: 1.1;
+    text-align: center;
+    text-transform: uppercase;
+  }
+
+  &__controls {
+    display: flex;
+    justify-content: center;
+    gap: rem(8px);
+    margin-top: rem(22px);
+  }
+
+  &__arrow {
+    @include hover {
+      background-color: rgba($black, 0.08);
+      transform: translateY(rem(-2px));
+    }
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: fluid(56px, 64px);
+    aspect-ratio: 1;
+    border: rem(1px) solid $black;
+    border-radius: 50%;
+    color: $black;
+
+    transition:
+      background-color $duration-fast $ease-base,
+      opacity $duration-fast $ease-base,
+      transform $duration-fast $ease-base;
+
+    &:active {
+      transform: scale(0.96);
+    }
+
+    &--prev .bloggers__arrow-icon {
+      transform: rotate(180deg);
+    }
+  }
+
+  &__arrow-icon {
+    width: rem(18px);
+    height: rem(18px);
+    fill: none;
+  }
+}
+
+.bloggers__slide.swiper-slide-active .bloggers__image {
+  transform: scale(1.015);
+}
+
+@media (max-width: $breakpoint-tablet) {
+  .bloggers {
+    min-height: auto;
+    padding: rem(88px) 0;
+
+    &__title {
+      font-size: rem(56px);
+    }
+
+    &__slide {
+      width: min(rem(760px), calc(100vw - rem(96px)));
+    }
+  }
+}
+
+@media (max-width: $breakpoint-mobile) {
+  .bloggers {
+    padding: rem(72px) 0;
+
+    &__title {
+      font-size: rem(46px);
+      line-height: 0.88;
+    }
+
+    &__slider {
+      margin-top: rem(32px);
+    }
+
+    &__slide {
+      --bloggers-side-scale: 0.84;
+      --bloggers-side-shift: 8%;
+
+      width: calc(100vw - rem(48px));
+    }
+
+    &__media {
+      aspect-ratio: 4 / 3;
+      border-radius: rem(24px);
+    }
+
+    &__caption {
+      font-size: rem(13px);
+    }
+
+    &__controls {
+      margin-top: rem(18px);
+    }
+  }
+}

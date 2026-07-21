@@ -1,0 +1,252 @@
+<div class="event-modal" id="event-modal" aria-hidden="true" data-event-modal>
+  <div
+    class="event-modal__dialog"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="event-modal-title"
+    tabindex="-1"
+    data-event-dialog
+  >
+    <header class="event-modal__header">
+      <h2 class="event-modal__title" id="event-modal-title">Рассчитайте стоимость мероприятия</h2>
+      <button
+        class="event-modal__close button-reset"
+        type="button"
+        aria-label="Закрыть расчёт стоимости"
+        data-event-close
+      >
+        <span></span>
+        <span></span>
+      </button>
+    </header>
+
+    <form class="event-modal__form" data-event-form novalidate>
+      <main class="event-modal__content" data-event-content>
+        <p class="event-modal__intro">
+          Ответьте на несколько вопросов<br />
+          и получите спецпредложение
+        </p>
+
+        <section class="event-modal__step" data-event-step="1" aria-labelledby="event-step-1-title">
+          <h3 class="event-modal__heading" id="event-step-1-title" tabindex="-1">
+            Выберите мероприятие
+          </h3>
+          <fieldset class="event-modal__options event-modal__options--events">
+            <legend class="visually-hidden">Тип мероприятия</legend>
+
+            <label class="event-modal__card event-modal__card--image">
+              <input class="visually-hidden" type="radio" name="eventType" value="kids-birthday" />
+              <img
+                src="img/events_modal/1.jpg"
+                width="284"
+                height="425"
+                alt=""
+                loading="lazy"
+                decoding="async"
+              />
+              <span class="event-modal__card-label">Детский день рождения</span>
+            </label>
+            <label class="event-modal__card event-modal__card--image">
+              <input class="visually-hidden" type="radio" name="eventType" value="adult-birthday" />
+              <img
+                src="img/events_modal/2.jpg"
+                width="284"
+                height="425"
+                alt=""
+                loading="lazy"
+                decoding="async"
+              />
+              <span class="event-modal__card-label">Взрослый день рождения</span>
+            </label>
+            <label class="event-modal__card event-modal__card--image">
+              <input class="visually-hidden" type="radio" name="eventType" value="corporate" />
+              <img
+                src="img/events_modal/3.jpg"
+                width="284"
+                height="425"
+                alt=""
+                loading="lazy"
+                decoding="async"
+              />
+              <span class="event-modal__card-label">Корпоратив / тимбилдинг</span>
+            </label>
+            <label class="event-modal__card event-modal__card--image">
+              <input class="visually-hidden" type="radio" name="eventType" value="graduation" />
+              <img
+                src="img/events_modal/4.jpg"
+                width="284"
+                height="425"
+                alt=""
+                loading="lazy"
+                decoding="async"
+              />
+              <span class="event-modal__card-label">Школьный выпускной</span>
+            </label>
+            <label class="event-modal__card event-modal__card--image">
+              <input class="visually-hidden" type="radio" name="eventType" value="mobile-event" />
+              <img
+                src="img/events_modal/5.jpg"
+                width="284"
+                height="425"
+                alt=""
+                loading="lazy"
+                decoding="async"
+              />
+              <span class="event-modal__card-label">Выездное мероприятие</span>
+            </label>
+          </fieldset>
+        </section>
+
+        <section
+          class="event-modal__step"
+          data-event-step="2"
+          aria-labelledby="event-step-2-title"
+          hidden
+        >
+          <h3 class="event-modal__heading" id="event-step-2-title" tabindex="-1">
+            Сколько человек планируется?
+          </h3>
+          <fieldset class="event-modal__options event-modal__options--guests">
+            <legend class="visually-hidden">Количество гостей</legend>
+
+            <label class="event-modal__card event-modal__card--plain">
+              <input class="visually-hidden" type="radio" name="guestCount" value="4-10" />
+              <span class="event-modal__card-label">от 4 до 10</span>
+            </label>
+            <label class="event-modal__card event-modal__card--plain">
+              <input class="visually-hidden" type="radio" name="guestCount" value="11-20" />
+              <span class="event-modal__card-label">от 11 до 20</span>
+            </label>
+            <label class="event-modal__card event-modal__card--plain">
+              <input class="visually-hidden" type="radio" name="guestCount" value="21-30" />
+              <span class="event-modal__card-label">от 21 до 30</span>
+            </label>
+            <label class="event-modal__card event-modal__card--plain">
+              <input class="visually-hidden" type="radio" name="guestCount" value="30+" />
+              <span class="event-modal__card-label">Более 30</span>
+            </label>
+          </fieldset>
+        </section>
+
+        <section
+          class="event-modal__step event-modal__step--calendar"
+          data-event-step="3"
+          aria-labelledby="event-step-3-title"
+          hidden
+        >
+          <h3 class="event-modal__heading" id="event-step-3-title" tabindex="-1">
+            В какой день планируете<br />
+            мероприятие?
+          </h3>
+          <div class="event-modal__calendar" data-event-calendar></div>
+          <p class="event-modal__selected-date" aria-live="polite" data-event-selected-date></p>
+        </section>
+
+        <section
+          class="event-modal__step event-modal__step--services"
+          data-event-step="4"
+          aria-labelledby="event-step-4-title"
+          hidden
+        >
+          <h3 class="event-modal__heading" id="event-step-4-title" tabindex="-1">
+            Добавим что-нибудь ещё?
+          </h3>
+          <fieldset class="event-modal__options event-modal__options--services">
+            <legend class="visually-hidden">Дополнительные услуги</legend>
+
+            <label class="event-modal__card event-modal__card--service">
+              <input class="visually-hidden" type="checkbox" name="services" value="master-class" />
+              <img
+                src="img/events_modal/moctail.png"
+                width="153"
+                height="153"
+                alt=""
+                loading="lazy"
+                decoding="async"
+              />
+              <span class="event-modal__card-label">Мастер-класс</span>
+            </label>
+            <label class="event-modal__card event-modal__card--service">
+              <input class="visually-hidden" type="checkbox" name="services" value="photographer" />
+              <span class="event-modal__card-label">Фотограф</span>
+            </label>
+            <label class="event-modal__card event-modal__card--service">
+              <input class="visually-hidden" type="checkbox" name="services" value="story-maker" />
+              <span class="event-modal__card-label">Сторисмейкер</span>
+            </label>
+            <label class="event-modal__card event-modal__card--service">
+              <input class="visually-hidden" type="checkbox" name="services" value="cake" />
+              <span class="event-modal__card-label">Праздничный торт</span>
+            </label>
+            <label class="event-modal__card event-modal__card--service">
+              <input class="visually-hidden" type="checkbox" name="services" value="balloons" />
+              <img
+                src="img/events_modal/baloon.png"
+                width="231"
+                height="234"
+                alt=""
+                loading="lazy"
+                decoding="async"
+              />
+              <span class="event-modal__card-label">Украшение шарами</span>
+            </label>
+            <label class="event-modal__card event-modal__card--service">
+              <input class="visually-hidden" type="checkbox" name="services" value="pinata" />
+              <span class="event-modal__card-label">Пиньята</span>
+            </label>
+            <label class="event-modal__card event-modal__card--service">
+              <input class="visually-hidden" type="checkbox" name="services" value="host-dj" />
+              <span class="event-modal__card-label">DJ и ведущий</span>
+            </label>
+            <label class="event-modal__card event-modal__card--service">
+              <input class="visually-hidden" type="checkbox" name="services" value="mirror-show" />
+              <span class="event-modal__card-label">Шоу «Зеркальный человек»</span>
+            </label>
+            <label class="event-modal__card event-modal__card--service">
+              <input class="visually-hidden" type="checkbox" name="services" value="cryo-show" />
+              <span class="event-modal__card-label">Крио шоу</span>
+            </label>
+          </fieldset>
+        </section>
+
+        <section
+          class="event-modal__step event-modal__step--finish"
+          data-event-step="5"
+          aria-labelledby="event-step-5-title"
+          hidden
+        >
+          <h3 class="event-modal__heading" id="event-step-5-title" tabindex="-1">Почти готово</h3>
+          <p class="visually-hidden">
+            Ответы сохранены. Нажмите «Далее», чтобы завершить расчёт стоимости.
+          </p>
+        </section>
+      </main>
+
+      <footer class="event-modal__footer">
+        <button
+          class="event-modal__nav event-modal__nav--back btn btn--m btn--red-outline"
+          type="button"
+          data-event-back
+        >
+          Назад
+        </button>
+
+        <div class="event-modal__progress" aria-live="polite">
+          <span data-event-progress-label>Шаг 1 из 5</span>
+          <span class="event-modal__progress-dots" aria-hidden="true" data-event-progress-dots>
+            <i></i><i></i><i></i><i></i><i></i>
+          </span>
+        </div>
+
+        <button
+          class="event-modal__nav event-modal__nav--next btn btn--m btn--red"
+          type="button"
+          data-event-next
+          disabled
+        >
+          Далее
+        </button>
+      </footer>
+    </form>
+  </div>
+</div>

@@ -6,9 +6,22 @@ export function initSliders() {
 
   sliders.forEach((slider) => {
     const root = slider.closest('[data-slider-root]') ?? slider;
+    const isBloggersSlider = slider.matches('[data-bloggers-slider]');
     const nextEl = root.querySelector('[data-slider-next]');
     const paginationEl = root.querySelector('[data-slider-pagination]');
     const prevEl = root.querySelector('[data-slider-prev]');
+    const captionEl = root.querySelector('[data-bloggers-caption]');
+    const modules = [A11y, Keyboard];
+
+    if (nextEl && prevEl) modules.push(Navigation);
+    if (paginationEl) modules.push(Pagination);
+
+    const updateCaption = (swiper) => {
+      if (!captionEl) return;
+
+      const activeSlide = swiper.slides[swiper.activeIndex];
+      captionEl.textContent = activeSlide?.dataset.bloggerCaption || '';
+    };
 
     new Swiper(slider, {
       a11y: {
@@ -18,7 +31,9 @@ export function initSliders() {
         enabled: true,
         onlyInViewport: true,
       },
-      modules: [A11y, Keyboard, Navigation, Pagination],
+      modules,
+      centeredSlides: isBloggersSlider,
+      initialSlide: isBloggersSlider ? 1 : 0,
       navigation:
         nextEl && prevEl
           ? {
@@ -33,9 +48,16 @@ export function initSliders() {
           }
         : undefined,
       slidesPerView: 'auto',
+      slideToClickedSlide: isBloggersSlider,
       spaceBetween: 16,
       speed: 650,
       watchOverflow: true,
+      on: isBloggersSlider
+        ? {
+            init: updateCaption,
+            slideChange: updateCaption,
+          }
+        : undefined,
     });
   });
 }

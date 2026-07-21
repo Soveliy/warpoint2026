@@ -1,0 +1,135 @@
+@use '../vars' as *;
+@use '../fluid' as *;
+
+.about-game {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  min-height: 100dvh;
+  scroll-snap-align: start;
+
+  &__bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  &__row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+  }
+
+  &__content {
+    max-width: rem(492px);
+  }
+
+  &__title {
+    margin: 0 0 rem(4px);
+    font-family: $font-family-heading;
+    font-size: fluid(40px, 64px);
+    letter-spacing: 0;
+    line-height: 0.88;
+    text-transform: uppercase;
+  }
+
+  &__desc {
+    color: $white;
+    font-size: fluid(16px, 18px);
+    font-weight: 600;
+    line-height: 1.2;
+  }
+
+  &--immersion {
+    .about-game__row {
+      position: relative;
+    }
+
+    .about-game__content {
+      position: absolute;
+      z-index: 3;
+      top: 53%;
+      left: 50%;
+      width: min(100%, rem(420px));
+      max-width: none;
+      text-align: center;
+      transform: translate(-50%, -50%);
+    }
+
+    .about-game__title {
+      margin-bottom: rem(16px);
+      font-size: rem(64px);
+      line-height: 0.76;
+
+      span {
+        display: block;
+      }
+    }
+
+    .about-game__desc {
+      font-size: rem(18px);
+      font-weight: 650;
+      line-height: 1.1;
+
+      span {
+        display: block;
+      }
+    }
+  }
+
+  &__character {
+    position: absolute;
+    z-index: 1;
+    top: 11%;
+    max-width: none;
+    pointer-events: none;
+
+    &--left {
+      left: calc(50% - min(36.77vw, #{rem(556px)}));
+      width: min(36.77vw, rem(556px));
+    }
+
+    &--right {
+      left: calc(50% + min(3.77vw, #{rem(57px)}));
+      width: min(29.03vw, rem(439px));
+    }
+  }
+}
+
+@media (max-width: $breakpoint-tablet) {
+  .about-game {
+    padding: rem(80px) 0;
+    &__title {
+      margin-bottom: rem(8px);
+    }
+    &--immersion {
+      .about-game__content {
+        position: relative;
+        transform: none;
+        width: auto;
+        left: initial;
+        top: initial;
+      }
+    }
+    &__row {
+      flex-direction: column;
+      justify-content: flex-start;
+      gap: rem(36px);
+    }
+    &__content {
+      order: -1;
+      text-align: center;
+    }
+  }
+}
+
+@media (max-width: $breakpoint-mobile) {
+  .about-game {
+  }
+}

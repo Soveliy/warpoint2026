@@ -67,12 +67,45 @@ async function renderHtmlIncludes(html, currentDir, stack = []) {
 function htmlIncludesPlugin() {
   return {
     name: 'warpoint-html-includes',
+    configureServer(server) {
+      server.watcher.add(path.join(srcDir, '**/*.html'));
+    },
+    handleHotUpdate({ file, server }) {
+      if (!file.endsWith('.html')) {
+        return;
+      }
+
+      server.ws.send({
+        path: '*',
+        type: 'full-reload',
+      });
+
+      return [];
+    },
     transformIndexHtml: {
       order: 'pre',
       async handler(html, context) {
         const filename = context.filename ?? path.join(srcDir, 'index.html');
         return renderHtmlIncludes(html, path.dirname(filename), [filename]);
       },
+    },
+  };
+}
+
+function scssLiveReloadFallbackPlugin() {
+  return {
+    name: 'warpoint-scss-live-reload-fallback',
+    handleHotUpdate({ file, modules, server }) {
+      if (!file.endsWith('.scss') || modules.length > 0) {
+        return;
+      }
+
+      server.ws.send({
+        path: '*',
+        type: 'full-reload',
+      });
+
+      return [];
     },
   };
 }
@@ -183,6 +216,11 @@ export default defineConfig(({ mode }) => {
         },
       },
     },
-    plugins: [staticAssetsPlugin(), htmlIncludesPlugin(), htmlMinifyPlugin(shouldMinify)],
+    plugins: [
+      staticAssetsPlugin(),
+      htmlIncludesPlugin(),
+      scssLiveReloadFallbackPlugin(),
+      htmlMinifyPlugin(shouldMinify),
+    ],
   };
 });

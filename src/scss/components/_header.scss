@@ -2,40 +2,201 @@
 @use '../fluid' as *;
 
 .header {
-  background-color: $color-bg;
-  border-bottom: rem(1px) solid $color-border;
-  padding: rem(20px) 0;
-  position: sticky;
+  --header-top-offset: 0px;
+  --header-foreground: #{$white};
+  --header-line: #{rgba($white, 0.16)};
+  --header-control-border: #{rgba($white, 0.72)};
+  --header-logo-filter: none;
+
+  position: fixed;
+  left: 0;
   top: 0;
+  width: 100%;
   z-index: $z-header;
+  color: var(--header-foreground);
+  transition:
+    color $duration-base $ease-base,
+    transform 360ms cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform;
+
+  &[data-theme='light'] {
+    --header-foreground: #{$white};
+    --header-line: #{rgba($white, 0.16)};
+    --header-control-border: #{rgba($white, 0.72)};
+    --header-logo-filter: brightness(0) invert(1);
+  }
+
+  &[data-theme='dark'] {
+    --header-foreground: #{$gray-950};
+    --header-line: #{rgba($black, 0.16)};
+    --header-control-border: #{rgba($black, 0.56)};
+    --header-logo-filter: brightness(0);
+  }
+
+  &--top-hidden {
+    transform: translate3d(0, calc(0px - var(--header-top-offset)), 0);
+  }
+
+  &__top {
+    padding: rem(10px) 0;
+    border-bottom: rem(1px) solid var(--header-line);
+    transition: border-color $duration-base $ease-base;
+  }
+
+  &__bottom {
+    padding: rem(12px) 0;
+  }
+
+  &__row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__item {
+    display: flex;
+    align-items: center;
+    gap: rem(16px);
+
+    &--desk {
+      @media (width <= 1024px) {
+        display: none;
+      }
+    }
+  }
+
+  &__logo {
+    height: rem(36px);
+
+    img {
+      max-width: 100%;
+      max-height: 100%;
+      filter: var(--header-logo-filter);
+      transition: filter $duration-base $ease-base;
+    }
+  }
+
+  &__buttons {
+    display: flex;
+    align-items: center;
+    gap: rem(24px);
+  }
+
+  &__button {
+    height: rem(24px);
+    width: rem(24px);
+  }
+
+  &__button-icon {
+    height: 100%;
+    width: 100%;
+    color: var(--header-foreground);
+    transition: color $duration-base $ease-base;
+    fill: none;
+  }
+
+  &__booking {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    width: 0;
+    height: rem(32px);
+    min-width: 0;
+    margin-left: rem(-24px);
+    padding: 0;
+    border-radius: $radius-pill;
+    background-color: $red-600;
+    color: $white;
+    font-size: rem(10px);
+    font-weight: 800;
+    line-height: 1;
+    text-transform: uppercase;
+    white-space: nowrap;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transform: translate3d(rem(12px), rem(-6px), 0) scale(0.94);
+    transition:
+      width 360ms cubic-bezier(0.22, 1, 0.36, 1),
+      margin-left 360ms cubic-bezier(0.22, 1, 0.36, 1),
+      padding 360ms cubic-bezier(0.22, 1, 0.36, 1),
+      background-color $duration-fast $ease-base,
+      opacity $duration-base $ease-base,
+      transform 360ms cubic-bezier(0.22, 1, 0.36, 1),
+      visibility 0s linear 360ms;
+
+    &:hover {
+      background-color: $red-700;
+    }
+
+    &:focus-visible {
+      outline: $focus-outline-width solid $focus-color;
+      outline-offset: $focus-outline-offset;
+    }
+  }
+
+  &--scrolled &__booking {
+    width: rem(130px);
+    margin-left: 0;
+    padding: 0 rem(18px);
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: none;
+    transition-delay: 0s;
+  }
+
+  &__menu {
+    padding-right: rem(140px);
+  }
+
+  .menu__link,
+  .select__button,
+  .link,
+  .burger,
+  .city-confirm__answer,
+  .city-confirm__change,
+  .city-confirm__selection {
+    color: var(--header-foreground);
+  }
+
+  .city-confirm__answer,
+  .city-confirm__change {
+    border-color: var(--header-control-border);
+  }
+
+  .city-confirm__selection--location {
+    border-color: var(--header-line);
+  }
 }
 
-.header__container {
-  align-items: center;
-  display: flex;
-  justify-content: space-between;
-}
-
-.header__logo {
-  color: $color-light;
-  font-family: $font-family-heading;
-  font-size: rem(26px);
-  font-weight: 700;
-  letter-spacing: 0;
-  line-height: 1;
-  text-transform: uppercase;
-}
-
-.header__burger {
-  display: none;
+@media (max-width: $breakpoint-tablet) {
+  .header {
+    &__logo {
+      height: rem(30px);
+    }
+  }
 }
 
 @media (max-width: $breakpoint-mobile) {
-  .header__nav {
-    display: none;
-  }
+  .header {
+    &__buttons {
+      gap: rem(18px);
+    }
 
-  .header__burger {
-    display: inline-flex;
+    &__booking {
+      display: none;
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .header {
+    transition: none;
+
+    &__booking {
+      transition: none;
+    }
   }
 }

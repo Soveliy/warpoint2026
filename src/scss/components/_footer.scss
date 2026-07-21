@@ -1,0 +1,343 @@
+@use '../fluid' as *;
+@use '../mixins/disable-mob-hover' as *;
+@use '../vars' as *;
+
+.footer {
+  .container {
+    padding: 0 24px;
+  }
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  min-height: rem(1044px);
+  padding: rem(32px) 0 rem(16px);
+  border-top: 0;
+  background-color: $gray-950;
+  color: $white;
+  scroll-snap-align: start;
+
+  &__top {
+    position: relative;
+    z-index: 3;
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: rem(16px);
+  }
+
+  &__column {
+    padding-top: rem(24px);
+    border-top: rem(1px) solid rgba($white, 0.32);
+    &:nth-child(n + 4) {
+      border-top: 0;
+    }
+  }
+
+  &__contacts {
+    max-width: rem(602px);
+  }
+
+  &__list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  &__contact-link {
+    @include hover {
+      color: $red-400;
+
+      small {
+        color: $gray-300;
+      }
+    }
+
+    display: flex;
+    align-items: center;
+    width: fit-content;
+    font-family: $font-family-heading;
+    font-size: fluid(32px, 36px);
+    font-weight: 800;
+    line-height: 0.91;
+    letter-spacing: 0;
+    text-transform: uppercase;
+    transition: color $duration-fast $ease-base;
+
+    small {
+      margin-left: rem(6px);
+      color: $gray-500;
+      font-family: $font-family-primary;
+      font-size: rem(12px);
+      font-weight: 500;
+      line-height: 1;
+      text-transform: none;
+      transition: color $duration-fast $ease-base;
+    }
+  }
+
+  &__menu {
+    font-family: $font-family-heading;
+    font-size: rem(36px);
+    font-weight: 800;
+    line-height: 0.91;
+    letter-spacing: 0;
+    text-transform: uppercase;
+  }
+
+  &__menu-link,
+  &__policy-list a {
+    @include hover {
+      color: $red-400;
+    }
+
+    display: inline-block;
+    transition: color $duration-fast $ease-base;
+  }
+
+  &__nav-group,
+  &__policies {
+    padding-top: rem(24px);
+    border-top: rem(1px) solid rgba($white, 0.32);
+  }
+
+  &__policy-list {
+    font-size: rem(12px);
+    font-weight: 500;
+    line-height: 1.2;
+  }
+
+  &__meta {
+    position: absolute;
+    top: rem(636px);
+    left: 50%;
+    z-index: 3;
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: rem(16px);
+    width: 100%;
+    transform: translateX(-50%);
+    @media (min-width: 1500px) {
+      top: rem(600px);
+    }
+  }
+
+  &__company {
+    grid-column: 2;
+    font-size: rem(12px);
+    font-weight: 600;
+    line-height: 1.2;
+  }
+
+  &__requisites,
+  &__company-note {
+    margin: 0;
+  }
+
+  &__skolkovo {
+    width: rem(125px);
+    margin: rem(32px) 0 rem(12px);
+  }
+
+  &__app {
+    @include hover {
+      border-color: $red-400;
+      transform: translateY(rem(-2px));
+    }
+
+    display: flex;
+    grid-column: 3;
+    align-items: center;
+    align-self: start;
+    gap: rem(10px);
+    width: rem(238px);
+    min-height: rem(96px);
+    margin-top: rem(75px);
+    padding: rem(8px);
+    border: rem(1px) solid rgba($white, 0.9);
+    border-radius: rem(16px);
+    font-size: rem(12px);
+    font-weight: 700;
+    line-height: 1.05;
+    transition:
+      border-color $duration-fast $ease-base,
+      transform $duration-fast $ease-base;
+  }
+
+  &__qr {
+    flex: 0 0 auto;
+    width: rem(80px);
+  }
+
+  &__art {
+    position: absolute;
+    bottom: rem(29px);
+    left: 50%;
+    z-index: 1;
+    width: min(102%, rem(1920px));
+    aspect-ratio: 1512 / 179;
+    transform: translateX(-50%);
+    pointer-events: none;
+  }
+
+  &__man {
+    position: absolute;
+    // The source PNG has 38 transparent pixels below the visible figure.
+    bottom: calc(100% - rem(38px));
+    left: 0;
+    z-index: 2;
+    width: rem(697px);
+    max-width: none;
+  }
+
+  &__wordmark {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+  }
+
+  &__legal {
+    position: absolute;
+    right: 0;
+    bottom: rem(12px);
+    left: 0;
+    z-index: 3;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: rem(20px);
+    font-size: rem(11px);
+    font-weight: 500;
+    line-height: 1.15;
+
+    a {
+      @include hover {
+        text-decoration-color: transparent;
+      }
+
+      text-decoration: underline;
+      text-decoration-color: currentcolor;
+      transition: text-decoration-color $duration-fast $ease-base;
+    }
+  }
+}
+
+@media (max-width: $breakpoint-tablet) {
+  .footer {
+    min-height: 0;
+    padding-bottom: rem(20px);
+
+    &__top {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: rem(48px) rem(20px);
+    }
+    &__column {
+      &--empty {
+        display: none;
+      }
+    }
+    &__contacts {
+      grid-column: 1 / -1;
+      max-width: none;
+    }
+
+    &__meta {
+      position: static;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: rem(20px);
+      margin-top: rem(64px);
+      transform: none;
+    }
+
+    &__company,
+    &__app {
+      grid-column: auto;
+    }
+
+    &__app {
+      justify-self: end;
+      margin-top: 0;
+    }
+
+    &__art {
+      position: relative;
+      bottom: auto;
+      left: auto;
+      width: 100%;
+      aspect-ratio: auto;
+      transform: none;
+    }
+
+    &__man {
+      position: relative;
+      bottom: auto;
+      left: auto;
+      z-index: 2;
+      width: min(82vw, rem(697px));
+      margin: rem(64px) 0 rem(-80px) $container-offset;
+    }
+
+    &__wordmark {
+      position: relative;
+      inset: auto;
+      width: 100%;
+      height: auto;
+    }
+
+    &__legal {
+      position: static;
+      margin-top: rem(20px);
+    }
+  }
+}
+
+@media (max-width: $breakpoint-mobile) {
+  .footer {
+    &__top,
+    &__meta,
+    &__legal {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    &__top {
+      gap: rem(48px);
+    }
+
+    &__contacts {
+      grid-column: auto;
+    }
+
+    &__contact-link {
+      flex-wrap: wrap;
+      font-size: rem(32px);
+
+      small {
+        width: 100%;
+        margin: rem(4px) 0 rem(10px);
+      }
+    }
+
+    &__menu {
+      font-size: rem(32px);
+    }
+
+    &__app {
+      justify-self: start;
+    }
+
+    &__man {
+      width: 110vw;
+      margin-top: rem(56px);
+      margin-left: rem(-52px);
+    }
+
+    &__wordmark {
+      width: 150%;
+      margin-left: -25%;
+    }
+
+    &__legal {
+      gap: rem(12px);
+    }
+  }
+}

@@ -1,0 +1,137 @@
+@use '../fluid' as *;
+@use '../vars' as *;
+
+.extras {
+  padding: fluid(88px, 140px) 0 fluid(72px, 112px);
+  overflow: hidden;
+  background-color: $gray-950;
+  color: $white;
+
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: fluid(16px, 24px);
+  }
+
+  &__item {
+    position: relative;
+    min-width: 0;
+    min-height: fluid(500px, 580px);
+    padding: fluid(34px, 42px) 0;
+    overflow: hidden;
+    border-top: rem(1px) solid rgba($white, 0.18);
+  }
+
+  &__item--compact {
+    min-height: fluid(360px, 440px);
+  }
+
+  &__content {
+    position: relative;
+    z-index: 1;
+  }
+
+  &__title {
+    max-width: rem(620px);
+    margin: 0;
+    font-family: $font-family-heading;
+    font-size: fluid(44px, 64px);
+    font-weight: 800;
+    line-height: 0.88;
+    letter-spacing: 0;
+    text-transform: uppercase;
+  }
+
+  &__description {
+    max-width: rem(650px);
+    margin: fluid(10px, 14px) 0 0;
+    color: $gray-400;
+    font-size: fluid(16px, 18px);
+    font-weight: 650;
+    line-height: 1.25;
+  }
+
+  &__button {
+    margin-top: fluid(22px, 28px);
+  }
+
+  &__image {
+    position: absolute;
+    z-index: 0;
+    display: block;
+    object-fit: contain;
+    pointer-events: none;
+    user-select: none;
+  }
+
+  &__image--certificate {
+    right: fluid(12px, 28px);
+    bottom: fluid(30px, 48px);
+    width: min(62%, rem(433px));
+  }
+
+  &__image--merch {
+    right: fluid(18px, 48px);
+    bottom: fluid(18px, 34px);
+    width: min(54%, rem(370px));
+  }
+}
+
+@media (max-width: $breakpoint-tablet) {
+  .extras {
+    &__item {
+      min-height: rem(510px);
+    }
+
+    &__item--compact {
+      min-height: rem(360px);
+    }
+
+    &__image--certificate {
+      width: min(72%, rem(400px));
+    }
+
+    &__image--merch {
+      width: min(66%, rem(350px));
+    }
+  }
+}
+
+@media (max-width: $breakpoint-mobile) {
+  .extras {
+    padding: rem(72px) 0 rem(56px);
+
+    &__grid {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    &__item {
+      min-height: rem(480px);
+      padding: rem(30px) 0;
+    }
+
+    &__item--compact {
+      min-height: rem(320px);
+    }
+
+    &__title {
+      font-size: rem(46px);
+    }
+
+    &__description {
+      max-width: rem(440px);
+    }
+
+    &__image--certificate {
+      right: 0;
+      bottom: rem(34px);
+      width: min(94%, rem(433px));
+    }
+
+    &__image--merch {
+      right: rem(4px);
+      bottom: rem(20px);
+      width: min(88%, rem(409px));
+    }
+  }
+}

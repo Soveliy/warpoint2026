@@ -2,17 +2,10 @@
 @use '../vars' as *;
 
 .burger {
-  align-items: center;
-  appearance: none;
-  background-color: transparent;
-  border: rem(1px) solid $color-border;
-  border-radius: $radius-sm;
-  color: $color-text;
-  display: inline-flex;
-  height: rem(44px);
-  justify-content: center;
-  padding: 0;
-  width: rem(44px);
+  position: relative;
+  width: rem(24px);
+  height: rem(24px);
+  color: $white;
 }
 
 .burger__line {
@@ -30,21 +23,22 @@
 .burger__line::before,
 .burger__line::after {
   background-color: currentColor;
-  border-radius: inherit;
+  border-radius: 10px;
   content: '';
   height: 100%;
-  left: 0;
+  right: 0;
   position: absolute;
   transition: transform $duration-fast $ease-base;
-  width: 100%;
 }
 
 .burger__line::before {
   transform: translateY(rem(-6px));
+  width: 100%;
 }
 
 .burger__line::after {
   transform: translateY(rem(6px));
+  width: 60%;
 }
 
 .burger.is-active .burger__line {

@@ -1,0 +1,126 @@
+@use '../fluid' as *;
+@use '../mixins/disable-mob-hover' as *;
+@use '../vars' as *;
+
+.city-confirm {
+  display: flex;
+  align-items: center;
+  gap: rem(6px);
+  font-size: rem(12px);
+  font-weight: 600;
+  line-height: 1;
+
+  &[hidden] {
+    display: none;
+  }
+
+  &__question {
+    white-space: nowrap;
+
+    strong {
+      font: inherit;
+    }
+  }
+
+  &__answer,
+  &__change {
+    @include hover {
+      border-color: $red-500;
+      color: $red-300;
+    }
+
+    border: rem(1px) solid rgba($white, 0.72);
+    color: $white;
+    transition:
+      border-color $duration-fast $ease-base,
+      color $duration-fast $ease-base;
+
+    &:focus-visible {
+      outline: rem(2px) solid $focus-color;
+      outline-offset: rem(2px);
+    }
+  }
+
+  &__selection {
+    @include hover {
+      color: $red-300;
+    }
+
+    display: inline-flex;
+    align-items: center;
+    gap: rem(4px);
+    min-width: 0;
+    color: $white;
+    font: inherit;
+    white-space: nowrap;
+    transition: color $duration-fast $ease-base;
+
+    &:focus-visible {
+      outline: rem(2px) solid $focus-color;
+      outline-offset: rem(3px);
+    }
+
+    &--location {
+      padding-left: rem(12px);
+      border-left: rem(1px) solid rgba($white, 0.24);
+    }
+  }
+
+  &__selection-icon {
+    flex: 0 0 auto;
+    width: rem(10px);
+    height: rem(10px);
+    color: currentcolor;
+  }
+
+  &__answer {
+    min-width: rem(28px);
+    min-height: rem(20px);
+    padding: rem(2px) rem(6px);
+    border-radius: rem(6px);
+  }
+
+  &__change {
+    min-height: rem(20px);
+    padding: rem(2px) rem(7px);
+    border-radius: rem(6px);
+  }
+
+  &__current {
+    display: flex;
+    align-items: center;
+    gap: rem(12px);
+    font-size: rem(12px);
+    font-weight: 650;
+    line-height: 1;
+
+    &[hidden] {
+      display: none;
+    }
+  }
+
+  &__address {
+    font-weight: 500;
+  }
+}
+
+@media (max-width: $breakpoint-mobile) {
+  .city-confirm {
+    gap: rem(4px);
+    font-size: rem(10px);
+
+    &__answer,
+    &__change {
+      min-height: rem(22px);
+      font-size: rem(10px);
+    }
+
+    &__current {
+      font-size: rem(11px);
+    }
+
+    &__selection--location {
+      display: none;
+    }
+  }
+}

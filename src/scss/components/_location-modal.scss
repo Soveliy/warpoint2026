@@ -1,0 +1,549 @@
+@use '../fluid' as *;
+@use '../mixins/disable-mob-hover' as *;
+@use '../vars' as *;
+
+.location-modal {
+  position: fixed;
+  z-index: $z-modal;
+  inset: 0;
+  display: none;
+  background-color: $black;
+  color: $white;
+
+  &.is-open {
+    display: block;
+  }
+
+  &__dialog {
+    display: grid;
+    grid-template-rows: rem(31px) minmax(0, 1fr);
+    width: 100%;
+    height: 100dvh;
+    background-color: $black;
+  }
+
+  &__header {
+    position: relative;
+    display: flex;
+    align-items: center;
+    min-width: 0;
+    padding: 0 rem(24px);
+    border-bottom: rem(1px) solid $gray-800;
+  }
+
+  &__heading {
+    margin: 0;
+    font-size: rem(12px);
+    font-weight: 600;
+    line-height: 1;
+  }
+
+  &__close {
+    position: absolute;
+    top: 50%;
+    right: rem(16px);
+    width: rem(24px);
+    height: rem(24px);
+    color: $white;
+    transform: translateY(-50%);
+
+    span {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: rem(15px);
+      height: rem(1px);
+      background-color: currentcolor;
+
+      &:first-child {
+        transform: translate(-50%, -50%) rotate(45deg);
+      }
+
+      &:last-child {
+        transform: translate(-50%, -50%) rotate(-45deg);
+      }
+    }
+  }
+
+  &__body {
+    display: grid;
+    grid-template-columns: rem(332px) minmax(0, 1fr);
+    min-height: 0;
+  }
+
+  &__sidebar {
+    position: relative;
+    min-height: 0;
+    overflow: hidden;
+    border-right: rem(1px) solid $gray-800;
+  }
+
+  &__steps {
+    position: relative;
+    z-index: 2;
+    padding: rem(38px) rem(24px) 0;
+  }
+
+  &__step {
+    @include hover {
+      color: $red-500;
+    }
+
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) rem(16px);
+    align-items: center;
+    gap: rem(8px);
+    width: 100%;
+    min-height: rem(77px);
+    border-bottom: rem(1px) solid $gray-500;
+    color: $white;
+    font-size: rem(18px);
+    font-weight: 650;
+    line-height: 1.1;
+    text-align: left;
+    transition:
+      border-color $duration-fast $ease-base,
+      color $duration-fast $ease-base;
+
+    &.is-active {
+      border-color: $red-500;
+      color: $red-500;
+    }
+
+    &:disabled {
+      border-color: $gray-800;
+      color: $gray-700;
+      pointer-events: none;
+    }
+
+    &:focus-visible {
+      outline: rem(2px) solid $focus-color;
+      outline-offset: rem(2px);
+    }
+  }
+
+  &__step-flag {
+    width: rem(27px);
+    height: rem(20px);
+    object-fit: cover;
+  }
+
+  &__step-icon {
+    width: rem(12px);
+    height: rem(12px);
+    transform: rotate(-90deg);
+  }
+
+  &__person {
+    position: absolute;
+    z-index: 0;
+    bottom: 0;
+    left: rem(15px);
+    width: rem(292px);
+    height: min(rem(687px), calc(100% - rem(260px)));
+    object-fit: contain;
+    object-position: center bottom;
+    pointer-events: none;
+    user-select: none;
+  }
+
+  &__actions {
+    position: absolute;
+    z-index: 3;
+    right: rem(24px);
+    bottom: rem(24px);
+    left: rem(24px);
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: rem(8px);
+  }
+
+  &__action {
+    min-height: rem(74px);
+    border: rem(1px) solid transparent;
+    border-radius: rem(16px);
+    font-size: rem(11px);
+    font-weight: 750;
+    line-height: 1;
+    text-transform: uppercase;
+    transition:
+      background-color $duration-fast $ease-base,
+      border-color $duration-fast $ease-base,
+      color $duration-fast $ease-base,
+      opacity $duration-fast $ease-base;
+
+    &:focus-visible {
+      outline: rem(2px) solid $focus-color;
+      outline-offset: rem(2px);
+    }
+  }
+
+  &__action--cancel {
+    @include hover {
+      background-color: $gray-200;
+    }
+
+    background-color: $white;
+    color: $red-500;
+  }
+
+  &__action--confirm {
+    @include hover {
+      background-color: $red-600;
+    }
+
+    background-color: $red-500;
+    color: $white;
+
+    &:disabled {
+      opacity: 0.35;
+      pointer-events: none;
+    }
+  }
+
+  &__content {
+    min-width: 0;
+    min-height: 0;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    scrollbar-color: $gray-700 transparent;
+  }
+
+  &__view {
+    min-height: 100%;
+    padding: rem(57px) fluid(32px, 64px) rem(64px);
+  }
+
+  &__countries {
+    columns: 3;
+    column-gap: fluid(36px, 72px);
+  }
+
+  &__country {
+    break-inside: avoid;
+    margin-bottom: rem(26px);
+  }
+
+  &__country-button {
+    @include hover {
+      color: $red-500;
+    }
+
+    display: inline-flex;
+    align-items: center;
+    gap: rem(8px);
+    max-width: 100%;
+    color: $white;
+    font-family: $font-family-heading;
+    font-size: fluid(30px, 36px);
+    font-weight: 800;
+    line-height: 0.92;
+    text-align: left;
+    text-transform: uppercase;
+    transition: color $duration-fast $ease-base;
+
+    &.is-selected {
+      color: $red-500;
+    }
+
+    &:focus-visible {
+      outline: rem(2px) solid $focus-color;
+      outline-offset: rem(3px);
+    }
+  }
+
+  &__country-flag {
+    flex: 0 0 auto;
+    width: rem(33px);
+    height: rem(25px);
+    object-fit: cover;
+  }
+
+  &__country-cities {
+    display: grid;
+    gap: rem(10px);
+    margin-top: rem(14px);
+  }
+
+  &__country-city,
+  &__city-button {
+    @include hover {
+      color: $red-500;
+    }
+
+    width: fit-content;
+    max-width: 100%;
+    color: $gray-300;
+    font-size: rem(18px);
+    font-weight: 600;
+    line-height: 1.15;
+    text-align: left;
+    transition: color $duration-fast $ease-base;
+
+    &:focus-visible {
+      outline: rem(2px) solid $focus-color;
+      outline-offset: rem(2px);
+    }
+  }
+
+  &__search {
+    width: min(100%, rem(350px));
+    height: rem(36px);
+    padding: 0 rem(2px) rem(10px);
+    border: 0;
+    border-bottom: rem(1px) solid $gray-400;
+    border-radius: 0;
+    background-color: transparent;
+    color: $white;
+    font: inherit;
+    font-size: rem(16px);
+
+    &::placeholder {
+      color: $gray-700;
+    }
+
+    &:focus-visible {
+      border-color: $red-500;
+      outline: 0;
+    }
+  }
+
+  &__cities {
+    columns: 3;
+    column-gap: fluid(36px, 72px);
+    margin-top: rem(40px);
+  }
+
+  &__city-group {
+    break-inside: avoid;
+    margin-bottom: rem(36px);
+  }
+
+  &__city-letter {
+    margin: 0 0 rem(16px);
+    font-family: $font-family-heading;
+    font-size: rem(36px);
+    font-weight: 800;
+    line-height: 0.9;
+  }
+
+  &__city-list {
+    display: grid;
+    gap: rem(11px);
+  }
+
+  &__city-button.is-selected,
+  &__country-city.is-selected {
+    color: $red-500;
+  }
+
+  &__empty {
+    margin: rem(40px) 0 0;
+    color: $gray-400;
+    font-size: rem(18px);
+  }
+
+  &__locations {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: fluid(16px, 24px);
+  }
+
+  &__location-card {
+    @include hover {
+      border-color: $gray-500;
+    }
+
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    min-height: rem(460px);
+    padding: rem(24px);
+    overflow: hidden;
+    border: rem(1px) solid $gray-700;
+    border-radius: rem(24px);
+    color: $white;
+    text-align: left;
+    transition:
+      border-color $duration-fast $ease-base,
+      color $duration-fast $ease-base;
+
+    &.is-selected {
+      border-color: $red-500;
+
+      .location-modal__location-title {
+        color: $red-500;
+      }
+    }
+
+    &:focus-visible {
+      outline: rem(2px) solid $focus-color;
+      outline-offset: rem(3px);
+    }
+  }
+
+  &__location-title {
+    margin: 0;
+    font-family: $font-family-heading;
+    font-size: fluid(30px, 36px);
+    font-weight: 800;
+    line-height: 0.92;
+    text-transform: uppercase;
+    transition: color $duration-fast $ease-base;
+  }
+
+  &__location-address {
+    margin: rem(12px) 0 0;
+    font-size: rem(18px);
+    font-weight: 650;
+    line-height: 1.2;
+  }
+
+  &__location-details {
+    display: block;
+  }
+
+  &__location-meta {
+    display: flex;
+    justify-content: space-between;
+    gap: rem(12px);
+    margin-top: auto;
+    padding-top: rem(24px);
+    font-size: rem(17px);
+    font-weight: 650;
+  }
+
+  &__location-rating::before {
+    content: '★';
+    margin-right: rem(8px);
+    color: $yellow-400;
+  }
+
+  &__location-image {
+    width: 100%;
+    aspect-ratio: 1.65;
+    margin-top: rem(10px);
+    border-radius: rem(8px);
+    object-fit: cover;
+  }
+}
+
+@media (max-width: $breakpoint-tablet) {
+  .location-modal {
+    &__body {
+      grid-template-columns: rem(280px) minmax(0, 1fr);
+    }
+
+    &__steps {
+      padding-inline: rem(18px);
+    }
+
+    &__person {
+      left: 0;
+      width: rem(270px);
+    }
+
+    &__actions {
+      right: rem(18px);
+      left: rem(18px);
+    }
+
+    &__countries,
+    &__cities {
+      columns: 2;
+    }
+
+    &__locations {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+}
+
+@media (max-width: $breakpoint-mobile) {
+  .location-modal {
+    &__dialog {
+      grid-template-rows: rem(44px) minmax(0, 1fr);
+    }
+
+    &__header {
+      padding-inline: rem(16px) rem(48px);
+    }
+
+    &__body {
+      grid-template-columns: minmax(0, 1fr);
+      grid-template-rows: auto minmax(0, 1fr);
+    }
+
+    &__sidebar {
+      overflow: visible;
+      border-right: 0;
+      border-bottom: rem(1px) solid $gray-800;
+    }
+
+    &__steps {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: rem(8px);
+      padding: 0 rem(12px);
+    }
+
+    &__step {
+      grid-template-columns: minmax(0, 1fr) rem(12px);
+      min-height: rem(58px);
+      font-size: rem(13px);
+
+      .location-modal__step-flag {
+        display: none;
+      }
+    }
+
+    &__person {
+      display: none;
+    }
+
+    &__actions {
+      position: fixed;
+      right: rem(12px);
+      bottom: rem(12px);
+      left: rem(12px);
+      gap: rem(8px);
+    }
+
+    &__action {
+      min-height: rem(58px);
+      border-radius: rem(12px);
+    }
+
+    &__view {
+      padding: rem(28px) rem(16px) rem(100px);
+    }
+
+    &__countries,
+    &__cities {
+      columns: 1;
+    }
+
+    &__country {
+      margin-bottom: rem(30px);
+    }
+
+    &__country-button {
+      font-size: rem(32px);
+    }
+
+    &__country-city,
+    &__city-button {
+      font-size: rem(17px);
+    }
+
+    &__locations {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    &__location-card {
+      min-height: rem(430px);
+      padding: rem(20px);
+      border-radius: rem(16px);
+    }
+  }
+}

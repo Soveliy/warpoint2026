@@ -61,6 +61,12 @@ a {
   color: $white;
 }
 
+.button-reset {
+  background-color: transparent;
+  padding: 0;
+  border: 0;
+}
+
 .visually-hidden {
   border: 0;
   clip-path: inset(50%);
