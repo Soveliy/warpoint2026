@@ -32,20 +32,23 @@
 }
 
 .games-intro {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding-bottom: fluid(32px, 76px);
-
   &__inner {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     width: 100%;
+    min-height: 100dvh;
+    padding: fluid(72px, 96px) 0 fluid(190px, 260px);
   }
 
   &__title {
-    max-width: rem(860px);
+    position: relative;
+    z-index: 2;
+    max-width: rem(720px);
     margin: 0 auto;
     font-family: $font-family-heading;
-    font-size: rem(102px);
+    font-size: fluid(52px, 82px);
     font-weight: 800;
     line-height: 0.82;
     letter-spacing: 0;
@@ -55,6 +58,64 @@
 
   &__title span {
     display: block;
+  }
+
+  &__deck {
+    display: none;
+    position: absolute;
+    z-index: 1;
+    bottom: fluid(32px, 64px);
+    left: 60%;
+    width: min(72vw, rem(760px));
+    height: fluid(150px, 230px);
+    pointer-events: none;
+    transform: translateX(-50%);
+  }
+
+  &__card {
+    --card-left: 50%;
+    --card-bottom: 0%;
+    --card-rotation: 0deg;
+    --card-scale: 1;
+
+    position: absolute;
+    bottom: var(--card-bottom);
+    left: var(--card-left);
+    width: fluid(72px, 116px);
+    aspect-ratio: 2 / 3;
+    border-radius: fluid(6px, 10px);
+    box-shadow: 0 rem(12px) rem(28px) rgba($black, 0.12);
+    object-fit: cover;
+    transform: translateX(-50%) rotate(var(--card-rotation)) scale(var(--card-scale));
+    transform-origin: 50% 100%;
+
+    &:nth-child(1) {
+      --card-left: 28%;
+      --card-bottom: 0%;
+      --card-rotation: -4deg;
+      --card-scale: 0.76;
+    }
+
+    &:nth-child(2) {
+      --card-left: 48%;
+      --card-bottom: 3%;
+      --card-rotation: -2deg;
+      --card-scale: 0.86;
+    }
+
+    &:nth-child(3) {
+      --card-left: 68%;
+      --card-bottom: 7%;
+      --card-rotation: 3deg;
+      --card-scale: 0.96;
+    }
+
+    &:nth-child(4) {
+      --card-left: 88%;
+      --card-bottom: 11%;
+      --card-rotation: 2deg;
+      --card-scale: 1.06;
+    }
   }
 }
 
@@ -229,10 +290,43 @@
 }
 
 @media (max-width: $breakpoint-mobile) {
-  .games-intro__title {
-    max-width: rem(340px);
-    font-size: rem(52px);
-    line-height: 0.86;
+  .games-intro {
+    &__inner {
+      padding: rem(76px) 0 rem(180px);
+    }
+
+    &__title {
+      max-width: rem(340px);
+      font-size: rem(52px);
+      line-height: 0.86;
+    }
+
+    &__deck {
+      bottom: rem(28px);
+      left: 50%;
+      width: 100%;
+      height: rem(155px);
+    }
+
+    &__card {
+      width: rem(72px);
+
+      &:nth-child(1) {
+        --card-left: 18%;
+      }
+
+      &:nth-child(2) {
+        --card-left: 40%;
+      }
+
+      &:nth-child(3) {
+        --card-left: 62%;
+      }
+
+      &:nth-child(4) {
+        --card-left: 84%;
+      }
+    }
   }
 
   .games-catalog {

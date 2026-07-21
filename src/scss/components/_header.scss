@@ -16,6 +16,7 @@
   color: var(--header-foreground);
   transition:
     color $duration-base $ease-base,
+    background-color $duration-base $ease-base,
     transform 360ms cubic-bezier(0.22, 1, 0.36, 1);
   will-change: transform;
 
@@ -23,6 +24,7 @@
     --header-foreground: #{$white};
     --header-line: #{rgba($white, 0.16)};
     --header-control-border: #{rgba($white, 0.72)};
+    background-color: #131316;
     --header-logo-filter: brightness(0) invert(1);
   }
 
@@ -31,6 +33,7 @@
     --header-line: #{rgba($black, 0.16)};
     --header-control-border: #{rgba($black, 0.56)};
     --header-logo-filter: brightness(0);
+    background-color: #fff;
   }
 
   &--top-hidden {

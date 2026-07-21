@@ -64,7 +64,7 @@
 
     .about-game__title {
       margin-bottom: rem(16px);
-      font-size: rem(64px);
+
       line-height: 0.76;
 
       span {
@@ -131,5 +131,18 @@
 
 @media (max-width: $breakpoint-mobile) {
   .about-game {
+    &__character {
+      top: 21%;
+      &--left {
+        width: 97%;
+        left: calc(24% - min(36.77vw, 34.75rem));
+      }
+
+      &--right {
+        width: 74%;
+        left: calc(26% + min(3.77vw, 3.5625rem));
+        top: 21%;
+      }
+    }
   }
 }
