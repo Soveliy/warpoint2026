@@ -4,7 +4,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 gsap.registerPlugin(ScrollTrigger);
 
 const sectionSelector =
-  '.main > :is(section, .hero, .video-section, [data-pixel-transition="on"]), .footer';
+  '.main > :is(section, .hero, .video-section, [data-pixel-transition="on"], [data-pixel-section]), .footer';
 const defaultColumns = 16;
 const defaultRows = 6;
 const defaultScrub = 0.3;

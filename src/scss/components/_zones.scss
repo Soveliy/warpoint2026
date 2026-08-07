@@ -5,6 +5,8 @@
 
 .zones {
   background-color: $red-600;
+  position: relative;
+  z-index: 50;
 
   &__wrap {
     display: flex;
@@ -25,8 +27,6 @@
   &__tab {
     @include hover {
       &:hover {
-        border-color: $white;
-        color: $white;
       }
     }
 
@@ -37,6 +37,8 @@
     width: rem(64px);
     border-radius: rem(16px);
     border: rem(1px) solid $color-bg;
+    border-color: $white;
+    color: $white;
     transition:
       color 0.3s,
       border-color 0.3s;

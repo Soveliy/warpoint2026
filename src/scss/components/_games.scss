@@ -2,21 +2,28 @@
 @use '../mixins/disable-mob-hover' as *;
 @use '../vars' as *;
 
-.games-intro,
-.games-catalog {
-  position: relative;
-  isolation: isolate;
-  overflow: hidden;
-  min-height: 100vh;
+.games-group {
   background-color: $gray-25;
   color: $black;
-  scroll-snap-align: start;
+  isolation: isolate;
+  position: relative;
 
-  &::before {
-    content: '';
+  &__background {
+    height: 100dvh;
+    margin-bottom: -100dvh;
+    overflow: hidden;
+    position: sticky;
+    top: 0;
+    z-index: 0;
+  }
+
+  &__background-pattern,
+  &__background-gradient {
     position: absolute;
-    inset: 0;
-    z-index: -1;
+    will-change: transform;
+  }
+
+  &__background-pattern {
     background-image:
       linear-gradient(
         124deg,
@@ -27,8 +34,26 @@
       ),
       linear-gradient(124deg, transparent 0 28%, rgba($gray-200, 0.34) 28% 37%, transparent 37%),
       linear-gradient(124deg, transparent 0 63%, rgba($gray-200, 0.28) 63% 70%, transparent 70%);
-    pointer-events: none;
+    inset: -12%;
   }
+
+  &__background-gradient {
+    background:
+      linear-gradient(112deg, rgb(209 209 214 / 0.34), transparent 34% 66%, rgb(228 228 231 / 0.3)),
+      linear-gradient(180deg, rgb(255 255 255 / 0.14), rgb(244 244 245 / 0.08));
+    inset: -18%;
+  }
+}
+
+.games-intro,
+.games-catalog {
+  color: $black;
+  isolation: isolate;
+  min-height: 100vh;
+  overflow: hidden;
+  position: relative;
+  scroll-snap-align: start;
+  z-index: 1;
 }
 
 .games-intro {

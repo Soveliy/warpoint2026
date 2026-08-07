@@ -142,18 +142,55 @@ function setupSectionReveals(sections) {
   return () => cleanups.forEach((cleanup) => cleanup?.());
 }
 
+function setupBackgroundParallax(group) {
+  const image = group.querySelector('.about-game-group__background-image');
+  const gradient = group.querySelector('.about-game-group__background-gradient');
+
+  if (!image || !gradient) return null;
+
+  const timeline = gsap.timeline({
+    scrollTrigger: {
+      end: 'bottom top',
+      invalidateOnRefresh: true,
+      scrub: 0.6,
+      start: 'top bottom',
+      trigger: group,
+    },
+  });
+
+  timeline
+    .fromTo(image, { scale: 1.08, yPercent: -3 }, { ease: 'none', scale: 1.08, yPercent: 3 }, 0)
+    .fromTo(
+      gradient,
+      { xPercent: -7, yPercent: -4 },
+      { ease: 'none', xPercent: 7, yPercent: 4 },
+      0,
+    );
+
+  return () => {
+    timeline.scrollTrigger?.kill();
+    timeline.kill();
+    gsap.set([image, gradient], { clearProps: 'transform' });
+  };
+}
+
 export function initAboutGameSequence() {
-  const sections = [...document.querySelectorAll('.main > .about-game')];
+  const group = document.querySelector('[data-about-game-group]');
+  const sections = group ? [...group.querySelectorAll(':scope > .about-game')] : [];
 
   if (sections.length < 2) return;
 
   const media = gsap.matchMedia();
 
   media.add(motionQuery, () => {
-    const cleanup = setupSectionReveals(sections);
+    const cleanupReveals = setupSectionReveals(sections);
+    const cleanupParallax = setupBackgroundParallax(group);
 
     ScrollTrigger.refresh();
 
-    return cleanup;
+    return () => {
+      cleanupParallax?.();
+      cleanupReveals();
+    };
   });
 }

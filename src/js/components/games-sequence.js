@@ -240,11 +240,44 @@ function setupCatalogReveal(catalog) {
   };
 }
 
-export function initGamesSequence() {
-  const intro = document.querySelector('.games-intro');
-  const catalog = document.querySelector('.games-catalog');
+function setupBackgroundParallax(group) {
+  const pattern = group.querySelector('.games-group__background-pattern');
+  const gradient = group.querySelector('.games-group__background-gradient');
 
-  if (!intro || !catalog) return;
+  if (!pattern || !gradient) return null;
+
+  const timeline = gsap.timeline({
+    scrollTrigger: {
+      end: 'bottom top',
+      invalidateOnRefresh: true,
+      scrub: 0.6,
+      start: 'top bottom',
+      trigger: group,
+    },
+  });
+
+  timeline
+    .fromTo(pattern, { xPercent: -5, yPercent: -3 }, { ease: 'none', xPercent: 5, yPercent: 3 }, 0)
+    .fromTo(
+      gradient,
+      { xPercent: 7, yPercent: -4 },
+      { ease: 'none', xPercent: -7, yPercent: 4 },
+      0,
+    );
+
+  return () => {
+    timeline.scrollTrigger?.kill();
+    timeline.kill();
+    gsap.set([pattern, gradient], { clearProps: 'transform' });
+  };
+}
+
+export function initGamesSequence() {
+  const group = document.querySelector('[data-games-group]');
+  const intro = group?.querySelector('.games-intro');
+  const catalog = group?.querySelector('.games-catalog');
+
+  if (!group || !intro || !catalog) return;
 
   const media = gsap.matchMedia();
 
@@ -257,10 +290,12 @@ export function initGamesSequence() {
 
       const introAnimation = setupIntroAnimation(intro);
       const catalogCleanup = setupCatalogReveal(catalog);
+      const backgroundCleanup = setupBackgroundParallax(group);
 
       ScrollTrigger.refresh();
 
       return () => {
+        backgroundCleanup?.();
         catalogCleanup?.();
         introAnimation?.cleanup();
       };
