@@ -1,6 +1,5 @@
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { getSmoothScroll } from './smooth-scroll.js';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -23,8 +22,6 @@ const waitForImage = (image) => {
 };
 
 const refreshPage = () => {
-  getSmoothScroll()?.resize();
-
   window.requestAnimationFrame(() => {
     ScrollTrigger.refresh();
   });

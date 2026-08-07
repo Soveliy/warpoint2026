@@ -1,5 +1,3 @@
-import { getSmoothScroll } from './smooth-scroll.js';
-
 const hiddenClass = 'header--top-hidden';
 const scrolledClass = 'header--scrolled';
 const directionThreshold = 2;
@@ -46,26 +44,20 @@ export function initHeaderScroll() {
     previousPosition = position;
   };
 
-  const smoothScroll = getSmoothScroll();
+  window.addEventListener(
+    'scroll',
+    () => {
+      if (scrollFrame !== null) {
+        return;
+      }
 
-  if (smoothScroll) {
-    smoothScroll.on('scroll', ({ scroll }) => updateHeader(scroll));
-  } else {
-    window.addEventListener(
-      'scroll',
-      () => {
-        if (scrollFrame !== null) {
-          return;
-        }
-
-        scrollFrame = window.requestAnimationFrame(() => {
-          updateHeader(window.scrollY);
-          scrollFrame = null;
-        });
-      },
-      { passive: true },
-    );
-  }
+      scrollFrame = window.requestAnimationFrame(() => {
+        updateHeader(window.scrollY);
+        scrollFrame = null;
+      });
+    },
+    { passive: true },
+  );
 
   updateTopOffset();
   updateHeader(window.scrollY);

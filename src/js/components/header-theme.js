@@ -1,5 +1,3 @@
-import { getSmoothScroll } from './smooth-scroll.js';
-
 const defaultTheme = 'brand';
 
 function getThemeBelowHeader(header) {
@@ -50,14 +48,7 @@ export function initHeaderTheme() {
     updateFrame = window.requestAnimationFrame(updateTheme);
   };
 
-  const smoothScroll = getSmoothScroll();
-
-  if (smoothScroll) {
-    smoothScroll.on('scroll', scheduleUpdate);
-  } else {
-    window.addEventListener('scroll', scheduleUpdate, { passive: true });
-  }
-
+  window.addEventListener('scroll', scheduleUpdate, { passive: true });
   window.addEventListener('resize', scheduleUpdate, { passive: true });
   window.addEventListener('load', scheduleUpdate, { once: true });
   scheduleUpdate();

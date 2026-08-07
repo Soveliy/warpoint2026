@@ -1,18 +1,9 @@
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
-import { getSmoothScroll } from './smooth-scroll.js';
-
 gsap.registerPlugin(ScrollTrigger);
 
-const desktopQuery = '(min-width: 64.0625rem)';
 const motionQuery = '(prefers-reduced-motion: no-preference)';
-const scrollDuration = 0.92;
-const scrollEase = gsap.parseEase('power2.inOut');
-
-function getDocumentTop(element) {
-  return window.scrollY + element.getBoundingClientRect().top;
-}
 
 function readCardState(card) {
   const styles = getComputedStyle(card);
@@ -141,28 +132,6 @@ function setupIntroAnimation(intro) {
     introTimeline.play(0);
   };
 
-  const collapseForExit = () => {
-    deckLoop.pause();
-    introTimeline.pause();
-    gsap.to(satelliteCards, {
-      autoAlpha: 0,
-      bottom: firstState.bottom,
-      duration: 0.38,
-      ease: 'power2.in',
-      left: firstState.left,
-      rotation: firstState.rotation,
-      scale: 0.16,
-      stagger: { each: 0.05, from: 'end' },
-      y: 50,
-    });
-    gsap.to(firstCard, {
-      duration: 0.62,
-      ease: 'power2.inOut',
-      scale: firstState.scale * 0.28,
-      y: -36,
-    });
-  };
-
   reset();
 
   const trigger = ScrollTrigger.create({
@@ -178,7 +147,6 @@ function setupIntroAnimation(intro) {
   if (trigger.isActive) play();
 
   return {
-    collapseForExit,
     cleanup: () => {
       trigger.kill();
       deckLoop.kill();
@@ -272,117 +240,6 @@ function setupCatalogReveal(catalog) {
   };
 }
 
-function setupScrollTransition(intro, catalog, onExit) {
-  let observer = null;
-  let fallbackTween = null;
-  let isAnimating = false;
-  let inputReady = true;
-
-  const setCapture = (enabled) => {
-    if (!observer) return;
-
-    if (enabled) {
-      inputReady = true;
-      intro.setAttribute('data-lenis-prevent-touch', '');
-      intro.setAttribute('data-lenis-prevent-wheel', '');
-      observer.enable();
-      return;
-    }
-
-    observer.disable();
-    intro.removeAttribute('data-lenis-prevent-touch');
-    intro.removeAttribute('data-lenis-prevent-wheel');
-  };
-
-  const scrollTo = (target, onComplete) => {
-    const smoothScroll = getSmoothScroll();
-
-    if (smoothScroll) {
-      smoothScroll.scrollTo(target, {
-        duration: scrollDuration,
-        easing: scrollEase,
-        force: true,
-        lock: true,
-        onComplete,
-      });
-      return;
-    }
-
-    const scrollState = { value: window.scrollY };
-
-    fallbackTween?.kill();
-    fallbackTween = gsap.to(scrollState, {
-      value: target,
-      duration: scrollDuration,
-      ease: 'power2.inOut',
-      onComplete,
-      onUpdate: () => window.scrollTo(0, scrollState.value),
-    });
-  };
-
-  const move = (direction) => {
-    if (isAnimating) return;
-
-    isAnimating = true;
-    setCapture(false);
-
-    if (direction > 0) {
-      onExit();
-      scrollTo(getDocumentTop(catalog), () => {
-        isAnimating = false;
-      });
-      return;
-    }
-
-    scrollTo(Math.max(0, getDocumentTop(intro) - window.innerHeight), () => {
-      isAnimating = false;
-    });
-  };
-
-  const trigger = ScrollTrigger.create({
-    end: 'bottom top',
-    onEnter: () => setCapture(true),
-    onEnterBack: () => setCapture(true),
-    onLeave: () => setCapture(false),
-    onLeaveBack: () => setCapture(false),
-    start: 'top 1px',
-    trigger: intro,
-  });
-
-  observer = ScrollTrigger.observe({
-    allowClicks: true,
-    dragMinimum: 8,
-    lockAxis: true,
-    onChangeY: (self) => {
-      const inputDirection = Math.sign(self.deltaY);
-
-      if (!inputDirection || !inputReady) return;
-
-      inputReady = false;
-      move(self.event.type === 'wheel' ? inputDirection : -inputDirection);
-    },
-    onStop: () => {
-      inputReady = true;
-    },
-    onStopDelay: 0.18,
-    preventDefault: true,
-    target: intro,
-    tolerance: 10,
-    type: 'wheel,touch',
-  });
-
-  observer.disable();
-
-  if (trigger.isActive) setCapture(true);
-
-  return () => {
-    setCapture(false);
-    observer.kill();
-    fallbackTween?.kill();
-    trigger.kill();
-  };
-}
-
 export function initGamesSequence() {
   const intro = document.querySelector('.games-intro');
   const catalog = document.querySelector('.games-catalog');
@@ -393,7 +250,6 @@ export function initGamesSequence() {
 
   media.add(
     {
-      desktop: desktopQuery,
       motion: motionQuery,
     },
     ({ conditions }) => {
@@ -401,15 +257,10 @@ export function initGamesSequence() {
 
       const introAnimation = setupIntroAnimation(intro);
       const catalogCleanup = setupCatalogReveal(catalog);
-      const transitionCleanup =
-        conditions.desktop && introAnimation
-          ? setupScrollTransition(intro, catalog, introAnimation.collapseForExit)
-          : null;
 
       ScrollTrigger.refresh();
 
       return () => {
-        transitionCleanup?.();
         catalogCleanup?.();
         introAnimation?.cleanup();
       };

@@ -41,9 +41,25 @@
   }
 
   &__previews {
+    position: relative;
+    isolation: isolate;
     display: flex;
     gap: rem(4px);
     margin-top: rem(16px);
+  }
+
+  &__preview-indicator {
+    position: absolute;
+    z-index: 0;
+    top: 0;
+    left: 0;
+    width: rem(72px);
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background-color: $red-500;
+    pointer-events: none;
+    transform: translate3d(0, 0, 0);
+    will-change: transform;
   }
 
   &__preview {
@@ -52,6 +68,7 @@
     }
 
     position: relative;
+    z-index: 1;
     flex: 0 0 auto;
     width: rem(72px);
     aspect-ratio: 1;
@@ -66,10 +83,6 @@
       height: 100%;
       border-radius: inherit;
       object-fit: cover;
-    }
-
-    &.is-active {
-      border-color: $red-500;
     }
 
     &:focus-visible {
@@ -95,23 +108,26 @@
 
   &__score,
   &__card {
+    box-sizing: border-box;
     flex: 0 0 auto;
     height: min(rem(716px), calc(100vh - rem(96px)));
     aspect-ratio: 403 / 716;
     border-radius: fluid(28px, 40px);
+    will-change: transform;
   }
 
   &__score {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    padding: fluid(28px, 40px);
+    padding: 0;
     background-color: $violet-500;
     color: $white;
   }
 
   &__services {
     display: grid;
+    padding: fluid(28px, 40px) fluid(28px, 40px) 0;
   }
 
   &__service {
@@ -143,6 +159,7 @@
   }
 
   &__rating {
+    padding: 0 fluid(28px, 40px) fluid(28px, 40px);
     text-align: center;
   }
 
@@ -173,6 +190,7 @@
       object-fit: cover;
     }
   }
+
   &__card-top {
     position: absolute;
     top: 0;
@@ -184,6 +202,7 @@
     width: 100%;
     box-sizing: border-box;
   }
+
   &__card-name,
   &__card__value {
     font-family: $font-family-heading;
@@ -192,15 +211,16 @@
     line-height: 92%;
     text-transform: uppercase;
 
-    color: #fff;
+    color: $white;
   }
+
   &__card-place {
     font-weight: 700;
     font-size: 11px;
     line-height: 100%;
     letter-spacing: 0.08em;
     text-transform: uppercase;
-    color: #fff;
+    color: $white;
     margin-top: 11px;
   }
 }
@@ -224,13 +244,17 @@
       width: rem(58px);
     }
 
+    &__preview-indicator {
+      width: rem(58px);
+    }
+
     &__score,
     &__card {
       height: min(rem(640px), calc(100vh - rem(96px)));
     }
 
     &__score {
-      padding: rem(28px);
+      padding: 0;
     }
 
     &__service-name,
@@ -279,6 +303,10 @@
       border-width: rem(2px);
     }
 
+    &__preview-indicator {
+      width: rem(54px);
+    }
+
     &__viewport {
       display: block;
       overflow-x: auto;
@@ -303,10 +331,11 @@
       height: auto;
       aspect-ratio: 403 / 716;
       scroll-snap-align: center;
+      will-change: auto;
     }
 
     &__score {
-      padding: rem(28px);
+      padding: 0;
     }
 
     &__service {

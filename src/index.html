@@ -60,16 +60,25 @@
           </div>
         </div>
       </div>
-      <div class="video-section" data-header-theme="light">
+      <div class="video-section" data-header-theme="light" data-click-video>
         <video
           class="video-section__native"
           playsinline
           loop
-          muted
-          autoplay
-          loading="lazy"
+          controls
+          preload="metadata"
           src="video/video_preview.mp4"
         ></video>
+        <button
+          class="video-section__play button-reset"
+          type="button"
+          aria-label="Воспроизвести видео"
+          data-video-play
+        >
+          <svg class="video-section__play-icon" aria-hidden="true">
+            <use href="/img/sprite.svg#icon-play"></use>
+          </svg>
+        </button>
       </div>
       <section class="about-game" data-header-theme="light">
         <picture>

@@ -1,9 +1,61 @@
+@use '../fluid' as *;
+@use '../vars' as *;
+
 .video-section {
+  background-color: $black;
   height: 100dvh;
+  overflow: hidden;
+  position: relative;
+
   &__native {
     height: 100%;
-    width: 100%;
     object-fit: cover;
     object-position: center;
+    width: 100%;
+  }
+
+  &__play {
+    align-items: center;
+    aspect-ratio: 1;
+    backdrop-filter: blur(rem(12px));
+    background-color: rgb(0 0 0 / 0.48);
+    border: rem(1px) solid rgb(255 255 255 / 0.38);
+    border-radius: 50%;
+    color: $white;
+    display: inline-flex;
+    height: fluid(68px, 96px);
+    justify-content: center;
+    left: 50%;
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    transition:
+      background-color $duration-base $ease-base,
+      opacity $duration-base $ease-base,
+      transform $duration-base $ease-base;
+    z-index: 2;
+
+    &:hover {
+      background-color: rgb(0 0 0 / 0.64);
+      transform: translate(-50%, -50%) scale(1.06);
+    }
+
+    &:focus-visible {
+      outline: $focus-outline-width solid $focus-color;
+      outline-offset: $focus-outline-offset;
+    }
+  }
+
+  &__play-icon {
+    fill: currentcolor;
+    height: fluid(20px, 28px);
+    transform: translateX(8%);
+    width: fluid(13px, 18px);
+  }
+
+  &.is-playing &__play {
+    opacity: 0;
+    pointer-events: none;
+    transform: translate(-50%, -50%) scale(0.88);
   }
 }
