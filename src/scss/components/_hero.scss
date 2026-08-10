@@ -49,6 +49,9 @@
     line-height: 88%;
     font-weight: 800;
     text-transform: uppercase;
+    span {
+      color: $red-600;
+    }
   }
   &__buttons {
     position: absolute;
@@ -59,24 +62,31 @@
     gap: rem(12px);
   }
   &__button {
-    border: 1.5px solid $violet-600;
     border-radius: 24px;
     padding: 36px 39px;
-    font-size: 11px;
+    font-size: 14px;
     line-height: 100%;
     letter-spacing: 0.08em;
     font-weight: 700;
     text-transform: uppercase;
     text-align: center;
+    border: 1px solid transparent;
+    transition: all 0.3s ease-in-out;
     &--red {
-      color: $red-500;
-      border-color: $red-500;
-      background: linear-gradient(135deg, rgba(246, 61, 104, 0.2) 0%, rgba(161, 16, 67, 0.2) 100%);
+      color: #ffffff;
+
+      background: linear-gradient(134.84deg, #f63d68 0%, #a11043 100%);
+      &:hover {
+        opacity: 0.8;
+      }
     }
     &--purple {
-      color: $violet-600;
-      border-color: $violet-600;
-      background: linear-gradient(135deg, rgba(135, 91, 247, 0.2) 0%, rgba(87, 32, 183, 0.2) 100%);
+      color: #ffffff;
+
+      background: linear-gradient(134.84deg, #875bf7 0%, #5720b7 100%);
+      &:hover {
+        opacity: 0.8;
+      }
     }
   }
   &__allerts {
