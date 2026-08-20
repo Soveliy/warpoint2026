@@ -4,193 +4,384 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 gsap.registerPlugin(ScrollTrigger);
 
 const motionQuery = '(prefers-reduced-motion: no-preference)';
+const desktopQuery = '(min-width: 64.0625rem)';
+const revealProperties = 'clipPath,opacity,scale,transform,transformOrigin,visibility,willChange';
 
-function getDirectSpans(element) {
-  if (!element) return [];
+const getTitleLines = (section) => [...section.querySelectorAll('.about-game__title > span')];
 
-  const spans = [...element.children].filter((child) => child.matches('span'));
+const getBenefitParts = (benefits) =>
+  benefits.map((benefit) => ({
+    content: benefit.querySelector('.about-game__benefit-content'),
+    number: benefit.querySelector('.about-game__number'),
+  }));
 
-  return spans.length ? spans : [element];
-}
+const clearRevealStyles = (elements) => {
+  gsap.set(elements.filter(Boolean), {
+    clearProps: revealProperties,
+  });
+};
 
-function setupSectionReveals(sections) {
-  const cleanups = sections.map((section, sectionIndex) => {
-    const visuals = [...section.querySelectorAll('.about-game__visual, .about-game__character')];
-    const titleParts = getDirectSpans(section.querySelector('.about-game__title'));
-    const descriptionParts = getDirectSpans(section.querySelector('.about-game__desc'));
-    const animatedElements = [...visuals, ...titleParts, ...descriptionParts];
-    const isImmersion = section.classList.contains('about-game--immersion');
-    const sideDirection = sectionIndex === 0 ? 1 : -1;
+const addOnceTrigger = (timeline, triggerElement, start) => {
+  let hasPlayed = false;
+  const play = () => {
+    if (hasPlayed) return;
 
-    if (!animatedElements.length) return null;
+    hasPlayed = true;
+    timeline.play(0);
+  };
+
+  const trigger = ScrollTrigger.create({
+    end: 'bottom top',
+    onEnter: play,
+    once: true,
+    start,
+    trigger: triggerElement,
+  });
+
+  if (trigger.isActive || trigger.progress > 0) {
+    play();
+  }
+
+  return trigger;
+};
+
+function setupDesktopReveal(section) {
+  const titleLines = getTitleLines(section);
+  const lead = section.querySelector('.about-game__lead');
+  const visual = section.querySelector('.about-game__visual');
+  const benefits = [...section.querySelectorAll('.about-game__benefit')];
+  const benefitParts = getBenefitParts(benefits);
+  const animatedElements = [
+    ...titleLines,
+    lead,
+    visual,
+    ...benefits,
+    ...benefitParts.flatMap(({ content, number }) => [content, number]),
+  ];
+
+  if (!titleLines.length || !visual || !benefits.length) return null;
+
+  const context = gsap.context(() => {
+    gsap.set(titleLines, {
+      autoAlpha: 0,
+      clipPath: 'inset(0 0 100% 0)',
+      willChange: 'transform, opacity, clip-path',
+      x: -44,
+      y: 24,
+    });
+    gsap.set(lead, {
+      autoAlpha: 0,
+      scaleY: 0.78,
+      transformOrigin: '0% 0%',
+      willChange: 'transform, opacity',
+      x: 28,
+    });
+    gsap.set(visual, {
+      autoAlpha: 0,
+      scale: 0.88,
+      transformOrigin: '50% 88%',
+      willChange: 'transform, opacity',
+      x: 0,
+      xPercent: -50,
+      y: 64,
+    });
+    gsap.set(benefits, {
+      autoAlpha: 0,
+      willChange: 'opacity',
+    });
+
+    benefitParts.forEach(({ content, number }, index) => {
+      const direction = index === 0 ? -1 : index === 2 ? 1 : 0;
+
+      gsap.set(number, {
+        autoAlpha: 0,
+        scale: 0.92,
+        transformOrigin: '50% 50%',
+        willChange: 'transform, opacity',
+        y: 8,
+      });
+      gsap.set(content, {
+        autoAlpha: 0,
+        willChange: 'transform, opacity',
+        x: direction * 14,
+        y: 8,
+      });
+    });
 
     const timeline = gsap.timeline({
       paused: true,
-      onComplete: () => {
-        gsap.set(visuals, {
-          clearProps: 'opacity,transform,transformOrigin,visibility,willChange',
-        });
-        gsap.set([...titleParts, ...descriptionParts], {
-          clearProps: 'clipPath,opacity,transform,visibility,willChange',
-        });
-      },
-    });
-
-    visuals.forEach((visual, visualIndex) => {
-      timeline.to(
-        visual,
-        {
-          autoAlpha: 1,
-          duration: 0.92,
-          ease: 'power3.out',
-          scale: 1,
-          x: 0,
-          y: 0,
-        },
-        visualIndex * 0.08,
-      );
+      onComplete: () => clearRevealStyles(animatedElements),
     });
 
     timeline
+      .to(titleLines, {
+        autoAlpha: 1,
+        clipPath: 'inset(0 0 0% 0)',
+        duration: 0.76,
+        ease: 'power4.out',
+        stagger: 0.07,
+        x: 0,
+        y: 0,
+      })
       .to(
-        titleParts,
+        lead,
         {
           autoAlpha: 1,
-          clipPath: 'inset(0 0 0% 0)',
           duration: 0.68,
           ease: 'power3.out',
-          stagger: 0.07,
+          scaleY: 1,
+          x: 0,
+        },
+        0.16,
+      )
+      .to(
+        visual,
+        {
+          autoAlpha: 1,
+          duration: 1.2,
+          ease: 'power4.out',
+          scale: 1,
+          x: 0,
+          xPercent: -50,
           y: 0,
+        },
+        0.22,
+      );
+
+    benefits.forEach((benefit, index) => {
+      const { content, number } = benefitParts[index];
+      const cardStart = 1.2 + index * 0.62;
+
+      timeline
+        .to(
+          benefit,
+          {
+            autoAlpha: 1,
+            duration: 0.68,
+            ease: 'power2.out',
+          },
+          cardStart,
+        )
+        .to(
+          number,
+          {
+            autoAlpha: 1,
+            duration: 0.6,
+            ease: 'power3.out',
+            scale: 1,
+            y: 0,
+          },
+          cardStart + 0.18,
+        )
+        .to(
+          content,
+          {
+            autoAlpha: 1,
+            duration: 0.72,
+            ease: 'power3.out',
+            x: 0,
+            y: 0,
+          },
+          cardStart + 0.22,
+        );
+    });
+
+    addOnceTrigger(timeline, section, 'top 72%');
+  }, section);
+
+  return () => context.revert();
+}
+
+function setupCompactReveal(section) {
+  const titleLines = getTitleLines(section);
+  const lead = section.querySelector('.about-game__lead');
+  const visual = section.querySelector('.about-game__visual');
+  const benefits = [...section.querySelectorAll('.about-game__benefit')];
+  const benefitParts = getBenefitParts(benefits);
+  const context = gsap.context(() => {
+    const headingElements = [...titleLines, lead, visual];
+
+    gsap.set(titleLines, {
+      autoAlpha: 0,
+      clipPath: 'inset(0 0 100% 0)',
+      willChange: 'transform, opacity, clip-path',
+      x: -30,
+      y: 20,
+    });
+    gsap.set(lead, {
+      autoAlpha: 0,
+      willChange: 'transform, opacity',
+      x: 22,
+    });
+    gsap.set(visual, {
+      autoAlpha: 0,
+      scale: 0.92,
+      transformOrigin: '50% 90%',
+      willChange: 'transform, opacity',
+      xPercent: 0,
+      y: 48,
+    });
+
+    const headingTimeline = gsap.timeline({
+      paused: true,
+      onComplete: () => clearRevealStyles(headingElements),
+    });
+
+    headingTimeline
+      .to(titleLines, {
+        autoAlpha: 1,
+        clipPath: 'inset(0 0 0% 0)',
+        duration: 0.7,
+        ease: 'power4.out',
+        stagger: 0.07,
+        x: 0,
+        y: 0,
+      })
+      .to(
+        lead,
+        {
+          autoAlpha: 1,
+          duration: 0.6,
+          ease: 'power3.out',
+          x: 0,
         },
         0.14,
       )
       .to(
-        descriptionParts,
+        visual,
         {
           autoAlpha: 1,
-          duration: 0.58,
-          ease: 'power3.out',
-          stagger: 0.045,
+          duration: 1,
+          ease: 'power4.out',
+          scale: 1,
+          xPercent: 0,
           y: 0,
         },
-        0.4,
+        0.22,
       );
 
-    const reset = () => {
-      timeline.pause(0);
+    addOnceTrigger(headingTimeline, section, 'top 78%');
 
-      visuals.forEach((visual) => {
-        const characterDirection = visual.classList.contains('about-game__character--left')
-          ? -1
-          : visual.classList.contains('about-game__character--right')
-            ? 1
-            : sideDirection;
+    benefits.forEach((benefit, index) => {
+      const { content, number } = benefitParts[index];
+      const elements = [benefit, content, number];
 
-        gsap.set(visual, {
-          autoAlpha: 0,
-          scale: 0.9,
-          transformOrigin: '50% 100%',
-          willChange: 'transform, opacity',
-          x: isImmersion ? characterDirection * 56 : characterDirection * 82,
-          y: () => Math.min(window.innerHeight * 0.24, 190),
-        });
-      });
-
-      gsap.set(titleParts, {
+      gsap.set(benefit, {
         autoAlpha: 0,
-        clipPath: 'inset(0 0 100% 0)',
-        willChange: 'transform, opacity, clip-path',
-        y: 48,
+        willChange: 'opacity',
       });
-      gsap.set(descriptionParts, {
+      gsap.set(number, {
+        autoAlpha: 0,
+        scale: 0.94,
+        willChange: 'transform, opacity',
+        y: 6,
+      });
+      gsap.set(content, {
         autoAlpha: 0,
         willChange: 'transform, opacity',
-        y: 28,
+        x: index % 2 === 0 ? -12 : 12,
+        y: 8,
       });
-    };
 
-    const play = () => {
-      reset();
-      timeline.play(0);
-    };
+      const timeline = gsap.timeline({
+        paused: true,
+        onComplete: () => {
+          clearRevealStyles(elements);
+        },
+      });
 
-    reset();
+      timeline
+        .to(benefit, {
+          autoAlpha: 1,
+          duration: 0.62,
+          ease: 'power2.out',
+        })
+        .to(
+          number,
+          {
+            autoAlpha: 1,
+            duration: 0.56,
+            ease: 'power3.out',
+            scale: 1,
+            y: 0,
+          },
+          0.16,
+        )
+        .to(
+          content,
+          {
+            autoAlpha: 1,
+            duration: 0.68,
+            ease: 'power3.out',
+            x: 0,
+            y: 0,
+          },
+          0.2,
+        );
 
-    const trigger = ScrollTrigger.create({
-      end: 'bottom 24%',
-      onEnter: play,
-      onEnterBack: play,
-      onLeave: reset,
-      onLeaveBack: reset,
-      start: 'top 76%',
-      trigger: section,
+      addOnceTrigger(timeline, benefit, 'top 88%');
     });
+  }, section);
 
-    if (trigger.isActive) {
-      play();
-    }
-
-    return () => {
-      trigger.kill();
-      timeline.kill();
-      gsap.set(animatedElements, {
-        clearProps: 'clipPath,opacity,transform,transformOrigin,visibility,willChange',
-      });
-    };
-  });
-
-  return () => cleanups.forEach((cleanup) => cleanup?.());
+  return () => context.revert();
 }
 
 function setupBackgroundParallax(group) {
   const image = group.querySelector('.about-game-group__background-image');
-  const gradient = group.querySelector('.about-game-group__background-gradient');
 
-  if (!image || !gradient) return null;
+  if (!image) return null;
 
-  const timeline = gsap.timeline({
-    scrollTrigger: {
-      end: 'bottom top',
-      invalidateOnRefresh: true,
-      scrub: 0.6,
-      start: 'top bottom',
-      trigger: group,
+  const timeline = gsap.fromTo(
+    image,
+    { scale: 1.04, yPercent: -1.5 },
+    {
+      ease: 'none',
+      scale: 1.04,
+      scrollTrigger: {
+        end: 'bottom top',
+        invalidateOnRefresh: true,
+        scrub: 0.8,
+        start: 'top bottom',
+        trigger: group,
+      },
+      yPercent: 1.5,
     },
-  });
-
-  timeline
-    .fromTo(image, { scale: 1.08, yPercent: -3 }, { ease: 'none', scale: 1.08, yPercent: 3 }, 0)
-    .fromTo(
-      gradient,
-      { xPercent: -7, yPercent: -4 },
-      { ease: 'none', xPercent: 7, yPercent: 4 },
-      0,
-    );
+  );
 
   return () => {
     timeline.scrollTrigger?.kill();
     timeline.kill();
-    gsap.set([image, gradient], { clearProps: 'transform' });
+    gsap.set(image, { clearProps: 'transform' });
   };
 }
 
 export function initAboutGameSequence() {
   const group = document.querySelector('[data-about-game-group]');
-  const sections = group ? [...group.querySelectorAll(':scope > .about-game')] : [];
+  const section = group?.querySelector(':scope > .about-game');
 
-  if (sections.length < 2) return;
+  if (!group || !section) return;
 
   const media = gsap.matchMedia();
 
-  media.add(motionQuery, () => {
-    const cleanupReveals = setupSectionReveals(sections);
-    const cleanupParallax = setupBackgroundParallax(group);
+  media.add(
+    {
+      desktop: desktopQuery,
+      motion: motionQuery,
+    },
+    ({ conditions }) => {
+      if (!conditions.motion) return undefined;
 
-    ScrollTrigger.refresh();
+      const cleanupReveal = conditions.desktop
+        ? setupDesktopReveal(section)
+        : setupCompactReveal(section);
+      const cleanupParallax = conditions.desktop ? setupBackgroundParallax(group) : null;
 
-    return () => {
-      cleanupParallax?.();
-      cleanupReveals();
-    };
-  });
+      ScrollTrigger.refresh();
+
+      return () => {
+        cleanupParallax?.();
+        cleanupReveal?.();
+      };
+    },
+  );
 }

@@ -93,6 +93,8 @@
   }
 
   &__content {
+    position: relative;
+    overflow: hidden;
     --reviews-card-width: clamp(12.5rem, calc(56.28vh - 5.9094rem), 25.1875rem);
 
     display: grid;
@@ -116,11 +118,11 @@
     box-sizing: border-box;
     width: 100%;
     aspect-ratio: 403 / 716;
-    border-radius: fluid(28px, 40px);
   }
 
   &__slider {
-    overflow: hidden;
+    overflow: visible;
+    border-radius: fluid(28px, 40px);
   }
 
   &__slider .swiper-wrapper {
@@ -128,14 +130,20 @@
   }
 
   &__score {
+    position: relative;
+    z-index: 2;
+    background-color: #fff;
+  }
+  &__wrap {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     padding: 0;
     background-color: $violet-500;
     color: $white;
+    border-radius: fluid(28px, 40px);
+    height: 100%;
   }
-
   &__services {
     display: grid;
     padding: fluid(28px, 40px) fluid(28px, 40px) 0;
@@ -309,7 +317,7 @@
       width: rem(58px);
     }
 
-    &__score {
+    &__wrap {
       padding: 0;
     }
 
@@ -372,6 +380,7 @@
       margin-left: auto;
     }
 
+    &__wrap,
     &__score,
     &__slider {
       width: 100%;

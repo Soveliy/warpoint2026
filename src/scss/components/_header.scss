@@ -24,8 +24,27 @@
     --header-foreground: #{$white};
     --header-line: #{rgba($white, 0.16)};
     --header-control-border: #{rgba($white, 0.72)};
-    background-color: #131316;
     --header-logo-filter: brightness(0) invert(1);
+
+    background-color: #131316;
+  }
+
+  &[data-theme='events'] {
+    --header-foreground: #{$white};
+    --header-line: #{rgba($white, 0.16)};
+    --header-control-border: #{rgba($white, 0.72)};
+    --header-logo-filter: brightness(0) invert(1);
+
+    background-color: transparent;
+
+    .header__booking {
+      background-color: $white;
+      color: $orange-500;
+
+      &:hover {
+        background-color: $gray-100;
+      }
+    }
   }
 
   &[data-theme='dark'] {
@@ -33,7 +52,7 @@
     --header-line: #{rgba($black, 0.16)};
     --header-control-border: #{rgba($black, 0.56)};
     --header-logo-filter: brightness(0);
-    background-color: #fff;
+    background-color: #ffffff;
   }
 
   &--top-hidden {
