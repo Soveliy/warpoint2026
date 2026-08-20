@@ -1,6 +1,7 @@
 const hiddenClass = 'header--top-hidden';
 const scrolledClass = 'header--scrolled';
 const directionThreshold = 2;
+const topHideThreshold = 12;
 const bookingRevealThreshold = 24;
 
 export function initHeaderScroll() {
@@ -30,7 +31,7 @@ export function initHeaderScroll() {
 
     header.classList.toggle(scrolledClass, position > bookingRevealThreshold);
 
-    if (position <= headerTop.offsetHeight) {
+    if (position <= topHideThreshold) {
       setTopHidden(false);
       previousPosition = position;
       return;

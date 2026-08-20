@@ -29,6 +29,9 @@
     background-color: #131316;
   }
 
+  &[data-theme='brand'] {
+    background-color: #010000;
+  }
   &[data-theme='events'] {
     --header-foreground: #{$white};
     --header-line: #{rgba($white, 0.16)};
