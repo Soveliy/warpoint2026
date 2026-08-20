@@ -17,7 +17,6 @@ import { initPixelTransitions } from './components/pixel-transition.js';
 import { initPreloader } from './components/preloader.js';
 import { initReviews } from './components/reviews.js';
 import { initSliders } from './components/sliders.js';
-import { initVideoPlayback } from './components/video-playback.js';
 import { initYandexMaps } from './components/yandex-map.js';
 import { initZoneSequence } from './components/zone-sequence.js';
 
@@ -38,7 +37,6 @@ initEventsSequence();
 initReviews();
 initPixelTransitions();
 initSliders();
-initVideoPlayback();
 initGamesSequence();
 initYandexMaps();
 initFaq();

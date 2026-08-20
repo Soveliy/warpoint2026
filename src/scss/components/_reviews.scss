@@ -59,6 +59,7 @@
     background-color: $red-500;
     pointer-events: none;
     transform: translate3d(0, 0, 0);
+    transition: transform 380ms $ease-base;
     will-change: transform;
   }
 
@@ -91,29 +92,39 @@
     }
   }
 
-  &__viewport {
-    display: flex;
-    align-items: center;
+  &__content {
+    --reviews-card-width: clamp(12.5rem, calc(56.28vh - 5.9094rem), 25.1875rem);
+
+    display: grid;
+    grid-template-columns: repeat(
+      2,
+      minmax(0, min(var(--reviews-card-width), calc(50% - rem(8px))))
+    );
+    align-self: center;
+    align-items: start;
+    gap: rem(16px);
     min-width: 0;
-    overflow: hidden;
   }
 
-  &__track {
-    display: flex;
-    flex: 0 0 auto;
-    gap: rem(16px);
-    width: max-content;
-    will-change: transform;
+  &__carousel {
+    min-width: 0;
+    width: 100%;
   }
 
   &__score,
-  &__card {
+  &__slider {
     box-sizing: border-box;
-    flex: 0 0 auto;
-    height: min(rem(716px), calc(100vh - rem(96px)));
+    width: 100%;
     aspect-ratio: 403 / 716;
     border-radius: fluid(28px, 40px);
-    will-change: transform;
+  }
+
+  &__slider {
+    overflow: hidden;
+  }
+
+  &__slider .swiper-wrapper {
+    height: 100%;
   }
 
   &__score {
@@ -173,7 +184,7 @@
   &__rating-value {
     margin-top: rem(12px);
     font-family: $font-family-heading;
-    font-size: rem(286px);
+    font-size: fluid(232px, 286px);
     font-weight: 800;
     line-height: 0.72;
     letter-spacing: 0;
@@ -182,6 +193,10 @@
   &__card {
     position: relative;
     overflow: hidden;
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+    border-radius: fluid(28px, 40px);
     background-color: $gray-900;
 
     img {
@@ -223,6 +238,52 @@
     color: $white;
     margin-top: 11px;
   }
+
+  &__controls {
+    display: flex;
+    justify-content: center;
+    gap: rem(8px);
+    margin-top: rem(22px);
+  }
+
+  &__arrow {
+    @include hover {
+      background-color: rgba($black, 0.08);
+      transform: translateY(rem(-2px));
+    }
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: fluid(56px, 64px);
+    aspect-ratio: 1;
+    border: rem(1px) solid $black;
+    border-radius: 50%;
+    color: $black;
+    transition:
+      background-color $duration-fast $ease-base,
+      opacity $duration-fast $ease-base,
+      transform $duration-fast $ease-base;
+
+    &:active {
+      transform: scale(0.96);
+    }
+
+    &:focus-visible {
+      outline: rem(2px) solid $focus-color;
+      outline-offset: rem(2px);
+    }
+
+    &--prev .reviews__arrow-icon {
+      transform: rotate(180deg);
+    }
+  }
+
+  &__arrow-icon {
+    width: rem(18px);
+    height: rem(18px);
+    fill: none;
+  }
 }
 
 @media (max-width: $breakpoint-tablet) {
@@ -246,11 +307,6 @@
 
     &__preview-indicator {
       width: rem(58px);
-    }
-
-    &__score,
-    &__card {
-      height: min(rem(640px), calc(100vh - rem(96px)));
     }
 
     &__score {
@@ -307,31 +363,19 @@
       width: rem(54px);
     }
 
-    &__viewport {
-      display: block;
-      overflow-x: auto;
+    &__content {
+      grid-template-columns: minmax(0, 1fr);
+      gap: rem(24px);
+      width: min(calc(100% - rem(32px)), rem(403px));
       margin-top: rem(40px);
-      padding-left: rem(16px);
-      scroll-snap-type: x mandatory;
-      scrollbar-width: none;
-
-      &::-webkit-scrollbar {
-        display: none;
-      }
-    }
-
-    &__track {
-      padding-right: rem(16px);
-      will-change: auto;
+      margin-right: auto;
+      margin-left: auto;
     }
 
     &__score,
-    &__card {
-      width: calc(100vw - rem(48px));
-      height: auto;
+    &__slider {
+      width: 100%;
       aspect-ratio: 403 / 716;
-      scroll-snap-align: center;
-      will-change: auto;
     }
 
     &__score {
@@ -346,16 +390,16 @@
     &__rating-value {
       font-size: rem(232px);
     }
+
+    &__controls {
+      margin-top: rem(18px);
+    }
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .reviews__viewport {
-    overflow-x: auto;
-    scrollbar-width: none;
-  }
-
-  .reviews__track {
-    will-change: auto;
+  .reviews__preview-indicator,
+  .reviews__arrow {
+    transition: none;
   }
 }

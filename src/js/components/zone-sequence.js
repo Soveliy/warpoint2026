@@ -1,117 +1,100 @@
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
+const rootSelector = '[data-zone-tabs]';
+const tabSelector = '[data-zone-tab]';
+const panelSelector = '[data-zone-panel]';
+const initializedAttribute = 'data-zone-tabs-initialized';
 
-gsap.registerPlugin(ScrollTrigger);
+function getPairs(root) {
+  const tabs = [...root.querySelectorAll(tabSelector)];
+  const panels = [...root.querySelectorAll(panelSelector)];
 
-const desktopQuery = '(min-width: 48rem) and (prefers-reduced-motion: no-preference)';
+  return tabs
+    .map((tab, index) => {
+      const controlledId = tab.getAttribute('aria-controls');
+      const controlledPanel = controlledId
+        ? panels.find((panel) => panel.id === controlledId)
+        : panels[index];
 
-function setActiveSlide(slides, activeIndex) {
-  slides.forEach((slide, index) => {
-    slide.classList.toggle('is-active', index === activeIndex);
-  });
+      return controlledPanel ? { panel: controlledPanel, tab } : null;
+    })
+    .filter(Boolean);
 }
 
-function setupSequence(root) {
-  const track = root.querySelector('[data-zone-sequence-track]');
-  const slides = track ? [...track.children].filter((item) => item.matches('.zone')) : [];
-  const rows = slides.map((slide) => slide.querySelector('.zone__row'));
-  const leftItems = rows.map((row) => row?.children[0]).filter(Boolean);
-  const rightItems = rows.map((row) => row?.children[1]).filter(Boolean);
-
-  if (
-    !track ||
-    slides.length < 2 ||
-    leftItems.length !== slides.length ||
-    rightItems.length !== slides.length
-  ) {
-    return null;
-  }
-
-  let activeIndex = 0;
-  const lastIndex = slides.length - 1;
-  const getDistance = () => (slides.length - 1) * root.clientHeight;
-  const getStep = () => root.clientHeight;
-
-  const syncState = (trigger) => {
-    const nextIndex = Math.round(trigger.progress * lastIndex);
-
-    if (nextIndex !== activeIndex) {
-      activeIndex = nextIndex;
-      setActiveSlide(slides, activeIndex);
-    }
-  };
-
-  root.classList.add('zones-wrap--animated');
-  setActiveSlide(slides, activeIndex);
-
-  const timeline = gsap.timeline({
-    scrollTrigger: {
-      anticipatePin: 1,
-      end: () => `+=${getDistance()}`,
-      invalidateOnRefresh: true,
-      onRefresh: syncState,
-      onUpdate: syncState,
-      pin: true,
-      refreshPriority: 30,
-      scrub: true,
-      start: 'top top',
-      trigger: root,
-    },
-  });
-
-  timeline.fromTo(
-    leftItems,
-    {
-      y: (index) => -index * getStep(),
-    },
-    {
-      y: (index) => (lastIndex - index) * getStep(),
-      duration: 1,
-      ease: 'none',
-      force3D: true,
-    },
-    0,
-  );
-
-  timeline.fromTo(
-    rightItems,
-    {
-      y: (index) => index * getStep(),
-    },
-    {
-      y: (index) => (index - lastIndex) * getStep(),
-      duration: 1,
-      ease: 'none',
-      force3D: true,
-    },
-    0,
-  );
-
-  return () => {
-    timeline.scrollTrigger?.kill();
-    timeline.kill();
-    gsap.set([...leftItems, ...rightItems], { clearProps: 'transform' });
-    slides.forEach((slide) => slide.classList.remove('is-active'));
-    root.classList.remove('zones-wrap--animated');
-  };
-}
-
-export function initZoneSequence() {
-  const roots = [...document.querySelectorAll('[data-zone-sequence]')];
-
-  if (!roots.length) {
+function setupTabs(root) {
+  if (root.hasAttribute(initializedAttribute)) {
     return;
   }
 
-  const media = gsap.matchMedia();
+  const pairs = getPairs(root);
 
-  media.add(desktopQuery, () => {
-    const cleanupCallbacks = roots.map(setupSequence).filter(Boolean);
+  if (!pairs.length) {
+    return;
+  }
 
-    ScrollTrigger.refresh();
+  const activePairIndex = pairs.findIndex(
+    ({ panel, tab }) => tab.getAttribute('aria-selected') === 'true' || !panel.hidden,
+  );
+  let activeIndex = activePairIndex >= 0 ? activePairIndex : 0;
 
-    return () => {
-      cleanupCallbacks.forEach((cleanup) => cleanup());
-    };
+  const activate = (nextIndex, { focus = false } = {}) => {
+    activeIndex = (nextIndex + pairs.length) % pairs.length;
+
+    pairs.forEach(({ panel, tab }, index) => {
+      const isActive = index === activeIndex;
+
+      tab.classList.toggle('is-active', isActive);
+      tab.setAttribute('aria-selected', String(isActive));
+      tab.tabIndex = isActive ? 0 : -1;
+
+      panel.classList.toggle('is-active', isActive);
+      panel.hidden = !isActive;
+
+      if (tab.id && !panel.hasAttribute('aria-labelledby')) {
+        panel.setAttribute('aria-labelledby', tab.id);
+      }
+    });
+
+    if (focus) {
+      const activeTab = pairs[activeIndex].tab;
+
+      activeTab.focus({ preventScroll: true });
+      activeTab.scrollIntoView({ block: 'nearest', inline: 'nearest' });
+    }
+  };
+
+  pairs.forEach(({ tab }, index) => {
+    tab.addEventListener('click', () => activate(index));
+
+    tab.addEventListener('keydown', (event) => {
+      let nextIndex = null;
+
+      switch (event.key) {
+        case 'ArrowRight':
+        case 'ArrowDown':
+          nextIndex = index + 1;
+          break;
+        case 'ArrowLeft':
+        case 'ArrowUp':
+          nextIndex = index - 1;
+          break;
+        case 'Home':
+          nextIndex = 0;
+          break;
+        case 'End':
+          nextIndex = pairs.length - 1;
+          break;
+        default:
+          return;
+      }
+
+      event.preventDefault();
+      activate(nextIndex, { focus: true });
+    });
   });
+
+  root.setAttribute(initializedAttribute, '');
+  activate(activeIndex);
+}
+
+export function initZoneSequence() {
+  document.querySelectorAll(rootSelector).forEach(setupTabs);
 }

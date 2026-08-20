@@ -2,42 +2,98 @@
 @use '../vars' as *;
 
 .video-section {
-  background-color: $black;
+  background-color: $gray-950;
   height: 100dvh;
+  isolation: isolate;
+  min-height: rem(560px);
   overflow: hidden;
   position: relative;
 
-  &__native {
+  &__background {
+    display: block;
     height: 100%;
+    inset: 0;
     object-fit: cover;
     object-position: center;
+    position: absolute;
     width: 100%;
+    z-index: 0;
+  }
+
+  &__content {
+    align-items: center;
+    color: $white;
+    display: flex;
+    flex-direction: column;
+    inset: 0;
+    justify-content: center;
+    padding: rem(20px);
+    pointer-events: none;
+    position: absolute;
+    text-align: center;
+    z-index: 1;
+  }
+
+  &__title {
+    font-family: $font-family-heading;
+    font-size: fluid(42px, 88px);
+    font-weight: 800;
+    letter-spacing: 0;
+    line-height: 0.78;
+    margin: 0;
+    text-transform: uppercase;
+
+    span {
+      display: block;
+      white-space: nowrap;
+    }
+  }
+
+  &__title-accent {
+    color: $red-600;
+  }
+
+  &__description {
+    font-size: rem(18px);
+    font-weight: 400;
+    line-height: 1.2;
+    margin: rem(26px) 0 0;
+    max-width: rem(540px);
+
+    span {
+      display: block;
+    }
+  }
+
+  &__control {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    margin-top: rem(24px);
   }
 
   &__play {
     align-items: center;
     aspect-ratio: 1;
     backdrop-filter: blur(rem(12px));
-    background-color: rgb(0 0 0 / 0.48);
-    border: rem(1px) solid rgb(255 255 255 / 0.38);
-    border-radius: 50%;
+    background-color: rgb(255 255 255 / 0.24);
+    border: rem(1px) solid rgb(255 255 255 / 0.28);
+    border-radius: fluid(16px, 20px);
     color: $white;
     display: inline-flex;
-    height: fluid(68px, 96px);
+    height: fluid(64px, 76px);
     justify-content: center;
-    left: 50%;
-    position: absolute;
-    top: 50%;
-    transform: translate(-50%, -50%);
+    pointer-events: auto;
     transition:
       background-color $duration-base $ease-base,
+      border-color $duration-base $ease-base,
       opacity $duration-base $ease-base,
       transform $duration-base $ease-base;
-    z-index: 2;
-    background-color: $red-600;
+
     &:hover {
-      background-color: rgb(0 0 0 / 0.64);
-      transform: translate(-50%, -50%) scale(1.06);
+      background-color: rgb(255 255 255 / 0.34);
+      border-color: rgb(255 255 255 / 0.42);
+      transform: scale(1.04);
     }
 
     &:focus-visible {
@@ -48,14 +104,89 @@
 
   &__play-icon {
     fill: currentcolor;
-    height: fluid(20px, 28px);
+    height: fluid(18px, 21px);
     transform: translateX(8%);
-    width: fluid(13px, 18px);
+    width: fluid(11px, 13px);
   }
 
-  &.is-playing &__play {
-    opacity: 0;
-    pointer-events: none;
-    transform: translate(-50%, -50%) scale(0.88);
+  &__duration {
+    color: rgb(255 255 255 / 0.56);
+    font-size: rem(18px);
+    font-weight: 650;
+    line-height: 1.1;
+    margin-top: rem(8px);
+  }
+}
+
+@media (max-width: $breakpoint-mobile) {
+  .video-section {
+    min-height: rem(520px);
+
+    &__content {
+      padding: rem(16px);
+    }
+
+    &__title {
+      font-size: clamp(#{rem(36px)}, 11.2vw, #{rem(58px)});
+    }
+
+    &__description {
+      font-size: rem(16px);
+      margin-top: rem(20px);
+      max-width: rem(360px);
+
+      span {
+        display: inline;
+      }
+    }
+
+    &__control {
+      margin-top: rem(22px);
+    }
+
+    &__play {
+      border-radius: rem(16px);
+      height: rem(64px);
+    }
+
+    &__duration {
+      font-size: rem(16px);
+      margin-top: rem(6px);
+    }
+  }
+}
+
+@media (height <= rem(640px)) {
+  .video-section {
+    &__title {
+      font-size: clamp(#{rem(36px)}, 11vh, #{rem(64px)});
+    }
+
+    &__description {
+      font-size: rem(16px);
+      line-height: 1.1;
+      margin-top: rem(16px);
+    }
+
+    &__control {
+      margin-top: rem(16px);
+    }
+
+    &__play {
+      height: rem(60px);
+    }
+
+    &__duration {
+      font-size: rem(16px);
+      margin-top: rem(6px);
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .video-section {
+    &__play {
+      transition: none;
+    }
   }
 }

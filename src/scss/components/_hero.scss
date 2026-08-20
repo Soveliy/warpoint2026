@@ -97,6 +97,14 @@
   }
 }
 
+@media (width > $breakpoint-tablet) {
+  .hero {
+    &__image {
+      right: max($container-offset, calc((100vw - $content-width) / 2));
+    }
+  }
+}
+
 @media (max-width: $breakpoint-mobile) {
   .hero {
     &__wrap {

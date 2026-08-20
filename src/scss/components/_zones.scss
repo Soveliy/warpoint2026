@@ -1,124 +1,148 @@
-@use '../mixins' as *;
-@use '../mixins/disable-mob-hover' as *;
 @use '../vars' as *;
 @use '../fluid' as *;
 
 .zones {
-  background-color: $red-600;
   position: relative;
   z-index: 50;
+  min-height: 100vh;
+  padding: rem(124px) 0 rem(42px);
+  overflow: hidden;
+  background-color: $gray-950;
 
-  &__wrap {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: rem(24px);
-    height: 100vh;
-    max-width: rem(662px);
-    margin: 0 auto;
+  &__inner {
+    padding: 0 rem(24px);
+  }
+
+  &__heading {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(rem(320px), rem(420px));
+    gap: rem(48px);
+    align-items: end;
+    margin-bottom: rem(48px);
+  }
+
+  &__title {
+    max-width: rem(650px);
+    margin: 0;
+    color: $white;
+    font-family: $font-family-heading;
+    font-size: fluid(56px, 96px);
+    font-weight: 800;
+    letter-spacing: -0.01em;
+    line-height: 78%;
+    text-transform: uppercase;
+  }
+
+  &__title span {
+    display: block;
+    white-space: nowrap;
+  }
+
+  &__lead {
+    max-width: rem(420px);
+    margin: 0 0 rem(-2px);
+    padding-left: rem(14px);
+    border-left: rem(1px) solid $red-500;
+    color: $white;
+    font-size: rem(18px);
+    font-weight: 400;
+    line-height: 120%;
   }
 
   &__tabs {
     display: flex;
-    justify-content: center;
-    gap: rem(8px);
+    align-items: stretch;
+    height: rem(78px);
+    margin-bottom: rem(22px);
+    overflow: hidden;
+    border: rem(1px) solid rgba($white, 0.12);
+    border-radius: rem(20px);
+    background-color: #1d1c21;
   }
 
   &__tab {
-    @include hover {
-      &:hover {
-      }
-    }
-
-    display: flex;
+    position: relative;
+    display: inline-flex;
+    flex-grow: 1;
     align-items: center;
     justify-content: center;
-    height: rem(64px);
-    width: rem(64px);
-    border-radius: rem(16px);
-    border: rem(1px) solid $color-bg;
-    border-color: $white;
+    gap: rem(16px);
+    min-width: 0;
+    padding: 0 rem(32px);
+    border-radius: rem(19px);
     color: $white;
+    font-size: rem(21px);
+    font-weight: 650;
+    line-height: 1;
+    text-transform: uppercase;
+    white-space: nowrap;
     transition:
-      color 0.3s,
-      border-color 0.3s;
+      background-color $duration-base $ease-base,
+      color $duration-base $ease-base;
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 0;
+      width: rem(1px);
+      height: rem(34px);
+      background-color: rgba($white, 0.1);
+      transform: translateY(-50%);
+    }
+
+    &:first-child::before,
+    &[aria-selected='true']::before,
+    &.is-active::before {
+      opacity: 0;
+    }
+
+    &[aria-selected='true'] + &::before,
+    &.is-active + &::before {
+      opacity: 0;
+    }
+
+    &:hover {
+      background-color: rgba($white, 0.06);
+    }
+
+    &[aria-selected='true'],
+    &.is-active {
+      background-color: $violet-500;
+    }
+
+    &[aria-selected='true']:hover,
+    &.is-active:hover {
+      background-color: $violet-600;
+    }
+
+    &:focus-visible {
+      z-index: 1;
+      outline: $focus-outline-width solid $violet-300;
+      outline-offset: rem(-4px);
+    }
   }
 
   &__tab-icon {
-    max-width: rem(36px);
-    height: auto;
+    flex: 0 0 auto;
+    width: rem(31px);
+    height: rem(31px);
+    color: currentColor;
   }
-
-  &__title {
-    margin: 0;
-    font-weight: 800;
-    font-family: $font-family-heading;
-    font-size: fluid(52px, 108px);
-    line-height: 78%;
-    letter-spacing: -0.01em;
-    text-transform: uppercase;
-    text-align: center;
-    color: $white;
-  }
-}
-
-.zones-wrap--animated {
-  position: relative;
-  overflow: hidden;
-  height: 100vh;
-
-  .zones-wrap__track {
-    position: relative;
-    height: 100%;
-  }
-
-  .zone {
-    position: absolute;
-    inset: 0;
-    height: 100vh;
-    pointer-events: none;
-  }
-
-  .zone.is-active {
-    pointer-events: auto;
-  }
-
-  .zone > .container {
-    height: 100%;
-  }
-
-  .zone__row {
-    height: 100%;
-  }
-
-  .zone__image-container,
-  .zone__content {
-    will-change: transform;
-  }
-}
-
-.zones-exit {
-  position: relative;
-  overflow: hidden;
-  height: fluid(180px, 280px);
-  background-color: $color-bg;
 }
 
 .zone {
-  --zone-accent: #{$red-600};
-  --zone-accent-hover: #{$red-700};
-  --zone-accent-active: #{$red-800};
+  --zone-accent: #{$red-500};
+  --zone-accent-hover: #{$red-600};
+  --zone-accent-active: #{$red-700};
   --zone-accent-disabled-bg: #{rgba($red-800, 0.48)};
   --zone-accent-disabled-border: #{rgba($red-800, 0.24)};
   --zone-focus: #{$red-300};
 
-  position: relative;
-  scroll-snap-align: start;
-
   &--red {
-    --zone-accent: #{$red-600};
-    --zone-accent-hover: #{$red-700};
-    --zone-accent-active: #{$red-800};
+    --zone-accent: #{$red-500};
+    --zone-accent-hover: #{$red-600};
+    --zone-accent-active: #{$red-700};
     --zone-accent-disabled-bg: #{rgba($red-800, 0.48)};
     --zone-accent-disabled-border: #{rgba($red-800, 0.24)};
     --zone-focus: #{$red-300};
@@ -133,143 +157,134 @@
     --zone-focus: #{$violet-300};
   }
 
-  &__row {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: rem(24px);
-    padding: rem(96px) 0;
-    height: 100vh;
+  &[hidden] {
+    display: none;
   }
 
-  &__image-container {
+  &__row {
+    display: grid;
+    grid-template-columns: minmax(0, 40.7%) minmax(0, 1fr);
+    gap: rem(24px);
+    height: rem(519px);
+  }
+
+  &__image-container,
+  &__content {
     position: relative;
+    min-width: 0;
+    min-height: 0;
     overflow: hidden;
     border-radius: rem(48px);
   }
 
+  &__image {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+
   &__image-zoom {
-    // @include hover {
-    //   border-color: rgba($white, 0.72);
-    //   background-color: rgba($white, 0.26);
-    //   box-shadow:
-    //     inset 0 rem(1px) 0 rgba($white, 0.8),
-    //     inset 0 rem(-1px) 0 rgba($white, 0.18),
-    //     0 rem(14px) rem(32px) rgba($black, 0.28);
-    //   transform: translateY(rem(-2px)) scale(1.03);
-
-    //   &::before {
-    //     transform: translateX(12%);
-    //   }
-    // }
-
     position: absolute;
-    bottom: fluid(20px, 40px);
-    left: fluid(20px, 40px);
-    z-index: 5;
+    bottom: rem(30px);
+    left: rem(30px);
+    z-index: 2;
     display: flex;
     align-items: center;
     justify-content: center;
+    width: rem(76px);
+    height: rem(76px);
     overflow: hidden;
-    isolation: isolate;
-    width: fluid(64px, 75px);
-    aspect-ratio: 1;
-    border: rem(1px) solid rgba($white, 0.48);
-    border-radius: fluid(16px, 20px);
+    border: rem(1px) solid rgba($white, 0.42);
+    border-radius: rem(20px);
     background-color: rgba($white, 0.18);
     box-shadow:
-      inset 0 rem(1px) 0 rgba($white, 0.72),
-      inset 0 rem(-1px) 0 rgba($white, 0.12),
-      0 rem(10px) rem(28px) rgba($black, 0.24);
+      inset 0 rem(1px) 0 rgba($white, 0.62),
+      0 rem(10px) rem(28px) rgba($black, 0.22);
     color: $white;
-    cursor: zoom-in;
-    backdrop-filter: blur(rem(18px)) saturate(170%);
-    transform: translateZ(0);
+    backdrop-filter: blur(rem(18px)) saturate(160%);
     transition:
-      background-color $duration-base ease,
-      border-color $duration-base ease,
-      box-shadow $duration-base ease,
-      transform $duration-base ease;
+      background-color $duration-base $ease-base,
+      border-color $duration-base $ease-base,
+      transform $duration-base $ease-base;
 
-    &::before {
-      content: '';
-      position: absolute;
-      inset: rem(1px);
-      z-index: -1;
-      border-radius: inherit;
-      background: linear-gradient(
-        135deg,
-        rgba($white, 0.38) 0%,
-        rgba($white, 0.08) 48%,
-        rgba($white, 0.18) 100%
-      );
-      pointer-events: none;
-      transition: transform $duration-base ease;
+    &:hover {
+      border-color: rgba($white, 0.68);
+      background-color: rgba($white, 0.26);
+      transform: translateY(rem(-2px));
     }
 
     &:active {
       transform: scale(0.97);
     }
+
+    &:focus-visible {
+      outline: $focus-outline-width solid $white;
+      outline-offset: $focus-outline-offset;
+    }
   }
 
   &__image-zoom-icon {
-    position: relative;
-    z-index: 1;
     width: rem(13px);
     height: rem(21px);
     color: currentColor;
   }
 
-  &__image {
-    display: block;
-    height: 100%;
-    width: 100%;
-    object-fit: cover;
-    object-position: center;
+  &__content {
+    padding: rem(30px);
+    background-color: $gray-800;
+
+    &::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      background: linear-gradient(
+        124deg,
+        rgba($white, 0.11) 0%,
+        rgba($white, 0.025) 18%,
+        transparent 18% 30%,
+        rgba($white, 0.035) 30% 39%,
+        transparent 39% 62%,
+        rgba($white, 0.022) 62% 70%,
+        transparent 70%
+      );
+      pointer-events: none;
+    }
   }
 
-  &__content {
-    position: relative;
-    padding: rem(40px);
-    border-radius: rem(48px);
-    background-color: $gray-800;
+  &__watermark {
+    position: absolute;
+    right: rem(18px);
+    bottom: rem(-46px);
+    z-index: 0;
+    color: rgba($white, 0.025);
+    font-family: $font-family-heading;
+    font-size: rem(260px);
+    font-weight: 800;
+    line-height: 0.8;
+    pointer-events: none;
   }
 
   &__wrap {
+    position: relative;
+    z-index: 1;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     height: 100%;
-    padding-right: rem(166px);
-  }
-
-  &__icon-wrap {
-    position: absolute;
-    top: rem(40px);
-    right: rem(40px);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: rem(53px);
-    width: rem(53px);
-    border-radius: rem(13px);
-    border: 1px solid var(--zone-accent);
-  }
-
-  &__icon {
-    color: var(--zone-accent);
-    max-width: 29px;
-    height: auto;
   }
 
   &__title {
-    margin: 0 0 fluid(8px, 12px);
-
+    max-width: rem(620px);
+    margin: 0 0 rem(14px);
+    color: $white;
     font-family: $font-family-heading;
-    font-size: fluid(40px, 64px);
+    font-size: fluid(42px, 64px);
     font-weight: 800;
     line-height: 88%;
     text-transform: uppercase;
-    color: $white;
   }
 
   &__title span {
@@ -278,8 +293,11 @@
   }
 
   &__desc {
-    font-weight: 600;
+    max-width: rem(610px);
+    margin: 0;
+    color: $white;
     font-size: rem(18px);
+    font-weight: 600;
     line-height: 120%;
   }
 
@@ -287,21 +305,21 @@
     display: flex;
     flex-wrap: wrap;
     gap: rem(4px);
-    list-style: none;
-    margin: fluid(12px, 24px) 0 0;
+    margin: rem(20px) 0 0;
     padding: 0;
+    list-style: none;
   }
 
   &__params-item {
-    border: rem(1px) solid $white;
-    border-radius: rem(25px);
-    padding: rem(10px) rem(12px);
-    font-weight: 700;
-    font-size: rem(11px);
-    line-height: 100%;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
+    padding: rem(9px) rem(11px);
+    border: rem(1px) solid rgba($white, 0.36);
+    border-radius: $radius-pill;
     color: $white;
+    font-size: rem(11px);
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    line-height: 1;
+    text-transform: uppercase;
   }
 
   &__button {
@@ -318,56 +336,238 @@
     --btn-color-active: #{$white};
     --btn-color-disabled: #{rgba($white, 0.28)};
     --btn-focus: var(--zone-focus);
+    --btn-height: #{rem(76px)};
+    --btn-min-width: #{rem(230px)};
+    --btn-padding-x: #{rem(34px)};
 
     margin-top: auto;
+    border-radius: rem(20px);
   }
 }
+
+.zones-exit {
+  position: relative;
+  height: fluid(180px, 280px);
+  overflow: hidden;
+  background-color: $color-bg;
+}
+
 @media (max-width: $breakpoint-tablet) {
-  .zone {
-    padding: rem(53px) 0;
-    &__image-container {
-      width: 100%;
+  .zones {
+    padding: rem(112px) 0 rem(48px);
+
+    &__inner {
+      padding: 0 rem(20px);
     }
+
+    &__heading {
+      grid-template-columns: minmax(0, 1fr) minmax(rem(260px), rem(320px));
+      gap: rem(32px);
+      margin-bottom: rem(36px);
+    }
+
+    &__title {
+      font-size: fluid(64px, 80px, 768px, 1024px);
+    }
+
+    &__lead {
+      font-size: rem(16px);
+    }
+
+    &__tabs {
+      height: rem(68px);
+      margin-bottom: rem(20px);
+      overflow: auto hidden;
+      border-radius: rem(18px);
+      scrollbar-width: none;
+
+      &::-webkit-scrollbar {
+        display: none;
+      }
+    }
+
+    &__tab {
+      flex: 1 0 auto;
+      min-width: rem(190px);
+      padding: 0 rem(24px);
+      border-radius: rem(17px);
+      font-size: rem(18px);
+    }
+
+    &__tab-icon {
+      width: rem(28px);
+      height: rem(28px);
+    }
+  }
+
+  .zone {
     &__row {
+      grid-template-columns: minmax(0, 1fr);
+      gap: rem(16px);
+      height: auto;
+    }
+
+    &__image-container {
+      aspect-ratio: 16 / 9;
+    }
+
+    &__image-container,
+    &__content {
+      border-radius: rem(36px);
+    }
+
+    &__content {
+      min-height: rem(480px);
+      padding: rem(28px);
+    }
+
+    &__image-zoom {
+      bottom: rem(24px);
+      left: rem(24px);
+      width: rem(68px);
+      height: rem(68px);
+      border-radius: rem(18px);
+    }
+
+    &__title {
+      max-width: rem(580px);
+      font-size: fluid(48px, 58px, 768px, 1024px);
+    }
+
+    &__desc {
+      max-width: rem(660px);
+    }
+
+    &__watermark {
+      right: rem(14px);
+      bottom: rem(-38px);
+      font-size: rem(220px);
+    }
+  }
+}
+
+@media (max-width: $breakpoint-mobile) {
+  .zones {
+    min-height: 0;
+    padding: rem(92px) 0 rem(32px);
+
+    &__heading {
       display: flex;
       flex-direction: column;
-      height: initial;
-      padding: 0;
-      border-radius: rem(32px);
-      margin: 0 rem(-16px);
-      padding: rem(28px) rem(24px);
-      background-color: $gray-800;
+      align-items: flex-start;
+      gap: rem(24px);
+      margin-bottom: rem(32px);
     }
+
+    &__inner {
+      padding: 0 rem(16px);
+    }
+
+    &__title {
+      max-width: 100%;
+      font-size: fluid(46px, 64px, 375px, 767px);
+      line-height: 80%;
+    }
+
+    &__lead {
+      max-width: rem(420px);
+      margin: 0;
+      padding-left: rem(12px);
+      font-size: rem(16px);
+
+      br {
+        display: none;
+      }
+    }
+
+    &__tabs {
+      height: rem(60px);
+      margin-bottom: rem(16px);
+      border-radius: rem(16px);
+    }
+
+    &__tab {
+      gap: rem(10px);
+      min-width: rem(154px);
+      padding: 0 rem(18px);
+      border-radius: rem(15px);
+      font-size: rem(16px);
+
+      &::before {
+        height: rem(28px);
+      }
+    }
+
+    &__tab-icon {
+      width: rem(24px);
+      height: rem(24px);
+    }
+  }
+
+  .zone {
+    &__row {
+      gap: rem(12px);
+    }
+
+    &__image-container {
+      aspect-ratio: 1.15;
+    }
+
+    &__image-container,
     &__content {
-      padding: 0;
-      order: -1;
-      border-radius: 0;
-      background-color: transparent;
+      border-radius: rem(28px);
     }
-    &__icon-wrap {
-      top: 0;
-      right: 0;
-      height: rem(36px);
-      width: rem(36px);
+
+    &__image-zoom {
+      bottom: rem(18px);
+      left: rem(18px);
+      width: rem(60px);
+      height: rem(60px);
+      border-radius: rem(16px);
     }
-    &__icon {
-      height: rem(20px);
-      width: rem(20px);
-      border-radius: rem(8px);
+
+    &__content {
+      min-height: rem(420px);
+      padding: rem(24px);
     }
-    &__wrap {
-      padding-right: 0;
+
+    &__title {
+      margin-bottom: rem(12px);
+      font-size: fluid(40px, 48px, 375px, 767px);
     }
+
+    &__desc {
+      font-size: rem(16px);
+    }
+
+    &__params {
+      margin-top: rem(16px);
+    }
+
+    &__params-item {
+      padding: rem(8px) rem(10px);
+      font-size: rem(10px);
+    }
+
     &__button {
-      display: none;
+      --btn-height: #{rem(60px)};
+      --btn-min-width: 100%;
+
+      width: 100%;
+      border-radius: rem(16px);
+    }
+
+    &__watermark {
+      right: rem(10px);
+      bottom: rem(-26px);
+      font-size: rem(156px);
     }
   }
 }
-@media (prefers-reduced-motion: reduce), (max-width: $breakpoint-mobile) {
-  .zones-wrap,
-  .zones-wrap__track {
-    height: auto;
-    overflow: visible;
-    transform: none !important;
+
+@media (prefers-reduced-motion: reduce) {
+  .zones__tab,
+  .zone__image-zoom {
+    transition: none;
   }
 }

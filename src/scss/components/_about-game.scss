@@ -2,184 +2,329 @@
 @use '../fluid' as *;
 
 .about-game-group {
-  background-color: $black;
-  isolation: isolate;
   position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  background-color: $gray-950;
 
   &__background {
-    height: 100dvh;
-    margin-bottom: -100dvh;
-    overflow: hidden;
-    position: sticky;
-    top: 0;
+    position: absolute;
+    inset: 0;
     z-index: 0;
+    overflow: hidden;
   }
 
   &__background-image {
-    height: 112%;
-    left: 0;
+    width: 100%;
+    height: 100%;
     max-width: none;
     object-fit: cover;
     object-position: center;
-    position: absolute;
-    top: -6%;
-    width: 100%;
-    will-change: transform;
   }
 
   &__background-gradient {
-    background:
-      linear-gradient(
-        118deg,
-        rgb(135 91 247 / 0.2) 0%,
-        transparent 35%,
-        rgb(246 61 104 / 0.14) 72%,
-        transparent 100%
-      ),
-      linear-gradient(180deg, rgb(0 0 0 / 0.04), rgb(0 0 0 / 0.34));
-    inset: -18%;
-    position: absolute;
-    will-change: transform;
+    display: none;
   }
 }
 
 .about-game {
-  isolation: isolate;
-  min-height: 100dvh;
-  overflow: hidden;
   position: relative;
-  scroll-snap-align: start;
   z-index: 1;
+  overflow: hidden;
+  min-height: max(100svh, #{fluid(800px, 982px, 1025px, 1512px)});
+  isolation: isolate;
+  scroll-snap-align: start;
 
-  &__row {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 100vh;
+  &__inner {
+    position: relative;
+    min-height: inherit;
   }
 
-  &__content {
-    max-width: rem(492px);
+  &__heading {
+    position: absolute;
+    inset: 0;
+    z-index: 4;
+    pointer-events: none;
+    margin: 0 1.25rem;
   }
 
   &__title {
-    margin: 0 0 rem(4px);
+    position: absolute;
+    top: fluid(92px, 115px, 1025px, 1512px);
+    left: 0;
+    margin: 0;
     font-family: $font-family-heading;
-    font-size: fluid(40px, 64px);
-    letter-spacing: 0;
-    line-height: 0.88;
+    font-size: fluid(72px, 96px, 1025px, 1512px);
+    font-weight: 800;
+    letter-spacing: -0.015em;
+    line-height: 0.72;
+    text-transform: uppercase;
+
+    span {
+      display: block;
+    }
+  }
+
+  &__title-accent {
+    color: $red-600;
+  }
+
+  &__lead {
+    position: absolute;
+    top: fluid(188px, 214px, 1025px, 1512px);
+    right: 0;
+    width: min(28%, rem(403px));
+    margin: 0;
+    padding-left: rem(14px);
+    border-left: rem(1px) solid $red-600;
+    color: $white;
+    font-size: fluid(16px, 18px, 1025px, 1512px);
+    font-weight: 400;
+    line-height: 1.2;
+    pointer-events: auto;
+  }
+
+  &__stage {
+    position: absolute;
+    inset: 0;
+    margin: 0 1.25rem;
+  }
+
+  &__visual {
+    position: absolute;
+    bottom: fluid(28px, 36px, 1025px, 1512px);
+    left: 50%;
+    z-index: 2;
+    width: min(43.35%, rem(774px));
+    max-width: none;
+    pointer-events: none;
+    transform: translateX(-50%);
+  }
+
+  &__benefits {
+    position: absolute;
+    inset: 0;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  &__benefit {
+    position: absolute;
+    display: grid;
+    grid-template-columns: fluid(52px, 64px, 1025px, 1512px) minmax(0, 1fr);
+    min-height: fluid(170px, 196px, 1025px, 1512px);
+    padding: fluid(22px, 28px, 1025px, 1512px);
+    border: rem(1px) solid rgb(255 255 255 / 0.16);
+    border-radius: fluid(20px, 28px, 1025px, 1512px);
+    background: linear-gradient(110deg, rgb(63 63 66 / 0.72), rgb(38 39 43 / 0.9));
+    box-shadow: inset 0 rem(1px) 0 rgb(255 255 255 / 0.06);
+    backdrop-filter: blur(rem(18px)) saturate(125%);
+
+    &--one {
+      top: 35.13%;
+      left: 0;
+      z-index: 1;
+      width: min(38%, rem(558px));
+    }
+
+    &--two {
+      bottom: 8.6%;
+      left: 25.55%;
+      z-index: 3;
+      width: min(34.38%, rem(506px));
+    }
+
+    &--three {
+      top: 45.01%;
+      right: rem(4px);
+      z-index: 3;
+      width: min(34.24%, rem(504px));
+    }
+  }
+
+  &__number {
+    color: $red-600;
+    font-family: $font-family-heading;
+    font-size: fluid(48px, 64px, 1025px, 1512px);
+    font-weight: 800;
+    line-height: 0.8;
+  }
+
+  &__benefit-content {
+    min-width: 0;
+    padding-left: fluid(12px, 18px, 1025px, 1512px);
+    border-left: rem(1px) solid $red-600;
+  }
+
+  &__benefit-title {
+    margin: 0 0 fluid(8px, 12px, 1025px, 1512px);
+    font-family: $font-family-heading;
+    font-size: fluid(28px, 36px, 1025px, 1512px);
+    font-weight: 800;
+    letter-spacing: 1px;
+    line-height: 0.86;
     text-transform: uppercase;
   }
 
-  &__desc {
+  &__benefit-description {
+    margin: 0;
     color: $white;
-    font-size: fluid(16px, 18px);
+    font-size: fluid(15px, 18px, 1025px, 1512px);
     font-weight: 600;
     line-height: 1.2;
-  }
-
-  &--immersion {
-    .about-game__row {
-      position: relative;
-    }
-
-    .about-game__content {
-      position: absolute;
-      z-index: 3;
-      top: 53%;
-      left: 50%;
-      width: min(100%, rem(420px));
-      max-width: none;
-      text-align: center;
-      transform: translate(-50%, -50%);
-    }
-
-    .about-game__title {
-      margin-bottom: rem(16px);
-
-      line-height: 0.76;
-
-      span {
-        display: block;
-      }
-    }
-
-    .about-game__desc {
-      font-size: rem(18px);
-      font-weight: 650;
-      line-height: 1.1;
-
-      span {
-        display: block;
-      }
-    }
-  }
-
-  &__character {
-    position: absolute;
-    z-index: 1;
-    top: 11%;
-    max-width: none;
-    pointer-events: none;
-
-    &--left {
-      left: calc(50% - min(36.77vw, #{rem(556px)}));
-      width: min(36.77vw, rem(556px));
-    }
-
-    &--right {
-      left: calc(50% + min(3.77vw, #{rem(57px)}));
-      width: min(29.03vw, rem(439px));
+    &--lit {
+      max-width: 86%;
     }
   }
 }
 
 @media (max-width: $breakpoint-tablet) {
   .about-game {
-    padding: rem(80px) 0;
+    min-height: 0;
+    padding: rem(104px) 0 rem(72px);
+
+    &__inner {
+      min-height: 0;
+    }
+
+    &__heading {
+      position: relative;
+      inset: auto;
+      display: flex;
+      flex-direction: column;
+      gap: rem(24px);
+      pointer-events: auto;
+    }
 
     &__title {
-      margin-bottom: rem(8px);
+      position: relative;
+      top: auto;
+      left: auto;
+      font-size: fluid(56px, 76px);
+      line-height: 0.76;
     }
 
-    &--immersion {
-      .about-game__content {
-        position: relative;
-        transform: none;
-        width: auto;
-        left: initial;
-        top: initial;
-      }
+    &__lead {
+      position: relative;
+      top: auto;
+      right: auto;
+      width: 100%;
+      max-width: rem(520px);
+      font-size: rem(18px);
     }
 
-    &__row {
+    &__stage {
+      position: relative;
+      inset: auto;
+      display: flex;
       flex-direction: column;
-      justify-content: flex-start;
-      gap: rem(36px);
+      margin-top: rem(36px);
     }
 
-    &__content {
-      order: -1;
-      text-align: center;
+    &__visual {
+      position: relative;
+      bottom: auto;
+      left: auto;
+      z-index: 1;
+      width: min(78vw, rem(638px));
+      margin: 0 auto;
+      transform: none;
+    }
+
+    &__benefits {
+      position: relative;
+      inset: auto;
+      z-index: 2;
+      display: grid;
+      gap: rem(16px);
+      width: min(100%, rem(700px));
+      margin: rem(-88px) auto 0;
+    }
+
+    &__benefit {
+      position: relative;
+      inset: auto;
+      z-index: auto;
+      grid-template-columns: rem(64px) minmax(0, 1fr);
+      width: 100%;
+      min-height: 0;
+      padding: rem(28px);
+      border-radius: rem(28px);
+    }
+
+    &__number {
+      font-size: rem(64px);
+    }
+
+    &__benefit-content {
+      padding-left: rem(16px);
+    }
+
+    &__benefit-title {
+      margin-bottom: rem(12px);
+      font-size: fluid(32px, 40px);
+    }
+
+    &__benefit-description {
+      font-size: rem(18px);
     }
   }
 }
 
 @media (max-width: $breakpoint-mobile) {
   .about-game {
-    &__character {
-      top: 21%;
+    padding: rem(88px) 0 rem(56px);
 
-      &--left {
-        width: 97%;
-        left: calc(24% - min(36.77vw, 34.75rem));
-      }
+    &__heading {
+      gap: rem(20px);
+    }
 
-      &--right {
-        width: 74%;
-        left: calc(26% + min(3.77vw, 3.5625rem));
-        top: 21%;
-      }
+    &__title {
+      font-size: fluid(48px, 58px);
+    }
+
+    &__lead {
+      padding-left: rem(12px);
+      font-size: rem(16px);
+    }
+
+    &__stage {
+      margin-top: rem(28px);
+    }
+
+    &__visual {
+      width: min(108%, rem(560px));
+      margin-left: -4%;
+    }
+
+    &__benefits {
+      gap: rem(12px);
+      margin-top: rem(-24px);
+    }
+
+    &__benefit {
+      grid-template-columns: rem(52px) minmax(0, 1fr);
+      padding: rem(20px);
+      border-radius: rem(20px);
+    }
+
+    &__number {
+      font-size: rem(50px);
+    }
+
+    &__benefit-content {
+      padding-left: rem(12px);
+    }
+
+    &__benefit-title {
+      margin-bottom: rem(10px);
+      font-size: fluid(28px, 34px);
+      line-height: 0.9;
+    }
+
+    &__benefit-description {
+      font-size: rem(16px);
     }
   }
 }

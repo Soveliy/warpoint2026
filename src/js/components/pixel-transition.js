@@ -5,7 +5,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 const sectionSelector =
   '.main > :is(section, .hero, .video-section, [data-pixel-transition="on"], [data-pixel-section]), .footer';
-const defaultColumns = 16;
+const defaultColumns = 48;
 const defaultRows = 6;
 const defaultScrub = 0.3;
 const defaultPixelDuration = 0.1;
@@ -62,9 +62,9 @@ function createWrapper(section, nextSection) {
 
   wrapper.className = 'pixelated-scroll-transition';
   wrapper.dataset.columns = section.dataset.pixelColumns || defaultColumns;
-  wrapper.dataset.columnsLandscape = section.dataset.pixelColumnsLandscape || 10;
-  wrapper.dataset.columnsMobile = section.dataset.pixelColumnsMobile || 6;
-  wrapper.dataset.columnsTablet = section.dataset.pixelColumnsTablet || 10;
+  wrapper.dataset.columnsLandscape = section.dataset.pixelColumnsLandscape || 30;
+  wrapper.dataset.columnsMobile = section.dataset.pixelColumnsMobile || 18;
+  wrapper.dataset.columnsTablet = section.dataset.pixelColumnsTablet || 30;
   wrapper.dataset.pixelatedScrollTransition = '';
   wrapper.dataset.rows = section.dataset.pixelRows || defaultRows;
   wrapper.dataset.rowsLandscape = section.dataset.pixelRowsLandscape || 4;
