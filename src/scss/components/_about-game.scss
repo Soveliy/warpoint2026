@@ -2,6 +2,7 @@
 @use '../fluid' as *;
 
 .about-game-group {
+  padding: 0 0 fluid(16px, 54px);
   position: relative;
   overflow: hidden;
   isolation: isolate;
