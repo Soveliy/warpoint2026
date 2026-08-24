@@ -156,7 +156,8 @@
       </section>
     </div>
 
-    <section class="zones" data-header-theme="brand" data-zone-tabs aria-labelledby="zones-title">
+    <section class="zones" data-header-theme="brand" data-zone-tabs data-zone-venue-active="park"
+      aria-labelledby="zones-title">
       <div class="zones__inner container">
         <div class="zones__heading">
           <h2 class="zones__title" id="zones-title">
@@ -168,46 +169,62 @@
           </p>
         </div>
 
-        <div class="zones__tabs" role="tablist" aria-label="Игровые зоны">
-          <button class="zones__tab button-reset" id="zone-tab-arena" type="button" role="tab" aria-selected="true"
-            aria-controls="zone-panel-arena" data-zone-tab>
-            <svg class="zones__tab-icon" aria-hidden="true">
-              <use href="/img/sprite.svg#icon-gun"></use>
-            </svg>
-            <span>Арена</span>
-          </button>
-          <button class="zones__tab button-reset" id="zone-tab-vr" type="button" role="tab" aria-selected="false"
-            aria-controls="zone-panel-vr" tabindex="-1" data-zone-tab>
-            <svg class="zones__tab-icon" aria-hidden="true">
-              <use href="/img/sprite.svg#icon-vr"></use>
-            </svg>
-            <span>VR станция</span>
-          </button>
-          <button class="zones__tab button-reset" id="zone-tab-extreme" type="button" role="tab" aria-selected="false"
-            aria-controls="zone-panel-extreme" tabindex="-1" data-zone-tab>
-            <svg class="zones__tab-icon" aria-hidden="true">
-              <use href="/img/sprite.svg#icon-car"></use>
-            </svg>
-            <span>Экстрим</span>
-          </button>
-          <button class="zones__tab button-reset" id="zone-tab-simulators" type="button" role="tab"
-            aria-selected="false" aria-controls="zone-panel-simulators" tabindex="-1" data-zone-tab>
-            <svg class="zones__tab-icon" aria-hidden="true">
-              <use href="/img/sprite.svg#icon-wheel"></use>
-            </svg>
-            <span>Симуляторы</span>
-          </button>
-          <button class="zones__tab button-reset" id="zone-tab-lounge" type="button" role="tab" aria-selected="false"
-            aria-controls="zone-panel-lounge" tabindex="-1" data-zone-tab>
-            <svg class="zones__tab-icon" aria-hidden="true">
-              <use href="/img/sprite.svg#icon-confeti"></use>
-            </svg>
-            <span>Лаунж</span>
-          </button>
+        <span class="visually-hidden" id="zones-navigation-label">Формат локации и доступные игровые зоны</span>
+        <div class="zones__navigation" role="group" aria-labelledby="zones-navigation-label">
+          <div class="zones__venue-switch" role="group" aria-label="Переключение формата локации">
+            <button class="zones__venue-arrow button-reset" type="button" aria-label="Показать формат «Арена»"
+              data-zone-venue-step="-1">
+              <span class="zones__venue-chevron zones__venue-chevron--prev" aria-hidden="true"></span>
+            </button>
+            <button class="zones__venue-current zones__tab button-reset is-active" id="zone-tab-arena" type="button"
+              aria-pressed="true" aria-controls="zone-panel-arena" aria-label="Открыть основную зону формата «Парк»"
+              data-zone-types="arena park" data-zone-primary data-zone-tab>
+              <svg class="zones__tab-icon" aria-hidden="true">
+                <use href="/img/sprite.svg#icon-gun"></use>
+              </svg>
+              <span class="zones__venue-name" data-zone-venue-name>Парк</span>
+            </button>
+            <button class="zones__venue-arrow button-reset" type="button" aria-label="Показать формат «Арена»"
+              data-zone-venue-step="1">
+              <span class="zones__venue-chevron zones__venue-chevron--next" aria-hidden="true"></span>
+            </button>
+          </div>
+
+          <div class="zones__tabs" id="zones-activity-tabs" role="group" aria-label="Доступные зоны">
+            <button class="zones__tab button-reset" id="zone-tab-vr" type="button" aria-pressed="false"
+              aria-controls="zone-panel-vr" tabindex="-1" data-zone-types="park" data-zone-tab>
+              <svg class="zones__tab-icon" aria-hidden="true">
+                <use href="/img/sprite.svg#icon-vr"></use>
+              </svg>
+              <span>VR станция</span>
+            </button>
+            <button class="zones__tab button-reset" id="zone-tab-extreme" type="button" aria-pressed="false"
+              aria-controls="zone-panel-extreme" tabindex="-1" data-zone-types="park" data-zone-tab>
+              <svg class="zones__tab-icon" aria-hidden="true">
+                <use href="/img/sprite.svg#icon-car"></use>
+              </svg>
+              <span>Экстрим</span>
+            </button>
+            <button class="zones__tab button-reset" id="zone-tab-simulators" type="button" aria-pressed="false"
+              aria-controls="zone-panel-simulators" tabindex="-1" data-zone-types="park" data-zone-tab>
+              <svg class="zones__tab-icon" aria-hidden="true">
+                <use href="/img/sprite.svg#icon-wheel"></use>
+              </svg>
+              <span>Симуляторы</span>
+            </button>
+            <button class="zones__tab button-reset" id="zone-tab-lounge" type="button" aria-pressed="false"
+              aria-controls="zone-panel-lounge" tabindex="-1" data-zone-types="arena park" data-zone-tab>
+              <svg class="zones__tab-icon" aria-hidden="true">
+                <use href="/img/sprite.svg#icon-confeti"></use>
+              </svg>
+              <span>Лаунж</span>
+            </button>
+          </div>
         </div>
+        <span class="visually-hidden" aria-live="polite" aria-atomic="true" data-zone-venue-status></span>
 
         <div class="zones__panels">
-          <section class="zone zone--red" id="zone-panel-arena" role="tabpanel" aria-labelledby="zone-tab-arena"
+          <section class="zone zone--red" id="zone-panel-arena" role="region" aria-labelledby="zone-tab-arena"
             data-zone-panel>
             <div class="zone__row">
               <div class="zone__image-container">
@@ -243,7 +260,7 @@
             </div>
           </section>
 
-          <section class="zone zone--violet" id="zone-panel-vr" role="tabpanel" aria-labelledby="zone-tab-vr"
+          <section class="zone zone--violet" id="zone-panel-vr" role="region" aria-labelledby="zone-tab-vr"
             data-zone-panel hidden>
             <div class="zone__row">
               <div class="zone__image-container">
@@ -279,7 +296,7 @@
             </div>
           </section>
 
-          <section class="zone zone--red" id="zone-panel-extreme" role="tabpanel" aria-labelledby="zone-tab-extreme"
+          <section class="zone zone--red" id="zone-panel-extreme" role="region" aria-labelledby="zone-tab-extreme"
             data-zone-panel hidden>
             <div class="zone__row">
               <div class="zone__image-container">
@@ -316,7 +333,7 @@
             </div>
           </section>
 
-          <section class="zone zone--violet" id="zone-panel-simulators" role="tabpanel"
+          <section class="zone zone--violet" id="zone-panel-simulators" role="region"
             aria-labelledby="zone-tab-simulators" data-zone-panel hidden>
             <div class="zone__row">
               <div class="zone__image-container">
@@ -350,7 +367,7 @@
             </div>
           </section>
 
-          <section class="zone zone--red" id="zone-panel-lounge" role="tabpanel" aria-labelledby="zone-tab-lounge"
+          <section class="zone zone--red" id="zone-panel-lounge" role="region" aria-labelledby="zone-tab-lounge"
             data-zone-panel hidden>
             <div class="zone__row">
               <div class="zone__image-container">
