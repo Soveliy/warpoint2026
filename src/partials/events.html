@@ -25,49 +25,10 @@
     </div>
 
     <div class="events__states" data-events-states>
-      <div class="events__tabs" role="tablist" aria-label="Формат мероприятия">
-        <button
-          class="events__tab is-active button-reset"
-          id="event-tab-birthday"
-          type="button"
-          role="tab"
-          aria-controls="event-state-birthday"
-          aria-selected="true"
-          data-event-control
-        >
-          День рождения
-        </button>
-        <button
-          class="events__tab button-reset"
-          id="event-tab-corporate"
-          type="button"
-          role="tab"
-          aria-controls="event-state-corporate"
-          aria-selected="false"
-          tabindex="-1"
-          data-event-control
-        >
-          Корпоратив
-        </button>
-        <button
-          class="events__tab button-reset"
-          id="event-tab-graduation"
-          type="button"
-          role="tab"
-          aria-controls="event-state-graduation"
-          aria-selected="false"
-          tabindex="-1"
-          data-event-control
-        >
-          Выпускной
-        </button>
-      </div>
-
       <article
         class="events__state events__state--birthday is-active"
         id="event-state-birthday"
-        role="tabpanel"
-        aria-labelledby="event-tab-birthday"
+        aria-label="День рождения"
         data-event-state
         data-event-color="#ff4405"
       >
@@ -129,8 +90,7 @@
       <article
         class="events__state events__state--corporate"
         id="event-state-corporate"
-        role="tabpanel"
-        aria-labelledby="event-tab-corporate"
+        aria-label="Корпоратив и тимбилдинг"
         data-event-state
         data-event-color="#7839ee"
       >
@@ -192,8 +152,7 @@
       <article
         class="events__state events__state--graduation"
         id="event-state-graduation"
-        role="tabpanel"
-        aria-labelledby="event-tab-graduation"
+        aria-label="Школьный выпускной"
         data-event-state
         data-event-color="#06aed4"
       >

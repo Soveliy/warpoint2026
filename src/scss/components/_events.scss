@@ -65,80 +65,6 @@
     transform: translateY(var(--events-row-shift));
   }
 
-  &__tabs {
-    position: absolute;
-    bottom: calc(100% + #{rem(10px)});
-    left: calc((var(--events-card-width) - var(--events-visual-width)) / 2 - #{rem(12px)});
-    z-index: 4;
-    display: grid;
-    grid-template-columns: 1.2fr 1fr 1fr;
-    gap: rem(6px);
-    width: calc(var(--events-visual-width) + #{rem(24px)});
-    padding: rem(10px);
-    border: rem(1px) solid rgba($white, 0.58);
-    border-radius: $radius-pill;
-    background-color: rgba($white, 0.035);
-    box-shadow:
-      inset 0 rem(1px) 0 rgba($white, 0.12),
-      0 rem(12px) rem(32px) rgba($black, 0.08);
-    backdrop-filter: blur(rem(8px));
-  }
-
-  &__tab {
-    @include hover {
-      background-color: rgba($white, 0.14);
-    }
-    position: relative;
-    min-width: 0;
-    min-height: rem(42px);
-    padding: rem(8px) rem(12px);
-    border: rem(1px) solid rgba($white, 0.82);
-    border-radius: $radius-pill;
-    color: $white;
-    font-size: rem(10px);
-    font-weight: 800;
-    line-height: 1;
-    text-align: center;
-    text-transform: uppercase;
-    white-space: nowrap;
-    &:before {
-      content: '';
-      position: absolute;
-      bottom: -6px;
-      width: 16px;
-      height: 2px;
-      left: 50%;
-      transform: translateX(-50%);
-      border-radius: 16px;
-      background-color: #fff;
-      transition: 0.3s;
-      opacity: 0;
-    }
-    transition:
-      background-color $duration-fast $ease-base,
-      border-color $duration-fast $ease-base,
-      color $duration-fast $ease-base,
-      transform $duration-fast $ease-base;
-
-    &.is-active {
-      border-color: $white;
-      background-color: $white;
-      color: var(--events-accent);
-      &:before {
-        opacity: 1;
-      }
-    }
-
-    // &:active {
-    //   transform: scale(0.98);
-    // }
-
-    &:focus-visible {
-      outline: $focus-outline-width solid $focus-color;
-      outline-offset: rem(2px);
-    }
-  }
-
   &__state {
     display: grid;
     visibility: hidden;
@@ -415,10 +341,6 @@
       transform: none;
     }
 
-    &__tabs {
-      display: none;
-    }
-
     &__state {
       position: relative;
       isolation: isolate;
@@ -510,7 +432,6 @@
 
 @media (prefers-reduced-motion: reduce) {
   .events {
-    &__tab,
     &__calculate,
     &__more {
       transition: none;

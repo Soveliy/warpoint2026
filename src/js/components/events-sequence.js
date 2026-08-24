@@ -3,10 +3,9 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
 
-const desktopQuery = '(min-width: 64.0625rem)';
-const motionQuery = '(prefers-reduced-motion: no-preference)';
+const desktopQuery = '(min-width: 64.0625rem) and (prefers-reduced-motion: no-preference)';
 
-function setActiveState(states, controls, activeIndex) {
+function setActiveState(states, activeIndex) {
   states.forEach((state, index) => {
     const isActive = index === activeIndex;
 
@@ -14,81 +13,23 @@ function setActiveState(states, controls, activeIndex) {
     state.inert = !isActive;
     state.setAttribute('aria-hidden', String(!isActive));
   });
-
-  controls.forEach((control, index) => {
-    const isActive = index === activeIndex;
-
-    control.classList.toggle('is-active', isActive);
-    control.setAttribute('aria-selected', String(isActive));
-    control.tabIndex = isActive ? 0 : -1;
-  });
 }
 
-function resetStates(states, controls) {
+function resetStates(states) {
   states.forEach((state, index) => {
     state.classList.toggle('is-active', index === 0);
     state.inert = false;
     state.removeAttribute('aria-hidden');
   });
-
-  controls.forEach((control, index) => {
-    const isActive = index === 0;
-
-    control.classList.toggle('is-active', isActive);
-    control.setAttribute('aria-selected', String(isActive));
-    control.tabIndex = isActive ? 0 : -1;
-  });
-}
-
-function bindControls(controls, onActivate) {
-  const cleanups = controls.map((control, index) => {
-    const handleClick = () => onActivate(index);
-    const handleKeydown = (event) => {
-      let nextIndex = null;
-
-      if (event.key === 'ArrowRight' || event.key === 'ArrowDown') {
-        nextIndex = (index + 1) % controls.length;
-      } else if (event.key === 'ArrowLeft' || event.key === 'ArrowUp') {
-        nextIndex = (index - 1 + controls.length) % controls.length;
-      } else if (event.key === 'Home') {
-        nextIndex = 0;
-      } else if (event.key === 'End') {
-        nextIndex = controls.length - 1;
-      }
-
-      if (nextIndex === null) {
-        return;
-      }
-
-      event.preventDefault();
-      controls[nextIndex].focus();
-      onActivate(nextIndex);
-    };
-
-    control.addEventListener('click', handleClick);
-    control.addEventListener('keydown', handleKeydown);
-
-    return () => {
-      control.removeEventListener('click', handleClick);
-      control.removeEventListener('keydown', handleKeydown);
-    };
-  });
-
-  return () => cleanups.forEach((cleanup) => cleanup());
 }
 
 function getElements(root) {
   const states = [...root.querySelectorAll('[data-event-state]')];
-  const controls = [...root.querySelectorAll('[data-event-control]')];
   const visuals = states.map((state) => state.querySelector('[data-event-visual]'));
   const details = states.map((state) => state.querySelector('[data-event-details]'));
-  const isValid =
-    states.length > 1 &&
-    states.length === controls.length &&
-    visuals.every(Boolean) &&
-    details.every(Boolean);
+  const isValid = states.length > 1 && visuals.every(Boolean) && details.every(Boolean);
 
-  return isValid ? { states, controls, visuals, details } : null;
+  return isValid ? { states, visuals, details } : null;
 }
 
 function setupSequence(root) {
@@ -98,7 +39,7 @@ function setupSequence(root) {
     return null;
   }
 
-  const { states, controls, visuals, details } = elements;
+  const { states, visuals, details } = elements;
   let activeIndex = 0;
   const lastIndex = states.length - 1;
   const getStep = () => Math.max(root.clientHeight, window.innerHeight);
@@ -109,13 +50,13 @@ function setupSequence(root) {
 
     if (nextIndex !== activeIndex) {
       activeIndex = nextIndex;
-      setActiveState(states, controls, activeIndex);
+      setActiveState(states, activeIndex);
     }
   };
 
   root.classList.add('events--animated');
   root.style.setProperty('--events-accent', states[0].dataset.eventColor);
-  setActiveState(states, controls, activeIndex);
+  setActiveState(states, activeIndex);
   gsap.set(states, { visibility: 'hidden' });
   gsap.set(states[0], { visibility: 'visible' });
   gsap.set([...visuals, ...details], { autoAlpha: 1, x: 0, y: 0 });
@@ -174,24 +115,7 @@ function setupSequence(root) {
     timeline.set(currentState, { visibility: 'hidden' }, position + 1);
   });
 
-  const scrollTrigger = timeline.scrollTrigger;
-  const unbindControls = bindControls(controls, (index) => {
-    if (
-      !scrollTrigger ||
-      !Number.isFinite(scrollTrigger.start) ||
-      !Number.isFinite(scrollTrigger.end)
-    ) {
-      return;
-    }
-
-    const progress = index / lastIndex;
-    const top = scrollTrigger.start + (scrollTrigger.end - scrollTrigger.start) * progress;
-
-    window.scrollTo({ behavior: 'smooth', top });
-  });
-
   return () => {
-    unbindControls();
     timeline.scrollTrigger?.kill();
     timeline.kill();
     root.classList.remove('events--animated');
@@ -199,32 +123,7 @@ function setupSequence(root) {
     gsap.set([...states, ...visuals, ...details], {
       clearProps: 'opacity,transform,visibility',
     });
-    resetStates(states, controls);
-  };
-}
-
-function setupStaticControls(root) {
-  const elements = getElements(root);
-
-  if (!elements) {
-    return null;
-  }
-
-  const { states, controls } = elements;
-  const activate = (index) => {
-    root.style.setProperty('--events-accent', states[index].dataset.eventColor);
-    setActiveState(states, controls, index);
-  };
-
-  root.classList.add('events--static');
-  activate(0);
-  const unbindControls = bindControls(controls, activate);
-
-  return () => {
-    unbindControls();
-    root.classList.remove('events--static');
-    root.style.removeProperty('--events-accent');
-    resetStates(states, controls);
+    resetStates(states);
   };
 }
 
@@ -237,17 +136,10 @@ export function initEventsSequence() {
 
   const media = gsap.matchMedia();
 
-  media.add({ desktop: desktopQuery, motion: motionQuery }, ({ conditions }) => {
-    if (!conditions?.desktop) {
-      return undefined;
-    }
+  media.add(desktopQuery, () => {
+    const cleanupCallbacks = roots.map(setupSequence).filter(Boolean);
 
-    const setup = conditions.motion ? setupSequence : setupStaticControls;
-    const cleanupCallbacks = roots.map(setup).filter(Boolean);
-
-    if (conditions.motion) {
-      ScrollTrigger.refresh();
-    }
+    ScrollTrigger.refresh();
 
     return () => {
       cleanupCallbacks.forEach((cleanup) => cleanup());

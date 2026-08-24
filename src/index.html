@@ -1,741 +1,515 @@
 <!doctype html>
 <html class="is-preloading" lang="ru">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Warpoint</title>
-    <script>
-      window.setTimeout(() => document.documentElement.classList.remove('is-preloading'), 8000);
-    </script>
-  </head>
 
-  <body class="page">
-    @include('partials/preloader.html') @include('partials/header.html')
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Warpoint</title>
+  <script>
+    window.setTimeout(() => document.documentElement.classList.remove('is-preloading'), 8000);
+  </script>
+</head>
 
-    <main class="main">
-      <div class="hero" data-header-theme="brand">
-        <picture class="hero__picture">
-          <source srcset="/img/hero_mob.jpg" media="(max-width: 800px)" />
-          <img
-            class="hero__image"
-            src="/img/hero_desk.jpg"
-            width="1200"
-            height="800"
-            alt="Description"
-          />
-        </picture>
-        <div class="hero__content container">
-          <div class="hero__wrap">
-            <div class="hero__pretitle">Сеть клубов виртуальной реальности в Екатеринбурге</div>
-            <h1 class="hero__title">
-              Путешествуйте по виртуальным мирам вместе с <span>warpoint</span>
-            </h1>
-            <div class="hero__buttons">
-              <button class="hero__button hero__button--red button-reset" type="button">
-                забронировать игру
-              </button>
-              <button
-                class="hero__button hero__button--purple button-reset"
-                type="button"
-                aria-haspopup="dialog"
-                aria-controls="event-modal"
-                data-event-modal-open
-              >
-                провести мероприятие
-              </button>
-            </div>
+<body class="page">
+  @include('partials/preloader.html') @include('partials/header.html')
+
+  <main class="main">
+    <div class="hero" data-header-theme="brand">
+      <picture class="hero__picture">
+        <source srcset="/img/hero_mob.jpg" media="(max-width: 800px)" />
+        <img class="hero__image" src="/img/hero_desk.jpg" width="1200" height="800" alt="Description" />
+      </picture>
+      <div class="hero__content container">
+        <div class="hero__wrap">
+          <div class="hero__pretitle">Сеть клубов виртуальной реальности в Екатеринбурге</div>
+          <h1 class="hero__title">
+            Путешествуйте по виртуальным мирам вместе с <span>warpoint</span>
+          </h1>
+          <div class="hero__buttons">
+            <button class="hero__button hero__button--red button-reset" type="button">
+              забронировать игру
+            </button>
+            <button class="hero__button hero__button--purple button-reset" type="button" aria-haspopup="dialog"
+              aria-controls="event-modal" data-event-modal-open>
+              провести мероприятие
+            </button>
           </div>
-          <div class="hero__allerts allerts">
-            <div class="allert">
-              <div class="allert__row">
-                <div class="allert__pic">
-                  <img src="img/ypoint.png" alt="" />
-                </div>
-                <div class="allert__content">
-                  <div class="allert__title">5.0</div>
-                  <div class="allert__desc">
-                    средняя оценка наших гостей на основании 2048 отзывов
-                  </div>
+        </div>
+        <div class="hero__allerts allerts">
+          <div class="allert">
+            <div class="allert__row">
+              <div class="allert__pic">
+                <img src="img/ypoint.png" alt="" />
+              </div>
+              <div class="allert__content">
+                <div class="allert__title">5.0</div>
+                <div class="allert__desc">
+                  средняя оценка наших гостей на основании 2048 отзывов
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <section class="video-section" data-header-theme="brand" aria-labelledby="promo-video-title">
-        <img
-          class="video-section__background"
-          src="img/promo-video.jpg"
-          width="1512"
-          height="982"
-          alt=""
-        />
-        <div class="video-section__content">
-          <h2 class="video-section__title" id="promo-video-title">
-            <span>Превратите</span>
-            <span>обычную встречу</span>
-            <span class="video-section__title-accent">в событие</span>
-          </h2>
-          <p class="video-section__description">
-            <span>От встречи с друзьями до дня рождения или корпоратива</span>
-            <span>— WARPOINT подходит для тех случаев, когда хочется</span>
-            <span>чего-то интереснее обычных развлечений.</span>
-          </p>
-          <div class="video-section__control">
-            <button
-              class="video-section__play button-reset"
-              type="button"
-              aria-label="Открыть видео"
-              data-promo-video
-            >
-              <svg class="video-section__play-icon" aria-hidden="true">
-                <use href="/img/sprite.svg#icon-play"></use>
-              </svg>
-            </button>
-            <span class="video-section__duration" aria-hidden="true">0:50</span>
-          </div>
+    </div>
+    <section class="video-section" data-header-theme="brand" aria-labelledby="promo-video-title">
+      <img class="video-section__background" src="img/promo-video.jpg" width="1512" height="982" alt="" />
+      <div class="video-section__content">
+        <h2 class="video-section__title" id="promo-video-title">
+          <span>Превратите</span>
+          <span>обычную встречу</span>
+          <span class="video-section__title-accent">в событие</span>
+        </h2>
+        <p class="video-section__description">
+          <span>От встречи с друзьями до дня рождения или корпоратива</span>
+          <span>— WARPOINT подходит для тех случаев, когда хочется</span>
+          <span>чего-то интереснее обычных развлечений.</span>
+        </p>
+        <div class="video-section__control">
+          <button class="video-section__play button-reset" type="button" aria-label="Открыть видео" data-promo-video>
+            <svg class="video-section__play-icon" aria-hidden="true">
+              <use href="/img/sprite.svg#icon-play"></use>
+            </svg>
+          </button>
         </div>
-      </section>
-
-      <div class="about-game-group" data-about-game-group data-pixel-transition="on">
-        <div class="about-game-group__background" aria-hidden="true">
-          <img
-            class="about-game-group__background-image"
-            src="img/about/bg_1.jpg"
-            width="1512"
-            height="982"
-            alt=""
-            loading="lazy"
-            decoding="async"
-          />
-        </div>
-        <section class="about-game" data-header-theme="brand" aria-labelledby="about-game-title">
-          <div class="about-game__inner container">
-            <div class="about-game__heading">
-              <h2 class="about-game__title" id="about-game-title">
-                <span>Почему выбирают</span>
-                <span class="about-game__title-accent">WARPOINT</span>
-              </h2>
-              <p class="about-game__lead">
-                Современные VR-развлечения для всей семьи. Ощутите игру по-новому!
-              </p>
-            </div>
-            <div class="about-game__stage">
-              <img
-                class="about-game__visual"
-                src="img/about/4.png"
-                width="638"
-                height="727"
-                alt="Семья играет в виртуальной реальности"
-                loading="lazy"
-                decoding="async"
-              />
-              <ol class="about-game__benefits">
-                <li class="about-game__benefit about-game__benefit--one">
-                  <span class="about-game__number"
-                    ><svg
-                      width="44"
-                      height="51"
-                      viewBox="0 0 44 51"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        d="M0 33.2518V17.8159C0 12.1493 1.06449 7.7633 3.19347 4.65798C5.32246 1.55266 8.30472 0 12.1403 0C15.9927 0 18.9834 1.52999 21.1124 4.58998C23.2583 7.64996 24.3312 12.0586 24.3312 17.8159V33.2518C24.3312 39.0091 23.2245 43.4178 21.011 46.4778C18.7976 49.5151 15.8406 51.0224 12.1403 50.9997C8.27093 50.9997 5.28022 49.4811 3.16813 46.4438C1.05604 43.3838 0 38.9865 0 33.2518ZM9.90991 35.1898C9.90991 37.3205 10.0873 38.9411 10.4422 40.0518C10.8139 41.1625 11.3884 41.7178 12.1656 41.7178C12.9429 41.7178 13.5089 41.1625 13.8637 40.0518C14.2355 38.9411 14.4213 37.3205 14.4213 35.1898V16.0479C14.4213 13.8719 14.2355 12.2286 13.8637 11.1179C13.492 10.0073 12.926 9.45195 12.1656 9.45195C11.3884 9.45195 10.8139 10.0073 10.4422 11.1179C10.0873 12.2286 9.90991 13.8719 9.90991 16.0479V35.1898Z"
-                        fill="#E31B54"
-                      />
-                      <path
-                        d="M33.938 50.2518V12.2059L25.6248 16.2179V5.77997L36.2191 0.475998H44V50.2518H33.938Z"
-                        fill="#E31B54"
-                      /></svg
-                  ></span>
-                  <div class="about-game__benefit-content">
-                    <h3 class="about-game__benefit-title">Захватывающие командные игры</h3>
-                    <p class="about-game__benefit-description about-game__benefit-description--lit">
-                      Совместные миссии, одиночные игры или соревнования между командами. Играйте в
-                      команде или друг против друга
-                    </p>
-                  </div>
-                </li>
-                <li class="about-game__benefit about-game__benefit--two">
-                  <span class="about-game__number">
-                    <svg
-                      width="44"
-                      height="51"
-                      viewBox="0 0 44 51"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        d="M0 33.2518V17.8159C0 12.1493 0.956007 7.7633 2.86802 4.65798C4.78004 1.55266 7.45837 0 10.903 0C14.3629 0 17.0488 1.52999 18.9608 4.58998C20.888 7.64996 21.8516 12.0586 21.8516 17.8159V33.2518C21.8516 39.0091 20.8576 43.4178 18.8698 46.4778C16.8819 49.5151 14.2263 51.0224 10.903 50.9997C7.42802 50.9997 4.7421 49.4811 2.84526 46.4438C0.94842 43.3838 0 38.9865 0 33.2518ZM8.89997 35.1898C8.89997 37.3205 9.05931 38.9411 9.37797 40.0518C9.71182 41.1625 10.2278 41.7178 10.9258 41.7178C11.6238 41.7178 12.1322 41.1625 12.4509 40.0518C12.7847 38.9411 12.9516 37.3205 12.9516 35.1898V16.0479C12.9516 13.8719 12.7847 12.2286 12.4509 11.1179C12.117 10.0073 11.6087 9.45195 10.9258 9.45195C10.2278 9.45195 9.71182 10.0073 9.37797 11.1179C9.05931 12.2286 8.89997 13.8719 8.89997 16.0479V35.1898Z"
-                        fill="#E31B54"
-                      />
-                      <path
-                        d="M22.0118 50.2518V41.8198L31.8223 23.6639C32.5658 22.0546 33.2184 20.4226 33.7798 18.7679C34.3565 17.1132 34.6448 15.4359 34.6448 13.7359C34.6448 12.0359 34.5082 10.9026 34.2351 10.3359C33.9771 9.76929 33.4384 9.48595 32.619 9.48595C31.7844 9.48595 31.2532 9.90528 31.0256 10.7439C30.8132 11.5599 30.7069 13.1353 30.7069 15.4699V17.9859H21.9208V14.9259C21.9208 10.3019 22.8768 6.66397 24.7888 4.01198C26.7008 1.33733 29.3488 0 32.7328 0C36.4051 0 39.1213 1.14466 40.8816 3.43398C42.6419 5.70064 43.5296 8.94196 43.5448 13.1579C43.5448 16.8299 43.1123 19.9012 42.2473 22.3719C41.3824 24.8425 40.2746 27.3245 38.9241 29.8179L34.3261 39.8818H44V50.2518H22.0118Z"
-                        fill="#E31B54"
-                      />
-                    </svg>
-                  </span>
-                  <div class="about-game__benefit-content">
-                    <h3 class="about-game__benefit-title">Невероятный уровень погружения</h3>
-                    <p class="about-game__benefit-description">
-                      Виртуальная реальность нового поколения, свободное перемещение и современные
-                      VR очки без проводов и ограничений
-                    </p>
-                  </div>
-                </li>
-                <li class="about-game__benefit about-game__benefit--three">
-                  <span class="about-game__number">
-                    <svg
-                      width="44"
-                      height="51"
-                      viewBox="0 0 44 51"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        d="M0 33.0278V18.0059C0 12.3769 0.941197 7.96871 2.82359 4.78123C4.72081 1.59374 7.38877 0 10.8275 0C14.2958 0 16.9712 1.58244 18.8536 4.74732C20.7508 7.88959 21.6994 12.3091 21.6994 18.0059V33.0278C21.6994 38.7245 20.7286 43.1554 18.7869 46.3203C16.8452 49.4625 14.1921 51.0224 10.8275 50.9998C7.35912 50.9998 4.68375 49.4286 2.80136 46.2863C0.933786 43.1441 0 38.7245 0 33.0278ZM8.6931 34.7911C8.6931 37.0065 8.86356 38.7245 9.20446 39.9453C9.54537 41.1434 10.0938 41.7425 10.8497 41.7425C11.6204 41.7425 12.1763 41.1434 12.5172 39.9453C12.8581 38.7245 13.0285 37.0065 13.0285 34.7911V16.4122C13.0285 14.1515 12.8507 12.4221 12.4949 11.224C12.154 10.0033 11.6056 9.39291 10.8497 9.39291C10.0938 9.39291 9.54537 10.0033 9.20446 11.224C8.86356 12.4221 8.6931 14.1515 8.6931 16.4122V34.7911Z"
-                        fill="#E31B54"
-                      />
-                      <path
-                        d="M21.4113 36.4526V34.1468H29.882V36.4526C29.882 38.2837 30.1118 39.6514 30.5713 40.5557C31.0456 41.4373 31.7793 41.8781 32.7723 41.8781C33.7802 41.8781 34.4546 41.4147 34.7955 40.4878C35.1513 39.561 35.3291 37.8203 35.3291 35.2658C35.3291 32.8017 35.092 31.1062 34.6177 30.1794C34.1434 29.2299 33.1799 28.7552 31.7274 28.7552H28.6592V20.4474H31.5495C32.839 20.4474 33.6765 19.9839 34.0619 19.0571C34.4472 18.1076 34.6399 16.593 34.6399 14.5132C34.6399 12.5239 34.5065 11.1449 34.2397 10.3763C33.9877 9.58506 33.4245 9.18945 32.55 9.18945C31.7052 9.18945 31.1123 9.59636 30.7714 10.4102C30.4305 11.224 30.26 12.5126 30.26 14.2759V16.0392H21.9226V14.1402C21.9226 9.89025 22.8861 6.4767 24.8129 3.89958C26.7546 1.29986 29.4003 0 32.7501 0C36.2629 0 38.879 1.19813 40.5984 3.5944C42.3325 5.96806 43.1996 9.11033 43.1996 13.0212C43.1996 15.8244 42.8142 18.1415 42.0435 19.9726C41.2876 21.8038 40.1537 23.194 38.6418 24.1435V24.2791C40.213 24.8895 41.4951 26.1442 42.4882 28.0431C43.4961 29.9194 44 32.5191 44 35.8423C44 40.4765 43.0366 44.1614 41.1097 46.8967C39.1828 49.6321 36.3889 50.9998 32.7279 50.9998C29.2595 50.9998 26.5175 49.6999 24.5017 47.1002C22.5007 44.4778 21.4706 40.9287 21.4113 36.4526Z"
-                        fill="#E31B54"
-                      />
-                    </svg>
-                  </span>
-                  <div class="about-game__benefit-content">
-                    <h3 class="about-game__benefit-title">Подходит для детей и&nbsp;взрослых</h3>
-                    <p class="about-game__benefit-description about-game__benefit-description--lit">
-                      Развлечение для всей семьи. Подходит для детей от&nbsp;6&nbsp;лет
-                      и&nbsp;взрослых любого возраста
-                    </p>
-                  </div>
-                </li>
-              </ol>
-            </div>
-          </div>
-        </section>
       </div>
+    </section>
 
-      <section class="zones" data-header-theme="brand" data-zone-tabs aria-labelledby="zones-title">
-        <div class="zones__inner container">
-          <div class="zones__heading">
-            <h2 class="zones__title" id="zones-title">
-              <span>Игровые зоны</span>
-              <span>в нашем парке</span>
+    <div class="about-game-group" data-about-game-group>
+      <div class="about-game-group__background" aria-hidden="true">
+        <img class="about-game-group__background-image" src="img/about/bg_1.jpg" width="1512" height="982" alt=""
+          loading="lazy" decoding="async" />
+      </div>
+      <section class="about-game" data-header-theme="brand" aria-labelledby="about-game-title">
+        <div class="about-game__inner container">
+          <div class="about-game__heading">
+            <h2 class="about-game__title" id="about-game-title">
+              <span>Почему выбирают</span>
+              <span class="about-game__title-accent">WARPOINT</span>
             </h2>
-            <p class="zones__lead">
-              Выберите свою зону и погрузитесь в мир технологий, адреналина и незабываемых эмоций
+            <p class="about-game__lead">
+              Современные VR-развлечения для всей семьи. Ощутите игру по-новому!
             </p>
           </div>
-
-          <div class="zones__tabs" role="tablist" aria-label="Игровые зоны">
-            <button
-              class="zones__tab button-reset"
-              id="zone-tab-arena"
-              type="button"
-              role="tab"
-              aria-selected="true"
-              aria-controls="zone-panel-arena"
-              data-zone-tab
-            >
-              <svg class="zones__tab-icon" aria-hidden="true">
-                <use href="/img/sprite.svg#icon-gun"></use>
-              </svg>
-              <span>Арена</span>
-            </button>
-            <button
-              class="zones__tab button-reset"
-              id="zone-tab-vr"
-              type="button"
-              role="tab"
-              aria-selected="false"
-              aria-controls="zone-panel-vr"
-              tabindex="-1"
-              data-zone-tab
-            >
-              <svg class="zones__tab-icon" aria-hidden="true">
-                <use href="/img/sprite.svg#icon-vr"></use>
-              </svg>
-              <span>VR станция</span>
-            </button>
-            <button
-              class="zones__tab button-reset"
-              id="zone-tab-extreme"
-              type="button"
-              role="tab"
-              aria-selected="false"
-              aria-controls="zone-panel-extreme"
-              tabindex="-1"
-              data-zone-tab
-            >
-              <svg class="zones__tab-icon" aria-hidden="true">
-                <use href="/img/sprite.svg#icon-car"></use>
-              </svg>
-              <span>Экстрим</span>
-            </button>
-            <button
-              class="zones__tab button-reset"
-              id="zone-tab-simulators"
-              type="button"
-              role="tab"
-              aria-selected="false"
-              aria-controls="zone-panel-simulators"
-              tabindex="-1"
-              data-zone-tab
-            >
-              <svg class="zones__tab-icon" aria-hidden="true">
-                <use href="/img/sprite.svg#icon-wheel"></use>
-              </svg>
-              <span>Симуляторы</span>
-            </button>
-            <button
-              class="zones__tab button-reset"
-              id="zone-tab-lounge"
-              type="button"
-              role="tab"
-              aria-selected="false"
-              aria-controls="zone-panel-lounge"
-              tabindex="-1"
-              data-zone-tab
-            >
-              <svg class="zones__tab-icon" aria-hidden="true">
-                <use href="/img/sprite.svg#icon-confeti"></use>
-              </svg>
-              <span>Лаунж</span>
-            </button>
-          </div>
-
-          <div class="zones__panels">
-            <section
-              class="zone zone--red"
-              id="zone-panel-arena"
-              role="tabpanel"
-              aria-labelledby="zone-tab-arena"
-              data-zone-panel
-            >
-              <div class="zone__row">
-                <div class="zone__image-container">
-                  <img
-                    class="zone__image"
-                    src="img/zones/1.jpg"
-                    alt="Игроки на арене WARPOINT"
-                    loading="lazy"
-                    decoding="async"
-                  />
-                  <a
-                    class="zone__image-zoom"
-                    href="img/zones/1.jpg"
-                    data-fancybox="zones"
-                    data-caption="Арена для командных сражений"
-                    aria-label="Открыть фото зоны «Арена»"
-                  >
-                    <svg class="zone__image-zoom-icon" aria-hidden="true">
-                      <use href="/img/sprite.svg#icon-play"></use>
-                    </svg>
-                  </a>
+          <div class="about-game__stage">
+            <img class="about-game__visual" src="img/about/4.png" width="638" height="727"
+              alt="Семья играет в виртуальной реальности" loading="lazy" decoding="async" />
+            <ol class="about-game__benefits">
+              <li class="about-game__benefit about-game__benefit--one">
+                <span class="about-game__number"><svg width="44" height="51" viewBox="0 0 44 51" fill="none"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path
+                      d="M0 33.2518V17.8159C0 12.1493 1.06449 7.7633 3.19347 4.65798C5.32246 1.55266 8.30472 0 12.1403 0C15.9927 0 18.9834 1.52999 21.1124 4.58998C23.2583 7.64996 24.3312 12.0586 24.3312 17.8159V33.2518C24.3312 39.0091 23.2245 43.4178 21.011 46.4778C18.7976 49.5151 15.8406 51.0224 12.1403 50.9997C8.27093 50.9997 5.28022 49.4811 3.16813 46.4438C1.05604 43.3838 0 38.9865 0 33.2518ZM9.90991 35.1898C9.90991 37.3205 10.0873 38.9411 10.4422 40.0518C10.8139 41.1625 11.3884 41.7178 12.1656 41.7178C12.9429 41.7178 13.5089 41.1625 13.8637 40.0518C14.2355 38.9411 14.4213 37.3205 14.4213 35.1898V16.0479C14.4213 13.8719 14.2355 12.2286 13.8637 11.1179C13.492 10.0073 12.926 9.45195 12.1656 9.45195C11.3884 9.45195 10.8139 10.0073 10.4422 11.1179C10.0873 12.2286 9.90991 13.8719 9.90991 16.0479V35.1898Z"
+                      fill="#E31B54" />
+                    <path d="M33.938 50.2518V12.2059L25.6248 16.2179V5.77997L36.2191 0.475998H44V50.2518H33.938Z"
+                      fill="#E31B54" />
+                  </svg></span>
+                <div class="about-game__benefit-content">
+                  <h3 class="about-game__benefit-title">Захватывающие командные игры</h3>
+                  <p class="about-game__benefit-description about-game__benefit-description--lit">
+                    Совместные миссии, одиночные игры или соревнования между командами. Играйте в
+                    команде или друг против друга
+                  </p>
                 </div>
-                <div class="zone__content">
-                  <div class="zone__wrap">
-                    <h3 class="zone__title"><span>Арена</span> для командных сражений</h3>
-                    <p class="zone__desc">
-                      Совместные игры на большой площадке, по которой участники могут свободно
-                      перемещаться. В виртуальном мире все участники видят персонажей друг друга и
-                      могут взаимодействовать между собой
-                    </p>
-                    <ul class="zone__params">
-                      <li class="zone__params-item">площадь 350 м²</li>
-                      <li class="zone__params-item">2–10 человек</li>
-                      <li class="zone__params-item">от 1000 ₽</li>
-                      <li class="zone__params-item">12+</li>
-                    </ul>
-                    <button class="zone__button btn btn--l" type="button" data-booking-open>
-                      забронировать
-                    </button>
-                  </div>
-                  <span class="zone__watermark" aria-hidden="true">01</span>
+              </li>
+              <li class="about-game__benefit about-game__benefit--two">
+                <span class="about-game__number">
+                  <svg width="44" height="51" viewBox="0 0 44 51" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                      d="M0 33.2518V17.8159C0 12.1493 0.956007 7.7633 2.86802 4.65798C4.78004 1.55266 7.45837 0 10.903 0C14.3629 0 17.0488 1.52999 18.9608 4.58998C20.888 7.64996 21.8516 12.0586 21.8516 17.8159V33.2518C21.8516 39.0091 20.8576 43.4178 18.8698 46.4778C16.8819 49.5151 14.2263 51.0224 10.903 50.9997C7.42802 50.9997 4.7421 49.4811 2.84526 46.4438C0.94842 43.3838 0 38.9865 0 33.2518ZM8.89997 35.1898C8.89997 37.3205 9.05931 38.9411 9.37797 40.0518C9.71182 41.1625 10.2278 41.7178 10.9258 41.7178C11.6238 41.7178 12.1322 41.1625 12.4509 40.0518C12.7847 38.9411 12.9516 37.3205 12.9516 35.1898V16.0479C12.9516 13.8719 12.7847 12.2286 12.4509 11.1179C12.117 10.0073 11.6087 9.45195 10.9258 9.45195C10.2278 9.45195 9.71182 10.0073 9.37797 11.1179C9.05931 12.2286 8.89997 13.8719 8.89997 16.0479V35.1898Z"
+                      fill="#E31B54" />
+                    <path
+                      d="M22.0118 50.2518V41.8198L31.8223 23.6639C32.5658 22.0546 33.2184 20.4226 33.7798 18.7679C34.3565 17.1132 34.6448 15.4359 34.6448 13.7359C34.6448 12.0359 34.5082 10.9026 34.2351 10.3359C33.9771 9.76929 33.4384 9.48595 32.619 9.48595C31.7844 9.48595 31.2532 9.90528 31.0256 10.7439C30.8132 11.5599 30.7069 13.1353 30.7069 15.4699V17.9859H21.9208V14.9259C21.9208 10.3019 22.8768 6.66397 24.7888 4.01198C26.7008 1.33733 29.3488 0 32.7328 0C36.4051 0 39.1213 1.14466 40.8816 3.43398C42.6419 5.70064 43.5296 8.94196 43.5448 13.1579C43.5448 16.8299 43.1123 19.9012 42.2473 22.3719C41.3824 24.8425 40.2746 27.3245 38.9241 29.8179L34.3261 39.8818H44V50.2518H22.0118Z"
+                      fill="#E31B54" />
+                  </svg>
+                </span>
+                <div class="about-game__benefit-content">
+                  <h3 class="about-game__benefit-title">Невероятный уровень погружения</h3>
+                  <p class="about-game__benefit-description">
+                    Виртуальная реальность нового поколения, свободное перемещение и современные
+                    VR очки без проводов и ограничений
+                  </p>
                 </div>
-              </div>
-            </section>
-
-            <section
-              class="zone zone--violet"
-              id="zone-panel-vr"
-              role="tabpanel"
-              aria-labelledby="zone-tab-vr"
-              data-zone-panel
-              hidden
-            >
-              <div class="zone__row">
-                <div class="zone__image-container">
-                  <img
-                    class="zone__image"
-                    src="img/zones/2.jpg"
-                    alt="Игроки на VR-станции WARPOINT"
-                    loading="lazy"
-                    decoding="async"
-                  />
-                  <a
-                    class="zone__image-zoom"
-                    href="img/zones/2.jpg"
-                    data-fancybox="zones"
-                    data-caption="VR-станция: игры на прохождение"
-                    aria-label="Открыть фото VR-станции"
-                  >
-                    <svg class="zone__image-zoom-icon" aria-hidden="true">
-                      <use href="/img/sprite.svg#icon-play"></use>
-                    </svg>
-                  </a>
+              </li>
+              <li class="about-game__benefit about-game__benefit--three">
+                <span class="about-game__number">
+                  <svg width="44" height="51" viewBox="0 0 44 51" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                      d="M0 33.0278V18.0059C0 12.3769 0.941197 7.96871 2.82359 4.78123C4.72081 1.59374 7.38877 0 10.8275 0C14.2958 0 16.9712 1.58244 18.8536 4.74732C20.7508 7.88959 21.6994 12.3091 21.6994 18.0059V33.0278C21.6994 38.7245 20.7286 43.1554 18.7869 46.3203C16.8452 49.4625 14.1921 51.0224 10.8275 50.9998C7.35912 50.9998 4.68375 49.4286 2.80136 46.2863C0.933786 43.1441 0 38.7245 0 33.0278ZM8.6931 34.7911C8.6931 37.0065 8.86356 38.7245 9.20446 39.9453C9.54537 41.1434 10.0938 41.7425 10.8497 41.7425C11.6204 41.7425 12.1763 41.1434 12.5172 39.9453C12.8581 38.7245 13.0285 37.0065 13.0285 34.7911V16.4122C13.0285 14.1515 12.8507 12.4221 12.4949 11.224C12.154 10.0033 11.6056 9.39291 10.8497 9.39291C10.0938 9.39291 9.54537 10.0033 9.20446 11.224C8.86356 12.4221 8.6931 14.1515 8.6931 16.4122V34.7911Z"
+                      fill="#E31B54" />
+                    <path
+                      d="M21.4113 36.4526V34.1468H29.882V36.4526C29.882 38.2837 30.1118 39.6514 30.5713 40.5557C31.0456 41.4373 31.7793 41.8781 32.7723 41.8781C33.7802 41.8781 34.4546 41.4147 34.7955 40.4878C35.1513 39.561 35.3291 37.8203 35.3291 35.2658C35.3291 32.8017 35.092 31.1062 34.6177 30.1794C34.1434 29.2299 33.1799 28.7552 31.7274 28.7552H28.6592V20.4474H31.5495C32.839 20.4474 33.6765 19.9839 34.0619 19.0571C34.4472 18.1076 34.6399 16.593 34.6399 14.5132C34.6399 12.5239 34.5065 11.1449 34.2397 10.3763C33.9877 9.58506 33.4245 9.18945 32.55 9.18945C31.7052 9.18945 31.1123 9.59636 30.7714 10.4102C30.4305 11.224 30.26 12.5126 30.26 14.2759V16.0392H21.9226V14.1402C21.9226 9.89025 22.8861 6.4767 24.8129 3.89958C26.7546 1.29986 29.4003 0 32.7501 0C36.2629 0 38.879 1.19813 40.5984 3.5944C42.3325 5.96806 43.1996 9.11033 43.1996 13.0212C43.1996 15.8244 42.8142 18.1415 42.0435 19.9726C41.2876 21.8038 40.1537 23.194 38.6418 24.1435V24.2791C40.213 24.8895 41.4951 26.1442 42.4882 28.0431C43.4961 29.9194 44 32.5191 44 35.8423C44 40.4765 43.0366 44.1614 41.1097 46.8967C39.1828 49.6321 36.3889 50.9998 32.7279 50.9998C29.2595 50.9998 26.5175 49.6999 24.5017 47.1002C22.5007 44.4778 21.4706 40.9287 21.4113 36.4526Z"
+                      fill="#E31B54" />
+                  </svg>
+                </span>
+                <div class="about-game__benefit-content">
+                  <h3 class="about-game__benefit-title">Подходит для детей и&nbsp;взрослых</h3>
+                  <p class="about-game__benefit-description about-game__benefit-description--lit">
+                    Развлечение для всей семьи. Подходит для детей от&nbsp;6&nbsp;лет
+                    и&nbsp;взрослых любого возраста
+                  </p>
                 </div>
-                <div class="zone__content">
-                  <div class="zone__wrap">
-                    <h3 class="zone__title"><span>VR станция</span> игры на прохождение</h3>
-                    <p class="zone__desc">
-                      Большой выбор игр разных жанров: победите плохих парней, спасите мир от зомби
-                      или пройдите увлекательный квест
-                    </p>
-                    <ul class="zone__params">
-                      <li class="zone__params-item">1–4 человека</li>
-                      <li class="zone__params-item">Oculus Quest</li>
-                      <li class="zone__params-item">Valve Index</li>
-                      <li class="zone__params-item">от 700 ₽</li>
-                      <li class="zone__params-item">6+</li>
-                    </ul>
-                    <button class="zone__button btn btn--l" type="button" data-booking-open>
-                      забронировать
-                    </button>
-                  </div>
-                  <span class="zone__watermark" aria-hidden="true">02</span>
-                </div>
-              </div>
-            </section>
-
-            <section
-              class="zone zone--red"
-              id="zone-panel-extreme"
-              role="tabpanel"
-              aria-labelledby="zone-tab-extreme"
-              data-zone-panel
-              hidden
-            >
-              <div class="zone__row">
-                <div class="zone__image-container">
-                  <img
-                    class="zone__image"
-                    src="img/zones/3.jpg"
-                    alt="Игроки в экстрим-зоне WARPOINT"
-                    loading="lazy"
-                    decoding="async"
-                  />
-                  <a
-                    class="zone__image-zoom"
-                    href="img/zones/3.jpg"
-                    data-fancybox="zones"
-                    data-caption="Экстрим-зона для любителей острых ощущений"
-                    aria-label="Открыть фото экстрим-зоны"
-                  >
-                    <svg class="zone__image-zoom-icon" aria-hidden="true">
-                      <use href="/img/sprite.svg#icon-play"></use>
-                    </svg>
-                  </a>
-                </div>
-                <div class="zone__content">
-                  <div class="zone__wrap">
-                    <h3 class="zone__title">
-                      <span>Экстрим-зона</span> для любителей острых ощущений
-                    </h3>
-                    <p class="zone__desc">
-                      Зона с аттракционами, от которых захватывает дух! Прокатитесь на безумных
-                      американских горках, полетайте на дельтаплане, погрузитесь на дно океана или
-                      покорите космос
-                    </p>
-                    <ul class="zone__params">
-                      <li class="zone__params-item">1–4 человека</li>
-                      <li class="zone__params-item">от 700 ₽</li>
-                      <li class="zone__params-item">6+</li>
-                    </ul>
-                    <button class="zone__button btn btn--l" type="button" data-booking-open>
-                      забронировать
-                    </button>
-                  </div>
-                  <span class="zone__watermark" aria-hidden="true">03</span>
-                </div>
-              </div>
-            </section>
-
-            <section
-              class="zone zone--violet"
-              id="zone-panel-simulators"
-              role="tabpanel"
-              aria-labelledby="zone-tab-simulators"
-              data-zone-panel
-              hidden
-            >
-              <div class="zone__row">
-                <div class="zone__image-container">
-                  <img
-                    class="zone__image"
-                    src="img/zones/4.jpg"
-                    alt="Автосимуляторы WARPOINT"
-                    loading="lazy"
-                    decoding="async"
-                  />
-                  <a
-                    class="zone__image-zoom"
-                    href="img/zones/4.jpg"
-                    data-fancybox="zones"
-                    data-caption="Симуляторы для фанатов скорости"
-                    aria-label="Открыть фото зоны симуляторов"
-                  >
-                    <svg class="zone__image-zoom-icon" aria-hidden="true">
-                      <use href="/img/sprite.svg#icon-play"></use>
-                    </svg>
-                  </a>
-                </div>
-                <div class="zone__content">
-                  <div class="zone__wrap">
-                    <h3 class="zone__title"><span>Симуляторы</span> для фанатов скорости</h3>
-                    <p class="zone__desc">
-                      Игровая зона с профессиональными автосимуляторами, где можно устроить
-                      соревновательные заезды с друзьями и показать, кто настоящий король скорости
-                    </p>
-                    <ul class="zone__params">
-                      <li class="zone__params-item">1–4 человека</li>
-                      <li class="zone__params-item">от 700 ₽</li>
-                      <li class="zone__params-item">6+</li>
-                    </ul>
-                    <button class="zone__button btn btn--l" type="button" data-booking-open>
-                      забронировать
-                    </button>
-                  </div>
-                  <span class="zone__watermark" aria-hidden="true">04</span>
-                </div>
-              </div>
-            </section>
-
-            <section
-              class="zone zone--red"
-              id="zone-panel-lounge"
-              role="tabpanel"
-              aria-labelledby="zone-tab-lounge"
-              data-zone-panel
-              hidden
-            >
-              <div class="zone__row">
-                <div class="zone__image-container">
-                  <img
-                    class="zone__image"
-                    src="img/zones/5.jpg"
-                    alt="Праздник в лаунж-зоне WARPOINT"
-                    loading="lazy"
-                    decoding="async"
-                  />
-                  <a
-                    class="zone__image-zoom"
-                    href="img/zones/5.jpg"
-                    data-fancybox="zones"
-                    data-caption="Лаунж-зона для проведения мероприятий"
-                    aria-label="Открыть фото лаунж-зоны"
-                  >
-                    <svg class="zone__image-zoom-icon" aria-hidden="true">
-                      <use href="/img/sprite.svg#icon-play"></use>
-                    </svg>
-                  </a>
-                </div>
-                <div class="zone__content">
-                  <div class="zone__wrap">
-                    <h3 class="zone__title"><span>Лаунж-зона</span> для проведения мероприятий</h3>
-                    <p class="zone__desc">
-                      Комфортное пространство, где можно весело провести время с друзьями и отметить
-                      любой праздник: день рождения, школьный выпускной или корпоратив с коллегами
-                    </p>
-                    <ul class="zone__params">
-                      <li class="zone__params-item">площадь 40 м²</li>
-                      <li class="zone__params-item">ТВ с приставкой</li>
-                      <li class="zone__params-item">до 30 человек</li>
-                    </ul>
-                    <button class="zone__button btn btn--l" type="button" data-booking-open>
-                      забронировать
-                    </button>
-                  </div>
-                  <span class="zone__watermark" aria-hidden="true">05</span>
-                </div>
-              </div>
-            </section>
+              </li>
+            </ol>
           </div>
         </div>
       </section>
+    </div>
 
-      <div class="games-group" data-games-group data-pixel-section>
-        <div class="games-group__background" aria-hidden="true">
-          <span class="games-group__background-pattern"></span>
-          <span class="games-group__background-gradient"></span>
-        </div>
-        <section
-          class="games-catalog"
-          data-header-theme="dark"
-          aria-labelledby="games-catalog-title"
-          data-slider-root
-        >
-          <h2 class="games-catalog__title" id="games-catalog-title">
-            <span>Выберите</span>
-            <span>свое виртуальное</span>
-            <span>приключение</span>
+    <section class="zones" data-header-theme="brand" data-zone-tabs aria-labelledby="zones-title">
+      <div class="zones__inner container">
+        <div class="zones__heading">
+          <h2 class="zones__title" id="zones-title">
+            <span>Игровые зоны</span>
+            <span>в нашем парке</span>
           </h2>
-          <div class="games-catalog__track">
-            <div class="games-catalog__slider swiper" data-slider data-games-slider>
-              <div class="swiper-wrapper">
-                <article class="game-card swiper-slide">
-                  <img
-                    class="game-card__image"
-                    src="img/games/1.jpg"
-                    width="840"
-                    height="1260"
-                    alt="Команда игроков на виртуальной арене"
-                    loading="lazy"
-                    decoding="async"
-                  />
-                  <div class="game-card__meta">
-                    <span class="game-card__tag game-card__tag--accent">Арена</span>
-                    <span class="game-card__tag">Стрелялка</span>
-                    <span class="game-card__tag">2–10 человек</span>
-                    <span class="game-card__tag game-card__tag--age">12+</span>
-                  </div>
-                  <div class="game-card__content">
-                    <h3 class="game-card__title">Warpoint арена</h3>
-                    <p class="game-card__description">
-                      Для фанатов реалистичных шутеров, мощного оружия, стратегии и тактики
-                    </p>
-                  </div>
-                </article>
-                <article class="game-card swiper-slide">
-                  <img
-                    class="game-card__image"
-                    src="img/games/2.jpg"
-                    width="840"
-                    height="1260"
-                    alt="Героини фэнтезийного приключения"
-                    loading="lazy"
-                    decoding="async"
-                  />
-                  <div class="game-card__meta">
-                    <span class="game-card__tag game-card__tag--accent">Арена</span>
-                    <span class="game-card__tag">Активная</span>
-                    <span class="game-card__tag">2–6 человек</span>
-                    <span class="game-card__tag game-card__tag--age">10+</span>
-                  </div>
-                  <div class="game-card__content">
-                    <h3 class="game-card__title">Аниме станция</h3>
-                    <p class="game-card__description">
-                      Яркое командное приключение в мире парящих островов и магических технологий
-                    </p>
-                  </div>
-                </article>
-                <article class="game-card swiper-slide">
-                  <img
-                    class="game-card__image"
-                    src="img/games/3.jpg"
-                    width="840"
-                    height="1260"
-                    alt="Космический пехотинец и его инопланетный союзник"
-                    loading="lazy"
-                    decoding="async"
-                  />
-                  <div class="game-card__meta">
-                    <span class="game-card__tag game-card__tag--accent">Арена</span>
-                    <span class="game-card__tag">Стрелялка</span>
-                    <span class="game-card__tag">2–10 человек</span>
-                    <span class="game-card__tag game-card__tag--age">12+</span>
-                  </div>
-                  <div class="game-card__content">
-                    <h3 class="game-card__title">Военная станция</h3>
-                    <p class="game-card__description">
-                      Тактическая миссия на орбитальной станции с динамичными командными боями
-                    </p>
-                  </div>
-                </article>
-                <article class="game-card swiper-slide">
-                  <img
-                    class="game-card__image"
-                    src="img/games/4.jpg"
-                    width="840"
-                    height="1260"
-                    alt="Исследователи на поверхности далекой планеты"
-                    loading="lazy"
-                    decoding="async"
-                  />
-                  <div class="game-card__meta">
-                    <span class="game-card__tag game-card__tag--accent">Арена</span>
-                    <span class="game-card__tag">Приключение</span>
-                    <span class="game-card__tag">2–6 человек</span>
-                    <span class="game-card__tag game-card__tag--age">8+</span>
-                  </div>
-                  <div class="game-card__content">
-                    <h3 class="game-card__title">Космо станция</h3>
-                    <p class="game-card__description">
-                      Гонка через порталы и неизведанные миры для дружной команды исследователей
-                    </p>
-                  </div>
-                </article>
-                <article class="game-card swiper-slide">
-                  <img
-                    class="game-card__image"
-                    src="img/games/5.jpg"
-                    width="840"
-                    height="1260"
-                    alt="Исследователи на поверхности далекой планеты"
-                    loading="lazy"
-                    decoding="async"
-                  />
-                  <div class="game-card__meta">
-                    <span class="game-card__tag game-card__tag--accent">Арена</span>
-                    <span class="game-card__tag">Приключение</span>
-                    <span class="game-card__tag">2–6 человек</span>
-                    <span class="game-card__tag game-card__tag--age">8+</span>
-                  </div>
-                  <div class="game-card__content">
-                    <h3 class="game-card__title">Космо станция</h3>
-                    <p class="game-card__description">
-                      Гонка через порталы и неизведанные миры для дружной команды исследователей
-                    </p>
-                  </div>
-                </article>
+          <p class="zones__lead">
+            Выберите свою зону и погрузитесь в мир технологий, адреналина и незабываемых эмоций
+          </p>
+        </div>
+
+        <div class="zones__tabs" role="tablist" aria-label="Игровые зоны">
+          <button class="zones__tab button-reset" id="zone-tab-arena" type="button" role="tab" aria-selected="true"
+            aria-controls="zone-panel-arena" data-zone-tab>
+            <svg class="zones__tab-icon" aria-hidden="true">
+              <use href="/img/sprite.svg#icon-gun"></use>
+            </svg>
+            <span>Арена</span>
+          </button>
+          <button class="zones__tab button-reset" id="zone-tab-vr" type="button" role="tab" aria-selected="false"
+            aria-controls="zone-panel-vr" tabindex="-1" data-zone-tab>
+            <svg class="zones__tab-icon" aria-hidden="true">
+              <use href="/img/sprite.svg#icon-vr"></use>
+            </svg>
+            <span>VR станция</span>
+          </button>
+          <button class="zones__tab button-reset" id="zone-tab-extreme" type="button" role="tab" aria-selected="false"
+            aria-controls="zone-panel-extreme" tabindex="-1" data-zone-tab>
+            <svg class="zones__tab-icon" aria-hidden="true">
+              <use href="/img/sprite.svg#icon-car"></use>
+            </svg>
+            <span>Экстрим</span>
+          </button>
+          <button class="zones__tab button-reset" id="zone-tab-simulators" type="button" role="tab"
+            aria-selected="false" aria-controls="zone-panel-simulators" tabindex="-1" data-zone-tab>
+            <svg class="zones__tab-icon" aria-hidden="true">
+              <use href="/img/sprite.svg#icon-wheel"></use>
+            </svg>
+            <span>Симуляторы</span>
+          </button>
+          <button class="zones__tab button-reset" id="zone-tab-lounge" type="button" role="tab" aria-selected="false"
+            aria-controls="zone-panel-lounge" tabindex="-1" data-zone-tab>
+            <svg class="zones__tab-icon" aria-hidden="true">
+              <use href="/img/sprite.svg#icon-confeti"></use>
+            </svg>
+            <span>Лаунж</span>
+          </button>
+        </div>
+
+        <div class="zones__panels">
+          <section class="zone zone--red" id="zone-panel-arena" role="tabpanel" aria-labelledby="zone-tab-arena"
+            data-zone-panel>
+            <div class="zone__row">
+              <div class="zone__image-container">
+                <img class="zone__image" src="img/zones/1.jpg" alt="Игроки на арене WARPOINT" loading="lazy"
+                  decoding="async" />
+                <a class="zone__image-zoom" href="img/zones/1.jpg" data-fancybox="zones"
+                  data-caption="Арена для командных сражений" aria-label="Открыть фото зоны «Арена»">
+                  <svg class="zone__image-zoom-icon" aria-hidden="true">
+                    <use href="/img/sprite.svg#icon-play"></use>
+                  </svg>
+                </a>
+              </div>
+              <div class="zone__content">
+                <div class="zone__wrap">
+                  <h3 class="zone__title"><span>Арена</span> для командных сражений</h3>
+                  <p class="zone__desc">
+                    Совместные игры на большой площадке, по которой участники могут свободно
+                    перемещаться. В виртуальном мире все участники видят персонажей друг друга и
+                    могут взаимодействовать между собой
+                  </p>
+                  <ul class="zone__params">
+                    <li class="zone__params-item">площадь 350 м²</li>
+                    <li class="zone__params-item">2–10 человек</li>
+                    <li class="zone__params-item">от 1000 ₽</li>
+                    <li class="zone__params-item">12+</li>
+                  </ul>
+                  <button class="zone__button btn btn--l" type="button" data-booking-open>
+                    забронировать
+                  </button>
+                </div>
+                <span class="zone__watermark" aria-hidden="true">01</span>
               </div>
             </div>
-          </div>
-          <div class="games-catalog__controls">
-            <button
-              class="games-catalog__arrow button-reset games-catalog__arrow--prev"
-              type="button"
-              aria-label="Предыдущая игра"
-              data-slider-prev
-            >
-              <svg class="games-catalog__arrow-icon" aria-hidden="true">
-                <use href="/img/sprite.svg#icon-chevron_left"></use>
-              </svg>
-            </button>
-            <button
-              class="games-catalog__arrow games-catalog__arrow--next button-reset"
-              type="button"
-              aria-label="Следующая игра"
-              data-slider-next
-            >
-              <svg class="games-catalog__arrow-icon" aria-hidden="true">
-                <use href="/img/sprite.svg#icon-chevron_left"></use>
-              </svg>
-            </button>
-          </div>
-        </section>
+          </section>
+
+          <section class="zone zone--violet" id="zone-panel-vr" role="tabpanel" aria-labelledby="zone-tab-vr"
+            data-zone-panel hidden>
+            <div class="zone__row">
+              <div class="zone__image-container">
+                <img class="zone__image" src="img/zones/2.jpg" alt="Игроки на VR-станции WARPOINT" loading="lazy"
+                  decoding="async" />
+                <a class="zone__image-zoom" href="img/zones/2.jpg" data-fancybox="zones"
+                  data-caption="VR-станция: игры на прохождение" aria-label="Открыть фото VR-станции">
+                  <svg class="zone__image-zoom-icon" aria-hidden="true">
+                    <use href="/img/sprite.svg#icon-play"></use>
+                  </svg>
+                </a>
+              </div>
+              <div class="zone__content">
+                <div class="zone__wrap">
+                  <h3 class="zone__title"><span>VR станция</span> игры на прохождение</h3>
+                  <p class="zone__desc">
+                    Большой выбор игр разных жанров: победите плохих парней, спасите мир от зомби
+                    или пройдите увлекательный квест
+                  </p>
+                  <ul class="zone__params">
+                    <li class="zone__params-item">1–4 человека</li>
+                    <li class="zone__params-item">Oculus Quest</li>
+                    <li class="zone__params-item">Valve Index</li>
+                    <li class="zone__params-item">от 700 ₽</li>
+                    <li class="zone__params-item">6+</li>
+                  </ul>
+                  <button class="zone__button btn btn--l" type="button" data-booking-open>
+                    забронировать
+                  </button>
+                </div>
+                <span class="zone__watermark" aria-hidden="true">02</span>
+              </div>
+            </div>
+          </section>
+
+          <section class="zone zone--red" id="zone-panel-extreme" role="tabpanel" aria-labelledby="zone-tab-extreme"
+            data-zone-panel hidden>
+            <div class="zone__row">
+              <div class="zone__image-container">
+                <img class="zone__image" src="img/zones/3.jpg" alt="Игроки в экстрим-зоне WARPOINT" loading="lazy"
+                  decoding="async" />
+                <a class="zone__image-zoom" href="img/zones/3.jpg" data-fancybox="zones"
+                  data-caption="Экстрим-зона для любителей острых ощущений" aria-label="Открыть фото экстрим-зоны">
+                  <svg class="zone__image-zoom-icon" aria-hidden="true">
+                    <use href="/img/sprite.svg#icon-play"></use>
+                  </svg>
+                </a>
+              </div>
+              <div class="zone__content">
+                <div class="zone__wrap">
+                  <h3 class="zone__title">
+                    <span>Экстрим-зона</span> для любителей острых ощущений
+                  </h3>
+                  <p class="zone__desc">
+                    Зона с аттракционами, от которых захватывает дух! Прокатитесь на безумных
+                    американских горках, полетайте на дельтаплане, погрузитесь на дно океана или
+                    покорите космос
+                  </p>
+                  <ul class="zone__params">
+                    <li class="zone__params-item">1–4 человека</li>
+                    <li class="zone__params-item">от 700 ₽</li>
+                    <li class="zone__params-item">6+</li>
+                  </ul>
+                  <button class="zone__button btn btn--l" type="button" data-booking-open>
+                    забронировать
+                  </button>
+                </div>
+                <span class="zone__watermark" aria-hidden="true">03</span>
+              </div>
+            </div>
+          </section>
+
+          <section class="zone zone--violet" id="zone-panel-simulators" role="tabpanel"
+            aria-labelledby="zone-tab-simulators" data-zone-panel hidden>
+            <div class="zone__row">
+              <div class="zone__image-container">
+                <img class="zone__image" src="img/zones/4.jpg" alt="Автосимуляторы WARPOINT" loading="lazy"
+                  decoding="async" />
+                <a class="zone__image-zoom" href="img/zones/4.jpg" data-fancybox="zones"
+                  data-caption="Симуляторы для фанатов скорости" aria-label="Открыть фото зоны симуляторов">
+                  <svg class="zone__image-zoom-icon" aria-hidden="true">
+                    <use href="/img/sprite.svg#icon-play"></use>
+                  </svg>
+                </a>
+              </div>
+              <div class="zone__content">
+                <div class="zone__wrap">
+                  <h3 class="zone__title"><span>Симуляторы</span> для фанатов скорости</h3>
+                  <p class="zone__desc">
+                    Игровая зона с профессиональными автосимуляторами, где можно устроить
+                    соревновательные заезды с друзьями и показать, кто настоящий король скорости
+                  </p>
+                  <ul class="zone__params">
+                    <li class="zone__params-item">1–4 человека</li>
+                    <li class="zone__params-item">от 700 ₽</li>
+                    <li class="zone__params-item">6+</li>
+                  </ul>
+                  <button class="zone__button btn btn--l" type="button" data-booking-open>
+                    забронировать
+                  </button>
+                </div>
+                <span class="zone__watermark" aria-hidden="true">04</span>
+              </div>
+            </div>
+          </section>
+
+          <section class="zone zone--red" id="zone-panel-lounge" role="tabpanel" aria-labelledby="zone-tab-lounge"
+            data-zone-panel hidden>
+            <div class="zone__row">
+              <div class="zone__image-container">
+                <img class="zone__image" src="img/zones/5.jpg" alt="Праздник в лаунж-зоне WARPOINT" loading="lazy"
+                  decoding="async" />
+                <a class="zone__image-zoom" href="img/zones/5.jpg" data-fancybox="zones"
+                  data-caption="Лаунж-зона для проведения мероприятий" aria-label="Открыть фото лаунж-зоны">
+                  <svg class="zone__image-zoom-icon" aria-hidden="true">
+                    <use href="/img/sprite.svg#icon-play"></use>
+                  </svg>
+                </a>
+              </div>
+              <div class="zone__content">
+                <div class="zone__wrap">
+                  <h3 class="zone__title"><span>Лаунж-зона</span> для проведения мероприятий</h3>
+                  <p class="zone__desc">
+                    Комфортное пространство, где можно весело провести время с друзьями и отметить
+                    любой праздник: день рождения, школьный выпускной или корпоратив с коллегами
+                  </p>
+                  <ul class="zone__params">
+                    <li class="zone__params-item">площадь 40 м²</li>
+                    <li class="zone__params-item">ТВ с приставкой</li>
+                    <li class="zone__params-item">до 30 человек</li>
+                  </ul>
+                  <button class="zone__button btn btn--l" type="button" data-booking-open>
+                    забронировать
+                  </button>
+                </div>
+                <span class="zone__watermark" aria-hidden="true">05</span>
+              </div>
+            </div>
+          </section>
+        </div>
       </div>
-      @include('partials/events.html') @include('partials/extras.html')
-      @include('partials/reviews.html') @include('partials/bloggers.html')
-      @include('partials/faq.html') @include('partials/contacts.html')
-    </main>
+    </section>
 
-    @include('partials/footer.html') @include('partials/location-modal.html')
-    @include('partials/event-modal.html') @include('partials/booking-panel.html')
-    @include('partials/mobile-actions.html')
+    <div class="games-group" data-games-group data-pixel-section>
+      <div class="games-group__background" aria-hidden="true">
+        <span class="games-group__background-pattern"></span>
+        <span class="games-group__background-gradient"></span>
+      </div>
+      <section class="games-catalog" data-header-theme="dark" aria-labelledby="games-catalog-title" data-slider-root>
+        <h2 class="games-catalog__title" id="games-catalog-title">
+          <span>Выберите</span>
+          <span>свое виртуальное</span>
+          <span>приключение</span>
+        </h2>
+        <div class="games-catalog__track">
+          <div class="games-catalog__slider swiper" data-slider data-games-slider>
+            <div class="swiper-wrapper">
+              <article class="game-card swiper-slide">
+                <img class="game-card__image" src="img/games/1.jpg" width="840" height="1260"
+                  alt="Команда игроков на виртуальной арене" loading="lazy" decoding="async" />
+                <div class="game-card__meta">
+                  <span class="game-card__tag game-card__tag--accent">Арена</span>
+                  <span class="game-card__tag">Стрелялка</span>
+                  <span class="game-card__tag">2–10 человек</span>
+                  <span class="game-card__tag game-card__tag--age">12+</span>
+                </div>
+                <div class="game-card__content">
+                  <h3 class="game-card__title">Warpoint арена</h3>
+                  <p class="game-card__description">
+                    Для фанатов реалистичных шутеров, мощного оружия, стратегии и тактики
+                  </p>
+                </div>
+              </article>
+              <article class="game-card swiper-slide">
+                <img class="game-card__image" src="img/games/2.jpg" width="840" height="1260"
+                  alt="Героини фэнтезийного приключения" loading="lazy" decoding="async" />
+                <div class="game-card__meta">
+                  <span class="game-card__tag game-card__tag--accent">Арена</span>
+                  <span class="game-card__tag">Активная</span>
+                  <span class="game-card__tag">2–6 человек</span>
+                  <span class="game-card__tag game-card__tag--age">10+</span>
+                </div>
+                <div class="game-card__content">
+                  <h3 class="game-card__title">Аниме станция</h3>
+                  <p class="game-card__description">
+                    Яркое командное приключение в мире парящих островов и магических технологий
+                  </p>
+                </div>
+              </article>
+              <article class="game-card swiper-slide">
+                <img class="game-card__image" src="img/games/3.jpg" width="840" height="1260"
+                  alt="Космический пехотинец и его инопланетный союзник" loading="lazy" decoding="async" />
+                <div class="game-card__meta">
+                  <span class="game-card__tag game-card__tag--accent">Арена</span>
+                  <span class="game-card__tag">Стрелялка</span>
+                  <span class="game-card__tag">2–10 человек</span>
+                  <span class="game-card__tag game-card__tag--age">12+</span>
+                </div>
+                <div class="game-card__content">
+                  <h3 class="game-card__title">Военная станция</h3>
+                  <p class="game-card__description">
+                    Тактическая миссия на орбитальной станции с динамичными командными боями
+                  </p>
+                </div>
+              </article>
+              <article class="game-card swiper-slide">
+                <img class="game-card__image" src="img/games/4.jpg" width="840" height="1260"
+                  alt="Исследователи на поверхности далекой планеты" loading="lazy" decoding="async" />
+                <div class="game-card__meta">
+                  <span class="game-card__tag game-card__tag--accent">Арена</span>
+                  <span class="game-card__tag">Приключение</span>
+                  <span class="game-card__tag">2–6 человек</span>
+                  <span class="game-card__tag game-card__tag--age">8+</span>
+                </div>
+                <div class="game-card__content">
+                  <h3 class="game-card__title">Космо станция</h3>
+                  <p class="game-card__description">
+                    Гонка через порталы и неизведанные миры для дружной команды исследователей
+                  </p>
+                </div>
+              </article>
+              <article class="game-card swiper-slide">
+                <img class="game-card__image" src="img/games/5.jpg" width="840" height="1260"
+                  alt="Исследователи на поверхности далекой планеты" loading="lazy" decoding="async" />
+                <div class="game-card__meta">
+                  <span class="game-card__tag game-card__tag--accent">Арена</span>
+                  <span class="game-card__tag">Приключение</span>
+                  <span class="game-card__tag">2–6 человек</span>
+                  <span class="game-card__tag game-card__tag--age">8+</span>
+                </div>
+                <div class="game-card__content">
+                  <h3 class="game-card__title">Космо станция</h3>
+                  <p class="game-card__description">
+                    Гонка через порталы и неизведанные миры для дружной команды исследователей
+                  </p>
+                </div>
+              </article>
+            </div>
+          </div>
+        </div>
+        <div class="games-catalog__controls">
+          <button class="games-catalog__arrow button-reset games-catalog__arrow--prev" type="button"
+            aria-label="Предыдущая игра" data-slider-prev>
+            <svg class="games-catalog__arrow-icon" aria-hidden="true">
+              <use href="/img/sprite.svg#icon-chevron_left"></use>
+            </svg>
+          </button>
+          <button class="games-catalog__arrow games-catalog__arrow--next button-reset" type="button"
+            aria-label="Следующая игра" data-slider-next>
+            <svg class="games-catalog__arrow-icon" aria-hidden="true">
+              <use href="/img/sprite.svg#icon-chevron_left"></use>
+            </svg>
+          </button>
+        </div>
+      </section>
+    </div>
+    @include('partials/events.html') @include('partials/extras.html')
+    @include('partials/reviews.html') @include('partials/bloggers.html')
+    @include('partials/faq.html') @include('partials/contacts.html')
+  </main>
 
-    <script type="module" src="/js/main.js"></script>
-  </body>
+  @include('partials/footer.html') @include('partials/location-modal.html')
+  @include('partials/event-modal.html') @include('partials/booking-panel.html')
+  @include('partials/mobile-actions.html')
+
+  <script type="module" src="/js/main.js"></script>
+</body>
+
 </html>
