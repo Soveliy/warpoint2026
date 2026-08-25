@@ -7,6 +7,7 @@
   --header-line: #{rgba($white, 0.16)};
   --header-control-border: #{rgba($white, 0.72)};
   --header-logo-filter: none;
+  --mobile-menu-top: 0px;
 
   position: fixed;
   left: 0;
@@ -18,7 +19,6 @@
     color $duration-base $ease-base,
     background-color $duration-base $ease-base,
     transform 360ms cubic-bezier(0.22, 1, 0.36, 1);
-  will-change: transform;
 
   &[data-theme='light'] {
     --header-foreground: #{$white};
@@ -32,6 +32,7 @@
   &[data-theme='brand'] {
     background-color: #010000;
   }
+
   &[data-theme='events'] {
     --header-foreground: #{$white};
     --header-line: #{rgba($white, 0.16)};
@@ -60,6 +61,24 @@
 
   &--top-hidden {
     transform: translate3d(0, calc(0px - var(--header-top-offset)), 0);
+  }
+
+  &.header--menu-open {
+    --header-foreground: #{$white};
+    --header-line: #{rgba($white, 0.14)};
+    --header-control-border: #{rgba($white, 0.72)};
+    --header-logo-filter: brightness(0) invert(1);
+
+    z-index: $z-overlay;
+    background-color: #0c0b10;
+    transform: none;
+  }
+
+  &.header--menu-open &__top,
+  &.header--menu-open &__logo,
+  &.header--menu-open &__buttons {
+    position: relative;
+    z-index: 2;
   }
 
   &__top {
@@ -105,6 +124,10 @@
     display: flex;
     align-items: center;
     gap: rem(24px);
+  }
+
+  &__burger {
+    flex: 0 0 rem(24px);
   }
 
   &__button {

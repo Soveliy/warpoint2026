@@ -59,8 +59,14 @@
     background-color: $red-500;
     pointer-events: none;
     transform: translate3d(0, 0, 0);
-    transition: transform 380ms $ease-base;
+    transition:
+      opacity $duration-fast $ease-base,
+      transform 380ms $ease-base;
     will-change: transform;
+
+    &.is-hidden {
+      opacity: 0;
+    }
   }
 
   &__preview {
@@ -93,10 +99,10 @@
   }
 
   &__content {
-    position: relative;
-    overflow: hidden;
     --reviews-card-width: clamp(12.5rem, calc(56.28vh - 5.9094rem), 25.1875rem);
 
+    position: relative;
+    overflow: hidden;
     display: grid;
     grid-template-columns: repeat(
       2,
@@ -132,8 +138,9 @@
   &__score {
     position: relative;
     z-index: 2;
-    background-color: #fff;
+    background-color: $white;
   }
+
   &__wrap {
     display: flex;
     flex-direction: column;
@@ -144,6 +151,7 @@
     border-radius: fluid(28px, 40px);
     height: 100%;
   }
+
   &__services {
     display: grid;
     padding: fluid(28px, 40px) fluid(28px, 40px) 0;

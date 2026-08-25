@@ -3,7 +3,7 @@
 
 .video-section {
   background-color: $gray-950;
-  height: 100dvh;
+  height: 100svh;
   isolation: isolate;
   min-height: rem(560px);
   overflow: hidden;
@@ -196,10 +196,10 @@
   }
 }
 
-@media (height <= rem(640px)) {
+@media (width >= rem(768px)) and (height <= rem(640px)) {
   .video-section {
     &__title {
-      font-size: clamp(#{rem(36px)}, 11vh, #{rem(64px)});
+      font-size: clamp(#{rem(36px)}, 11svh, #{rem(64px)});
     }
 
     &__description {

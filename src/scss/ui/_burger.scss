@@ -3,9 +3,16 @@
 
 .burger {
   position: relative;
+  display: grid;
+  place-items: center;
   width: rem(24px);
   height: rem(24px);
   color: $white;
+
+  &:focus-visible {
+    outline: $focus-outline-width solid $focus-color;
+    outline-offset: $focus-outline-offset;
+  }
 }
 
 .burger__line {
@@ -28,7 +35,9 @@
   height: 100%;
   right: 0;
   position: absolute;
-  transition: transform $duration-fast $ease-base;
+  transition:
+    transform $duration-fast $ease-base,
+    width $duration-fast $ease-base;
 }
 
 .burger__line::before {
@@ -46,9 +55,11 @@
 }
 
 .burger.is-active .burger__line::before {
+  width: 100%;
   transform: rotate(45deg);
 }
 
 .burger.is-active .burger__line::after {
+  width: 100%;
   transform: rotate(-45deg);
 }

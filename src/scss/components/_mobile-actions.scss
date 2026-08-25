@@ -16,6 +16,18 @@
     gap: rem(8px);
     width: min(calc(100% - rem(32px)), rem(288px));
     transform: translateX(-50%);
+    transition:
+      opacity $duration-base $ease-base,
+      transform $duration-base $ease-base,
+      visibility 0s linear 0s;
+
+    .is-mobile-menu-open & {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transform: translate3d(-50%, rem(12px), 0);
+      transition-delay: 0s, 0s, $duration-base;
+    }
 
     &__booking,
     &__button {
@@ -55,20 +67,13 @@
       flex: 0 0 rem(56px);
       width: rem(56px);
       color: $white;
-
-      &--message {
-        background-color: $violet-400;
-      }
-
-      &--phone {
-        background-color: $violet-500;
-        color: $black;
-      }
+      background-color: $violet-500;
     }
 
     &__icon {
       width: rem(20px);
       height: rem(20px);
+      color: $white;
     }
   }
 }

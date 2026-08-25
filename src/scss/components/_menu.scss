@@ -2,35 +2,194 @@
 @use '../mixins/disable-mob-hover' as *;
 @use '../vars' as *;
 
+@mixin menu-overlay {
+  position: fixed;
+  inset: var(--mobile-menu-top, 0) 0 0;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden auto;
+  padding: 16px;
+  background-color: $black;
+  color: $white;
+  opacity: 0;
+  visibility: hidden;
+  overscroll-behavior: contain;
+  pointer-events: none;
+  transform: translate3d(0, rem(-16px), 0) scale(0.985);
+  transform-origin: 50% 0;
+  transition:
+    opacity $duration-base $ease-base,
+    transform 420ms cubic-bezier(0.22, 1, 0.36, 1),
+    visibility 0s linear 420ms;
+
+  .menu__list {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    width: min(100%, rem(760px));
+    margin: 0 auto;
+  }
+
+  .menu__item {
+    border-bottom: rem(1px) solid rgba($white, 0.12);
+    opacity: 0;
+    transform: translate3d(0, rem(18px), 0);
+    transition:
+      opacity 280ms $ease-base,
+      transform 480ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .menu__link {
+    justify-content: space-between;
+    width: 100%;
+    padding: rem(14px) 0 rem(12px);
+    color: $white;
+    font-family: $font-family-heading;
+    font-size: clamp(#{rem(34px)}, 9vw, #{rem(68px)});
+    font-weight: 800;
+    letter-spacing: 0;
+    line-height: 0.88;
+    text-align: left;
+  }
+
+  .menu__link-icon {
+    display: none;
+  }
+
+  .menu__footer {
+    display: grid;
+    grid-template-columns: minmax(0, rem(260px)) auto;
+    align-items: center;
+    gap: rem(24px);
+    width: min(100%, rem(760px));
+    margin: auto auto 0;
+    padding-top: rem(36px);
+  }
+}
+
 .menu {
   &__list {
     display: flex;
     align-items: center;
     gap: 0.75rem;
-    list-style: none;
-    padding: 0;
     margin: 0;
+    padding: 0;
+    list-style: none;
   }
+
+  &__item {
+    min-width: 0;
+  }
+
   &__link {
-    font-weight: 700;
-    font-size: rem(11px);
-    line-height: 100%;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    text-align: center;
-    color: #fff;
+    color: $white;
     display: flex;
     align-items: center;
     gap: 0.25rem;
+    font-size: rem(11px);
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    line-height: 100%;
+    text-align: center;
+    text-transform: uppercase;
   }
+
   &__link-icon {
-    height: 0.375rem;
     width: 0.375rem;
+    height: 0.375rem;
+  }
+
+  &__footer {
+    display: none;
+  }
+
+  &__booking {
+    @include hover {
+      background-color: $red-600;
+      transform: translateY(rem(-2px));
+    }
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: rem(58px);
+    padding: 0 rem(28px);
+    border-radius: $radius-pill;
+    background-color: $red-500;
+    color: $white;
+    font-size: rem(11px);
+    font-weight: 800;
+    letter-spacing: 0.04em;
+    line-height: 1;
+    text-transform: uppercase;
+    transition:
+      background-color $duration-fast $ease-base,
+      transform $duration-fast $ease-base;
+
+    &:active {
+      transform: scale(0.98);
+    }
+  }
+
+  &__phone {
+    @include hover {
+      color: $white;
+    }
+
+    color: rgba($white, 0.78);
+    font-size: rem(18px);
+    font-weight: 700;
+    letter-spacing: 0.01em;
   }
 }
 
 @media (max-width: $breakpoint-tablet) {
-  .menu {
-    display: none;
+  .header__menu.menu {
+    @include menu-overlay;
+  }
+}
+
+.header__menu.menu.is-open {
+  @include menu-overlay;
+
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: none;
+  transition-delay: 0s;
+
+  .menu__item {
+    opacity: 1;
+    transform: none;
+
+    @for $index from 1 through 6 {
+      &:nth-child(#{$index}) {
+        transition-delay: #{70ms + (($index - 1) * 45ms)};
+      }
+    }
+  }
+}
+
+@media (max-width: $breakpoint-mobile) {
+  .header__menu.menu,
+  .header__menu.menu.is-open {
+    .menu__footer {
+      grid-template-columns: 1fr;
+      gap: rem(18px);
+    }
+
+    .menu__phone {
+      text-align: center;
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .header__menu.menu,
+  .header__menu.menu.is-open,
+  .header__menu.menu .menu__item,
+  .header__menu.menu.is-open .menu__item {
+    transition: none;
   }
 }

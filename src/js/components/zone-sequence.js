@@ -3,7 +3,12 @@ const tabSelector = '[data-zone-tab]';
 const panelSelector = '[data-zone-panel]';
 const venueStepSelector = '[data-zone-venue-step]';
 const venueNameSelector = '[data-zone-venue-name]';
+const mobileSelectSelector = '[data-zone-mobile-select]';
+const mobileTriggerSelector = '[data-zone-mobile-trigger]';
+const mobileValueSelector = '[data-zone-mobile-value]';
+const mobileMenuSelector = '[data-zone-mobile-menu]';
 const initializedAttribute = 'data-zone-tabs-initialized';
+const mobileBreakpoint = '(max-width: 47.9375rem)';
 const venueOrder = ['arena', 'park'];
 const venueNames = {
   arena: 'Арена',
@@ -34,6 +39,63 @@ function getPairKey({ panel, tab }) {
   return tab.id || panel.id;
 }
 
+function getZoneLabel({ tab }) {
+  if (tab.hasAttribute('data-zone-primary')) {
+    return 'Арена';
+  }
+
+  return tab.textContent.replace(/\s+/g, ' ').trim();
+}
+
+function cloneZoneIcon(tab) {
+  return tab.querySelector('.zones__tab-icon')?.cloneNode(true) ?? null;
+}
+
+function createMobileOption(pair, index) {
+  const option = document.createElement('button');
+  const label = document.createElement('span');
+  const mark = document.createElement('span');
+  const icon = cloneZoneIcon(pair.tab);
+
+  option.className = 'zones__mobile-option button-reset';
+  option.id = `${pair.tab.id || `zone-${index}`}-mobile-option`;
+  option.type = 'button';
+  option.role = 'option';
+  option.tabIndex = -1;
+  option.dataset.zoneMobileOption = String(index);
+  option.setAttribute('aria-selected', 'false');
+
+  if (pair.panel.id) {
+    option.setAttribute('aria-controls', pair.panel.id);
+  }
+
+  if (icon) {
+    option.append(icon);
+  }
+
+  label.className = 'zones__mobile-option-label';
+  label.textContent = getZoneLabel(pair);
+  mark.className = 'zones__mobile-option-mark';
+  mark.setAttribute('aria-hidden', 'true');
+  option.append(label, mark);
+
+  return option;
+}
+
+function renderMobileValue(container, pair) {
+  if (!container) {
+    return;
+  }
+
+  const label = document.createElement('span');
+  const icon = cloneZoneIcon(pair.tab);
+
+  label.className = 'zones__mobile-trigger-text';
+  label.textContent = getZoneLabel(pair);
+
+  container.replaceChildren(...(icon ? [icon, label] : [label]));
+}
+
 function syncPanelGallery(panel, isAvailable) {
   const galleryItems = [...panel.querySelectorAll('[data-fancybox], [data-zone-fancybox-group]')];
 
@@ -60,10 +122,24 @@ function setupTabs(root) {
   const venueName = root.querySelector(venueNameSelector);
   const venueStatus = root.querySelector('[data-zone-venue-status]');
   const activityList = root.querySelector('.zones__tabs');
+  const mobileSelect = root.querySelector(mobileSelectSelector);
+  const mobileTrigger = root.querySelector(mobileTriggerSelector);
+  const mobileValue = root.querySelector(mobileValueSelector);
+  const mobileMenu = root.querySelector(mobileMenuSelector);
+  const mobileMedia = window.matchMedia(mobileBreakpoint);
   const primaryIndex = pairs.findIndex(({ tab }) => tab.hasAttribute('data-zone-primary'));
 
   if (!pairs.length || primaryIndex < 0) {
     return;
+  }
+
+  const hasMobileSelect = Boolean(mobileSelect && mobileTrigger && mobileValue && mobileMenu);
+  const mobileOptions = hasMobileSelect
+    ? pairs.map((pair, index) => createMobileOption(pair, index))
+    : [];
+
+  if (hasMobileSelect) {
+    mobileMenu.replaceChildren(...mobileOptions);
   }
 
   const initialPairIndex = pairs.findIndex(
@@ -109,6 +185,24 @@ function setupTabs(root) {
     }
   };
 
+  const syncMobileSelect = (availableIndices) => {
+    if (!hasMobileSelect) {
+      return;
+    }
+
+    mobileOptions.forEach((option, index) => {
+      const available = availableIndices.includes(index);
+      const isActive = available && index === activeIndex;
+
+      option.hidden = !available;
+      option.classList.toggle('is-active', isActive);
+      option.setAttribute('aria-selected', String(isActive));
+      option.tabIndex = isActive ? 0 : -1;
+    });
+
+    renderMobileValue(mobileValue, pairs[activeIndex]);
+  };
+
   const activate = (nextIndex, { focus = false, reveal = false } = {}) => {
     const availableIndices = getAvailableIndices();
 
@@ -137,6 +231,8 @@ function setupTabs(root) {
       }
     });
 
+    syncMobileSelect(availableIndices);
+
     rememberedTabs.set(activeVenue, getPairKey(pairs[activeIndex]));
 
     const activeTab = pairs[activeIndex].tab;
@@ -148,6 +244,49 @@ function setupTabs(root) {
     if (focus || reveal) {
       revealTab(activeTab);
     }
+  };
+
+  const closeMobileSelect = ({ restoreFocus = false } = {}) => {
+    if (!hasMobileSelect || mobileMenu.hidden) {
+      return;
+    }
+
+    mobileMenu.hidden = true;
+    mobileSelect.classList.remove('is-open');
+    mobileTrigger.setAttribute('aria-expanded', 'false');
+
+    if (restoreFocus) {
+      mobileTrigger.focus({ preventScroll: true });
+    }
+  };
+
+  const openMobileSelect = ({ focusSelected = false } = {}) => {
+    if (!hasMobileSelect || !mobileMedia.matches) {
+      return;
+    }
+
+    mobileMenu.hidden = false;
+    mobileSelect.classList.add('is-open');
+    mobileTrigger.setAttribute('aria-expanded', 'true');
+
+    if (focusSelected) {
+      window.requestAnimationFrame(() => {
+        mobileOptions[activeIndex]?.focus({ preventScroll: true });
+      });
+    }
+  };
+
+  const getAvailableMobileIndices = () =>
+    mobileOptions.reduce((indices, option, index) => {
+      if (!option.hidden) {
+        indices.push(index);
+      }
+
+      return indices;
+    }, []);
+
+  const focusMobileOption = (index) => {
+    mobileOptions[index]?.focus({ preventScroll: true });
   };
 
   const getNextVenue = (step = 1) => {
@@ -250,10 +389,94 @@ function setupTabs(root) {
     });
   });
 
+  if (hasMobileSelect) {
+    mobileTrigger.addEventListener('click', () => {
+      if (mobileMenu.hidden) {
+        openMobileSelect();
+      } else {
+        closeMobileSelect();
+      }
+    });
+
+    mobileTrigger.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape') {
+        event.preventDefault();
+        closeMobileSelect();
+        return;
+      }
+
+      if (event.key !== 'ArrowDown' && event.key !== 'ArrowUp') {
+        return;
+      }
+
+      event.preventDefault();
+      openMobileSelect({ focusSelected: true });
+    });
+
+    mobileOptions.forEach((option, index) => {
+      option.addEventListener('click', () => {
+        activate(index);
+        closeMobileSelect({ restoreFocus: true });
+      });
+
+      option.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape') {
+          event.preventDefault();
+          closeMobileSelect({ restoreFocus: true });
+          return;
+        }
+
+        if (event.key === 'Tab') {
+          closeMobileSelect();
+          return;
+        }
+
+        const availableIndices = getAvailableMobileIndices();
+        const currentPosition = availableIndices.indexOf(index);
+        let nextPosition = null;
+
+        switch (event.key) {
+          case 'ArrowDown':
+            nextPosition = currentPosition + 1;
+            break;
+          case 'ArrowUp':
+            nextPosition = currentPosition - 1;
+            break;
+          case 'Home':
+            nextPosition = 0;
+            break;
+          case 'End':
+            nextPosition = availableIndices.length - 1;
+            break;
+          default:
+            return;
+        }
+
+        event.preventDefault();
+        focusMobileOption(
+          availableIndices[(nextPosition + availableIndices.length) % availableIndices.length],
+        );
+      });
+    });
+
+    document.addEventListener('pointerdown', (event) => {
+      if (!mobileSelect.contains(event.target)) {
+        closeMobileSelect();
+      }
+    });
+
+    mobileMedia.addEventListener('change', (event) => {
+      if (!event.matches) {
+        closeMobileSelect();
+      }
+    });
+  }
+
   venueSteps.forEach((button) => {
     button.addEventListener('click', () => {
       const step = Number.parseInt(button.dataset.zoneVenueStep, 10) || 1;
 
+      closeMobileSelect();
       setVenue(getNextVenue(step));
     });
   });

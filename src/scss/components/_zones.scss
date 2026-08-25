@@ -63,6 +63,10 @@
     transition: width $duration-base $ease-base;
   }
 
+  &__mobile-select {
+    display: none;
+  }
+
   &__venue-switch {
     position: relative;
     z-index: 2;
@@ -629,14 +633,18 @@
     }
 
     &__navigation {
-      width: 100%;
-      height: rem(60px);
-      margin-bottom: rem(16px);
+      width: min(100%, rem(190px));
+      height: rem(52px);
+      margin-bottom: rem(20px);
+      overflow: visible;
+      border: 0;
       border-radius: rem(16px);
+      background: transparent;
+      box-shadow: none;
     }
 
     &__venue-switch {
-      flex-basis: rem(168px);
+      flex-basis: 100%;
       grid-template-columns: rem(34px) minmax(0, 1fr) rem(34px);
       border-radius: rem(15px);
     }
@@ -646,12 +654,7 @@
     }
 
     &__tabs {
-      overflow: auto hidden;
-      scrollbar-width: none;
-
-      &::-webkit-scrollbar {
-        display: none;
-      }
+      display: none;
     }
 
     &__tab {
@@ -678,8 +681,148 @@
       height: rem(24px);
     }
 
-    &[data-zone-venue-active='arena'] &__navigation {
+    &__mobile-select {
+      position: relative;
+      z-index: 8;
+      display: block;
+      margin-bottom: rem(16px);
+    }
+
+    &__mobile-label {
+      display: block;
+      margin-bottom: rem(7px);
+      color: rgba($white, 0.56);
+      font-size: rem(14px);
+      line-height: 1.2;
+    }
+
+    &__mobile-trigger {
+      display: flex;
+      align-items: center;
+      gap: rem(12px);
       width: 100%;
+      min-height: rem(48px);
+      padding: 0 rem(18px);
+      border: rem(1px) solid $violet-500;
+      border-radius: $radius-pill;
+      background-color: rgba($gray-900, 0.82);
+      box-shadow: inset 0 rem(1px) 0 rgba($white, 0.06);
+      color: $white;
+      font-size: rem(16px);
+      font-weight: 700;
+      line-height: 1;
+      text-transform: uppercase;
+
+      &:focus-visible {
+        outline: $focus-outline-width solid $violet-300;
+        outline-offset: rem(2px);
+      }
+    }
+
+    &__mobile-value {
+      display: flex;
+      align-items: center;
+      gap: rem(12px);
+      min-width: 0;
+    }
+
+    &__mobile-trigger-text,
+    &__mobile-option-label {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    &__mobile-chevron {
+      flex: 0 0 auto;
+      width: rem(11px);
+      height: rem(11px);
+      margin-left: auto;
+      border-right: rem(1.5px) solid currentColor;
+      border-bottom: rem(1.5px) solid currentColor;
+      transform: translateY(rem(-2px)) rotate(45deg);
+      transition: transform $duration-fast $ease-base;
+    }
+
+    &__mobile-trigger[aria-expanded='true'] &__mobile-chevron {
+      transform: translateY(rem(2px)) rotate(225deg);
+    }
+
+    &__mobile-dropdown {
+      position: absolute;
+      top: calc(100% + #{rem(6px)});
+      right: 0;
+      left: 0;
+      z-index: 2;
+      display: grid;
+      gap: rem(2px);
+      padding: rem(4px);
+      overflow: hidden;
+      border: rem(1px) solid rgba($white, 0.06);
+      border-radius: rem(24px);
+      background-color: rgba($gray-800, 0.96);
+      box-shadow: 0 rem(18px) rem(42px) rgba($black, 0.34);
+      backdrop-filter: blur(rem(18px));
+
+      &[hidden] {
+        display: none;
+      }
+    }
+
+    &__mobile-option {
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: rem(12px);
+      width: 100%;
+      min-height: rem(44px);
+      padding: 0 rem(16px);
+      border-radius: $radius-pill;
+      color: $white;
+      font-size: rem(16px);
+      font-weight: 650;
+      line-height: 1;
+      text-align: left;
+      text-transform: uppercase;
+      transition: background-color $duration-fast $ease-base;
+
+      &[hidden] {
+        display: none;
+      }
+
+      &:hover {
+        background-color: rgba($white, 0.06);
+      }
+
+      &.is-active,
+      &[aria-selected='true'] {
+        background: linear-gradient(90deg, $violet-500, $violet-600);
+      }
+
+      &:focus-visible {
+        outline: $focus-outline-width solid $violet-300;
+        outline-offset: rem(-2px);
+      }
+    }
+
+    &__mobile-option-mark {
+      flex: 0 0 auto;
+      width: rem(10px);
+      height: rem(10px);
+      margin-left: auto;
+      border-radius: 50%;
+      background-color: $white;
+      opacity: 0;
+      transition: opacity $duration-fast $ease-base;
+    }
+
+    &__mobile-option.is-active &__mobile-option-mark,
+    &__mobile-option[aria-selected='true'] &__mobile-option-mark {
+      opacity: 1;
+    }
+
+    &[data-zone-venue-active='arena'] &__navigation {
+      width: min(100%, rem(190px));
     }
   }
 
@@ -748,7 +891,16 @@
   .zones__navigation,
   .zones__tab,
   .zones__venue-arrow,
+  .zones__mobile-chevron,
+  .zones__mobile-option,
+  .zones__mobile-option-mark,
   .zone__image-zoom {
     transition: none;
+  }
+}
+@media (max-width: 576px) {
+  .zones__navigation,
+  .zones[data-zone-venue-active='arena'] .zones__navigation {
+    width: 100%;
   }
 }

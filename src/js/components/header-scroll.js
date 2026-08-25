@@ -1,6 +1,6 @@
 const hiddenClass = 'header--top-hidden';
 const scrolledClass = 'header--scrolled';
-const directionThreshold = 2;
+const directionThreshold = 10;
 const topHideThreshold = 12;
 const bookingRevealThreshold = 24;
 

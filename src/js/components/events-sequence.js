@@ -1,11 +1,6 @@
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
+function setActiveState(root, states, controls, activeIndex) {
+  root.style.setProperty('--events-accent', states[activeIndex].dataset.eventColor);
 
-gsap.registerPlugin(ScrollTrigger);
-
-const desktopQuery = '(min-width: 64.0625rem) and (prefers-reduced-motion: no-preference)';
-
-function setActiveState(states, activeIndex) {
   states.forEach((state, index) => {
     const isActive = index === activeIndex;
 
@@ -13,136 +8,82 @@ function setActiveState(states, activeIndex) {
     state.inert = !isActive;
     state.setAttribute('aria-hidden', String(!isActive));
   });
-}
 
-function resetStates(states) {
-  states.forEach((state, index) => {
-    state.classList.toggle('is-active', index === 0);
-    state.inert = false;
-    state.removeAttribute('aria-hidden');
+  controls.forEach((control, index) => {
+    const isActive = index === activeIndex;
+
+    control.classList.toggle('is-active', isActive);
+    control.setAttribute('aria-selected', String(isActive));
+    control.tabIndex = isActive ? 0 : -1;
   });
 }
 
-function getElements(root) {
-  const states = [...root.querySelectorAll('[data-event-state]')];
-  const visuals = states.map((state) => state.querySelector('[data-event-visual]'));
-  const details = states.map((state) => state.querySelector('[data-event-details]'));
-  const isValid = states.length > 1 && visuals.every(Boolean) && details.every(Boolean);
-
-  return isValid ? { states, visuals, details } : null;
-}
-
-function setupSequence(root) {
-  const elements = getElements(root);
-
-  if (!elements) {
-    return null;
+function getNextIndex(event, currentIndex, controlsCount) {
+  if (event.key === 'ArrowRight' || event.key === 'ArrowDown') {
+    return (currentIndex + 1) % controlsCount;
   }
 
-  const { states, visuals, details } = elements;
-  let activeIndex = 0;
-  const lastIndex = states.length - 1;
-  const getStep = () => Math.max(root.clientHeight, window.innerHeight);
-  const getDistance = () => lastIndex * getStep();
+  if (event.key === 'ArrowLeft' || event.key === 'ArrowUp') {
+    return (currentIndex - 1 + controlsCount) % controlsCount;
+  }
 
-  const syncState = (trigger) => {
-    const nextIndex = Math.round(trigger.progress * lastIndex);
+  if (event.key === 'Home') {
+    return 0;
+  }
 
-    if (nextIndex !== activeIndex) {
-      activeIndex = nextIndex;
-      setActiveState(states, activeIndex);
+  if (event.key === 'End') {
+    return controlsCount - 1;
+  }
+
+  return null;
+}
+
+function setupTabs(root) {
+  const states = [...root.querySelectorAll('[data-event-state]')];
+  const controls = [...root.querySelectorAll('[data-event-control]')];
+
+  if (states.length < 2 || states.length !== controls.length) {
+    return;
+  }
+
+  let activeIndex = Math.max(
+    0,
+    controls.findIndex((control) => control.classList.contains('is-active')),
+  );
+
+  const activate = (index) => {
+    if (index === activeIndex && states[index].classList.contains('is-active')) {
+      return;
     }
+
+    activeIndex = index;
+    setActiveState(root, states, controls, activeIndex);
   };
 
-  root.classList.add('events--animated');
-  root.style.setProperty('--events-accent', states[0].dataset.eventColor);
-  setActiveState(states, activeIndex);
-  gsap.set(states, { visibility: 'hidden' });
-  gsap.set(states[0], { visibility: 'visible' });
-  gsap.set([...visuals, ...details], { autoAlpha: 1, x: 0, y: 0 });
+  controls.forEach((control, index) => {
+    control.addEventListener('click', () => activate(index));
+    control.addEventListener('keydown', (event) => {
+      const nextIndex = getNextIndex(event, index, controls.length);
 
-  const timeline = gsap.timeline({
-    scrollTrigger: {
-      anticipatePin: 1,
-      end: () => `+=${getDistance()}`,
-      invalidateOnRefresh: true,
-      onRefresh: syncState,
-      onUpdate: syncState,
-      pin: true,
-      refreshPriority: 20,
-      scrub: true,
-      start: 'top 1px',
-      trigger: root,
-    },
-  });
+      if (nextIndex === null) {
+        return;
+      }
 
-  states.slice(1).forEach((nextState, index) => {
-    const currentState = states[index];
-    const position = index;
-
-    timeline.to(
-      root,
-      {
-        '--events-accent': nextState.dataset.eventColor,
-        duration: 1,
-        ease: 'none',
-      },
-      position,
-    );
-    timeline.set(nextState, { visibility: 'visible' }, position);
-    timeline.to(
-      [visuals[index], details[index]],
-      {
-        duration: 1,
-        ease: 'none',
-        force3D: true,
-        y: () => -getStep(),
-      },
-      position,
-    );
-    timeline.fromTo(
-      [visuals[index + 1], details[index + 1]],
-      { y: () => getStep() },
-      {
-        duration: 1,
-        ease: 'none',
-        force3D: true,
-        immediateRender: true,
-        y: 0,
-      },
-      position,
-    );
-    timeline.set(currentState, { visibility: 'hidden' }, position + 1);
-  });
-
-  return () => {
-    timeline.scrollTrigger?.kill();
-    timeline.kill();
-    root.classList.remove('events--animated');
-    root.style.removeProperty('--events-accent');
-    gsap.set([...states, ...visuals, ...details], {
-      clearProps: 'opacity,transform,visibility',
+      event.preventDefault();
+      controls[nextIndex].focus();
+      activate(nextIndex);
     });
-    resetStates(states);
-  };
+  });
+
+  setActiveState(root, states, controls, activeIndex);
 }
 
 export function initEventsSequence() {
-  const roots = [...document.querySelectorAll('[data-events-sequence]')];
+  const roots = document.querySelectorAll('[data-events-sequence]');
 
   if (!roots.length) {
     return;
   }
 
-  const media = gsap.matchMedia();
-
-  media.add(desktopQuery, () => {
-    const cleanupCallbacks = roots.map(setupSequence).filter(Boolean);
-
-    ScrollTrigger.refresh();
-
-    return () => {
-      cleanupCallbacks.forEach((cleanup) => cleanup());
-    };
-  });
+  roots.forEach(setupTabs);
 }

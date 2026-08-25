@@ -11,6 +11,7 @@ import { initGamesSequence } from './components/games-sequence.js';
 import { initHeaderScroll } from './components/header-scroll.js';
 import { initHeaderTheme } from './components/header-theme.js';
 import { initLocationModal } from './components/location-modal.js';
+import { initMobileMenu } from './components/mobile-menu.js';
 import { initPageState } from './components/page-state.js';
 import { initPhoneMasks } from './components/phone-mask.js';
 import { initPixelTransitions } from './components/pixel-transition.js';
@@ -20,10 +21,15 @@ import { initSliders } from './components/sliders.js';
 import { initYandexMaps } from './components/yandex-map.js';
 import { initZoneSequence } from './components/zone-sequence.js';
 
+ScrollTrigger.config({
+  ignoreMobileResize: true,
+});
+
 initPreloader();
 initPageState();
 initHeaderScroll();
 initHeaderTheme();
+initMobileMenu();
 initLocationModal();
 initCityConfirm();
 initEventModal();

@@ -221,6 +221,42 @@
             </button>
           </div>
         </div>
+
+        <div class="zones__mobile-select" data-zone-mobile-select>
+          <span class="zones__mobile-label" id="zones-mobile-select-label">
+            Выберите свою игровую зону
+          </span>
+          <button
+            class="zones__mobile-trigger button-reset"
+            type="button"
+            aria-haspopup="listbox"
+            aria-expanded="false"
+            aria-controls="zones-mobile-options"
+            aria-labelledby="zones-mobile-select-label zones-mobile-select-value"
+            data-zone-mobile-trigger
+          >
+            <span
+              class="zones__mobile-value"
+              id="zones-mobile-select-value"
+              data-zone-mobile-value
+            >
+              <svg class="zones__tab-icon" aria-hidden="true">
+                <use href="/img/sprite.svg#icon-gun"></use>
+              </svg>
+              <span>Арена</span>
+            </span>
+            <span class="zones__mobile-chevron" aria-hidden="true"></span>
+          </button>
+          <div
+            class="zones__mobile-dropdown"
+            id="zones-mobile-options"
+            role="listbox"
+            aria-labelledby="zones-mobile-select-label"
+            data-zone-mobile-menu
+            hidden
+          ></div>
+        </div>
+
         <span class="visually-hidden" aria-live="polite" aria-atomic="true" data-zone-venue-status></span>
 
         <div class="zones__panels">
