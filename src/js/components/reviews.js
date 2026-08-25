@@ -135,6 +135,7 @@ export function initReviews() {
           onlyInViewport: true,
         },
         loop: wrapper.children.length > 1,
+        loopAdditionalSlides: 2,
         navigation: {
           nextEl: nextButton,
           prevEl: previousButton,

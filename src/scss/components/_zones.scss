@@ -599,6 +599,11 @@
 }
 
 @media (max-width: $breakpoint-mobile) {
+  .zone {
+    &__button {
+      display: none;
+    }
+  }
   .zones {
     min-height: 0;
     padding: rem(92px) 0 rem(32px);
