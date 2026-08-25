@@ -4,8 +4,8 @@
 
 .booking-panel {
   position: fixed;
-  z-index: $z-overlay;
   inset: 0;
+  z-index: $z-modal;
   visibility: hidden;
   opacity: 0;
   pointer-events: none;
@@ -19,7 +19,8 @@
     pointer-events: auto;
 
     .booking-panel__dialog {
-      transform: translateX(0);
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(1);
     }
   }
 
@@ -28,93 +29,67 @@
     inset: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba($black, 0.12);
+    background-color: rgba($black, 0.72);
+    backdrop-filter: blur(rem(8px));
   }
 
   &__dialog {
     position: absolute;
-    top: rem(32px);
-    right: rem(24px);
-    bottom: rem(24px);
-    display: grid;
-    grid-template-rows: repeat(2, minmax(rem(360px), 1fr));
-    gap: rem(8px);
-    width: min(rem(472px), calc(100vw - rem(32px)));
-    min-height: 0;
+    top: 50%;
+    left: 50%;
+    isolation: isolate;
+    width: min(rem(500px), calc(100vw - #{rem(32px)}));
+    max-height: calc(100dvh - #{rem(32px)});
+    padding: rem(42px) rem(32px) rem(38px);
     overflow-y: auto;
     overscroll-behavior: contain;
-    border-radius: rem(28px);
+    border: rem(1px) solid rgba($white, 0.12);
+    border-radius: rem(48px);
     outline: 0;
+    background: $gray-950 url('../../img/pop-up-bg.jpg') center / cover no-repeat;
+    box-shadow: 0 rem(28px) rem(80px) rgba($black, 0.55);
+    opacity: 0;
     scrollbar-width: none;
-    transform: translateX(calc(100% + rem(32px)));
-    transition: transform 360ms cubic-bezier(0.22, 1, 0.36, 1);
+    transform: translate(-50%, calc(-50% + #{rem(24px)})) scale(0.98);
+    transition:
+      opacity 280ms $ease-base,
+      transform 420ms cubic-bezier(0.22, 1, 0.36, 1);
 
     &::-webkit-scrollbar {
       display: none;
     }
   }
 
-  &__card {
-    position: relative;
-    isolation: isolate;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    min-height: 0;
-    padding: fluid(30px, 40px);
-    border: rem(1px) solid rgba($white, 0.12);
-    border-radius: rem(28px);
-    background-color: rgba($gray-800, 0.9);
-    box-shadow: 0 rem(16px) rem(40px) rgba($black, 0.24);
-    backdrop-filter: blur(rem(18px));
-  }
-
-  &__copy {
-    position: relative;
-    z-index: 3;
-  }
-
-  &__title {
-    max-width: rem(350px);
-    margin: 0;
-    font-family: $font-family-heading;
-    font-size: fluid(24px, 36px);
-    font-weight: 800;
-    line-height: 0.92;
-    text-transform: uppercase;
-    color: $gray-50;
-  }
-
-  &__subtitle {
-    margin: rem(8px) 0 0;
-    color: $gray-400;
-    font-size: rem(18px);
-    font-weight: 600;
-    line-height: 1.15;
-  }
-
   &__close {
     @include hover {
+      border-color: $red-400;
       color: $red-400;
+      transform: rotate(90deg);
     }
 
     position: absolute;
-    z-index: 6;
     top: rem(18px);
     right: rem(18px);
-    width: rem(30px);
-    height: rem(30px);
-    border: rem(1px) solid rgba($white, 0.45);
+    z-index: 4;
+    width: rem(38px);
+    height: rem(38px);
+    border: rem(1px) solid rgba($white, 0.48);
     border-radius: 50%;
+    background-color: rgba($gray-950, 0.34);
     color: $white;
-    transition: color $duration-fast $ease-base;
+    backdrop-filter: blur(rem(8px));
+    transition:
+      border-color $duration-fast $ease-base,
+      color $duration-fast $ease-base,
+      transform $duration-fast $ease-base;
 
     span {
       position: absolute;
       top: 50%;
       left: 50%;
-      width: rem(13px);
-      height: rem(1px);
+      width: rem(15px);
+      height: rem(1.5px);
+      border-radius: $radius-pill;
       background-color: currentcolor;
 
       &:first-child {
@@ -125,97 +100,151 @@
         transform: translate(-50%, -50%) rotate(-45deg);
       }
     }
+
+    &:focus-visible {
+      outline: $focus-outline-width solid $focus-color;
+      outline-offset: rem(2px);
+    }
+  }
+
+  &__online,
+  &__request {
+    position: relative;
+    z-index: 1;
+  }
+
+  &__title {
+    max-width: calc(100% - #{rem(44px)});
+    margin: 0 auto;
+    color: $white;
+    font-family: $font-family-heading;
+    font-size: fluid(54px, 68px, 375px, 768px);
+    font-weight: 800;
+    line-height: 0.78;
+    text-align: center;
+    text-transform: uppercase;
+
+    span {
+      display: block;
+    }
+  }
+
+  &__subtitle {
+    margin: rem(24px) auto 0;
+    color: $white;
+    font-size: rem(18px);
+    font-weight: 400;
+    line-height: 1.25;
+    text-align: center;
   }
 
   &__button {
-    @include hover {
-      background-color: $red-600;
-      transform: translateY(rem(-2px));
-    }
-
     position: relative;
-    z-index: 4;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: rem(226px);
-    min-height: rem(74px);
-    padding: rem(12px) rem(20px);
-    border-radius: rem(18px);
-    background-color: $red-500;
+    width: 100%;
+    min-height: rem(76px);
+    padding: rem(14px) rem(20px);
+    border: rem(1px) solid transparent;
+    border-radius: rem(20px);
     color: $white;
-    font-weight: 700;
-    font-size: rem(11px);
-    line-height: 100%;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
+    font-size: rem(12px);
+    font-weight: 750;
+    line-height: 1;
+    letter-spacing: 0.05em;
     text-align: center;
-    color: #fff;
+    text-transform: uppercase;
     transition:
       background-color $duration-fast $ease-base,
-      opacity $duration-fast $ease-base,
+      border-color $duration-fast $ease-base,
+      color $duration-fast $ease-base,
       transform $duration-fast $ease-base;
 
+    &:active {
+      transform: scale(0.985);
+    }
+
     &:focus-visible {
-      outline: rem(2px) solid $focus-color;
+      outline: $focus-outline-width solid $focus-color;
       outline-offset: rem(3px);
     }
 
-    &:disabled {
-      background-color: rgba($red-700, 0.72);
-      color: rgba($white, 0.4);
-      cursor: not-allowed;
-      pointer-events: none;
+    &--online {
+      @include hover {
+        background-color: $red-600;
+        transform: translateY(rem(-2px));
+      }
+
+      margin-top: rem(26px);
+      background-color: $red-500;
     }
 
-    &--online {
-      position: absolute;
-      bottom: rem(30px);
-      left: rem(32px);
+    &--submit {
+      @include hover {
+        border-color: $red-500;
+        background-color: $red-500;
+      }
+
+      margin-top: rem(20px);
+      border-color: rgba($white, 0.8);
+      background-color: transparent;
+
+      &:disabled {
+        border-color: rgba($white, 0.42);
+        background-color: transparent;
+        color: rgba($white, 0.58);
+        cursor: not-allowed;
+        pointer-events: none;
+      }
     }
   }
 
-  &__man {
-    position: absolute;
-    z-index: 2;
-    right: 0;
-    bottom: 0;
-    width: min(51%, rem(240px));
-    max-width: none;
-    pointer-events: none;
+  &__request {
+    margin-top: rem(36px);
+  }
+
+  &__request-title {
+    margin: 0;
+    color: $gray-400;
+    font-size: rem(18px);
+    font-weight: 700;
+    line-height: 1.2;
+    text-align: center;
   }
 
   &__form {
-    position: relative;
-    z-index: 4;
-
-    width: min(62%, rem(270px));
-    margin-top: auto;
+    margin-top: rem(20px);
   }
 
   &__fields {
     display: grid;
+    gap: rem(20px);
   }
 
   &__input {
     width: 100%;
     height: rem(54px);
-    padding: 0;
-    border: 0;
-    border-bottom: rem(1px) solid $gray-500;
-    border-radius: 0;
+    padding: 0 rem(20px);
+    border: rem(1px) solid transparent;
+    border-radius: rem(8px);
     outline: 0;
-    background: transparent;
-    color: $white;
+    background-color: $gray-50;
+    color: $gray-950;
     font-size: rem(18px);
     font-weight: 600;
+    transition:
+      border-color $duration-fast $ease-base,
+      box-shadow $duration-fast $ease-base;
 
     &::placeholder {
       color: $gray-500;
+      opacity: 1;
     }
 
     &:focus {
       border-color: $red-400;
+      box-shadow: 0 0 0 rem(3px) rgba($red-500, 0.18);
     }
 
     &.is-invalid {
@@ -224,32 +253,41 @@
   }
 
   &__agreement {
-    display: block;
-    margin-top: rem(22px);
-    color: $gray-300;
-    font-size: rem(12px);
+    display: grid;
+    grid-template-columns: rem(16px) minmax(0, 1fr);
+    gap: rem(10px);
+    align-items: start;
+    margin-top: rem(20px);
+    color: $white;
+    font-size: rem(11px);
     font-weight: 500;
-    line-height: 123%;
+    line-height: 1.18;
     cursor: pointer;
 
     a {
-      border-bottom: rem(1px) dotted $gray-400;
+      color: $red-500;
+      text-decoration: none;
+
+      &:hover {
+        text-decoration: underline;
+      }
+
+      &:focus-visible {
+        outline: $focus-outline-width solid $focus-color;
+        outline-offset: rem(2px);
+      }
     }
   }
 
   &__agreement-box {
     position: relative;
-    float: left;
-    margin-right: 6px;
-    margin-top: -2px;
-    width: rem(14px);
-    height: rem(14px);
-    border: rem(1px) solid $gray-300;
-    border-radius: rem(4px);
+    width: rem(16px);
+    height: rem(16px);
+    border: rem(1px) solid $red-500;
+    border-radius: rem(3px);
   }
 
   &__agreement-input:checked + &__agreement-box {
-    border-color: $red-500;
     background-color: $red-500;
 
     &::after {
@@ -266,75 +304,91 @@
   }
 
   &__agreement-input:focus-visible + &__agreement-box {
-    outline: rem(2px) solid $focus-color;
+    outline: $focus-outline-width solid $focus-color;
     outline-offset: rem(2px);
   }
 
   &__agreement-input.is-invalid + &__agreement-box {
-    border-color: $red-500;
-  }
-
-  &__button--submit {
-    margin-top: rem(36px);
-  }
-
-  &__woman {
-    position: absolute;
-    z-index: 2;
-    right: 0;
-    bottom: 0;
-    width: min(61%, 21.875rem);
-    max-width: none;
-    pointer-events: none;
+    box-shadow: 0 0 0 rem(2px) rgba($red-500, 0.28);
   }
 }
 
 @media (max-width: $breakpoint-mobile) {
   .booking-panel {
-    &__dialog {
-      top: 0;
-      right: 0;
-      bottom: 0;
-      grid-template-rows: none;
-      width: 100%;
-      padding: rem(10px);
-      border-radius: 0;
-      background-color: $black;
-      transform: translateX(100%);
+    &__backdrop {
+      background-color: rgba($black, 0.82);
     }
 
-    &__card {
-      min-height: rem(460px);
-      padding: rem(30px) rem(24px);
-      border-radius: rem(22px);
+    &__dialog {
+      width: min(rem(450px), 100vw);
+      max-height: 100dvh;
+      padding: rem(38px) rem(24px) rem(32px);
+      border-radius: rem(42px);
+    }
+
+    &__close {
+      top: rem(14px);
+      right: rem(14px);
+      width: rem(34px);
+      height: rem(34px);
     }
 
     &__title {
-      max-width: calc(100% - rem(32px));
-      font-size: rem(34px);
+      font-size: fluid(48px, 60px, 320px, 450px);
     }
 
     &__subtitle {
-      max-width: 80%;
-      font-size: rem(15px);
+      margin-top: rem(22px);
+      font-size: rem(16px);
     }
 
-    &__button--online {
-      bottom: rem(24px);
-      left: rem(24px);
+    &__button {
+      min-height: rem(74px);
     }
 
-    &__form {
-      width: min(66%, rem(270px));
+    &__request {
       margin-top: rem(34px);
     }
 
-    &__button--submit {
-      margin-top: rem(26px);
+    &__request-title {
+      font-size: rem(17px);
     }
 
-    &__woman {
-      right: rem(-88px);
+    &__input {
+      height: rem(50px);
+      font-size: rem(17px);
     }
+  }
+}
+
+@media (width <= 374px) {
+  .booking-panel {
+    &__dialog {
+      padding-right: rem(18px);
+      padding-left: rem(18px);
+      border-radius: rem(34px);
+    }
+
+    &__title {
+      font-size: rem(46px);
+    }
+
+    &__request-title {
+      font-size: rem(16px);
+    }
+
+    &__agreement {
+      font-size: rem(10px);
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .booking-panel,
+  .booking-panel__dialog,
+  .booking-panel__close,
+  .booking-panel__button,
+  .booking-panel__input {
+    transition: none;
   }
 }

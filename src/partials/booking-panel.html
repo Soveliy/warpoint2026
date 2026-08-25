@@ -1,61 +1,109 @@
-<div class="booking-panel" id="booking-panel" aria-hidden="true" data-booking-panel>
-  <button class="booking-panel__backdrop button-reset" type="button" tabindex="-1"
-    aria-label="Закрыть панель бронирования" data-booking-close></button>
+<div class="booking-panel" id="booking-panel" aria-hidden="true" data-booking-panel inert>
+  <button
+    class="booking-panel__backdrop button-reset"
+    type="button"
+    tabindex="-1"
+    aria-label="Закрыть окно бронирования"
+    data-booking-close
+  ></button>
 
-  <aside class="booking-panel__dialog" role="dialog" aria-modal="true" aria-labelledby="booking-panel-title"
-    tabindex="-1" data-booking-dialog>
-    <article class="booking-panel__card booking-panel__card--online">
-      <div class="booking-panel__copy">
-        <h2 class="booking-panel__title" id="booking-panel-title">Забронируйте игру онлайн</h2>
-        <p class="booking-panel__subtitle">Запишитесь онлайн на удобное для вас время</p>
-      </div>
+  <aside
+    class="booking-panel__dialog"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="booking-panel-title"
+    aria-describedby="booking-panel-description"
+    tabindex="-1"
+    data-booking-dialog
+  >
+    <button
+      class="booking-panel__close button-reset"
+      type="button"
+      aria-label="Закрыть окно бронирования"
+      data-booking-close
+    >
+      <span></span>
+      <span></span>
+    </button>
 
-      <button class="booking-panel__button booking-panel__button--online button-reset" type="button"
-        data-booking-online>
-        Забронировать онлайн
+    <section class="booking-panel__online">
+      <h2 class="booking-panel__title" id="booking-panel-title">
+        <span>Запишитесь</span>
+        <span>онлайн</span>
+      </h2>
+      <p class="booking-panel__subtitle" id="booking-panel-description">
+        Выберите игровую зону, дату<br />и удобное время
+      </p>
+
+      <button
+        class="booking-panel__button booking-panel__button--online button-reset"
+        type="button"
+        data-booking-online
+      >
+        Записаться онлайн
       </button>
+    </section>
 
-      <img class="booking-panel__man" src="img/form_man.png" width="240" height="327" alt="" aria-hidden="true"
-        loading="lazy" decoding="async" />
-    </article>
-
-    <article class="booking-panel__card booking-panel__card--request">
-      <div class="booking-panel__copy">
-        <h2 class="booking-panel__title">Или оставьте заявку</h2>
-        <p class="booking-panel__subtitle">Мы перезвоним и подберём удобное время</p>
-      </div>
+    <section class="booking-panel__request" aria-labelledby="booking-request-title">
+      <h3 class="booking-panel__request-title" id="booking-request-title">
+        Или оставьте заявку и мы свяжемся с вами
+      </h3>
 
       <form class="booking-panel__form" data-booking-form data-callback-form novalidate>
         <div class="booking-panel__fields">
           <label class="visually-hidden" for="booking-name">Ваше имя</label>
-          <input class="booking-panel__input" id="booking-name" name="name" type="text" placeholder="Ваше имя"
-            autocomplete="name" minlength="2" data-validate required />
+          <input
+            class="booking-panel__input"
+            id="booking-name"
+            name="name"
+            type="text"
+            placeholder="Имя"
+            autocomplete="name"
+            minlength="2"
+            data-validate
+            required
+          />
 
           <label class="visually-hidden" for="booking-phone">Телефон</label>
-          <input class="booking-panel__input" id="booking-phone" name="phone" type="tel"
-            placeholder="+7 (000) 000-00-00" autocomplete="tel" inputmode="tel" data-phone-mask data-validate
-            required />
+          <input
+            class="booking-panel__input"
+            id="booking-phone"
+            name="phone"
+            type="tel"
+            placeholder="+7 (000) 000-00-00"
+            autocomplete="tel"
+            inputmode="tel"
+            data-phone-mask
+            data-validate
+            required
+          />
         </div>
 
         <label class="booking-panel__agreement">
-          <input class="booking-panel__agreement-input visually-hidden" name="agreement" type="checkbox" data-validate
-            required />
+          <input
+            class="booking-panel__agreement-input visually-hidden"
+            name="agreement"
+            type="checkbox"
+            data-validate
+            required
+          />
           <span class="booking-panel__agreement-box" aria-hidden="true"></span>
           <span>
-            Принимаю условия
-            <a href="/privacy/">политики конфиденциальности</a>
-            и даю согласие на обработку персональных данных
+            Я согласен на обработку персональных данных в соответствии с
+            <a href="/legal/privacy/">Политикой конфиденциальности</a>, а также с условиями
+            <a href="/legal/agreement/">Пользовательского соглашения</a>
           </span>
         </label>
 
-        <button class="booking-panel__button booking-panel__button--submit button-reset" type="submit"
-          data-booking-submit disabled>
+        <button
+          class="booking-panel__button booking-panel__button--submit button-reset"
+          type="submit"
+          data-booking-submit
+          disabled
+        >
           Оставить заявку
         </button>
       </form>
-
-      <img class="booking-panel__woman" src="img/form_girl.png" width="378" height="438" alt="" aria-hidden="true"
-        loading="lazy" decoding="async" />
-    </article>
+    </section>
   </aside>
 </div>

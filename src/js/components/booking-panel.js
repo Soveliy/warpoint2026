@@ -18,13 +18,8 @@ export function initBookingPanel() {
   const agreementInput = form.querySelector('[name="agreement"]');
   const submitButton = panel.querySelector('[data-booking-submit]');
   const closeButtons = [...panel.querySelectorAll('[data-booking-close]')];
-  const openButtons = [
-    ...new Set(
-      document.querySelectorAll(
-        '[data-booking-open], .hero__button--red, .zone__button:not([data-event-modal-open])',
-      ),
-    ),
-  ];
+  const openButtons = [...document.querySelectorAll('[data-booking-open]')];
+  const validatedFields = [...form.querySelectorAll('[data-validate]')];
 
   let activeTrigger = null;
 
@@ -38,13 +33,20 @@ export function initBookingPanel() {
   const closePanel = () => {
     panel.classList.remove('is-open');
     panel.setAttribute('aria-hidden', 'true');
+    panel.inert = true;
     toggleScrollLock(false);
     activeTrigger?.focus();
   };
 
   const openPanel = (trigger) => {
     activeTrigger = trigger;
+    panel.inert = false;
     form.reset();
+    validatedFields.forEach((field) => {
+      field.classList.remove('is-invalid', 'is-touched');
+      field.setAttribute('aria-invalid', 'false');
+      field.setCustomValidity('');
+    });
     updateSubmitState();
     panel.classList.add('is-open');
     panel.setAttribute('aria-hidden', 'false');
@@ -63,7 +65,7 @@ export function initBookingPanel() {
       return;
     }
 
-    const focusableElements = [...panel.querySelectorAll(focusableSelector)].filter(
+    const focusableElements = [...dialog.querySelectorAll(focusableSelector)].filter(
       (element) => element.getClientRects().length,
     );
     const firstElement = focusableElements[0];

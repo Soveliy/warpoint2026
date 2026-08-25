@@ -293,6 +293,17 @@
 
 @media (max-width: $breakpoint-mobile) {
   .footer {
+    padding-bottom: 80px;
+    &__meta {
+      margin-top: 1rem;
+    }
+    &__column,
+    &__nav-group {
+      padding-top: 1rem;
+    }
+  }
+
+  .footer {
     &__top,
     &__meta,
     &__legal {
@@ -300,7 +311,7 @@
     }
 
     &__top {
-      gap: rem(48px);
+      gap: rem(16px);
     }
 
     &__contacts {
