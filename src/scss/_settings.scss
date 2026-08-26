@@ -6,7 +6,9 @@
 *::after {
   box-sizing: border-box;
 }
-
+html {
+  scrollbar-gutter: stable;
+}
 body {
   background-color: $color-bg;
   color: $color-text;

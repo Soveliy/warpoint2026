@@ -104,8 +104,9 @@ export function initLocationModal() {
   const stepButtons = [...modal.querySelectorAll('[data-location-step]')];
   const views = [...modal.querySelectorAll('[data-location-view]')];
   const openButtons = [...document.querySelectorAll('[data-location-open]')];
-  const headerCity = document.querySelector('[data-header-city]');
-  const headerAddress = document.querySelector('[data-header-address]');
+  const mobileMenuToggle = document.querySelector('[data-mobile-menu-toggle]');
+  const headerCities = [...document.querySelectorAll('[data-header-city]')];
+  const headerAddresses = [...document.querySelectorAll('[data-header-address]')];
 
   let appliedState = loadState();
   let draftState = { ...appliedState };
@@ -118,12 +119,14 @@ export function initLocationModal() {
     const country = getCountry(state.countryId);
     const location = getLocation(state);
 
-    if (headerCity) {
+    headerCities.forEach((headerCity) => {
       headerCity.textContent = state.cityName;
-    }
+    });
 
-    if (headerAddress && location) {
-      headerAddress.textContent = location.headerAddress;
+    if (location) {
+      headerAddresses.forEach((headerAddress) => {
+        headerAddress.textContent = location.headerAddress;
+      });
     }
 
     document.documentElement.dataset.country = country.id;
@@ -387,7 +390,9 @@ export function initLocationModal() {
 
   openButtons.forEach((button) => {
     button.addEventListener('click', () => {
-      openModal(button.dataset.locationOpen || 'country', button);
+      const restoreTarget = button.closest('[data-mobile-menu]') ? mobileMenuToggle : button;
+
+      openModal(button.dataset.locationOpen || 'country', restoreTarget || button);
     });
   });
   stepButtons.forEach((button) => {

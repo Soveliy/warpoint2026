@@ -2,106 +2,409 @@
 @use '../mixins/disable-mob-hover' as *;
 @use '../vars' as *;
 
-@mixin menu-overlay {
+@mixin menu-drawer {
   position: fixed;
-  inset: var(--mobile-menu-top, 0) 0 0;
-  z-index: 1;
+  inset: 0 0 0 auto;
+  z-index: 3;
   display: flex;
   flex-direction: column;
-  overflow: hidden auto;
-  padding: 16px;
+  width: min(100%, rem(440px));
+  height: 100vh;
+  height: 100dvh;
+  overflow: hidden;
+  padding: rem(18px) rem(26px);
+  padding-bottom: calc(#{rem(26px)} + env(safe-area-inset-bottom));
+  border-left: rem(1px) solid rgba($white, 0.1);
   background-color: $black;
+  box-shadow: rem(-30px) 0 rem(80px) rgba($black, 0.55);
   color: $white;
-  opacity: 0;
   visibility: hidden;
-  overscroll-behavior: contain;
   pointer-events: none;
-  transform: translate3d(0, rem(-16px), 0) scale(0.985);
-  transform-origin: 50% 0;
+  transform: translate3d(102%, 0, 0);
   transition:
-    opacity $duration-base $ease-base,
-    transform 420ms cubic-bezier(0.22, 1, 0.36, 1),
-    visibility 0s linear 420ms;
+    transform 380ms cubic-bezier(0.2, 0.8, 0.2, 1),
+    visibility 0s linear 380ms;
+
+  .menu__top {
+    display: flex;
+    width: 100%;
+  }
+
+  .menu__scroll {
+    display: flex;
+  }
 
   .menu__list {
-    flex-direction: column;
-    align-items: stretch;
-    gap: 0;
-    width: min(100%, rem(760px));
-    margin: 0 auto;
+    display: block;
+    width: 100%;
+    margin: 0 0 rem(26px);
+    border-top: rem(1px) solid rgba($white, 0.09);
   }
 
   .menu__item {
-    border-bottom: rem(1px) solid rgba($white, 0.12);
-    opacity: 0;
-    transform: translate3d(0, rem(18px), 0);
-    transition:
-      opacity 280ms $ease-base,
-      transform 480ms cubic-bezier(0.22, 1, 0.36, 1);
+    border-bottom: rem(1px) solid rgba($white, 0.09);
   }
 
-  .menu__link {
+  .menu__item--group {
+    position: static;
+  }
+
+  .menu__link,
+  .menu__toggle {
     justify-content: space-between;
     width: 100%;
-    padding: rem(14px) 0 rem(12px);
+    min-height: 0;
+    padding: rem(17px) rem(2px);
+    border-radius: 0;
     color: $white;
-    font-family: $font-family-heading;
-    font-size: clamp(#{rem(34px)}, 9vw, #{rem(68px)});
-    font-weight: 800;
+    font-family: $font-family-primary;
+    font-size: rem(19px);
+    font-weight: 700;
     letter-spacing: 0;
-    line-height: 0.88;
+    line-height: 1.15;
     text-align: left;
+    text-transform: none;
   }
 
   .menu__link-icon {
-    display: none;
+    display: block;
+    width: rem(13px);
+    height: rem(13px);
+    flex: 0 0 rem(13px);
+    transition: transform 300ms cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+
+  .menu__toggle[aria-expanded='true'] {
+    color: $red-400;
+  }
+
+  .menu__toggle[aria-expanded='true'] .menu__link-icon {
+    transform: rotate(180deg);
+  }
+
+  .menu__submenu {
+    position: static;
+    inset: auto;
+    min-width: 0;
+    max-height: 0;
+    overflow: hidden;
+    padding: 0 0 0 rem(2px);
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transform: none;
+    transition:
+      max-height 350ms cubic-bezier(0.2, 0.8, 0.2, 1),
+      opacity 220ms $ease-base,
+      visibility 0s linear 350ms;
+  }
+
+  .menu__toggle[aria-expanded='true'] + .menu__submenu {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: none;
+    transition-delay: 0s;
+  }
+
+  .menu__submenu li {
+    border-top: rem(1px) solid rgba($white, 0.09);
+  }
+
+  .menu__submenu a {
+    display: block;
+    padding: rem(13px) rem(2px);
+    border-radius: 0;
+    color: rgba($white, 0.72);
+    font-size: rem(16px);
+    font-weight: 500;
+    line-height: 1.2;
+  }
+
+  .menu__place {
+    display: flex;
+    margin-top: auto;
   }
 
   .menu__footer {
-    display: grid;
-    grid-template-columns: minmax(0, rem(260px)) auto;
-    align-items: center;
-    gap: rem(24px);
-    width: min(100%, rem(760px));
-    margin: auto auto 0;
-    padding-top: rem(36px);
+    display: flex;
   }
 }
 
 .menu {
-  &__list {
+  display: flex;
+  align-items: center;
+
+  &__top {
+    display: none;
+    align-items: center;
+    justify-content: space-between;
+    flex: 0 0 auto;
+    gap: rem(16px);
+    margin-bottom: rem(22px);
+  }
+
+  &__logo {
     display: flex;
     align-items: center;
-    gap: 0.75rem;
+    height: rem(40px);
+
+    img {
+      width: auto;
+      max-width: rem(214px);
+      max-height: rem(28px);
+    }
+  }
+
+  &__close {
+    @include hover {
+      transform: translateY(rem(-1px));
+    }
+    position: relative;
+    display: grid;
+    place-items: center;
+    width: rem(52px);
+    height: rem(52px);
+    flex: 0 0 rem(52px);
+    border-radius: rem(16px);
+    background-color: rgba($white, 0.07);
+    color: $white;
+    transition:
+      border-color $duration-fast $ease-base,
+      background-color $duration-fast $ease-base,
+      transform $duration-fast $ease-base;
+  }
+
+  &__close-icon,
+  &__close-icon::before {
+    display: block;
+    width: rem(20px);
+    height: rem(2px);
+    border-radius: $radius-pill;
+    background-color: currentColor;
+  }
+
+  &__close-icon {
+    transform: rotate(45deg);
+  }
+
+  &__close-icon::before {
+    content: '';
+    transform: rotate(90deg);
+  }
+
+  &__scroll {
+    width: 100%;
+    display: contents;
+    min-height: 0;
+    flex: 1;
+    flex-direction: column;
+    overflow: hidden auto;
+    overscroll-behavior: contain;
+    scrollbar-width: none;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+
+  &__list,
+  &__submenu {
     margin: 0;
     padding: 0;
     list-style: none;
   }
 
+  &__list {
+    display: flex;
+    align-items: center;
+    gap: rem(12px);
+  }
+
   &__item {
     min-width: 0;
+
+    &--group {
+      position: relative;
+    }
   }
 
   &__link {
-    color: $white;
+    @include hover {
+      color: $red-400;
+    }
     display: flex;
     align-items: center;
-    gap: 0.25rem;
+    gap: rem(4px);
+    color: $white;
     font-size: rem(11px);
     font-weight: 700;
     letter-spacing: 0.08em;
-    line-height: 100%;
+    line-height: 1;
     text-align: center;
     text-transform: uppercase;
+    transition: color $duration-fast $ease-base;
+  }
+
+  &__toggle {
+    white-space: nowrap;
   }
 
   &__link-icon {
-    width: 0.375rem;
-    height: 0.375rem;
+    width: rem(6px);
+    height: rem(6px);
+    transition: transform $duration-base cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+
+  &__toggle[aria-expanded='true'] {
+    color: $red-400;
+  }
+
+  &__toggle[aria-expanded='true'] &__link-icon {
+    transform: rotate(180deg);
+  }
+
+  &__submenu {
+    position: absolute;
+    top: calc(100% + #{rem(14px)});
+    left: rem(-16px);
+    z-index: 2;
+    min-width: rem(264px);
+    padding: rem(8px);
+    border: rem(1px) solid rgba($white, 0.1);
+    border-radius: rem(18px);
+    background-color: rgba($gray-950, 0.96);
+    box-shadow: 0 rem(18px) rem(48px) rgba($black, 0.38);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transform: translate3d(0, rem(-8px), 0);
+    transition:
+      opacity $duration-base $ease-base,
+      transform 300ms cubic-bezier(0.2, 0.8, 0.2, 1),
+      visibility 0s linear 300ms;
+
+    a {
+      @include hover {
+        background-color: rgba($white, 0.07);
+        color: $white;
+      }
+      display: block;
+      padding: rem(11px) rem(14px);
+      border-radius: rem(12px);
+      color: rgba($white, 0.74);
+      font-size: rem(14px);
+      font-weight: 600;
+      line-height: 1.2;
+      transition:
+        color $duration-fast $ease-base,
+        background-color $duration-fast $ease-base;
+    }
+  }
+
+  &__toggle[aria-expanded='true'] + &__submenu {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: none;
+    transition-delay: 0s;
+  }
+
+  &__place {
+    display: none;
+    flex-direction: column;
+    gap: rem(8px);
+    margin-bottom: rem(24px);
+  }
+
+  &__label {
+    display: block;
+    margin-bottom: rem(2px);
+    color: rgba($white, 0.4);
+    font-size: rem(11px);
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    line-height: 1.2;
+    text-transform: uppercase;
+  }
+
+  &__place-button {
+    @include hover {
+      border-color: rgba($white, 0.22);
+      background-color: rgba($white, 0.11);
+    }
+    display: flex;
+    align-items: center;
+    gap: rem(10px);
+    width: 100%;
+    min-height: rem(52px);
+    padding: 0 rem(16px);
+    border: rem(1px) solid rgba($white, 0.12);
+    border-radius: rem(16px);
+    background-color: rgba($white, 0.07);
+    color: $white;
+    font-size: rem(15px);
+    font-weight: 600;
+    text-align: left;
+    transition:
+      border-color $duration-fast $ease-base,
+      background-color $duration-fast $ease-base;
+
+    > span:not(.menu__place-marker) {
+      min-width: 0;
+      flex: 1;
+    }
+
+    &--address {
+      color: rgba($white, 0.78);
+      font-size: rem(14px);
+      font-weight: 500;
+    }
+  }
+
+  &__place-marker {
+    position: relative;
+    width: rem(14px);
+    height: rem(14px);
+    flex: 0 0 rem(14px);
+    border: rem(2px) solid $red-400;
+    border-radius: 50% 50% 50% 0;
+    transform: rotate(-45deg);
+
+    &::after {
+      content: '';
+      position: absolute;
+      inset: 50% auto auto 50%;
+      width: rem(4px);
+      height: rem(4px);
+      border-radius: 50%;
+      background-color: $red-400;
+      transform: translate(-50%, -50%);
+    }
+  }
+
+  &__place-chevron {
+    width: rem(11px);
+    height: rem(11px);
+    flex: 0 0 rem(11px);
+  }
+
+  &__place-address {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 
   &__footer {
     display: none;
+    flex-direction: column;
+    align-items: stretch;
+    gap: rem(18px);
+    margin-top: 16px;
   }
 
   &__booking {
@@ -109,10 +412,10 @@
       background-color: $red-600;
       transform: translateY(rem(-2px));
     }
-
     display: inline-flex;
     align-items: center;
     justify-content: center;
+    width: 100%;
     min-height: rem(58px);
     padding: 0 rem(28px);
     border-radius: $radius-pill;
@@ -134,53 +437,69 @@
 
   &__phone {
     @include hover {
-      color: $white;
+      color: $red-400;
     }
-
-    color: rgba($white, 0.78);
-    font-size: rem(18px);
-    font-weight: 700;
+    color: $white;
+    font-family: $font-family-heading;
+    font-size: rem(24px);
+    font-weight: 800;
     letter-spacing: 0.01em;
+    line-height: 1;
+    transition: color $duration-fast $ease-base;
+  }
+}
+
+.menu-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  background-color: rgb(6 6 10 / 0.62);
+  opacity: 0;
+  pointer-events: none;
+  backdrop-filter: blur(rem(6px));
+  transition: opacity 300ms cubic-bezier(0.2, 0.8, 0.2, 1);
+
+  &.is-visible {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  &[hidden] {
+    display: none;
   }
 }
 
 @media (max-width: $breakpoint-tablet) {
   .header__menu.menu {
-    @include menu-overlay;
+    @include menu-drawer;
   }
 }
 
 .header__menu.menu.is-open {
-  @include menu-overlay;
+  @include menu-drawer;
 
-  opacity: 1;
   visibility: visible;
   pointer-events: auto;
   transform: none;
   transition-delay: 0s;
-
-  .menu__item {
-    opacity: 1;
-    transform: none;
-
-    @for $index from 1 through 6 {
-      &:nth-child(#{$index}) {
-        transition-delay: #{70ms + (($index - 1) * 45ms)};
-      }
-    }
-  }
 }
 
-@media (max-width: $breakpoint-mobile) {
+@media (width <= rem(900px)) {
   .header__menu.menu,
   .header__menu.menu.is-open {
-    .menu__footer {
-      grid-template-columns: 1fr;
-      gap: rem(18px);
+    width: 100%;
+    padding: rem(14px) rem(18px);
+    padding-bottom: calc(#{rem(20px)} + env(safe-area-inset-bottom));
+    border-left: 0;
+
+    .menu__top {
+      margin-bottom: rem(18px);
     }
 
-    .menu__phone {
-      text-align: center;
+    .menu__link,
+    .menu__toggle {
+      padding: rem(15px) rem(2px);
+      font-size: rem(17px);
     }
   }
 }
@@ -188,8 +507,9 @@
 @media (prefers-reduced-motion: reduce) {
   .header__menu.menu,
   .header__menu.menu.is-open,
-  .header__menu.menu .menu__item,
-  .header__menu.menu.is-open .menu__item {
+  .menu__submenu,
+  .menu__link-icon,
+  .menu-backdrop {
     transition: none;
   }
 }

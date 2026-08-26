@@ -20,6 +20,7 @@ export function initBookingPanel() {
   const closeButtons = [...panel.querySelectorAll('[data-booking-close]')];
   const openButtons = [...document.querySelectorAll('[data-booking-open]')];
   const validatedFields = [...form.querySelectorAll('[data-validate]')];
+  const mobileMenuToggle = document.querySelector('[data-mobile-menu-toggle]');
 
   let activeTrigger = null;
 
@@ -87,7 +88,11 @@ export function initBookingPanel() {
   openButtons.forEach((button) => {
     button.setAttribute('aria-controls', 'booking-panel');
     button.setAttribute('aria-haspopup', 'dialog');
-    button.addEventListener('click', () => openPanel(button));
+    button.addEventListener('click', () => {
+      const restoreTarget = button.closest('[data-mobile-menu]') ? mobileMenuToggle : button;
+
+      openPanel(restoreTarget || button);
+    });
   });
   closeButtons.forEach((button) => button.addEventListener('click', closePanel));
   form.addEventListener('input', updateSubmitState);

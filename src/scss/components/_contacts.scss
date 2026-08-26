@@ -9,7 +9,7 @@
   min-height: 100vh;
   padding-top: rem(28px);
   background-color: $violet-600;
-  color: $black;
+  color: $white;
   scroll-snap-align: start;
 
   &::before {
@@ -17,15 +17,8 @@
     position: absolute;
     inset: 0;
     z-index: -1;
-    background-image:
-      linear-gradient(
-        124deg,
-        rgba($white, 0.12) 0 5.5%,
-        transparent 5.5% 8%,
-        rgba($white, 0.09) 8% 11%,
-        transparent 11%
-      ),
-      linear-gradient(124deg, transparent 0 63%, rgba($violet-400, 0.16) 63% 69%, transparent 69%);
+    background: url(../../img/gradient_event.svg) no-repeat center center;
+    background-size: cover;
     pointer-events: none;
   }
 
@@ -114,7 +107,7 @@
   &__title {
     margin: 0;
     font-family: $font-family-heading;
-    font-size: fluid(56px, 64px);
+    font-size: fluid(46px, 64px);
     font-weight: 800;
     line-height: 0.88;
     letter-spacing: 0;
@@ -136,7 +129,7 @@
 
   &__label {
     margin-bottom: rem(12px);
-    color: rgba($black, 0.52);
+    color: rgba($white, 0.52);
     font-size: rem(11px);
     font-weight: 800;
     line-height: 1;
@@ -145,7 +138,6 @@
 
   &__text {
     margin: 0;
-    color: $black;
     font-size: rem(18px);
     font-style: normal;
     font-weight: 700;
@@ -185,9 +177,9 @@
     justify-content: center;
     width: rem(44px);
     aspect-ratio: 1;
-    border: rem(1px) solid rgba($black, 0.22);
+    border: rem(1px) solid rgba($white, 0.22);
     border-radius: rem(14px);
-    color: $black;
+    color: $white;
     transition:
       border-color $duration-fast $ease-base,
       background-color $duration-fast $ease-base;

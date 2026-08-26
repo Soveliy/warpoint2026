@@ -74,52 +74,108 @@
           aria-label="Основная навигация"
           data-mobile-menu
         >
-          <ul class="menu__list">
-            <li class="menu__item">
-              <a href="/games/" class="menu__link">
-                Игры
-                <svg class="icon menu__link-icon" aria-hidden="true">
-                  <use href="/img/sprite.svg#icon-cvervron_down"></use>
-                </svg>
-              </a>
-            </li>
-            <li class="menu__item">
-              <a href="/tariffs/" class="menu__link">
-                Тарифы
-                <svg class="icon menu__link-icon" aria-hidden="true">
-                  <use href="/img/sprite.svg#icon-cvervron_down"></use>
-                </svg>
-              </a>
-            </li>
-            <li class="menu__item">
-              <a href="/events/" class="menu__link">
-                Мероприятия
-                <svg class="icon menu__link-icon" aria-hidden="true">
-                  <use href="/img/sprite.svg#icon-cvervron_down"></use>
-                </svg>
-              </a>
-            </li>
-            <li class="menu__item">
-              <a href="/certificates/" class="menu__link"> Сертификаты </a>
-            </li>
-            <li class="menu__item">
-              <a href="/about/" class="menu__link"> О компании </a>
-            </li>
-            <li class="menu__item">
-              <a href="#contacts" class="menu__link"> Контакты </a>
-            </li>
-          </ul>
-
-          <div class="menu__footer">
+          <div class="menu__top">
+            <a class="menu__logo" href="/" aria-label="Warpoint — на главную">
+              <img src="img/logo.svg" alt="" />
+            </a>
             <button
-              class="menu__booking button-reset"
+              class="menu__close button-reset"
               type="button"
-              data-booking-open
+              aria-label="Закрыть меню"
               data-mobile-menu-close
             >
-              Забронировать
+              <span class="menu__close-icon" aria-hidden="true"></span>
             </button>
-            <a class="menu__phone" href="tel:+73433000000">+7 (343) 300-00-00</a>
+          </div>
+
+          <div class="menu__scroll">
+            <ul class="menu__list">
+              <li class="menu__item">
+                <a href="/games/" class="menu__link">Игры</a>
+              </li>
+              <li class="menu__item">
+                <a href="/tariffs/" class="menu__link">Тарифы</a>
+              </li>
+              <li class="menu__item menu__item--group">
+                <button
+                  class="menu__link menu__toggle button-reset"
+                  type="button"
+                  aria-expanded="false"
+                  aria-controls="header-events-submenu"
+                  data-menu-submenu-toggle
+                >
+                  <span>Мероприятия</span>
+                  <svg class="icon menu__link-icon" aria-hidden="true">
+                    <use href="/img/sprite.svg#icon-cvervron_down"></use>
+                  </svg>
+                </button>
+                <ul
+                  class="menu__submenu"
+                  id="header-events-submenu"
+                  aria-label="Разделы мероприятий"
+                  aria-hidden="true"
+                  data-menu-submenu
+                  inert
+                >
+                  <li><a href="/events/">Все мероприятия</a></li>
+                  <li><a href="/events/birthday/">День рождения</a></li>
+                  <li><a href="/events/corporate/">Корпоратив и тимбилдинг</a></li>
+                  <li><a href="/events/graduation/">Школьный выпускной</a></li>
+                </ul>
+              </li>
+              <li class="menu__item">
+                <a href="/certificates/" class="menu__link">Сертификаты</a>
+              </li>
+              <li class="menu__item">
+                <a href="/about/" class="menu__link">О компании</a>
+              </li>
+              <li class="menu__item">
+                <a href="#contacts" class="menu__link">Контакты</a>
+              </li>
+            </ul>
+
+            <div class="menu__place">
+              <span class="menu__label">Ваш город и локация</span>
+              <button
+                class="menu__place-button button-reset"
+                type="button"
+                aria-haspopup="dialog"
+                aria-controls="location-modal"
+                data-location-open="city"
+                data-mobile-menu-close
+              >
+                <span class="menu__place-marker" aria-hidden="true"></span>
+                <span data-header-city>Екатеринбург</span>
+                <svg class="icon menu__place-chevron" aria-hidden="true">
+                  <use href="/img/sprite.svg#icon-cvervron_down"></use>
+                </svg>
+              </button>
+              <button
+                class="menu__place-button menu__place-button--address button-reset"
+                type="button"
+                aria-haspopup="dialog"
+                aria-controls="location-modal"
+                data-location-open="location"
+                data-mobile-menu-close
+              >
+                <span class="menu__place-address" data-header-address>пр-т Космонавтов, 108 Д</span>
+                <svg class="icon menu__place-chevron" aria-hidden="true">
+                  <use href="/img/sprite.svg#icon-cvervron_down"></use>
+                </svg>
+              </button>
+            </div>
+
+            <div class="menu__footer">
+              <a class="menu__phone" href="tel:+73433000000">+7 (343) 300-00-00</a>
+              <button
+                class="menu__booking button-reset"
+                type="button"
+                data-booking-open
+                data-mobile-menu-close
+              >
+                Забронировать
+              </button>
+            </div>
           </div>
         </nav>
         <div class="header__buttons">
@@ -150,4 +206,5 @@
       </div>
     </div>
   </div>
+  <div class="menu-backdrop" data-mobile-menu-backdrop hidden></div>
 </header>
