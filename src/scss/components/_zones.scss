@@ -1,13 +1,15 @@
-@use '../vars' as *;
 @use '../fluid' as *;
+@use '../mixins' as *;
+@use '../mixins/disable-mob-hover' as *;
+@use '../vars' as *;
 
 .zones {
   position: relative;
   z-index: 50;
   min-height: 100vh;
-  padding: rem(124px) 0 rem(42px);
+  @include section-spacing;
   overflow: hidden;
-  background-color: $gray-950;
+  background-color: $color-bg;
 
   &__inner {
     padding: 0 rem(24px);
@@ -65,80 +67,6 @@
 
   &__mobile-select {
     display: none;
-  }
-
-  &__venue-switch {
-    position: relative;
-    z-index: 2;
-    display: grid;
-    flex: 0 0 rem(236px);
-    grid-template-columns: rem(42px) minmax(0, 1fr) rem(42px);
-    min-width: 0;
-    overflow: hidden;
-    border-radius: rem(19px);
-    background: linear-gradient(135deg, $violet-500 0%, #7b4df2 100%);
-    box-shadow:
-      inset 0 rem(1px) 0 rgba($white, 0.24),
-      rem(8px) 0 rem(22px) rgba($black, 0.2);
-  }
-
-  &__venue-arrow {
-    position: relative;
-    display: grid;
-    place-items: center;
-    color: $white;
-    opacity: 0.76;
-    transition:
-      background-color $duration-fast $ease-base,
-      opacity $duration-fast $ease-base;
-
-    &::after {
-      content: '';
-      position: absolute;
-      top: 50%;
-      width: rem(1px);
-      height: rem(38px);
-      background-color: rgba($white, 0.34);
-      transform: translateY(-50%);
-    }
-
-    &:first-child::after {
-      right: 0;
-    }
-
-    &:last-child::after {
-      left: 0;
-    }
-
-    &:hover {
-      background-color: rgba($white, 0.12);
-      opacity: 1;
-    }
-
-    &:active {
-      background-color: rgba($black, 0.08);
-    }
-
-    &:focus-visible {
-      z-index: 2;
-      outline: $focus-outline-width solid $white;
-      outline-offset: rem(-5px);
-    }
-  }
-
-  &__venue-chevron {
-    width: rem(11px);
-    height: rem(11px);
-    border-top: rem(1.5px) solid currentColor;
-    border-right: rem(1.5px) solid currentColor;
-
-    &--prev {
-      transform: rotate(-135deg);
-    }
-
-    &--next {
-      transform: rotate(45deg);
-    }
   }
 
   &__tabs {
@@ -217,49 +145,11 @@
     }
   }
 
-  &__venue-current {
-    flex: 1 1 auto;
-    gap: rem(11px);
-    width: auto;
-    padding: 0 rem(10px);
-    border-radius: 0;
-
-    &::before {
-      display: none;
-    }
-
-    &:hover,
-    &[aria-pressed='true'],
-    &[aria-pressed='true']:hover,
-    &.is-active,
-    &.is-active:hover {
-      background-color: transparent;
-    }
-
-    &:focus-visible {
-      outline-color: $white;
-      outline-offset: rem(-5px);
-    }
-  }
-
-  &__venue-name {
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-
   &__tab-icon {
     flex: 0 0 auto;
     width: rem(31px);
     height: rem(31px);
     color: currentColor;
-  }
-
-  &[data-zone-venue-active='arena'] &__navigation {
-    width: min(100%, rem(456px));
-  }
-
-  &[data-zone-venue-active='arena'] &__tabs &__tab {
-    min-width: 100%;
   }
 }
 
@@ -372,7 +262,7 @@
       position: absolute;
       inset: 0;
       z-index: 0;
-      background: url(../../img/zone_gradient.svg) no-repeat center center;
+      background: url('../../img/zones_gradient.svg') no-repeat center center;
       background-size: cover;
       pointer-events: none;
     }
@@ -504,16 +394,6 @@
       border-radius: rem(18px);
     }
 
-    &__venue-switch {
-      flex-basis: rem(210px);
-      grid-template-columns: rem(38px) minmax(0, 1fr) rem(38px);
-      border-radius: rem(17px);
-    }
-
-    &__venue-arrow::after {
-      height: rem(32px);
-    }
-
     &__tabs {
       overflow: auto hidden;
       scrollbar-width: none;
@@ -529,13 +409,6 @@
       padding: 0 rem(24px);
       border-radius: rem(17px);
       font-size: rem(18px);
-    }
-
-    &__venue-current {
-      gap: rem(9px);
-      min-width: 0;
-      padding: 0 rem(8px);
-      border-radius: 0;
     }
 
     &__tab-icon {
@@ -596,9 +469,9 @@
       display: none;
     }
   }
+
   .zones {
     min-height: 0;
-    padding: rem(92px) 0 rem(32px);
 
     &__heading {
       display: flex;
@@ -630,24 +503,7 @@
     }
 
     &__navigation {
-      width: min(100%, rem(190px));
-      height: rem(52px);
-      margin-bottom: rem(20px);
-      overflow: visible;
-      border: 0;
-      border-radius: rem(16px);
-      background: transparent;
-      box-shadow: none;
-    }
-
-    &__venue-switch {
-      flex-basis: 100%;
-      grid-template-columns: rem(34px) minmax(0, 1fr) rem(34px);
-      border-radius: rem(15px);
-    }
-
-    &__venue-arrow::after {
-      height: rem(28px);
+      display: none;
     }
 
     &__tabs {
@@ -664,13 +520,6 @@
       &::before {
         height: rem(28px);
       }
-    }
-
-    &__venue-current {
-      gap: rem(7px);
-      min-width: 0;
-      padding: 0 rem(5px);
-      border-radius: 0;
     }
 
     &__tab-icon {
@@ -817,10 +666,6 @@
     &__mobile-option[aria-selected='true'] &__mobile-option-mark {
       opacity: 1;
     }
-
-    &[data-zone-venue-active='arena'] &__navigation {
-      width: min(100%, rem(190px));
-    }
   }
 
   .zone {
@@ -887,17 +732,10 @@
 @media (prefers-reduced-motion: reduce) {
   .zones__navigation,
   .zones__tab,
-  .zones__venue-arrow,
   .zones__mobile-chevron,
   .zones__mobile-option,
   .zones__mobile-option-mark,
   .zone__image-zoom {
     transition: none;
-  }
-}
-@media (max-width: 576px) {
-  .zones__navigation,
-  .zones[data-zone-venue-active='arena'] .zones__navigation {
-    width: 100%;
   }
 }

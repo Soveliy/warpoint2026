@@ -18,6 +18,7 @@ import { initPixelTransitions } from './components/pixel-transition.js';
 import { initPreloader } from './components/preloader.js';
 import { initReviews } from './components/reviews.js';
 import { initSliders } from './components/sliders.js';
+import { initVideoParallax } from './components/video-parallax.js';
 import { initYandexMaps } from './components/yandex-map.js';
 import { initZoneSequence } from './components/zone-sequence.js';
 
@@ -37,6 +38,7 @@ initBookingPanel();
 initPhoneMasks();
 initFancybox();
 initAnimations();
+initVideoParallax();
 initAboutGameSequence();
 initZoneSequence();
 initEventsSequence();

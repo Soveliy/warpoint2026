@@ -1,4 +1,5 @@
 @use '../fluid' as *;
+@use '../mixins' as *;
 @use '../mixins/disable-mob-hover' as *;
 @use '../vars' as *;
 
@@ -7,8 +8,16 @@
   color: $black;
   isolation: isolate;
   position: relative;
-
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: url(../../img/white_gradient.svg) no-repeat center center;
+    background-size: cover;
+    pointer-events: none;
+  }
   &__background {
+    display: none;
     height: 100svh;
     margin-bottom: -100svh;
     overflow: hidden;
@@ -46,25 +55,23 @@
 }
 
 .games-catalog {
+  @include section-spacing;
+
   position: relative;
   overflow: hidden;
   z-index: 1;
   isolation: isolate;
   min-height: 100vh;
-  padding: fluid(88px, 104px) 0 fluid(48px, 64px);
   color: $black;
   scroll-snap-align: start;
 
   &__title {
-    max-width: rem(720px);
-    margin: 0 auto;
-    font-family: $font-family-heading;
-    font-size: rem(64px);
-    font-weight: 800;
-    line-height: 0.86;
-    letter-spacing: 0;
+    @include section-title;
+
+    max-width: rem(736px);
+    margin-right: auto;
+    margin-left: auto;
     text-align: center;
-    text-transform: uppercase;
   }
 
   &__title span {
@@ -72,7 +79,7 @@
   }
 
   &__track {
-    margin-top: fluid(32px, 38px);
+    margin-top: $section-title-gap;
     padding-left: fluid(16px, 88px);
   }
 
@@ -229,9 +236,10 @@
 }
 
 @media (max-width: $breakpoint-tablet) {
-  .games-catalog__title {
-    max-width: rem(660px);
-    font-size: rem(56px);
+  .games-catalog {
+    &__title {
+      max-width: rem(660px);
+    }
   }
 
   .game-card__title {
@@ -241,16 +249,11 @@
 
 @media (max-width: $breakpoint-mobile) {
   .games-catalog {
-    padding-top: rem(72px);
-
     &__title {
       max-width: rem(340px);
-      font-size: rem(46px);
-      line-height: 0.88;
     }
 
     &__track {
-      margin-top: rem(32px);
       padding-left: rem(16px);
     }
   }

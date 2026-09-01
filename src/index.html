@@ -26,11 +26,7 @@
             Путешествуйте по виртуальным мирам вместе с <span>warpoint</span>
           </h1>
           <div class="hero__buttons">
-            <button
-              class="hero__button hero__button--red button-reset"
-              type="button"
-              data-booking-open
-            >
+            <button class="hero__button hero__button--red button-reset" type="button" data-booking-open>
               забронировать игру
             </button>
             <button class="hero__button hero__button--purple button-reset" type="button" aria-haspopup="dialog"
@@ -80,10 +76,6 @@
     </section>
 
     <div class="about-game-group" data-about-game-group>
-      <div class="about-game-group__background" aria-hidden="true">
-        <img class="about-game-group__background-image" src="img/about/bg_1.jpg" width="1512" height="982" alt=""
-          loading="lazy" decoding="async" />
-      </div>
       <section class="about-game" data-header-theme="brand" aria-labelledby="about-game-title">
         <div class="about-game__inner container">
           <div class="about-game__heading">
@@ -96,10 +88,34 @@
             </p>
           </div>
           <div class="about-game__stage">
-            <img class="about-game__visual" src="img/about/4.png" width="638" height="727"
-              alt="Семья играет в виртуальной реальности" loading="lazy" decoding="async" />
+            <div class="about-game__visual-wrap" data-about-game-scene>
+              <span class="about-game__visual-aura" aria-hidden="true"></span>
+              <span class="about-game__visual-shadow" aria-hidden="true"></span>
+              <div class="about-game__visual-model">
+                <div class="about-game__visual-state about-game__visual-state--team" data-about-scene-state="team"
+                  aria-hidden="true">
+                  <img class="about-game__visual about-game__visual--team" src="img/about/1.png" width="758"
+                    height="949" alt="" loading="lazy" decoding="async" />
+                </div>
+                <div class="about-game__visual-state about-game__visual-state--immersion"
+                  data-about-scene-state="immersion" aria-hidden="true">
+                  <div class="about-game__character about-game__character--girl">
+                    <img src="img/about/2.png" width="556" height="854" alt="" loading="lazy" decoding="async" />
+                  </div>
+                  <div class="about-game__character about-game__character--boy">
+                    <img src="img/about/3.png" width="439" height="731" alt="" loading="lazy" decoding="async" />
+                  </div>
+                </div>
+                <div class="about-game__visual-state about-game__visual-state--family is-active"
+                  data-about-scene-state="family">
+                  <img class="about-game__visual about-game__visual--family" src="img/about/4.png" width="638"
+                    height="727" alt="Семья играет в виртуальной реальности" loading="lazy" decoding="async" />
+                </div>
+                <span class="about-game__visual-light" aria-hidden="true"></span>
+              </div>
+            </div>
             <ol class="about-game__benefits">
-              <li class="about-game__benefit about-game__benefit--one">
+              <li class="about-game__benefit about-game__benefit--one" data-about-benefit="team">
                 <span class="about-game__number"><svg width="44" height="51" viewBox="0 0 44 51" fill="none"
                     xmlns="http://www.w3.org/2000/svg">
                     <path
@@ -116,7 +132,7 @@
                   </p>
                 </div>
               </li>
-              <li class="about-game__benefit about-game__benefit--two">
+              <li class="about-game__benefit about-game__benefit--two" data-about-benefit="immersion">
                 <span class="about-game__number">
                   <svg width="44" height="51" viewBox="0 0 44 51" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path
@@ -135,7 +151,7 @@
                   </p>
                 </div>
               </li>
-              <li class="about-game__benefit about-game__benefit--three">
+              <li class="about-game__benefit about-game__benefit--three" data-about-benefit="family">
                 <span class="about-game__number">
                   <svg width="44" height="51" viewBox="0 0 44 51" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path
@@ -160,8 +176,7 @@
       </section>
     </div>
 
-    <section class="zones" data-header-theme="brand" data-zone-tabs data-zone-venue-active="park"
-      aria-labelledby="zones-title">
+    <section class="zones" data-header-theme="brand" data-zone-tabs aria-labelledby="zones-title">
       <div class="zones__inner container">
         <div class="zones__heading">
           <h2 class="zones__title" id="zones-title">
@@ -173,51 +188,39 @@
           </p>
         </div>
 
-        <span class="visually-hidden" id="zones-navigation-label">Формат локации и доступные игровые зоны</span>
-        <div class="zones__navigation" role="group" aria-labelledby="zones-navigation-label">
-          <div class="zones__venue-switch" role="group" aria-label="Переключение формата локации">
-            <button class="zones__venue-arrow button-reset" type="button" aria-label="Показать формат «Арена»"
-              data-zone-venue-step="-1">
-              <span class="zones__venue-chevron zones__venue-chevron--prev" aria-hidden="true"></span>
-            </button>
-            <button class="zones__venue-current zones__tab button-reset is-active" id="zone-tab-arena" type="button"
-              aria-pressed="true" aria-controls="zone-panel-arena" aria-label="Открыть основную зону формата «Парк»"
-              data-zone-types="arena park" data-zone-primary data-zone-tab>
+        <span class="visually-hidden" id="zones-navigation-label">Доступные игровые зоны</span>
+        <div class="zones__navigation">
+          <div class="zones__tabs" id="zones-activity-tabs" role="group" aria-labelledby="zones-navigation-label">
+            <button class="zones__tab button-reset is-active" id="zone-tab-arena" type="button" aria-pressed="true"
+              aria-controls="zone-panel-arena" data-zone-tab>
               <svg class="zones__tab-icon" aria-hidden="true">
                 <use href="/img/sprite.svg#icon-gun"></use>
               </svg>
-              <span class="zones__venue-name" data-zone-venue-name>Парк</span>
+              <span>Арена</span>
             </button>
-            <button class="zones__venue-arrow button-reset" type="button" aria-label="Показать формат «Арена»"
-              data-zone-venue-step="1">
-              <span class="zones__venue-chevron zones__venue-chevron--next" aria-hidden="true"></span>
-            </button>
-          </div>
-
-          <div class="zones__tabs" id="zones-activity-tabs" role="group" aria-label="Доступные зоны">
             <button class="zones__tab button-reset" id="zone-tab-vr" type="button" aria-pressed="false"
-              aria-controls="zone-panel-vr" tabindex="-1" data-zone-types="park" data-zone-tab>
+              aria-controls="zone-panel-vr" tabindex="-1" data-zone-tab>
               <svg class="zones__tab-icon" aria-hidden="true">
                 <use href="/img/sprite.svg#icon-vr"></use>
               </svg>
               <span>VR станция</span>
             </button>
             <button class="zones__tab button-reset" id="zone-tab-extreme" type="button" aria-pressed="false"
-              aria-controls="zone-panel-extreme" tabindex="-1" data-zone-types="park" data-zone-tab>
+              aria-controls="zone-panel-extreme" tabindex="-1" data-zone-tab>
               <svg class="zones__tab-icon" aria-hidden="true">
                 <use href="/img/sprite.svg#icon-car"></use>
               </svg>
               <span>Экстрим</span>
             </button>
             <button class="zones__tab button-reset" id="zone-tab-simulators" type="button" aria-pressed="false"
-              aria-controls="zone-panel-simulators" tabindex="-1" data-zone-types="park" data-zone-tab>
+              aria-controls="zone-panel-simulators" tabindex="-1" data-zone-tab>
               <svg class="zones__tab-icon" aria-hidden="true">
                 <use href="/img/sprite.svg#icon-wheel"></use>
               </svg>
               <span>Симуляторы</span>
             </button>
             <button class="zones__tab button-reset" id="zone-tab-lounge" type="button" aria-pressed="false"
-              aria-controls="zone-panel-lounge" tabindex="-1" data-zone-types="arena park" data-zone-tab>
+              aria-controls="zone-panel-lounge" tabindex="-1" data-zone-tab>
               <svg class="zones__tab-icon" aria-hidden="true">
                 <use href="/img/sprite.svg#icon-confeti"></use>
               </svg>
@@ -230,20 +233,10 @@
           <span class="zones__mobile-label" id="zones-mobile-select-label">
             Выберите свою игровую зону
           </span>
-          <button
-            class="zones__mobile-trigger button-reset"
-            type="button"
-            aria-haspopup="listbox"
-            aria-expanded="false"
-            aria-controls="zones-mobile-options"
-            aria-labelledby="zones-mobile-select-label zones-mobile-select-value"
-            data-zone-mobile-trigger
-          >
-            <span
-              class="zones__mobile-value"
-              id="zones-mobile-select-value"
-              data-zone-mobile-value
-            >
+          <button class="zones__mobile-trigger button-reset" type="button" aria-haspopup="listbox" aria-expanded="false"
+            aria-controls="zones-mobile-options" aria-labelledby="zones-mobile-select-label zones-mobile-select-value"
+            data-zone-mobile-trigger>
+            <span class="zones__mobile-value" id="zones-mobile-select-value" data-zone-mobile-value>
               <svg class="zones__tab-icon" aria-hidden="true">
                 <use href="/img/sprite.svg#icon-gun"></use>
               </svg>
@@ -251,17 +244,9 @@
             </span>
             <span class="zones__mobile-chevron" aria-hidden="true"></span>
           </button>
-          <div
-            class="zones__mobile-dropdown"
-            id="zones-mobile-options"
-            role="listbox"
-            aria-labelledby="zones-mobile-select-label"
-            data-zone-mobile-menu
-            hidden
-          ></div>
+          <div class="zones__mobile-dropdown" id="zones-mobile-options" role="listbox"
+            aria-labelledby="zones-mobile-select-label" data-zone-mobile-menu hidden></div>
         </div>
-
-        <span class="visually-hidden" aria-live="polite" aria-atomic="true" data-zone-venue-status></span>
 
         <div class="zones__panels">
           <section class="zone zone--red" id="zone-panel-arena" role="region" aria-labelledby="zone-tab-arena"
@@ -451,9 +436,9 @@
       </div>
       <section class="games-catalog" data-header-theme="dark" aria-labelledby="games-catalog-title" data-slider-root>
         <h2 class="games-catalog__title" id="games-catalog-title">
-          <span>Выберите</span>
-          <span>свое виртуальное</span>
-          <span>приключение</span>
+          Выберите
+          свое виртуальное
+          приключение
         </h2>
         <div class="games-catalog__track">
           <div class="games-catalog__slider swiper" data-slider data-games-slider>

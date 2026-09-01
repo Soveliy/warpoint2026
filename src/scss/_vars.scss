@@ -144,6 +144,15 @@ $space-72: rem(72px);
 $space-80: rem(80px);
 $space-96: rem(96px);
 
+$section-space-y: fluid(60px, 80px, $viewport-min, $viewport-max);
+$section-space-y-tablet: rem(60px);
+$section-space-y-mobile: rem(48px);
+$section-title-size: rem(64px);
+$section-title-size-tablet: rem(56px);
+$section-title-size-mobile: rem(46px);
+$section-title-line-height: 0.88;
+$section-title-gap: fluid(32px, 38px, $viewport-min, $viewport-max);
+
 $z-base: 1;
 $z-header: 100;
 $z-overlay: 400;

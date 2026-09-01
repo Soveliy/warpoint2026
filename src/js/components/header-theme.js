@@ -14,7 +14,7 @@ function getThemeBelowHeader(header) {
     const themedSection = element.closest('[data-header-theme]');
 
     if (themedSection) {
-      return themedSection.dataset.headerTheme || defaultTheme;
+      return themedSection.dataset.headerTheme === 'dark' ? 'dark' : defaultTheme;
     }
   }
 

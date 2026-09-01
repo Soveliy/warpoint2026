@@ -1,9 +1,11 @@
 @use '../fluid' as *;
+@use '../mixins' as *;
 @use '../mixins/disable-mob-hover' as *;
 @use '../vars' as *;
 
 .faq {
-  padding: fluid(54px, 132px) 0 fluid(50px, 160px);
+  @include section-spacing;
+
   background-color: $white;
   color: $black;
   scroll-snap-align: start;
@@ -16,14 +18,9 @@
   }
 
   &__title {
+    @include section-title;
+
     max-width: rem(520px);
-    margin: 0;
-    font-family: $font-family-heading;
-    font-size: fluid(46px, 64px);
-    letter-spacing: -0.02em;
-    font-weight: 800;
-    line-height: 0.9;
-    text-transform: uppercase;
     color: $gray-950;
   }
 

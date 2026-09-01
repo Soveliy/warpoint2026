@@ -3,7 +3,27 @@ import { A11y, Keyboard, Navigation } from 'swiper/modules';
 
 const motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
 const mobileQuery = window.matchMedia('(max-width: 47.9375rem)');
+const REVIEW_LOOP_SETS = 2;
+const REVIEW_LOOP_BUFFER = 4;
 const scoreLabel = 'Средняя оценка гостей 5 из 5';
+
+const prepareReviewLoopSlides = (wrapper, cards) => {
+  const existingCopies = [...wrapper.querySelectorAll('[data-review-loop-copy]')];
+  const copiesCount = cards.length * (REVIEW_LOOP_SETS - 1);
+  const fragment = document.createDocumentFragment();
+
+  for (let index = existingCopies.length; index < copiesCount; index += 1) {
+    const clone = cards[index % cards.length]?.cloneNode(true);
+
+    if (!clone) continue;
+
+    clone.removeAttribute('data-review-card');
+    clone.setAttribute('data-review-loop-copy', '');
+    fragment.append(clone);
+  }
+
+  wrapper.append(fragment);
+};
 
 const setActiveReview = (controls, index) => {
   controls.forEach((control, controlIndex) => {
@@ -56,6 +76,7 @@ export function initReviews() {
     cards.forEach((card, index) => {
       card.dataset.reviewIndex = String(index);
     });
+    prepareReviewLoopSlides(wrapper, cards);
 
     const getReviewIndex = (slide) => {
       const index = Number(slide?.dataset.reviewIndex);
@@ -115,6 +136,8 @@ export function initReviews() {
       let initialSlide = 0;
 
       placeScore(isMobileMode);
+      const slidesCount = wrapper.children.length;
+      const loopAdditionalSlides = Math.min(REVIEW_LOOP_BUFFER, Math.max(0, slidesCount - 2));
 
       if (!isFirstBuild && preservedState.type === 'review') {
         initialSlide = preservedState.index + Number(isMobileMode);
@@ -134,13 +157,13 @@ export function initReviews() {
           enabled: true,
           onlyInViewport: true,
         },
-        loop: wrapper.children.length > 1,
-        loopAdditionalSlides: 2,
+        loop: slidesCount > 1,
+        loopAdditionalSlides,
         navigation: {
           nextEl: nextButton,
           prevEl: previousButton,
         },
-        slidesPerView: 1,
+        slidesPerView: isMobileMode ? 1 : 'auto',
         spaceBetween: 16,
         speed: motionQuery.matches ? 0 : 650,
         watchOverflow: true,

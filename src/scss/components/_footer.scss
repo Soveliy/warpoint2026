@@ -181,7 +181,7 @@
   &__man {
     position: absolute;
     // The source PNG has 38 transparent pixels below the visible figure.
-    bottom: calc(100% - rem(38px));
+    bottom: calc(100% - rem(56px));
     left: 0;
     z-index: 2;
     width: rem(697px);
@@ -274,7 +274,7 @@
       left: auto;
       z-index: 2;
       width: min(82vw, rem(697px));
-      margin: rem(64px) 0 rem(-80px) $container-offset;
+      margin: rem(64px) 0 rem(-56px) $container-offset;
     }
 
     &__wordmark {
@@ -338,7 +338,7 @@
 
     &__man {
       width: 50%;
-      margin: 0 0 -16px 0;
+      margin: 0 0 -5% 0;
     }
 
     &__wordmark {

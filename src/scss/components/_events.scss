@@ -1,4 +1,5 @@
 @use '../fluid' as *;
+@use '../mixins' as *;
 @use '../mixins/disable-mob-hover' as *;
 @use '../vars' as *;
 
@@ -47,10 +48,10 @@
     }
   }
   &__container {
+    @include section-spacing;
+
     min-height: 100svh;
-    padding-top: fluid(70px, 130px);
-    padding-bottom: fluid(70px, 90px);
-    box-sizing: content-box;
+    box-sizing: border-box;
   }
 
   &__intro,
@@ -75,7 +76,7 @@
     max-width: 845px;
     width: 100%;
     margin: 0 auto;
-    transform: translateY(var(--events-row-shift));
+    // transform: translateY(var(--events-row-shift));
   }
 
   &__tabs {
@@ -187,7 +188,6 @@
     }
   }
 
-  &__title,
   &__subtitle {
     margin: 0;
     font-family: $font-family-heading;
@@ -197,9 +197,9 @@
   }
 
   &__title {
+    @include section-title;
+
     max-width: rem(520px);
-    font-size: fluid(48px, 88px);
-    line-height: 0.9;
   }
 
   &__subtitle {
@@ -439,7 +439,6 @@
     &__intro {
       grid-column: 1 / -1;
       max-width: rem(560px);
-      padding: rem(96px) 0 rem(64px);
       transform: none;
     }
 
@@ -487,7 +486,7 @@
     }
 
     &__intro {
-      padding: rem(72px) 0 rem(56px);
+      padding: 0;
     }
 
     &__tabs {

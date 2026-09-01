@@ -1,30 +1,76 @@
 @use '../fluid' as *;
+@use '../mixins' as *;
 @use '../mixins/disable-mob-hover' as *;
 @use '../vars' as *;
 
 .bloggers {
+  @include section-spacing;
+
   position: relative;
   overflow: hidden;
   min-height: 100vh;
-  padding: fluid(88px, 104px) 0 fluid(48px, 64px);
   background-color: $white;
   color: $black;
   scroll-snap-align: start;
-
-  &__title {
-    margin: 0;
-    font-family: $font-family-heading;
-    font-size: rem(64px);
-    font-weight: 800;
-    line-height: 0.86;
-    letter-spacing: 0;
-    text-align: center;
+  &__info {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    gap: 30px;
+    width: 100%;
+    padding: 20px fluid(20px, 40px);
+    background: $gray-950;
+    z-index: 50;
+    border-radius: 0 0 fluid(28px, 48px) fluid(28px, 48px);
+    align-items: center;
+  }
+  &__info-item + &__info-item {
+    padding-left: 30px;
+    border-left: 1px solid rgba(255, 255, 255, 0.2);
+  }
+  &__info-item-name {
+    font-weight: 700;
+    font-size: fluid(16px, 32px);
+    line-height: 88%;
+    letter-spacing: -0.02em;
     text-transform: uppercase;
+    color: $white;
+    font-family: $font-family-heading;
+  }
+  &__info-item-type {
+    font-weight: 600;
+    font-size: fluid(14px, 18px);
+    line-height: 120%;
+    color: rgba(255, 255, 255, 0.5);
+  }
+  &__info-item-row {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+  }
+  &__info-item-avatar {
+    height: fluid(40px, 60px);
+    height: fluid(40px, 60px);
+    flex-shrink: 0;
+    border-radius: 50%;
+    position: relative;
+    overflow: hidden;
+    img {
+      height: 100%;
+      width: 100%;
+      object-fit: cover;
+    }
+  }
+  &__title {
+    @include section-title;
+
+    text-align: center;
   }
 
   &__slider {
     overflow: visible;
-    margin-top: fluid(32px, 38px);
+    margin-top: $section-title-gap;
   }
 
   &__slide {
@@ -97,16 +143,6 @@
     fill: currentcolor;
   }
 
-  &__caption {
-    min-height: rem(18px);
-    margin: rem(14px) rem(20px) 0;
-    font-size: rem(16px);
-    font-weight: 700;
-    line-height: 1.1;
-    text-align: center;
-    text-transform: uppercase;
-  }
-
   &__controls {
     display: flex;
     justify-content: center;
@@ -157,11 +193,6 @@
 @media (max-width: $breakpoint-tablet) {
   .bloggers {
     min-height: auto;
-    padding: rem(88px) 0;
-
-    &__title {
-      font-size: rem(56px);
-    }
 
     &__slide {
       width: min(rem(760px), calc(100vw - rem(96px)));
@@ -171,17 +202,6 @@
 
 @media (max-width: $breakpoint-mobile) {
   .bloggers {
-    padding: rem(72px) 0;
-
-    &__title {
-      font-size: rem(46px);
-      line-height: 0.88;
-    }
-
-    &__slider {
-      margin-top: rem(32px);
-    }
-
     &__slide {
       --bloggers-side-scale: 0.84;
       --bloggers-side-shift: 8%;
@@ -192,10 +212,6 @@
     &__media {
       aspect-ratio: 4 / 3;
       border-radius: rem(24px);
-    }
-
-    &__caption {
-      font-size: rem(13px);
     }
 
     &__controls {

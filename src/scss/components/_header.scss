@@ -20,35 +20,8 @@
     background-color $duration-base $ease-base,
     transform 360ms cubic-bezier(0.22, 1, 0.36, 1);
 
-  &[data-theme='light'] {
-    --header-foreground: #{$white};
-    --header-line: #{rgba($white, 0.16)};
-    --header-control-border: #{rgba($white, 0.72)};
-    --header-logo-filter: brightness(0) invert(1);
-
-    background-color: #131316;
-  }
-
   &[data-theme='brand'] {
     background-color: #010000;
-  }
-
-  &[data-theme='events'] {
-    --header-foreground: #{$white};
-    --header-line: #{rgba($white, 0.16)};
-    --header-control-border: #{rgba($white, 0.72)};
-    --header-logo-filter: brightness(0) invert(1);
-
-    background-color: transparent;
-
-    .header__booking {
-      background-color: $white;
-      color: $orange-500;
-
-      &:hover {
-        background-color: $gray-100;
-      }
-    }
   }
 
   &[data-theme='dark'] {

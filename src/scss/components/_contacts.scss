@@ -1,13 +1,15 @@
 @use '../fluid' as *;
+@use '../mixins' as *;
 @use '../mixins/disable-mob-hover' as *;
 @use '../vars' as *;
 
 .contacts {
+  @include section-spacing;
+
   position: relative;
   isolation: isolate;
   overflow: hidden;
   min-height: 100vh;
-  padding-top: rem(28px);
   background-color: $violet-600;
   color: $white;
   scroll-snap-align: start;
@@ -28,7 +30,7 @@
     align-content: center;
     align-items: start;
     gap: rem(40px);
-    min-height: calc(100vh - rem(28px));
+    min-height: calc(100svh - #{fluid(176px, 208px, $viewport-min, $viewport-max)});
   }
 
   &__map {
@@ -105,13 +107,7 @@
   }
 
   &__title {
-    margin: 0;
-    font-family: $font-family-heading;
-    font-size: fluid(46px, 64px);
-    font-weight: 800;
-    line-height: 0.88;
-    letter-spacing: 0;
-    text-transform: uppercase;
+    @include section-title;
   }
 
   &__grid {
@@ -195,7 +191,6 @@
 @media (max-width: $breakpoint-tablet) {
   .contacts {
     min-height: auto;
-    padding: fluid(72px, 96px) 0;
 
     &__container {
       display: flex;
@@ -214,8 +209,6 @@
 
 @media (max-width: $breakpoint-mobile) {
   .contacts {
-    padding: rem(72px) 0;
-
     &__map {
       border-radius: rem(32px);
     }

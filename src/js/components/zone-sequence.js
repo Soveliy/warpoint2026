@@ -1,19 +1,12 @@
 const rootSelector = '[data-zone-tabs]';
 const tabSelector = '[data-zone-tab]';
 const panelSelector = '[data-zone-panel]';
-const venueStepSelector = '[data-zone-venue-step]';
-const venueNameSelector = '[data-zone-venue-name]';
 const mobileSelectSelector = '[data-zone-mobile-select]';
 const mobileTriggerSelector = '[data-zone-mobile-trigger]';
 const mobileValueSelector = '[data-zone-mobile-value]';
 const mobileMenuSelector = '[data-zone-mobile-menu]';
 const initializedAttribute = 'data-zone-tabs-initialized';
 const mobileBreakpoint = '(max-width: 47.9375rem)';
-const venueOrder = ['arena', 'park'];
-const venueNames = {
-  arena: 'Арена',
-  park: 'Парк',
-};
 
 function getPairs(root) {
   const tabs = [...root.querySelectorAll(tabSelector)];
@@ -31,19 +24,7 @@ function getPairs(root) {
     .filter(Boolean);
 }
 
-function getZoneTypes(tab) {
-  return (tab.dataset.zoneTypes ?? '').split(/\s+/).filter(Boolean);
-}
-
-function getPairKey({ panel, tab }) {
-  return tab.id || panel.id;
-}
-
 function getZoneLabel({ tab }) {
-  if (tab.hasAttribute('data-zone-primary')) {
-    return 'Арена';
-  }
-
   return tab.textContent.replace(/\s+/g, ' ').trim();
 }
 
@@ -92,11 +73,10 @@ function renderMobileValue(container, pair) {
 
   label.className = 'zones__mobile-trigger-text';
   label.textContent = getZoneLabel(pair);
-
   container.replaceChildren(...(icon ? [icon, label] : [label]));
 }
 
-function syncPanelGallery(panel, isAvailable) {
+function syncPanelGallery(panel) {
   const galleryItems = [...panel.querySelectorAll('[data-fancybox], [data-zone-fancybox-group]')];
 
   galleryItems.forEach((item) => {
@@ -104,10 +84,8 @@ function syncPanelGallery(panel, isAvailable) {
       item.dataset.zoneFancyboxGroup = item.dataset.fancybox;
     }
 
-    if (isAvailable && item.dataset.zoneFancyboxGroup) {
+    if (item.dataset.zoneFancyboxGroup) {
       item.dataset.fancybox = item.dataset.zoneFancyboxGroup;
-    } else if (!isAvailable) {
-      item.removeAttribute('data-fancybox');
     }
   });
 }
@@ -118,18 +96,14 @@ function setupTabs(root) {
   }
 
   const pairs = getPairs(root);
-  const venueSteps = [...root.querySelectorAll(venueStepSelector)];
-  const venueName = root.querySelector(venueNameSelector);
-  const venueStatus = root.querySelector('[data-zone-venue-status]');
   const activityList = root.querySelector('.zones__tabs');
   const mobileSelect = root.querySelector(mobileSelectSelector);
   const mobileTrigger = root.querySelector(mobileTriggerSelector);
   const mobileValue = root.querySelector(mobileValueSelector);
   const mobileMenu = root.querySelector(mobileMenuSelector);
   const mobileMedia = window.matchMedia(mobileBreakpoint);
-  const primaryIndex = pairs.findIndex(({ tab }) => tab.hasAttribute('data-zone-primary'));
 
-  if (!pairs.length || primaryIndex < 0) {
+  if (!pairs.length) {
     return;
   }
 
@@ -145,26 +119,7 @@ function setupTabs(root) {
   const initialPairIndex = pairs.findIndex(
     ({ panel, tab }) => tab.getAttribute('aria-pressed') === 'true' || !panel.hidden,
   );
-  let activeIndex = initialPairIndex >= 0 ? initialPairIndex : primaryIndex;
-  let activeVenue = venueOrder.includes(root.dataset.zoneVenueActive)
-    ? root.dataset.zoneVenueActive
-    : 'park';
-  const rememberedTabs = new Map([[activeVenue, getPairKey(pairs[activeIndex])]]);
-
-  const isAvailable = ({ tab }, venue = activeVenue) => {
-    const zoneTypes = getZoneTypes(tab);
-
-    return !venue || !zoneTypes.length || zoneTypes.includes(venue);
-  };
-
-  const getAvailableIndices = (venue = activeVenue) =>
-    pairs.reduce((indices, pair, index) => {
-      if (isAvailable(pair, venue)) {
-        indices.push(index);
-      }
-
-      return indices;
-    }, []);
+  let activeIndex = initialPairIndex >= 0 ? initialPairIndex : 0;
 
   const revealTab = (tab) => {
     if (
@@ -185,16 +140,14 @@ function setupTabs(root) {
     }
   };
 
-  const syncMobileSelect = (availableIndices) => {
+  const syncMobileSelect = () => {
     if (!hasMobileSelect) {
       return;
     }
 
     mobileOptions.forEach((option, index) => {
-      const available = availableIndices.includes(index);
-      const isActive = available && index === activeIndex;
+      const isActive = index === activeIndex;
 
-      option.hidden = !available;
       option.classList.toggle('is-active', isActive);
       option.setAttribute('aria-selected', String(isActive));
       option.tabIndex = isActive ? 0 : -1;
@@ -204,36 +157,27 @@ function setupTabs(root) {
   };
 
   const activate = (nextIndex, { focus = false, reveal = false } = {}) => {
-    const availableIndices = getAvailableIndices();
-
-    if (!availableIndices.length) {
-      return;
-    }
-
-    activeIndex = availableIndices.includes(nextIndex) ? nextIndex : availableIndices[0];
+    activeIndex = nextIndex >= 0 && nextIndex < pairs.length ? nextIndex : 0;
 
     pairs.forEach(({ panel, tab }, index) => {
-      const available = availableIndices.includes(index);
-      const isActive = available && index === activeIndex;
+      const isActive = index === activeIndex;
 
-      tab.hidden = !available;
+      tab.hidden = false;
       tab.classList.toggle('is-active', isActive);
       tab.setAttribute('aria-pressed', String(isActive));
-      tab.tabIndex = available ? 0 : -1;
+      tab.tabIndex = isActive ? 0 : -1;
 
       panel.classList.toggle('is-active', isActive);
       panel.hidden = !isActive;
       panel.inert = !isActive;
-      syncPanelGallery(panel, available);
+      syncPanelGallery(panel);
 
       if (tab.id && !panel.hasAttribute('aria-labelledby')) {
         panel.setAttribute('aria-labelledby', tab.id);
       }
     });
 
-    syncMobileSelect(availableIndices);
-
-    rememberedTabs.set(activeVenue, getPairKey(pairs[activeIndex]));
+    syncMobileSelect();
 
     const activeTab = pairs[activeIndex].tab;
 
@@ -276,116 +220,35 @@ function setupTabs(root) {
     }
   };
 
-  const getAvailableMobileIndices = () =>
-    mobileOptions.reduce((indices, option, index) => {
-      if (!option.hidden) {
-        indices.push(index);
-      }
-
-      return indices;
-    }, []);
-
   const focusMobileOption = (index) => {
     mobileOptions[index]?.focus({ preventScroll: true });
-  };
-
-  const getNextVenue = (step = 1) => {
-    const currentIndex = venueOrder.indexOf(activeVenue);
-
-    return venueOrder[(currentIndex + step + venueOrder.length) % venueOrder.length];
-  };
-
-  const updateVenueControls = () => {
-    const currentName = venueNames[activeVenue];
-    const nextName = venueNames[getNextVenue()];
-
-    if (venueName) {
-      venueName.textContent = currentName;
-    }
-
-    pairs[primaryIndex].tab.setAttribute(
-      'aria-label',
-      `Открыть основную зону формата «${currentName}»`,
-    );
-
-    venueSteps.forEach((button) => {
-      button.setAttribute('aria-label', `Показать формат «${nextName}»`);
-    });
-  };
-
-  const announceVenue = () => {
-    if (!venueStatus) {
-      return;
-    }
-
-    const zoneNames = getAvailableIndices().map((index) => {
-      const { tab } = pairs[index];
-
-      return tab.hasAttribute('data-zone-primary')
-        ? 'Арена'
-        : tab.textContent.replace(/\s+/g, ' ').trim();
-    });
-    const availability = zoneNames.length === 1 ? 'Доступна зона' : 'Доступны зоны';
-
-    venueStatus.textContent = `Выбран формат «${venueNames[activeVenue]}». ${availability}: ${zoneNames.join(', ')}.`;
-  };
-
-  const setVenue = (nextVenue, { announce = true, reveal = true } = {}) => {
-    if (!venueOrder.includes(nextVenue)) {
-      return;
-    }
-
-    rememberedTabs.set(activeVenue, getPairKey(pairs[activeIndex]));
-    activeVenue = nextVenue;
-    root.dataset.zoneVenueActive = activeVenue;
-    updateVenueControls();
-
-    const availableIndices = getAvailableIndices();
-    const rememberedTab = rememberedTabs.get(activeVenue);
-    const rememberedIndex = pairs.findIndex((pair) => getPairKey(pair) === rememberedTab);
-
-    activate(
-      rememberedIndex >= 0 && availableIndices.includes(rememberedIndex)
-        ? rememberedIndex
-        : primaryIndex,
-      { reveal },
-    );
-
-    if (announce) {
-      announceVenue();
-    }
   };
 
   pairs.forEach(({ tab }, index) => {
     tab.addEventListener('click', () => activate(index));
 
     tab.addEventListener('keydown', (event) => {
-      const availableIndices = getAvailableIndices();
-      const currentPosition = availableIndices.indexOf(index);
-      let nextPosition = null;
+      let nextIndex = null;
 
       switch (event.key) {
         case 'ArrowRight':
-          nextPosition = currentPosition + 1;
+          nextIndex = index + 1;
           break;
         case 'ArrowLeft':
-          nextPosition = currentPosition - 1;
+          nextIndex = index - 1;
           break;
         case 'Home':
-          nextPosition = 0;
+          nextIndex = 0;
           break;
         case 'End':
-          nextPosition = availableIndices.length - 1;
+          nextIndex = pairs.length - 1;
           break;
         default:
           return;
       }
 
       event.preventDefault();
-      activate(
-        availableIndices[(nextPosition + availableIndices.length) % availableIndices.length],
-        { focus: true },
-      );
+      activate((nextIndex + pairs.length) % pairs.length, { focus: true, reveal: true });
     });
   });
 
@@ -431,31 +294,27 @@ function setupTabs(root) {
           return;
         }
 
-        const availableIndices = getAvailableMobileIndices();
-        const currentPosition = availableIndices.indexOf(index);
-        let nextPosition = null;
+        let nextIndex = null;
 
         switch (event.key) {
           case 'ArrowDown':
-            nextPosition = currentPosition + 1;
+            nextIndex = index + 1;
             break;
           case 'ArrowUp':
-            nextPosition = currentPosition - 1;
+            nextIndex = index - 1;
             break;
           case 'Home':
-            nextPosition = 0;
+            nextIndex = 0;
             break;
           case 'End':
-            nextPosition = availableIndices.length - 1;
+            nextIndex = mobileOptions.length - 1;
             break;
           default:
             return;
         }
 
         event.preventDefault();
-        focusMobileOption(
-          availableIndices[(nextPosition + availableIndices.length) % availableIndices.length],
-        );
+        focusMobileOption((nextIndex + mobileOptions.length) % mobileOptions.length);
       });
     });
 
@@ -472,17 +331,8 @@ function setupTabs(root) {
     });
   }
 
-  venueSteps.forEach((button) => {
-    button.addEventListener('click', () => {
-      const step = Number.parseInt(button.dataset.zoneVenueStep, 10) || 1;
-
-      closeMobileSelect();
-      setVenue(getNextVenue(step));
-    });
-  });
-
   root.setAttribute(initializedAttribute, '');
-  setVenue(activeVenue, { announce: false, reveal: false });
+  activate(activeIndex);
 }
 
 export function initZoneSequence() {

@@ -1,35 +1,38 @@
 @use '../fluid' as *;
+@use '../mixins' as *;
 @use '../mixins/disable-mob-hover' as *;
 @use '../vars' as *;
 
 .reviews {
+  @include section-spacing;
+
   position: relative;
   overflow: hidden;
-  min-height: 100vh;
   background-color: $white;
   color: $black;
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: url(../../img/white_gradient.svg) no-repeat center center;
+    background-size: cover;
+    pointer-events: none;
+  }
 
   &__sticky {
-    display: grid;
-    grid-template-columns: minmax(0, rem(480px)) minmax(0, 1fr);
+    position: relative;
+    display: flex;
     gap: rem(32px);
-    height: 100vh;
     padding-left: $container-offset;
   }
 
   &__intro {
-    align-self: center;
+    flex-shrink: 0;
     max-width: rem(430px);
   }
 
   &__title {
-    margin: 0;
-    font-family: $font-family-heading;
-    font-size: rem(64px);
-    font-weight: 800;
-    line-height: 0.86;
-    letter-spacing: 0;
-    text-transform: uppercase;
+    @include section-title;
   }
 
   &__lead {
@@ -102,59 +105,40 @@
     --reviews-card-width: clamp(12.5rem, calc(56.28vh - 5.9094rem), 25.1875rem);
 
     position: relative;
-    overflow: hidden;
-    display: grid;
-    grid-template-columns: repeat(
-      2,
-      minmax(0, min(var(--reviews-card-width), calc(50% - rem(8px))))
-    );
+    overflow: visible;
+    flex: 1 1 auto;
     align-self: center;
-    align-items: start;
-    gap: rem(16px);
     min-width: 0;
   }
 
   &__carousel {
+    position: relative;
+    overflow: hidden;
     min-width: 0;
     width: 100%;
   }
 
-  &__score,
   &__slider {
     box-sizing: border-box;
-    width: 100%;
-    aspect-ratio: 403 / 716;
-  }
-
-  &__slider {
     overflow: visible;
+    width: 100%;
     border-radius: fluid(28px, 40px);
   }
 
   &__slider .swiper-wrapper {
-    height: 100%;
+    align-items: stretch;
+    height: auto;
   }
 
   &__score {
     position: relative;
-    z-index: 2;
     background-color: $white;
-  }
-
-  &__wrap {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    padding: 0;
-    background-color: $violet-500;
-    color: $white;
-    border-radius: fluid(28px, 40px);
-    height: 100%;
   }
 
   &__services {
     display: grid;
-    padding: fluid(28px, 40px) fluid(28px, 40px) 0;
+    margin-top: rem(24px);
+    gap: 10px;
   }
 
   &__service {
@@ -162,8 +146,6 @@
     grid-template-columns: rem(40px) minmax(0, 1fr) auto;
     align-items: center;
     gap: rem(12px);
-    min-height: rem(64px);
-    border-bottom: rem(1px) solid rgba($white, 0.16);
   }
 
   &__service-icon {
@@ -186,8 +168,8 @@
   }
 
   &__rating {
-    padding: 0 fluid(28px, 40px) fluid(28px, 40px);
     text-align: center;
+    margin-top: 32px;
   }
 
   &__rating-label {
@@ -200,7 +182,7 @@
   &__rating-value {
     margin-top: rem(12px);
     font-family: $font-family-heading;
-    font-size: fluid(232px, 286px);
+    font-size: fluid(232px, 238px);
     font-weight: 800;
     line-height: 0.72;
     letter-spacing: 0;
@@ -209,9 +191,11 @@
   &__card {
     position: relative;
     overflow: hidden;
+    flex: 0 0 var(--reviews-card-width);
     box-sizing: border-box;
-    width: 100%;
-    height: 100%;
+    width: var(--reviews-card-width);
+    height: auto;
+    aspect-ratio: 403 / 716;
     border-radius: fluid(28px, 40px);
     background-color: $gray-900;
 
@@ -309,10 +293,6 @@
       gap: rem(24px);
     }
 
-    &__title {
-      font-size: rem(54px);
-    }
-
     &__lead {
       font-size: rem(16px);
     }
@@ -323,10 +303,6 @@
 
     &__preview-indicator {
       width: rem(58px);
-    }
-
-    &__wrap {
-      padding: 0;
     }
 
     &__service-name,
@@ -344,7 +320,6 @@
 @media (max-width: $breakpoint-mobile) {
   .reviews {
     min-height: auto;
-    padding: rem(72px) 0;
 
     &__sticky {
       display: block;
@@ -359,7 +334,6 @@
 
     &__title {
       max-width: rem(340px);
-      font-size: rem(48px);
     }
 
     &__lead {
@@ -380,28 +354,41 @@
     }
 
     &__content {
-      grid-template-columns: minmax(0, 1fr);
-      gap: rem(24px);
+      --reviews-card-width: 100%;
+
       width: min(calc(100% - rem(32px)), rem(403px));
       margin-top: rem(40px);
       margin-right: auto;
       margin-left: auto;
     }
 
-    &__wrap,
-    &__score,
-    &__slider {
+    &__slider,
+    &__score.swiper-slide {
       width: 100%;
       aspect-ratio: 403 / 716;
     }
 
-    &__score {
-      padding: 0;
+    &__score.swiper-slide {
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      justify-content: flex-start;
+      height: auto;
+      padding: rem(24px);
+      border-radius: fluid(28px, 40px);
+    }
+
+    &__score.swiper-slide .reviews__services {
+      margin-top: 0;
+    }
+
+    &__score.swiper-slide .reviews__rating {
+      margin-top: auto;
     }
 
     &__service {
-      grid-template-columns: rem(40px) minmax(0, 1fr) auto;
       gap: rem(8px);
+      min-height: rem(56px);
     }
 
     &__rating-value {
