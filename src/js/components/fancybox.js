@@ -3,15 +3,6 @@ import previewVideoUrl from '../../video/video_preview.mp4?url';
 
 const fancyboxSelector = '[data-fancybox]';
 const bloggerVideoSelector = '[data-blogger-video]';
-const promoVideoSelector = '[data-promo-video]';
-
-function preparePromoVideo() {
-  document.querySelectorAll(promoVideoSelector).forEach((button) => {
-    button.dataset.fancybox = 'promo-video';
-    button.dataset.src = previewVideoUrl;
-    button.dataset.type = 'html5video';
-  });
-}
 
 function prepareBloggerVideos() {
   document.querySelectorAll(bloggerVideoSelector).forEach((button, index) => {
@@ -22,7 +13,6 @@ function prepareBloggerVideos() {
 }
 
 export function initFancybox() {
-  preparePromoVideo();
   prepareBloggerVideos();
 
   if (!document.querySelector(fancyboxSelector)) {

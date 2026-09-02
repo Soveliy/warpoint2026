@@ -52,8 +52,18 @@
         </div>
       </div>
     </div>
-    <section class="video-section" data-header-theme="brand" aria-labelledby="promo-video-title">
+    <section class="video-section" data-header-theme="brand" aria-labelledby="promo-video-title"
+      data-promo-video-section>
       <img class="video-section__background" src="img/promo-video.jpg" width="1512" height="982" alt="" />
+      <div class="video-section__player" id="promo-video-player" aria-hidden="true" data-promo-video-player>
+        <svg class="video-section__player-icon" aria-hidden="true">
+          <use href="/img/sprite.svg#icon-play"></use>
+        </svg>
+        <video class="video-section__video" playsinline preload="metadata" poster="img/promo-video.jpg"
+          data-promo-video-media></video>
+        <button class="video-section__close button-reset" type="button" aria-label="Закрыть видео" tabindex="-1"
+          data-promo-video-close></button>
+      </div>
       <div class="video-section__content">
         <h2 class="video-section__title" id="promo-video-title">
           <span>Превратите</span>
@@ -66,7 +76,8 @@
           <span>чего-то интереснее обычных развлечений.</span>
         </p>
         <div class="video-section__control">
-          <button class="video-section__play button-reset" type="button" aria-label="Открыть видео" data-promo-video>
+          <button class="video-section__play button-reset" type="button" aria-label="Открыть видео"
+            aria-controls="promo-video-player" aria-expanded="false" data-promo-video>
             <svg class="video-section__play-icon" aria-hidden="true">
               <use href="/img/sprite.svg#icon-play"></use>
             </svg>

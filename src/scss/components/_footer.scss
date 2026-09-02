@@ -115,6 +115,7 @@
     gap: rem(16px);
     width: 100%;
     transform: translateX(-50%);
+    align-items: flex-end;
     @media (min-width: 1500px) {
       top: rem(600px);
     }
@@ -125,6 +126,9 @@
     font-size: rem(12px);
     font-weight: 600;
     line-height: 1.2;
+  }
+  &__requisites {
+    font-size: 0.75rem;
   }
 
   &__requisites,

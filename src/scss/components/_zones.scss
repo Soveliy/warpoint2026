@@ -4,10 +4,10 @@
 @use '../vars' as *;
 
 .zones {
+  @include section-spacing;
   position: relative;
   z-index: 50;
   min-height: 100vh;
-  @include section-spacing;
   overflow: hidden;
   background-color: $color-bg;
 
@@ -205,6 +205,44 @@
     height: 100%;
     object-fit: cover;
     object-position: center;
+  }
+
+  &__cube-layer {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    display: grid;
+    grid-template: repeat(var(--zone-cube-grid), minmax(0, 1fr)) / repeat(
+        var(--zone-cube-grid),
+        minmax(0, 1fr)
+      );
+    overflow: hidden;
+    border-radius: inherit;
+    perspective: rem(900px);
+    pointer-events: none;
+  }
+
+  &__cube {
+    position: relative;
+    overflow: hidden;
+    opacity: 0;
+    backface-visibility: hidden;
+    transform-style: preserve-3d;
+    will-change: transform, opacity;
+  }
+
+  &__cube-image {
+    position: absolute;
+    top: calc(var(--zone-cube-row) * -100%);
+    left: calc(var(--zone-cube-column) * -100%);
+    display: block;
+    width: calc(var(--zone-cube-grid) * 100%);
+    height: calc(var(--zone-cube-grid) * 100%);
+    max-width: none;
+    object-fit: cover;
+    object-position: center;
+    pointer-events: none;
+    user-select: none;
   }
 
   &__image-zoom {
@@ -737,5 +775,9 @@
   .zones__mobile-option-mark,
   .zone__image-zoom {
     transition: none;
+  }
+
+  .zone__cube-layer {
+    display: none;
   }
 }

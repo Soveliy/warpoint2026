@@ -7,6 +7,143 @@ const mobileValueSelector = '[data-zone-mobile-value]';
 const mobileMenuSelector = '[data-zone-mobile-menu]';
 const initializedAttribute = 'data-zone-tabs-initialized';
 const mobileBreakpoint = '(max-width: 47.9375rem)';
+const compactMotion = window.matchMedia(mobileBreakpoint);
+const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+const cubeGridSize = 5;
+const cubeGridCenter = (cubeGridSize - 1) / 2;
+
+function playZoneAssembly(panel) {
+  const imageContainer = panel.querySelector('.zone__image-container');
+  const image = imageContainer?.querySelector('.zone__image');
+  const content = panel.querySelector('.zone__content');
+
+  if (reducedMotion.matches || typeof Element.prototype.animate !== 'function') {
+    return null;
+  }
+
+  const animations = [];
+  let cubeLayer = null;
+  let firstHandoffFrame = 0;
+  let secondHandoffFrame = 0;
+  let handoffAnimation = null;
+  let isCancelled = false;
+
+  const finish = () => {
+    if (isCancelled) return;
+
+    image?.style.removeProperty('opacity');
+    cubeLayer?.remove();
+    animations.forEach((animation) => animation.cancel());
+    handoffAnimation?.cancel();
+  };
+
+  if (content) {
+    const contentStartTransform = compactMotion.matches
+      ? 'translate3d(0, 40px, 0)'
+      : 'translate3d(64px, 0, 0)';
+
+    animations.push(
+      content.animate(
+        [
+          { opacity: 0.08, transform: contentStartTransform },
+          { opacity: 1, transform: 'translate3d(0, 0, 0)' },
+        ],
+        {
+          delay: 40,
+          duration: 560,
+          easing: 'cubic-bezier(0.16, 1, 0.3, 1)',
+          fill: 'both',
+        },
+      ),
+    );
+  }
+
+  if (imageContainer && image?.complete && image.naturalWidth > 0) {
+    cubeLayer = document.createElement('div');
+    cubeLayer.className = 'zone__cube-layer';
+    cubeLayer.setAttribute('aria-hidden', 'true');
+    cubeLayer.style.setProperty('--zone-cube-grid', String(cubeGridSize));
+
+    const cubeAnimations = [];
+
+    for (let row = 0; row < cubeGridSize; row += 1) {
+      for (let column = 0; column < cubeGridSize; column += 1) {
+        const cube = document.createElement('span');
+        const imageFragment = image.cloneNode(true);
+        const columnDelta = column - cubeGridCenter;
+        const rowDelta = row - cubeGridCenter;
+        const distanceFromCenter = Math.hypot(columnDelta, rowDelta);
+
+        cube.className = 'zone__cube';
+        cube.style.setProperty('--zone-cube-column', String(column));
+        cube.style.setProperty('--zone-cube-row', String(row));
+        imageFragment.className = 'zone__cube-image';
+        imageFragment.alt = '';
+        imageFragment.removeAttribute('id');
+        imageFragment.removeAttribute('loading');
+        imageFragment.setAttribute('aria-hidden', 'true');
+        imageFragment.draggable = false;
+        cube.append(imageFragment);
+        cubeLayer.append(cube);
+
+        const cubeAnimation = cube.animate(
+          [
+            {
+              opacity: 0.04,
+              transform: `translate3d(${columnDelta * 14}px, ${rowDelta * 12}px, ${-32 - distanceFromCenter * 7}px) rotateX(${rowDelta * -3.5}deg) rotateY(${columnDelta * 4}deg) scale(0.94)`,
+            },
+            {
+              opacity: 1,
+              transform: 'translate3d(0, 0, 0) rotateX(0) rotateY(0) scale(1)',
+            },
+          ],
+          {
+            delay: distanceFromCenter * 16,
+            duration: 470,
+            easing: 'cubic-bezier(0.16, 1, 0.3, 1)',
+            fill: 'both',
+          },
+        );
+
+        cubeAnimations.push(cubeAnimation);
+        animations.push(cubeAnimation);
+      }
+    }
+
+    image.style.opacity = '0';
+    imageContainer.append(cubeLayer);
+
+    Promise.allSettled(cubeAnimations.map((animation) => animation.finished)).then(() => {
+      if (isCancelled) return;
+
+      image.style.opacity = '1';
+      firstHandoffFrame = window.requestAnimationFrame(() => {
+        secondHandoffFrame = window.requestAnimationFrame(() => {
+          if (isCancelled || !cubeLayer) return;
+
+          handoffAnimation = cubeLayer.animate([{ opacity: 1 }, { opacity: 0 }], {
+            duration: 110,
+            easing: 'ease-out',
+            fill: 'forwards',
+          });
+          handoffAnimation.finished.then(finish).catch(() => {});
+        });
+      });
+    });
+  } else {
+    Promise.allSettled(animations.map((animation) => animation.finished)).then(finish);
+  }
+
+  return () => {
+    isCancelled = true;
+    window.cancelAnimationFrame(firstHandoffFrame);
+    window.cancelAnimationFrame(secondHandoffFrame);
+    handoffAnimation?.cancel();
+    animations.forEach((animation) => animation.cancel());
+    image?.style.removeProperty('opacity');
+    cubeLayer?.remove();
+  };
+}
 
 function getPairs(root) {
   const tabs = [...root.querySelectorAll(tabSelector)];
@@ -120,6 +257,13 @@ function setupTabs(root) {
     ({ panel, tab }) => tab.getAttribute('aria-pressed') === 'true' || !panel.hidden,
   );
   let activeIndex = initialPairIndex >= 0 ? initialPairIndex : 0;
+  let activeAssemblyCleanup = null;
+  let hasPlayedInitialAssembly = false;
+
+  const animateActivePanel = () => {
+    activeAssemblyCleanup?.();
+    activeAssemblyCleanup = playZoneAssembly(pairs[activeIndex].panel);
+  };
 
   const revealTab = (tab) => {
     if (
@@ -157,6 +301,8 @@ function setupTabs(root) {
   };
 
   const activate = (nextIndex, { focus = false, reveal = false } = {}) => {
+    const previousIndex = activeIndex;
+
     activeIndex = nextIndex >= 0 && nextIndex < pairs.length ? nextIndex : 0;
 
     pairs.forEach(({ panel, tab }, index) => {
@@ -187,6 +333,11 @@ function setupTabs(root) {
 
     if (focus || reveal) {
       revealTab(activeTab);
+    }
+
+    if (previousIndex !== activeIndex) {
+      hasPlayedInitialAssembly = true;
+      animateActivePanel();
     }
   };
 
@@ -333,6 +484,26 @@ function setupTabs(root) {
 
   root.setAttribute(initializedAttribute, '');
   activate(activeIndex);
+
+  const panelsContainer = root.querySelector('.zones__panels');
+
+  if (!reducedMotion.matches && panelsContainer && 'IntersectionObserver' in window) {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (!entries.some((entry) => entry.isIntersecting)) return;
+
+        observer.disconnect();
+
+        if (!hasPlayedInitialAssembly) {
+          hasPlayedInitialAssembly = true;
+          animateActivePanel();
+        }
+      },
+      { threshold: 0.22 },
+    );
+
+    observer.observe(panelsContainer);
+  }
 }
 
 export function initZoneSequence() {
