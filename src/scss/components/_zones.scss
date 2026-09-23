@@ -38,6 +38,10 @@
   &__title span {
     display: block;
     white-space: nowrap;
+
+    &:first-child {
+      color: $red-600;
+    }
   }
 
   &__lead {
@@ -185,8 +189,8 @@
 
   &__row {
     display: grid;
-    grid-template-columns: minmax(0, 40.7%) minmax(0, 1fr);
-    gap: rem(24px);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0;
     height: rem(519px);
   }
 
@@ -199,12 +203,20 @@
     border-radius: rem(48px);
   }
 
+  &__image-container {
+    border-radius: rem(48px) 0 0 rem(48px);
+  }
+
+  &__content {
+    border-radius: 0 rem(48px) rem(48px) 0;
+  }
+
   &__image {
     display: block;
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: center;
+    object-position: center 38%;
   }
 
   &__cube-layer {
@@ -357,7 +369,8 @@
     display: flex;
     flex-wrap: wrap;
     gap: rem(4px);
-    margin: rem(20px) 0 0;
+    order: -1;
+    margin: 0 0 rem(30px);
     padding: 0;
     list-style: none;
   }

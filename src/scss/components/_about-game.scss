@@ -2,7 +2,7 @@
 @use '../fluid' as *;
 
 .about-game-group {
-  padding: 0 0 fluid(16px, 54px);
+  padding: 0 0 fluid(56px, 103px);
   position: relative;
   overflow: hidden;
   isolation: isolate;
@@ -67,20 +67,30 @@
     inset: 0;
     z-index: 4;
     pointer-events: none;
-    margin: 0 1.25rem;
+    margin: 0;
   }
 
   &__title {
     position: absolute;
     top: fluid(92px, 115px, 1025px, 1512px);
-    left: 0;
+    left: 50%;
+    width: 100%;
     margin: 0;
-    font-family: $font-family-heading;
+    font-family: $font-family-second;
     font-size: fluid(46px, 88px);
-    font-weight: 800;
-    letter-spacing: -0.015em;
-    line-height: 0.72;
+    font-weight: 700;
+    line-height: 78%;
+    letter-spacing: -0.01em;
+    text-align: center;
     text-transform: uppercase;
+    transform: translateX(-50%);
+    font-variation-settings:
+      'GRAD' 150,
+      'XOPQ' 110,
+      'YTDE' -198,
+      'YTUC' 760,
+      'wdth' 75,
+      'opsz' 144;
 
     span {
       display: block;
@@ -92,6 +102,7 @@
   }
 
   &__lead {
+    display: none;
     position: absolute;
     top: fluid(188px, 214px, 1025px, 1512px);
     right: 0;
@@ -109,16 +120,16 @@
   &__stage {
     position: absolute;
     inset: 0;
-    margin: 0 1.25rem;
+    margin: 0;
     perspective: rem(1400px);
   }
 
   &__visual-wrap {
     position: absolute;
-    bottom: fluid(28px, 36px, 1025px, 1512px);
+    bottom: 1.5%;
     left: 50%;
-    z-index: 2;
-    width: min(43.35%, rem(774px));
+    z-index: 3;
+    width: min(40%, rem(650px));
     aspect-ratio: 638 / 727;
     isolation: isolate;
     pointer-events: none;
@@ -288,7 +299,7 @@
     display: grid;
     grid-template-columns: fluid(52px, 64px, 1025px, 1512px) minmax(0, 1fr);
     min-height: fluid(170px, 196px, 1025px, 1512px);
-    padding: fluid(22px, 28px, 1025px, 1512px);
+    padding: fluid(22px, 30px, 1025px, 1512px);
     overflow: hidden;
     border: rem(1px) solid rgb(255 255 255 / 0.16);
     border-radius: fluid(20px, 28px, 1025px, 1512px);
@@ -297,26 +308,29 @@
     backdrop-filter: blur(rem(18px)) saturate(125%);
     backface-visibility: hidden;
     isolation: isolate;
-
+    width: min(36%, rem(505px));
     &--one {
-      top: 35.13%;
-      left: 0;
+      top: 28.3%;
+      left: 20px;
       z-index: 1;
-      width: min(38%, rem(558px));
     }
 
     &--two {
-      bottom: 8.6%;
-      left: 25.55%;
-      z-index: 3;
-      width: min(34.38%, rem(506px));
+      bottom: 18.5%;
+      left: 7.7%;
+      z-index: 10;
     }
 
     &--three {
-      top: 45.01%;
-      right: rem(4px);
-      z-index: 3;
-      width: min(34.24%, rem(504px));
+      top: 33.7%;
+      right: 2.7%;
+      z-index: 1;
+    }
+
+    &--four {
+      right: 7.6%;
+      bottom: 8.9%;
+      z-index: 10;
     }
   }
 
@@ -335,13 +349,22 @@
   }
 
   &__benefit-title {
-    margin: 0 0 fluid(8px, 12px, 1025px, 1512px);
-    font-family: $font-family-heading;
+    margin: 0 0 fluid(8px, 10px, 1025px, 1512px);
+    font-family: $font-family-second;
     font-size: fluid(28px, 36px, 1025px, 1512px);
-    font-weight: 800;
-    letter-spacing: 1px;
-    line-height: 0.86;
+
+    letter-spacing: 0.03px;
+
+    font-optical-sizing: none;
     text-transform: uppercase;
+    line-height: 0.88;
+    font-variation-settings:
+      'GRAD' 150,
+      'XOPQ' 110,
+      'YTDE' -198,
+      'YTUC' 760,
+      'wdth' 71,
+      'opsz' 144;
   }
 
   &__benefit-description {
@@ -350,6 +373,8 @@
     font-size: fluid(15px, 18px, 1025px, 1512px);
     font-weight: 600;
     line-height: 1.2;
+    letter-spacing: -0.3px;
+    color: #a2a2a2;
 
     &--lit {
       max-width: 86%;
@@ -446,6 +471,10 @@
       &--three.is-active {
         transform: translate3d(rem(-8px), rem(-5px), 0) scale(1.012);
       }
+
+      &--four.is-active {
+        transform: translate3d(rem(-6px), rem(-7px), 0) scale(1.012);
+      }
     }
 
     &.has-active-benefit .about-game__benefit:not(.is-active) {
@@ -481,6 +510,7 @@
     }
 
     &__lead {
+      display: block;
       position: relative;
       top: auto;
       right: auto;

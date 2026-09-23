@@ -12,9 +12,9 @@
 
   &__container {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: minmax(rem(360px), 0.78fr) minmax(0, 1.45fr);
     align-items: start;
-    gap: rem(82px);
+    gap: fluid(72px, 120px);
   }
 
   &__title {
@@ -27,7 +27,7 @@
   &__callback {
     position: relative;
     overflow: hidden;
-    min-height: rem(438px);
+    min-height: 0;
     margin-top: rem(44px);
     border: rem(1px) solid $gray-300;
     border-radius: fluid(28px, 48px);
@@ -40,8 +40,8 @@
   &__form {
     position: relative;
     z-index: 1;
-    width: rem(358px);
-    padding: rem(38px) 0 rem(34px) rem(40px);
+    width: 100%;
+    padding: rem(38px) rem(40px) rem(34px);
   }
 
   &__form-title {
@@ -145,13 +145,15 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    min-width: rem(210px);
+    width: 100%;
+    min-width: 0;
     min-height: rem(76px);
     margin-top: rem(30px);
     padding: rem(12px) rem(24px);
     border: rem(1px) solid $red-500;
     border-radius: rem(20px);
-    color: $red-500;
+    background-color: $red-500;
+    color: $white;
     font-size: rem(11px);
     font-weight: 800;
     line-height: 1;
@@ -162,12 +164,7 @@
   }
 
   &__image {
-    position: absolute;
-    right: 0;
-    bottom: 0;
-    width: rem(378px);
-    height: rem(438px);
-    object-fit: contain;
+    display: none;
   }
 
   &__content {

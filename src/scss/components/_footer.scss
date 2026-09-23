@@ -3,37 +3,42 @@
 @use '../vars' as *;
 
 .footer {
-  .container {
-    padding: 0 24px;
-  }
   position: relative;
   isolation: isolate;
   overflow: hidden;
-  min-height: rem(1044px);
   padding: rem(32px) 0 rem(16px);
   border-top: 0;
   background-color: $gray-950;
   color: $white;
   scroll-snap-align: start;
 
+  .container {
+    padding: 0 24px;
+  }
+
   &__top {
     position: relative;
     z-index: 3;
     display: grid;
-    grid-template-columns: 2fr 1fr 1fr;
-    gap: rem(16px);
+    grid-template-columns: minmax(rem(250px), 1.35fr) repeat(4, minmax(0, 1fr));
+    gap: fluid(24px, 48px);
+    padding-top: rem(29px);
+    border-top: rem(1px) solid rgba($white, 0.28);
+    display: flex;
+    justify-content: space-between;
   }
 
   &__column {
-    padding-top: rem(24px);
-    border-top: rem(1px) solid rgba($white, 0.32);
-    &:nth-child(n + 4) {
-      border-top: 0;
-    }
+    min-width: 0;
   }
 
   &__contacts {
-    max-width: rem(602px);
+    max-width: rem(330px);
+  }
+  &__contact-list {
+    display: flex;
+    flex-direction: column;
+    gap: 27px;
   }
 
   &__list {
@@ -52,37 +57,63 @@
     }
 
     display: flex;
-    align-items: center;
+    flex-direction: column;
+    align-items: flex-start;
     width: fit-content;
-    font-family: $font-family-heading;
-    font-size: fluid(32px, 36px);
-    font-weight: 800;
-    line-height: 0.91;
-    letter-spacing: 0;
-    text-transform: uppercase;
+    color: $gray-400;
+    font-size: rem(18px);
+    font-weight: 500;
+    line-height: 1.2;
     transition: color $duration-fast $ease-base;
 
     small {
-      margin-left: rem(6px);
-      color: $gray-500;
+      margin-top: rem(5px);
+      margin-left: 0;
+      color: $white;
       font-family: $font-family-primary;
-      font-size: rem(12px);
-      font-weight: 500;
-      line-height: 1;
+      font-size: rem(17px);
+      font-weight: 600;
+      line-height: 1.2;
       text-transform: none;
       transition: color $duration-fast $ease-base;
     }
   }
 
-  &__menu {
-    font-family: $font-family-heading;
-    font-size: rem(36px);
-    font-weight: 800;
-    line-height: 0.91;
-    letter-spacing: 0;
+  &__heading {
+    margin: 0 0 rem(18px);
+    font-family: $font-family-second;
+    font-size: rem(25px);
+    padding-top: 11px;
+    letter-spacing: 1px;
+    font-variation-settings:
+      'GRAD' 150,
+      'XOPQ' 110,
+      'YTDE' -198,
+      'YTUC' 760,
+      'wdth' 72,
+      'opsz' 144;
+    line-height: 0.9;
     text-transform: uppercase;
   }
 
+  &__menu {
+    display: grid;
+    gap: rem(15px);
+    color: $gray-300;
+    font-size: rem(15px);
+    font-weight: 500;
+    line-height: 1.2;
+  }
+  &__menu-link {
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 120%;
+  }
+  &__policy-list a {
+    font-size: 18px;
+    line-height: 120%;
+    color: rgba(255, 255, 255, 0.8);
+  }
   &__menu-link,
   &__policy-list a {
     @include hover {
@@ -93,13 +124,10 @@
     transition: color $duration-fast $ease-base;
   }
 
-  &__nav-group,
-  &__policies {
-    padding-top: rem(24px);
-    border-top: rem(1px) solid rgba($white, 0.32);
-  }
-
   &__policy-list {
+    display: grid;
+    gap: rem(10px);
+    color: $gray-400;
     font-size: rem(12px);
     font-weight: 500;
     line-height: 1.2;
@@ -107,27 +135,26 @@
 
   &__meta {
     position: absolute;
-    top: rem(636px);
+    top: rem(390px);
     left: 50%;
     z-index: 3;
     display: grid;
-    grid-template-columns: 2fr 1fr 1fr;
+    grid-template-columns: minmax(rem(250px), 1.55fr) repeat(4, minmax(0, 1fr));
     gap: rem(16px);
     width: 100%;
     transform: translateX(-50%);
     align-items: flex-end;
-    @media (min-width: 1500px) {
-      top: rem(600px);
-    }
   }
 
   &__company {
-    grid-column: 2;
+    grid-column: 3 / span 2;
     font-size: rem(12px);
     font-weight: 600;
     line-height: 1.2;
   }
+
   &__requisites {
+    grid-column: 2;
     font-size: 0.75rem;
   }
 
@@ -172,47 +199,21 @@
   }
 
   &__art {
-    position: absolute;
-    bottom: rem(29px);
-    left: 50%;
-    z-index: 1;
-    width: min(102%, rem(1920px));
-    aspect-ratio: 1512 / 179;
-    transform: translateX(-50%);
-    pointer-events: none;
+    width: 100%;
   }
 
   &__man {
-    position: absolute;
-    // The source PNG has 38 transparent pixels below the visible figure.
-    bottom: calc(100% - rem(56px));
-    left: 0;
-    z-index: 2;
-    width: rem(697px);
-    max-width: none;
+    display: none;
   }
 
   &__wordmark {
-    position: absolute;
-    inset: 0;
-    z-index: 1;
     width: 100%;
-    height: 100%;
   }
 
   &__legal {
-    position: absolute;
-    right: 0;
-    bottom: rem(12px);
-    left: 0;
-    z-index: 3;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: rem(20px);
-    font-size: rem(11px);
-    font-weight: 500;
-    line-height: 1.15;
-
+    margin-top: 44px;
+    display: flex;
+    justify-content: space-between;
     a {
       @include hover {
         text-decoration-color: transparent;
@@ -234,11 +235,13 @@
       grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: rem(48px) rem(20px);
     }
+
     &__column {
       &--empty {
         display: none;
       }
     }
+
     &__contacts {
       grid-column: 1 / -1;
       max-width: none;
@@ -298,9 +301,11 @@
 @media (max-width: $breakpoint-mobile) {
   .footer {
     padding-bottom: 80px;
+
     &__meta {
       margin-top: 1rem;
     }
+
     &__column,
     &__nav-group {
       padding-top: 1rem;
@@ -322,6 +327,10 @@
       grid-column: auto;
     }
 
+    &__requisites {
+      grid-column: auto;
+    }
+
     &__contact-link {
       flex-wrap: wrap;
       font-size: rem(32px);
@@ -333,7 +342,7 @@
     }
 
     &__menu {
-      font-size: rem(32px);
+      font-size: rem(15px);
     }
 
     &__app {
@@ -342,7 +351,7 @@
 
     &__man {
       width: 50%;
-      margin: 0 0 -5% 0;
+      margin: 0 0 -5%;
     }
 
     &__wordmark {

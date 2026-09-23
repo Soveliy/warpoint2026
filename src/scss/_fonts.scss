@@ -8,6 +8,7 @@
   italic,
   'truetype'
 );
+@include font-face('Roboto Flex', 'RobotoFlex.woff2', 100 900, normal, 'truetype');
 @include font-face(
   'Oceanic Grotesk Condensed',
   'OceanicGroteskCondensed-Extrabold.woff2',

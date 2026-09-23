@@ -9,36 +9,211 @@
   position: relative;
   isolation: isolate;
   overflow: hidden;
-  min-height: 100vh;
-  background-color: $violet-600;
+  background-color: $gray-950;
   color: $white;
   scroll-snap-align: start;
 
-  &::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    z-index: -1;
-    background: url(../../img/gradient_event.svg) no-repeat center center;
-    background-size: cover;
-    pointer-events: none;
+  &__title {
+    @include section-title;
+
+    margin-bottom: fluid(32px, 48px);
+    text-align: center;
+
+    span {
+      color: $red-500;
+    }
   }
 
-  &__container {
+  &__card {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    align-content: center;
-    align-items: start;
-    gap: rem(40px);
-    min-height: calc(100svh - #{fluid(176px, 208px, $viewport-min, $viewport-max)});
+    grid-template-columns: minmax(rem(350px), 31.5%) minmax(0, 1fr);
+    min-height: fluid(590px, 720px);
+    overflow: hidden;
+    border: rem(1px) solid rgba($white, 0.14);
+    border-radius: fluid(30px, 44px);
+    background-color: $gray-900;
+    box-shadow: 0 rem(28px) rem(70px) rgba($black, 0.22);
+  }
+
+  &__content {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    padding: fluid(28px, 40px);
+    background: linear-gradient(140deg, rgba($white, 0.08), transparent 42%), $gray-800;
+  }
+
+  &__city {
+    margin: 0;
+    font-family: $font-family-heading;
+    font-size: fluid(42px, 54px);
+    font-weight: 800;
+    line-height: 0.9;
+    text-transform: uppercase;
+  }
+
+  &__location {
+    align-self: flex-start;
+    margin-top: rem(18px);
+    padding: rem(11px) rem(16px);
+    border: rem(1px) solid rgba($white, 0.18);
+    border-radius: $radius-pill;
+    background-color: rgba($white, 0.07);
+    font-size: rem(14px);
+    font-weight: 650;
+    line-height: 1;
+  }
+
+  &__grid {
+    display: grid;
+    gap: rem(20px);
+    margin-top: fluid(26px, 36px);
+  }
+
+  &__item {
+    min-width: 0;
+  }
+
+  &__item--requisites {
+    padding-top: rem(18px);
+    border-top: rem(1px) solid rgba($white, 0.12);
+  }
+
+  &__label {
+    margin-bottom: rem(7px);
+    color: rgba($white, 0.42);
+    font-size: rem(10px);
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    line-height: 1;
+    text-transform: uppercase;
+  }
+
+  &__text {
+    margin: 0;
+    font-size: fluid(15px, 17px);
+    font-style: normal;
+    font-weight: 650;
+    line-height: 1.3;
+
+    a {
+      @include hover {
+        color: $red-400;
+      }
+
+      transition: color $duration-fast $ease-base;
+    }
+
+    sup {
+      position: relative;
+      top: -0.25em;
+      font-size: 0.58em;
+      line-height: 0;
+    }
+
+    &--schedule {
+      display: grid;
+      gap: rem(3px);
+
+      div {
+        display: flex;
+        justify-content: space-between;
+        gap: rem(16px);
+      }
+    }
+
+    &--small {
+      color: rgba($white, 0.72);
+      font-size: rem(12px);
+      font-weight: 550;
+    }
+  }
+
+  &__socials {
+    display: flex;
+    flex-wrap: wrap;
+    gap: rem(8px);
+    margin-top: rem(20px);
+  }
+
+  &__social {
+    @include hover {
+      border-color: rgba($white, 0.42);
+      background-color: rgba($white, 0.11);
+      transform: translateY(rem(-2px));
+    }
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: rem(42px);
+    aspect-ratio: 1;
+    border: rem(1px) solid rgba($white, 0.2);
+    border-radius: rem(12px);
+    color: $white;
+    transition:
+      border-color $duration-fast $ease-base,
+      background-color $duration-fast $ease-base,
+      transform $duration-fast $ease-base;
+
+    &:focus-visible {
+      outline: $focus-outline-width solid $focus-color;
+      outline-offset: $focus-outline-offset;
+    }
+  }
+
+  &__social-icon {
+    width: rem(19px);
+    height: rem(19px);
+    fill: currentcolor;
+  }
+
+  &__booking {
+    @include hover {
+      background-color: $red-600;
+      transform: translateY(rem(-2px));
+    }
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: rem(12px);
+    width: 100%;
+    min-height: rem(72px);
+    margin-top: auto;
+    padding: rem(16px) rem(22px);
+    border-radius: rem(20px);
+    background-color: $red-500;
+    color: $white;
+    font-size: rem(11px);
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    line-height: 1;
+    text-transform: uppercase;
+    transition:
+      background-color $duration-fast $ease-base,
+      transform $duration-fast $ease-base;
+
+    &:focus-visible {
+      outline: $focus-outline-width solid $focus-color;
+      outline-offset: $focus-outline-offset;
+    }
+  }
+
+  &__booking-icon {
+    width: rem(24px);
+    height: rem(24px);
+    flex: 0 0 auto;
+    fill: currentcolor;
   }
 
   &__map {
     position: relative;
+    min-width: 0;
+    min-height: 100%;
     overflow: hidden;
-    width: 100%;
-    aspect-ratio: 724 / 573;
-    border-radius: fluid(28px, 40px);
     background-color: $violet-200;
   }
 
@@ -101,130 +276,62 @@
       opacity: 1;
     }
   }
-
-  &__content {
-    min-width: 0;
-  }
-
-  &__title {
-    @include section-title;
-  }
-
-  &__grid {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: fluid(48px, 54px) rem(16px);
-    margin-top: rem(28px);
-  }
-
-  &__item {
-    min-width: 0;
-    padding-top: rem(24px);
-    border-top: rem(1px) solid rgba($black, 0.24);
-  }
-
-  &__label {
-    margin-bottom: rem(12px);
-    color: rgba($white, 0.52);
-    font-size: rem(11px);
-    font-weight: 800;
-    line-height: 1;
-    text-transform: uppercase;
-  }
-
-  &__text {
-    margin: 0;
-    font-size: rem(18px);
-    font-style: normal;
-    font-weight: 700;
-    line-height: 1.28;
-
-    a {
-      @include hover {
-        opacity: 0.62;
-      }
-
-      transition: opacity $duration-fast $ease-base;
-    }
-
-    sup {
-      position: relative;
-      top: -0.25em;
-      font-size: 0.58em;
-      line-height: 0;
-    }
-  }
-
-  &__socials {
-    display: flex;
-    flex-wrap: wrap;
-    gap: rem(8px);
-    margin-top: rem(12px);
-  }
-
-  &__social {
-    @include hover {
-      border-color: rgba($black, 0.6);
-      background-color: rgba($white, 0.12);
-    }
-
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: rem(44px);
-    aspect-ratio: 1;
-    border: rem(1px) solid rgba($white, 0.22);
-    border-radius: rem(14px);
-    color: $white;
-    transition:
-      border-color $duration-fast $ease-base,
-      background-color $duration-fast $ease-base;
-  }
-
-  &__social-icon {
-    width: rem(20px);
-    height: rem(20px);
-    fill: currentcolor;
-  }
 }
 
 @media (max-width: $breakpoint-tablet) {
   .contacts {
-    min-height: auto;
-
-    &__container {
-      display: flex;
-      flex-direction: column-reverse;
-      gap: rem(36px);
-      min-height: auto;
+    &__card {
+      grid-template-columns: minmax(rem(300px), 40%) minmax(0, 1fr);
+      min-height: rem(640px);
     }
 
-    &__map,
     &__content {
-      width: 100%;
-      margin-inline: auto;
+      padding: rem(28px);
     }
   }
 }
 
 @media (max-width: $breakpoint-mobile) {
   .contacts {
+    &__title {
+      margin-bottom: rem(28px);
+    }
+
+    &__card {
+      display: flex;
+      flex-direction: column;
+      min-height: 0;
+      border-radius: rem(28px);
+    }
+
+    &__content {
+      min-height: rem(610px);
+      padding: rem(24px);
+    }
+
+    &__city {
+      font-size: rem(42px);
+    }
+
     &__map {
-      border-radius: rem(32px);
+      min-height: min(105vw, #{rem(470px)});
     }
 
-    &__grid {
-      grid-template-columns: 1fr;
-      gap: rem(36px);
-      margin-top: rem(24px);
+    &__booking {
+      min-height: rem(64px);
+      border-radius: rem(18px);
     }
+  }
+}
 
-    &__item {
-      padding-top: rem(20px);
-    }
-
-    &__text {
-      font-size: rem(16px);
+@media (prefers-reduced-motion: reduce) {
+  .contacts {
+    &__text a,
+    &__social,
+    &__booking,
+    &__map-placeholder,
+    &__map-frame {
+      transition: none;
     }
   }
 }

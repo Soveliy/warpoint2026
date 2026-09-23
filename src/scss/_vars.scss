@@ -3,12 +3,13 @@
 $font-family-primary: 'Inter Tight', Arial, sans-serif;
 $font-family-heading: 'Oceanic Grotesk Condensed', 'Inter Tight', Arial, sans-serif;
 $font-family: $font-family-primary;
+$font-family-second: 'Roboto Flex', 'Inter Tight', Arial, sans-serif;
 
 $viewport-min: 375px;
 $viewport-max: 1472px;
 
-$content-width: rem(1472px);
-$container-offset: rem(20px);
+$content-width: rem(1464px);
+$container-offset: rem(24px);
 $container-width: $content-width + ($container-offset * 2);
 
 $breakpoint-tablet: rem(1024px);

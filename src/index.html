@@ -17,20 +17,26 @@
     <div class="hero" data-header-theme="brand">
       <picture class="hero__picture">
         <source srcset="/img/hero_mob.jpg" media="(max-width: 800px)" />
-        <img class="hero__image" src="/img/hero_desk.jpg" width="1200" height="800" alt="Description" />
+        <img class="hero__image" src="/img/hero_desk.jpg" width="1508" height="978" alt="" />
       </picture>
       <div class="hero__content container">
         <div class="hero__wrap">
           <div class="hero__pretitle">Сеть клубов виртуальной реальности в Екатеринбурге</div>
           <h1 class="hero__title">
-            Путешествуйте по виртуальным мирам вместе с <span>warpoint</span>
+            Путешествуйте по виртуальным мирам вместе с <span>warpoint</span>
           </h1>
           <div class="hero__buttons">
-            <button class="hero__button hero__button--red button-reset" type="button" data-booking-open>
+            <button class="btn btn--red button-reset" type="button" data-booking-open>
+              <svg class="btn__icon" aria-hidden="true">
+                <use href="/img/sprite.svg#icon-game"></use>
+              </svg>
               забронировать игру
             </button>
-            <button class="hero__button hero__button--purple button-reset" type="button" aria-haspopup="dialog"
+            <button class="btn btn--purple button-reset" type="button" aria-haspopup="dialog"
               aria-controls="event-modal" data-event-modal-open>
+              <svg class="btn__icon" aria-hidden="true">
+                <use href="/img/sprite.svg#icon-calendar"></use>
+              </svg>
               провести мероприятие
             </button>
           </div>
@@ -82,6 +88,7 @@
               <use href="/img/sprite.svg#icon-play"></use>
             </svg>
           </button>
+          <span class="video-section__duration">Смотреть видео</span>
         </div>
       </div>
     </section>
@@ -116,6 +123,7 @@
                   <div class="about-game__character about-game__character--boy">
                     <img src="img/about/3.png" width="439" height="731" alt="" loading="lazy" decoding="async" />
                   </div>
+
                 </div>
                 <div class="about-game__visual-state about-game__visual-state--family is-active"
                   data-about-scene-state="family">
@@ -137,8 +145,8 @@
                   </svg></span>
                 <div class="about-game__benefit-content">
                   <h3 class="about-game__benefit-title">Захватывающие командные игры</h3>
-                  <p class="about-game__benefit-description about-game__benefit-description--lit">
-                    Совместные миссии, одиночные игры или соревнования между командами. Играйте в
+                  <p class="about-game__benefit-description">
+                    Совместные миссии, одиночные игры или&nbsp;соревнования между командами. Играйте в
                     команде или друг против друга
                   </p>
                 </div>
@@ -155,7 +163,7 @@
                   </svg>
                 </span>
                 <div class="about-game__benefit-content">
-                  <h3 class="about-game__benefit-title">Невероятный уровень погружения</h3>
+                  <h3 class="about-game__benefit-title">Невероятный уровень&nbsp;погружения</h3>
                   <p class="about-game__benefit-description">
                     Виртуальная реальность нового поколения, свободное перемещение и современные
                     VR очки без проводов и ограничений
@@ -178,6 +186,22 @@
                   <p class="about-game__benefit-description about-game__benefit-description--lit">
                     Развлечение для всей семьи. Подходит для детей от&nbsp;6&nbsp;лет
                     и&nbsp;взрослых любого возраста
+                  </p>
+                </div>
+              </li>
+              <li class="about-game__benefit about-game__benefit--four" data-about-benefit="events">
+                <svg width="44" height="51" viewBox="0 0 44 51" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    d="M0 33.0278V18.0059C0 12.3769 0.939299 7.96871 2.8179 4.78123C4.71129 1.59374 7.37386 0 10.8056 0C14.267 0 16.937 1.58244 18.8156 4.74732C20.7089 7.88959 21.6556 12.3091 21.6556 18.0059V33.0278C21.6556 38.7245 20.6868 43.1554 18.749 46.3203C16.8112 49.4625 14.1634 51.0224 10.8056 50.9998C7.34428 50.9998 4.6743 49.4286 2.79571 46.2863C0.931903 43.1441 0 38.7245 0 33.0278ZM8.67557 34.7911C8.67557 37.0065 8.84568 38.7245 9.1859 39.9453C9.52612 41.1434 10.0734 41.7425 10.8278 41.7425C11.597 41.7425 12.1517 41.1434 12.4919 39.9453C12.8322 38.7245 13.0023 37.0065 13.0023 34.7911V16.4122C13.0023 14.1515 12.8248 12.4221 12.4697 11.224C12.1295 10.0033 11.5822 9.39291 10.8278 9.39291C10.0734 9.39291 9.52612 10.0033 9.1859 11.224C8.84568 12.4221 8.67557 14.1515 8.67557 16.4122V34.7911Z"
+                    fill="#E31B54" />
+                  <path
+                    d="M32.9947 50.1859V36.9273L33.15 35.8423V18.3111H32.9503L28.6902 30.5863H35.5685L36.5892 30.2811H44V40.4878H21.235V31.2984L33.6603 0.813826H41.4262V50.1859H32.9947Z"
+                    fill="#E31B54" />
+                </svg>
+                <div class="about-game__benefit-content">
+                  <h3 class="about-game__benefit-title">Проведение мероприятий</h3>
+                  <p class="about-game__benefit-description">
+                    Дни рождения, выпускные и корпоративы, которые запомнятся каждому гостю
                   </p>
                 </div>
               </li>
@@ -440,6 +464,8 @@
       </div>
     </section>
 
+    @include('partials/events.html') @include('partials/gallery.html')
+
     <div class="games-group" data-games-group data-pixel-section>
       <div class="games-group__background" aria-hidden="true">
         <span class="games-group__background-pattern"></span>
@@ -447,15 +473,14 @@
       </div>
       <section class="games-catalog" data-header-theme="dark" aria-labelledby="games-catalog-title" data-slider-root>
         <h2 class="games-catalog__title" id="games-catalog-title">
-          Выберите
-          свое виртуальное
-          приключение
+          <span>Выберите своё</span>
+          <span>виртуальное приключение</span>
         </h2>
         <div class="games-catalog__track">
           <div class="games-catalog__slider swiper" data-slider data-games-slider>
             <div class="swiper-wrapper">
               <article class="game-card swiper-slide">
-                <img class="game-card__image" src="img/games/1.jpg" width="840" height="1260"
+                <img class="game-card__image" src="img/games/1.jpg" width="436" height="624"
                   alt="Команда игроков на виртуальной арене" loading="lazy" decoding="async" />
                 <div class="game-card__meta">
                   <span class="game-card__tag game-card__tag--accent">Арена</span>
@@ -471,7 +496,7 @@
                 </div>
               </article>
               <article class="game-card swiper-slide">
-                <img class="game-card__image" src="img/games/2.jpg" width="840" height="1260"
+                <img class="game-card__image" src="img/games/2.jpg" width="436" height="624"
                   alt="Героини фэнтезийного приключения" loading="lazy" decoding="async" />
                 <div class="game-card__meta">
                   <span class="game-card__tag game-card__tag--accent">Арена</span>
@@ -487,7 +512,7 @@
                 </div>
               </article>
               <article class="game-card swiper-slide">
-                <img class="game-card__image" src="img/games/3.jpg" width="840" height="1260"
+                <img class="game-card__image" src="img/games/3.jpg" width="436" height="624"
                   alt="Космический пехотинец и его инопланетный союзник" loading="lazy" decoding="async" />
                 <div class="game-card__meta">
                   <span class="game-card__tag game-card__tag--accent">Арена</span>
@@ -503,7 +528,7 @@
                 </div>
               </article>
               <article class="game-card swiper-slide">
-                <img class="game-card__image" src="img/games/4.jpg" width="840" height="1260"
+                <img class="game-card__image" src="img/games/4.jpg" width="436" height="624"
                   alt="Исследователи на поверхности далекой планеты" loading="lazy" decoding="async" />
                 <div class="game-card__meta">
                   <span class="game-card__tag game-card__tag--accent">Арена</span>
@@ -519,7 +544,7 @@
                 </div>
               </article>
               <article class="game-card swiper-slide">
-                <img class="game-card__image" src="img/games/5.jpg" width="840" height="1260"
+                <img class="game-card__image" src="img/games/5.jpg" width="436" height="624"
                   alt="Исследователи на поверхности далекой планеты" loading="lazy" decoding="async" />
                 <div class="game-card__meta">
                   <span class="game-card__tag game-card__tag--accent">Арена</span>
@@ -553,9 +578,9 @@
         </div>
       </section>
     </div>
-    @include('partials/events.html') @include('partials/extras.html')
     @include('partials/reviews.html') @include('partials/bloggers.html')
-    @include('partials/faq.html') @include('partials/contacts.html')
+    @include('partials/faq.html') @include('partials/extras.html')
+    @include('partials/contacts.html')
   </main>
 
   @include('partials/footer.html') @include('partials/location-modal.html')

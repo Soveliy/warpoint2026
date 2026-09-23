@@ -92,7 +92,7 @@ function setupDesktopReveal(section) {
     });
 
     benefitParts.forEach(({ content, number }, index) => {
-      const direction = index === 0 ? -1 : index === 2 ? 1 : 0;
+      const direction = index < 2 ? -1 : 1;
 
       gsap.set(number, {
         autoAlpha: 0,
