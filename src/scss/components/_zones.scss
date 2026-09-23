@@ -158,6 +158,33 @@
 }
 
 .zone {
+  &__bottom {
+    display: flex;
+    align-items: center;
+    margin-top: auto;
+    gap: 20px;
+  }
+  &__price {
+    padding-left: 20px;
+    border-left: 1px solid rgba(81, 82, 92, 0.5);
+    small {
+      font-weight: 600;
+      font-size: 20px;
+      line-height: 120%;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      color: rgba(255, 255, 255, 0.5);
+    }
+    span {
+      font-weight: 700;
+      font-size: 34px;
+      line-height: 88%;
+      letter-spacing: -0.02em;
+      text-transform: uppercase;
+      color: #fff;
+    }
+  }
   --zone-accent: #{$red-500};
   --zone-accent-hover: #{$red-600};
   --zone-accent-active: #{$red-700};
