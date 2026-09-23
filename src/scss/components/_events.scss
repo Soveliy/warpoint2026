@@ -156,6 +156,7 @@
     flex-direction: column;
     min-width: 0;
     padding: fluid(24px, 36px);
+    background: url(../img/event_vector.svg) no-repeat center bottom;
   }
 
   &__subtitle {
@@ -216,36 +217,7 @@
   }
 
   &__calculate {
-    @include hover {
-      background-color: $red-500;
-      transform: translateY(rem(-2px));
-    }
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: min(100%, rem(326px));
-    min-height: rem(72px);
-    margin: rem(36px) auto 0;
-    padding: rem(18px) rem(28px);
-    border-radius: rem(18px);
-    background-color: $red-600;
-    box-shadow: 0 rem(14px) rem(34px) rgba($red-600, 0.2);
-    color: $white;
-    font-size: rem(12px);
-    font-weight: 800;
-    letter-spacing: 0.08em;
-    line-height: 1;
-    text-align: center;
-    text-transform: uppercase;
-    transition:
-      background-color $duration-fast $ease-base,
-      transform $duration-fast $ease-base;
-
-    &:focus-visible {
-      outline: $focus-outline-width solid $focus-color;
-      outline-offset: $focus-outline-offset;
-    }
+    margin: 25px auto 0;
   }
 }
 
