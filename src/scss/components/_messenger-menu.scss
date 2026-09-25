@@ -22,14 +22,7 @@
       outline-offset: rem(3px);
     }
 
-    .select__button-text {
-      font-size: rem(18px);
-      line-height: 1.2;
-    }
-
     .select__button-icon {
-      width: rem(10px);
-      height: rem(10px);
       transition: transform $duration-fast $ease-base;
     }
 
@@ -43,18 +36,18 @@
     z-index: 4;
     top: calc(100% + rem(8px));
     right: 0;
-    width: rem(340px);
-    max-width: calc(100vw - rem(32px));
+    width: rem(240px);
+    max-width: 240px;
     margin: 0;
-    padding: rem(20px) rem(28px);
+    padding: 20px;
     border: rem(1px) solid rgb(var(--white-rgb) / 0.2);
-    border-radius: rem(40px);
+    border-radius: rem(24px);
     background: rgb(var(--gray-800-rgb) / 0.95);
-    box-shadow:
-      inset 0 0 0 rem(1px) rgb(var(--white-rgb) / 0.04),
-      0 rem(18px) rem(42px) rgb(var(--black-rgb) / 0.35);
-    color: var(--white);
+
     list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: rem(15px);
     backdrop-filter: blur(rem(16px));
 
     &[hidden] {
@@ -69,11 +62,10 @@
 
     display: flex;
     align-items: center;
-    gap: rem(12px);
-    min-height: rem(50px);
+    gap: rem(8px);
     border-radius: rem(8px);
     color: var(--white);
-    font-size: rem(22px);
+    font-size: rem(14px);
     font-weight: 600;
     line-height: 1.2;
     transition: color $duration-fast $ease-base;
@@ -87,8 +79,8 @@
 
   &__icon {
     flex: 0 0 rem(22px);
-    width: rem(22px);
-    height: rem(22px);
+    width: rem(14px);
+    height: rem(14px);
     color: var(--red-500);
   }
 }

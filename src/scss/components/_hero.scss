@@ -142,6 +142,7 @@
     &__wrap {
       align-items: flex-start;
       justify-content: flex-start;
+      min-height: max(100svh, #{rem(760px)});
       padding-top: rem(126px);
       padding-bottom: rem(320px);
       gap: rem(12px);
