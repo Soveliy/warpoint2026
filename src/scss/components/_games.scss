@@ -139,7 +139,18 @@
     object-fit: cover;
     transition: transform 650ms ease;
   }
-
+  &__more {
+    display: block;
+    width: max-content;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 100%;
+    letter-spacing: 0.08em;
+    text-align: center;
+    text-transform: uppercase;
+    color: var(--red-600);
+    margin-top: 30px;
+  }
   &__meta {
     position: absolute;
     top: fluid(20px, 32px);

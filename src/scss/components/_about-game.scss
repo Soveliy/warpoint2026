@@ -540,8 +540,11 @@
 
 @media (max-width: $breakpoint-mobile) {
   .about-game {
-    padding: rem(88px) 0 rem(56px);
-
+    padding: rem(32px) 0;
+    &__title {
+      font-size: 2.875rem;
+      text-align: left;
+    }
     &__heading {
       gap: rem(20px);
       margin: 0;
@@ -567,7 +570,6 @@
     }
 
     &__benefit {
-      grid-template-columns: rem(40px) minmax(0, 1fr);
       padding: rem(20px);
       border-radius: rem(20px);
     }
