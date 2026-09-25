@@ -270,8 +270,9 @@
 
   &__image-zoom {
     position: absolute;
-    bottom: rem(30px);
-    left: rem(30px);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     z-index: 2;
     display: flex;
     align-items: center;
@@ -279,12 +280,9 @@
     width: rem(76px);
     height: rem(76px);
     overflow: hidden;
-    border: rem(1px) solid rgb(var(--white-rgb) / 0.42);
+
     border-radius: rem(20px);
-    background-color: rgb(var(--white-rgb) / 0.18);
-    box-shadow:
-      inset 0 rem(1px) 0 rgb(var(--white-rgb) / 0.62),
-      0 rem(10px) rem(28px) rgb(var(--black-rgb) / 0.22);
+    background: linear-gradient(134.84deg, var(--red-500) 0%, var(--red-800) 100%);
     color: var(--white);
     backdrop-filter: blur(rem(18px)) saturate(160%);
     transition:
@@ -293,13 +291,7 @@
       transform $duration-base $ease-base;
 
     &:hover {
-      border-color: rgb(var(--white-rgb) / 0.68);
-      background-color: rgb(var(--white-rgb) / 0.26);
-      transform: translateY(rem(-2px));
-    }
-
-    &:active {
-      transform: scale(0.97);
+      opacity: 0.8;
     }
 
     &:focus-visible {
