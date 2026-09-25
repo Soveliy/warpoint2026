@@ -4,6 +4,8 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 gsap.registerPlugin(ScrollTrigger);
 
 const revealProperties = 'opacity,translate,willChange';
+const revealedGroups = new WeakSet();
+const revealedCards = new WeakSet();
 let initialized = false;
 
 export function initCardAnimations() {
@@ -20,9 +22,9 @@ export function initCardAnimations() {
     },
     ({ conditions }) => {
       const groups = [
-        ['.events', conditions.desktop ? '.events__state' : '.events__slider'],
-        ['.reviews', '.reviews__card, .reviews__score'],
-        ['.bloggers', '.bloggers__media'],
+        ['.events', conditions.desktop ? '.events__state' : '.events__slider', '.events__slider'],
+        ['.reviews', '.reviews__card, .reviews__score', '.reviews__carousel'],
+        ['.bloggers', '.bloggers__media', '.bloggers__slider'],
       ];
       const gridCards = [...document.querySelectorAll('.gallery__item, .extras__item')];
       const animatedElements = new Set(gridCards);
@@ -86,37 +88,51 @@ export function initCardAnimations() {
         }
       };
 
-      groups.forEach(([selector, cardSelector]) => {
+      groups.forEach(([selector, cardSelector, triggerSelector]) => {
         document.querySelectorAll(selector).forEach((root) => {
-          let hasPlayed = false;
-          const play = () => {
-            hasPlayed = true;
-            const cards = [...root.querySelectorAll(cardSelector)];
-            const controls = [...root.querySelectorAll('.slider-controls:not([hidden])')];
+          if (revealedGroups.has(root)) return;
 
+          const cards = [...root.querySelectorAll(cardSelector)];
+          const controls = [...root.querySelectorAll('.slider-controls:not([hidden])')];
+          if (!cards.length) return;
+
+          gsap.set([...cards, ...controls], { opacity: 0 });
+
+          const play = () => {
+            if (!active || revealedGroups.has(root)) return;
+
+            revealedGroups.add(root);
             reveal(cards, controls);
           };
           const trigger = ScrollTrigger.create({
-            trigger: root,
-            start: 'top 88%',
+            trigger: root.querySelector(triggerSelector) || root,
+            start: 'top 85%',
             end: 'bottom 20%',
+            once: true,
             onEnter: play,
-            onEnterBack: play,
           });
 
           triggers.push(trigger);
-          if (trigger.isActive && !hasPlayed) play();
+          if (trigger.isActive || trigger.progress > 0) play();
         });
       });
 
-      if (gridCards.length) {
+      const pendingCards = gridCards.filter((card) => !revealedCards.has(card));
+      if (pendingCards.length) {
+        gsap.set(pendingCards, { opacity: 0 });
         triggers.push(
-          ...ScrollTrigger.batch(gridCards, {
-            start: 'top bottom',
+          ...ScrollTrigger.batch(pendingCards, {
+            start: 'top 85%',
             end: 'bottom top',
             interval: 0.07,
-            onEnter: (cards) => reveal(cards),
-            onEnterBack: (cards) => reveal(cards),
+            once: true,
+            onEnter: (cards) => {
+              if (!active) return;
+
+              const unseenCards = cards.filter((card) => !revealedCards.has(card));
+              unseenCards.forEach((card) => revealedCards.add(card));
+              reveal(unseenCards);
+            },
           }),
         );
       }

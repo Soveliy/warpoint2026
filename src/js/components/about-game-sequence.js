@@ -7,6 +7,7 @@ const motionQuery = '(prefers-reduced-motion: no-preference)';
 const desktopQuery = '(min-width: 64.0625rem)';
 const hoverQuery = '(hover: hover) and (pointer: fine)';
 const revealProperties = 'clipPath,opacity,scale,transform,transformOrigin,visibility,willChange';
+const revealedElements = new WeakSet();
 
 const getTitleLines = (section) => [...section.querySelectorAll('.about-game__title > span')];
 
@@ -22,12 +23,20 @@ const clearRevealStyles = (elements) => {
   });
 };
 
-const addOnceTrigger = (timeline, triggerElement, start) => {
+const addOnceTrigger = (timeline, triggerElement, start, relatedElements = []) => {
+  if (revealedElements.has(triggerElement)) {
+    relatedElements.forEach((element) => revealedElements.add(element));
+    timeline.progress(1);
+    return null;
+  }
+
   let hasPlayed = false;
   const play = () => {
     if (hasPlayed) return;
 
     hasPlayed = true;
+    revealedElements.add(triggerElement);
+    relatedElements.forEach((element) => revealedElements.add(element));
     timeline.play(0);
   };
 
@@ -187,7 +196,7 @@ function setupDesktopReveal(section) {
         );
     });
 
-    addOnceTrigger(timeline, section, 'top 72%');
+    addOnceTrigger(timeline, section, 'top 72%', benefits);
   }, section);
 
   return () => context.revert();

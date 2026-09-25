@@ -4,8 +4,11 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 gsap.registerPlugin(ScrollTrigger);
 
 const motionQuery = '(prefers-reduced-motion: no-preference)';
+const revealedCatalogs = new WeakSet();
 
 function setupCatalogReveal(catalog) {
+  if (revealedCatalogs.has(catalog)) return null;
+
   const cards = [...catalog.querySelectorAll('.game-card')];
   const controls = catalog.querySelector('.games-catalog__controls');
 
@@ -66,8 +69,9 @@ function setupCatalogReveal(catalog) {
   }
 
   const play = () => {
-    timeline.pause(0);
-    reset();
+    if (revealedCatalogs.has(catalog)) return;
+
+    revealedCatalogs.add(catalog);
     timeline.play(0);
   };
 
@@ -75,14 +79,13 @@ function setupCatalogReveal(catalog) {
 
   const trigger = ScrollTrigger.create({
     end: 'bottom 20%',
+    once: true,
     onEnter: play,
-    onEnterBack: play,
-    onLeaveBack: reset,
-    start: 'top 88%',
-    trigger: catalog,
+    start: 'top 85%',
+    trigger: catalog.querySelector('.games-catalog__track') || catalog,
   });
 
-  if (trigger.isActive) play();
+  if (trigger.isActive || trigger.progress > 0) play();
 
   return () => {
     trigger.kill();
