@@ -11,10 +11,8 @@
   scroll-snap-align: start;
 
   &__container {
-    display: grid;
-    grid-template-columns: minmax(rem(360px), 0.78fr) minmax(0, 1.45fr);
-    align-items: start;
-    gap: fluid(72px, 120px);
+    display: flex;
+    gap: fluid(72px, 106px);
   }
 
   &__title {
@@ -25,10 +23,11 @@
   }
 
   &__callback {
+    max-width: 493px;
     position: relative;
     overflow: hidden;
     min-height: 0;
-    margin-top: rem(44px);
+    margin-top: rem(25px);
     border: rem(1px) solid var(--gray-300);
     border-radius: fluid(28px, 48px);
 
@@ -53,7 +52,7 @@
 
   &__fields {
     display: grid;
-    margin-top: rem(22px);
+    margin-top: rem(12px);
   }
 
   &__input {
@@ -88,11 +87,16 @@
     display: grid;
     grid-template-columns: rem(16px) 1fr;
     gap: rem(7px);
-    margin-top: rem(12px);
-    font-size: rem(11px);
+    margin-top: rem(32px);
     font-weight: 600;
-    line-height: 1.2;
+    font-size: 0.75rem;
+    line-height: 123%;
+    letter-spacing: 0.01em;
+    color: var(--gray-800);
     cursor: pointer;
+    a {
+      border-bottom: 1px dotted var(--gray-800);
+    }
   }
 
   &__agreement-input {
@@ -137,30 +141,8 @@
   }
 
   &__submit {
-    @include hover {
-      background-color: var(--red-500);
-      color: var(--white);
-    }
-
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
+    margin-top: 1.75rem;
     width: 100%;
-    min-width: 0;
-    min-height: rem(76px);
-    margin-top: rem(30px);
-    padding: rem(12px) rem(24px);
-    border: rem(1px) solid var(--red-500);
-    border-radius: rem(20px);
-    background-color: var(--red-500);
-    color: var(--white);
-    font-size: rem(11px);
-    font-weight: 800;
-    line-height: 1;
-    text-transform: uppercase;
-    transition:
-      background-color $duration-fast $ease-base,
-      color $duration-fast $ease-base;
   }
 
   &__image {
@@ -169,6 +151,7 @@
 
   &__content {
     border-top: rem(1px) solid var(--gray-400);
+    width: 100%;
   }
 
   &__item {
@@ -282,13 +265,16 @@
   }
 
   &__more {
-    display: inline-block;
-    margin-top: rem(30px);
-    color: var(--red-500);
-    font-size: rem(11px);
-    font-weight: 800;
-    line-height: 1;
+    display: block;
+    width: max-content;
+    font-weight: 680;
+    font-size: 16px;
+    line-height: 100%;
+    letter-spacing: 0.07em;
     text-transform: uppercase;
+    color: var(--red-500);
+    font-family: $font-family-second;
+    margin-top: 1.15rem;
   }
 }
 
@@ -311,7 +297,11 @@
       flex-direction: column;
     }
 
-    &__aside,
+    &__aside {
+      max-width: 32rem;
+      width: 100%;
+      flex-shrink: 0;
+    }
     &__content {
       width: 100%;
       max-width: 100%;

@@ -41,13 +41,41 @@
           </div>
         </div>
         <div class="header__item header__item--desk">
-          <div class="select header__select">
-            <button class="select__button button-reset">
+          <div class="select header__select messenger-menu" data-messenger-menu>
+            <button class="select__button messenger-menu__toggle button-reset" type="button"
+              aria-expanded="false" aria-controls="header-messengers" data-messenger-toggle>
               <span class="select__button-text">Мессенджеры</span>
               <svg class="icon select__button-icon" aria-hidden="true">
                 <use href="/img/sprite.svg#icon-cvervron_down"></use>
               </svg>
             </button>
+            <ul class="messenger-menu__dropdown" id="header-messengers" aria-label="Мессенджеры Warpoint"
+              data-messenger-dropdown hidden>
+              <li>
+                <a class="messenger-menu__link" href="#" data-messenger-link="vk">
+                  <svg class="messenger-menu__icon" aria-hidden="true">
+                    <use href="/img/sprite.svg#icon-vk"></use>
+                  </svg>
+                  <span>Написать во ВКонтакте</span>
+                </a>
+              </li>
+              <li>
+                <a class="messenger-menu__link" href="#" data-messenger-link="max">
+                  <svg class="messenger-menu__icon" aria-hidden="true">
+                    <use href="/img/sprite.svg#icon-max"></use>
+                  </svg>
+                  <span>Написать в Макс</span>
+                </a>
+              </li>
+              <li>
+                <a class="messenger-menu__link" href="#" data-messenger-link="telegram">
+                  <svg class="messenger-menu__icon" aria-hidden="true">
+                    <use href="/img/sprite.svg#icon-tg"></use>
+                  </svg>
+                  <span>Написать в Telegram</span>
+                </a>
+              </li>
+            </ul>
           </div>
           <a href="tel:+73433000000" class="header__link link">+7 (343) 300-00-00</a>
         </div>

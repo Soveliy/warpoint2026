@@ -7,23 +7,21 @@
   background-color: var(--gray-25);
   color: var(--black);
   isolation: isolate;
+  z-index: 50;
   position: relative;
   &::before {
     content: '';
     position: absolute;
-    inset: 0;
-    background: url(../../img/white_gradient.svg) no-repeat center center;
-    background-size: cover;
+    top: 50%;
+    right: -35%;
+    height: 956px;
+    width: 1423px;
+
+    background: url(../../img/games-background.svg) no-repeat right center;
     pointer-events: none;
   }
   &__background {
     display: none;
-    height: 100svh;
-    margin-bottom: -100svh;
-    overflow: hidden;
-    position: sticky;
-    top: 0;
-    z-index: 0;
   }
 
   &__background-pattern,
@@ -76,14 +74,12 @@
   overflow: hidden;
   z-index: 1;
   isolation: isolate;
-  min-height: 100vh;
   color: var(--black);
   scroll-snap-align: start;
 
   &__title {
     @include section-title;
 
-    max-width: rem(736px);
     margin-right: auto;
     margin-left: auto;
     text-align: center;
@@ -94,8 +90,9 @@
   }
 
   &__track {
+    position: relative;
     margin-top: $section-title-gap;
-    padding-left: fluid(16px, 88px);
+    padding-left: fluid(16px, 24px);
   }
 
   &__slider {
@@ -103,49 +100,7 @@
   }
 
   &__controls {
-    display: flex;
-    justify-content: center;
-    gap: rem(8px);
-    margin-top: fluid(20px, 28px);
-  }
-
-  &__arrow {
-    @include hover {
-      background-color: rgb(var(--black-rgb) / 0.08);
-      transform: translateY(rem(-2px));
-    }
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: fluid(56px, 64px);
-    aspect-ratio: 1;
-    border: rem(1px) solid var(--black);
-    border-radius: 50%;
-    color: var(--black);
-    transition:
-      background-color $duration-fast $ease-base,
-      opacity $duration-fast $ease-base,
-      transform $duration-fast $ease-base;
-
-    &:active {
-      transform: scale(0.96);
-    }
-
-    &:disabled {
-      opacity: 0.28;
-      pointer-events: none;
-    }
-
-    &--prev .games-catalog__arrow-icon {
-      transform: rotate(180deg);
-    }
-  }
-
-  &__arrow-icon {
-    fill: transparent;
-    width: rem(18px);
-    height: rem(18px);
+    left: fluid(16px, 88px);
   }
 }
 

@@ -4,18 +4,20 @@
 .about-game-group {
   padding: 0 0 13px;
   position: relative;
-  overflow: hidden;
+
   isolation: isolate;
   background-color: var(--color-bg);
 
   &::after {
     content: '';
     position: absolute;
-    top: 0;
-    left: 0;
-    height: 20%;
-    width: 100%;
-    background: linear-gradient(180deg, var(--color-bg) 0%, rgb(var(--white-rgb) / 0) 100%);
+    top: 50%;
+    right: 0;
+    height: 1168px;
+    width: 975px;
+    background: url('../../img/about-game-after.svg') no-repeat right top;
+
+    // background: linear-gradient(180deg, var(--color-bg) 0%, rgb(var(--white-rgb) / 0) 100%);
   }
 
   &::before {
@@ -191,57 +193,15 @@
 
   &__visual {
     position: absolute;
+    inset: 2.5%;
     display: block;
+    width: 95%;
+    height: 95%;
     max-width: none;
+    object-fit: contain;
     pointer-events: none;
     user-select: none;
     filter: drop-shadow(0 rem(24px) rem(20px) rgb(var(--black-rgb) / 0.3));
-
-    &--family {
-      inset: 2.5%;
-      width: 95%;
-      height: 95%;
-      object-fit: contain;
-    }
-
-    &--team {
-      bottom: -4%;
-      left: 50%;
-      width: auto;
-      height: 118%;
-      transform: translateX(-50%);
-    }
-  }
-
-  &__character {
-    position: absolute;
-    transform-style: preserve-3d;
-    will-change: transform;
-
-    img {
-      display: block;
-      width: 100%;
-      height: 100%;
-      max-width: none;
-      object-fit: contain;
-      filter: drop-shadow(0 rem(22px) rem(18px) rgb(var(--black-rgb) / 0.28));
-    }
-
-    &--girl {
-      bottom: -9%;
-      left: -7%;
-      z-index: 1;
-      height: 118%;
-      aspect-ratio: 556 / 854;
-    }
-
-    &--boy {
-      right: -7%;
-      bottom: -3%;
-      z-index: 2;
-      height: 108%;
-      aspect-ratio: 439 / 731;
-    }
   }
 
   &__visual-aura {
@@ -309,6 +269,7 @@
     backface-visibility: hidden;
     isolation: isolate;
     width: min(36%, rem(505px));
+
     &--one {
       top: 28.3%;
       left: 20px;
@@ -369,7 +330,6 @@
 
   &__benefit-description {
     margin: 0;
-    color: var(--white);
     font-size: fluid(15px, 18px, 1025px, 1512px);
     font-weight: 600;
     line-height: 1.2;
@@ -507,6 +467,7 @@
       top: auto;
       left: auto;
       line-height: 0.76;
+      transform: none;
     }
 
     &__lead {
@@ -606,7 +567,7 @@
     }
 
     &__benefit {
-      grid-template-columns: rem(52px) minmax(0, 1fr);
+      grid-template-columns: rem(40px) minmax(0, 1fr);
       padding: rem(20px);
       border-radius: rem(20px);
     }
@@ -621,7 +582,7 @@
 
     &__benefit-title {
       margin-bottom: rem(10px);
-      font-size: fluid(28px, 34px);
+      font-size: fluid(24px, 34px, 320px, 767px);
       line-height: 0.9;
     }
 

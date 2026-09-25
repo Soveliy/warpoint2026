@@ -9,6 +9,14 @@ import { toggleScrollLock } from '../_functions.js';
 import { setPhoneCountry } from './phone-mask.js';
 
 const STORAGE_KEY = 'warpoint-location';
+const pluralRules = new Intl.PluralRules('ru-RU');
+const cityForms = { one: 'город', few: 'города', many: 'городов', other: 'города' };
+const stepLabels = {
+  country: { title: 'страну', search: 'Поиск страны', empty: 'Страна не найдена' },
+  city: { title: 'город', search: 'Поиск города', empty: 'Город не найден' },
+  location: { title: 'локацию', search: 'Поиск локации', empty: 'Локация не найдена' },
+};
+const normalizeQuery = (value) => value.trim().toLocaleLowerCase('ru-RU').replaceAll('ё', 'е');
 const focusableSelector =
   'a[href], button:not(:disabled), input:not(:disabled), [tabindex]:not([tabindex="-1"])';
 
@@ -84,19 +92,22 @@ function groupCities(cities) {
 export function initLocationModal() {
   const modal = document.querySelector('[data-location-modal]');
 
-  if (!modal) {
+  if (!modal || modal.dataset.locationInitialized) {
     return;
   }
+
+  modal.dataset.locationInitialized = 'true';
 
   const dialog = modal.querySelector('[data-location-dialog]');
   const content = modal.querySelector('.location-modal__content');
   const countryList = modal.querySelector('[data-location-country-list]');
   const cityList = modal.querySelector('[data-location-city-list]');
-  const citySearch = modal.querySelector('[data-location-city-search]');
-  const cityEmpty = modal.querySelector('[data-location-city-empty]');
+  const search = modal.querySelector('[data-location-search]');
+  const searchLabel = modal.querySelector('[data-location-search-label]');
+  const empty = modal.querySelector('[data-location-empty]');
+  const heading = modal.querySelector('#location-modal-title');
+  const title = modal.querySelector('[data-location-title]');
   const locationList = modal.querySelector('[data-location-list]');
-  const person = modal.querySelector('[data-location-person]');
-  const selectedFlag = modal.querySelector('[data-location-selected-flag]');
   const countryLabel = modal.querySelector('[data-location-country-label]');
   const cityLabel = modal.querySelector('[data-location-city-label]');
   const locationLabel = modal.querySelector('[data-location-location-label]');
@@ -112,6 +123,15 @@ export function initLocationModal() {
   let draftState = { ...appliedState };
   let currentStep = 'country';
   let activeTrigger = null;
+  let cityColumns = 0;
+
+  const getCityColumnCount = () =>
+    Number.parseInt(getComputedStyle(modal).getPropertyValue('--location-city-columns'), 10) || 1;
+
+  const updateEmpty = (count) => {
+    empty.hidden = count > 0;
+    empty.textContent = count > 0 ? '' : stepLabels[currentStep].empty;
+  };
 
   const getDraftLocation = () => getLocation(draftState);
 
@@ -131,6 +151,7 @@ export function initLocationModal() {
 
     document.documentElement.dataset.country = country.id;
     document.documentElement.dataset.city = state.cityName;
+    document.documentElement.dataset.location = state.locationId;
     setPhoneCountry(country.id, { clearValue: clearPhoneValue });
   };
 
@@ -141,8 +162,9 @@ export function initLocationModal() {
     countryLabel.textContent = country.name;
     cityLabel.textContent = draftState.cityName || 'Выберите город';
     locationLabel.textContent = location?.name || 'Выберите локацию';
-    selectedFlag.src = country.flag;
-    person.src = country.person;
+    [countryLabel, cityLabel, locationLabel].forEach((label) => {
+      label.title = label.textContent;
+    });
 
     const cityStep = stepButtons.find((button) => button.dataset.locationStep === 'city');
     const locationStep = stepButtons.find((button) => button.dataset.locationStep === 'location');
@@ -161,62 +183,56 @@ export function initLocationModal() {
     updateSidebar();
   };
 
-  const renderCountries = () => {
+  const renderCountries = (query = '') => {
     const fragment = document.createDocumentFragment();
+    const normalizedQuery = normalizeQuery(query);
+    const filteredCountries = countries.filter((country) =>
+      normalizeQuery(country.name).includes(normalizedQuery),
+    );
 
-    countries.forEach((country) => {
-      const group = createElement('article', 'location-modal__country');
+    filteredCountries.forEach((country) => {
       const countryButton = createButton('location-modal__country-button');
       const flag = createElement('img', 'location-modal__country-flag');
-      const name = createElement('span', '', country.name);
+      const copy = createElement('span', 'location-modal__country-copy');
+      const name = createElement('span', 'location-modal__country-name', country.name);
+      const count = country.cities.length;
+      const cityCount = createElement(
+        'span',
+        'location-modal__country-count',
+        `${count} ${cityForms[pluralRules.select(count)]}`,
+      );
 
       flag.src = country.flag;
-      flag.width = 33;
-      flag.height = 25;
+      flag.width = 51;
+      flag.height = 38;
       flag.alt = '';
+      countryButton.dataset.countryId = country.id;
       countryButton.classList.toggle('is-selected', country.id === draftState.countryId);
       countryButton.setAttribute('aria-pressed', String(country.id === draftState.countryId));
-      countryButton.append(flag, name);
+      copy.append(name, cityCount);
+      countryButton.append(flag, copy);
       countryButton.addEventListener('click', () => {
-        setCountry(country.id);
+        if (country.id !== draftState.countryId) setCountry(country.id);
         setStep('city');
       });
-      group.append(countryButton);
-
-      if (country.cities.length <= 8) {
-        const cities = createElement('div', 'location-modal__country-cities');
-
-        country.cities.forEach((city) => {
-          const cityButton = createButton('location-modal__country-city', city);
-
-          cityButton.classList.toggle(
-            'is-selected',
-            country.id === draftState.countryId && city === draftState.cityName,
-          );
-          cityButton.addEventListener('click', () => {
-            setCountry(country.id, city);
-            updateSidebar();
-            setStep('location');
-          });
-          cities.append(cityButton);
-        });
-
-        group.append(cities);
-      }
-
-      fragment.append(group);
+      fragment.append(countryButton);
     });
 
     countryList.replaceChildren(fragment);
+    updateEmpty(filteredCountries.length);
   };
 
   const renderCities = (query = '') => {
     const country = getCountry(draftState.countryId);
-    const normalizedQuery = query.trim().toLocaleLowerCase('ru-RU');
-    const filteredCities = country.cities.filter((city) =>
-      city.toLocaleLowerCase('ru-RU').includes(normalizedQuery),
-    );
-    const fragment = document.createDocumentFragment();
+    const normalizedQuery = normalizeQuery(query);
+    const filteredCities = country.cities
+      .filter((city) => normalizeQuery(city).includes(normalizedQuery))
+      .sort((first, second) => first.localeCompare(second, 'ru-RU'));
+    cityColumns = getCityColumnCount();
+    const columns = Array.from({ length: cityColumns }, () => ({
+      element: createElement('div', 'location-modal__city-column'),
+      height: 0,
+    }));
 
     groupCities(filteredCities).forEach((cities, letter) => {
       const group = createElement('section', 'location-modal__city-group');
@@ -226,11 +242,14 @@ export function initLocationModal() {
       cities.forEach((city) => {
         const button = createButton('location-modal__city-button', city);
 
+        button.dataset.cityName = city;
         button.classList.toggle('is-selected', city === draftState.cityName);
         button.setAttribute('aria-pressed', String(city === draftState.cityName));
         button.addEventListener('click', () => {
-          draftState.cityName = city;
-          draftState.locationId = undefined;
+          if (city !== draftState.cityName) {
+            draftState.cityName = city;
+            draftState.locationId = undefined;
+          }
           updateSidebar();
           setStep('location');
         });
@@ -238,38 +257,43 @@ export function initLocationModal() {
       });
 
       group.append(heading, list);
-      fragment.append(group);
+      const column = columns.reduce((shortest, candidate) =>
+        candidate.height < shortest.height ? candidate : shortest,
+      );
+      column.element.append(group);
+      column.height += 57 + cities.length * 28;
     });
 
-    cityList.replaceChildren(fragment);
-    cityEmpty.hidden = Boolean(filteredCities.length);
+    cityList.replaceChildren(...columns.map((column) => column.element));
+    updateEmpty(filteredCities.length);
   };
 
-  const renderLocations = () => {
-    const locations = getLocations(draftState.countryId, draftState.cityName);
+  const renderLocations = (query = '') => {
+    const normalizedQuery = normalizeQuery(query);
+    const locations = getLocations(draftState.countryId, draftState.cityName).filter((location) =>
+      normalizeQuery(
+        `${location.name} ${location.address} ${location.details} ${location.type}`,
+      ).includes(normalizedQuery),
+    );
     const fragment = document.createDocumentFragment();
 
     locations.forEach((location) => {
       const card = createButton('location-modal__location-card');
-      const title = createElement('h4', 'location-modal__location-title', location.name);
-      const address = createElement('p', 'location-modal__location-address', location.address);
-      const details = createElement('span', 'location-modal__location-details', location.details);
-      const meta = createElement('div', 'location-modal__location-meta');
+      const title = createElement('span', 'location-modal__location-title', location.name);
+      const address = createElement('span', 'location-modal__location-address', location.address);
+      const meta = createElement('span', 'location-modal__location-meta');
       const rating = createElement('span', 'location-modal__location-rating', location.rating);
       const type = createElement('span', 'location-modal__location-type', location.type);
-      const image = createElement('img', 'location-modal__location-image');
+      const maximumRating = createElement('span', 'location-modal__location-rating-max', '/5');
       const isSelected = location.id === draftState.locationId;
 
-      address.append(details);
-      meta.append(rating, type);
-      image.src = location.image;
-      image.alt = location.name;
-      image.loading = 'lazy';
-      image.decoding = 'async';
+      rating.append(maximumRating);
+      meta.append(type, rating);
+      card.title = [location.address, location.details].filter(Boolean).join(', ');
       card.dataset.locationId = location.id;
       card.classList.toggle('is-selected', isSelected);
       card.setAttribute('aria-pressed', String(isSelected));
-      card.append(title, address, meta, image);
+      card.append(meta, title, address);
       card.addEventListener('click', () => {
         draftState.locationId = location.id;
         updateSidebar();
@@ -284,9 +308,16 @@ export function initLocationModal() {
     });
 
     locationList.replaceChildren(fragment);
+    updateEmpty(locations.length);
   };
 
-  function setStep(step) {
+  const renderCurrentStep = () => {
+    const render = { country: renderCountries, city: renderCities, location: renderLocations };
+    render[currentStep](search.value);
+  };
+
+  function setStep(step, moveFocus = true) {
+    if (!Object.hasOwn(stepLabels, step)) step = 'country';
     if (step === 'city' && !draftState.countryId) {
       step = 'country';
     }
@@ -306,16 +337,14 @@ export function initLocationModal() {
       button.setAttribute('aria-current', isActive ? 'step' : 'false');
     });
 
-    if (currentStep === 'country') {
-      renderCountries();
-    } else if (currentStep === 'city') {
-      citySearch.value = '';
-      renderCities();
-    } else {
-      renderLocations();
-    }
-
+    const labels = stepLabels[currentStep];
+    title.textContent = labels.title;
+    search.placeholder = labels.search;
+    searchLabel.textContent = labels.search;
+    search.value = '';
+    renderCurrentStep();
     content.scrollTop = 0;
+    if (moveFocus) heading.focus({ preventScroll: true });
   }
 
   const closeModal = (shouldApply = false) => {
@@ -354,7 +383,7 @@ export function initLocationModal() {
     modal.setAttribute('aria-hidden', 'false');
     toggleScrollLock(true);
     updateSidebar();
-    setStep(step);
+    setStep(step, false);
     requestAnimationFrame(() => dialog.focus());
   };
 
@@ -379,7 +408,10 @@ export function initLocationModal() {
       return;
     }
 
-    if (event.shiftKey && document.activeElement === firstElement) {
+    if (
+      event.shiftKey &&
+      (document.activeElement === firstElement || document.activeElement === dialog)
+    ) {
       event.preventDefault();
       lastElement.focus();
     } else if (!event.shiftKey && document.activeElement === lastElement) {
@@ -398,11 +430,43 @@ export function initLocationModal() {
   stepButtons.forEach((button) => {
     button.addEventListener('click', () => setStep(button.dataset.locationStep));
   });
-  citySearch.addEventListener('input', () => renderCities(citySearch.value));
+  search.addEventListener('input', () => {
+    renderCurrentStep();
+    content.scrollTop = 0;
+  });
+  window.addEventListener('resize', () => {
+    if (
+      modal.classList.contains('is-open') &&
+      currentStep === 'city' &&
+      cityColumns !== getCityColumnCount()
+    ) {
+      renderCities(search.value);
+    }
+  });
   modal.querySelector('[data-location-cancel]').addEventListener('click', () => closeModal());
   modal.querySelector('[data-location-close]').addEventListener('click', () => closeModal());
   confirmButton.addEventListener('click', () => closeModal(true));
   modal.addEventListener('keydown', trapFocus);
+
+  // A contact dropdown can select a location without opening this dialog.
+  document.addEventListener('warpoint:location-change', (event) => {
+    const nextState = normalizeState(event.detail);
+    if (
+      nextState.countryId === appliedState.countryId &&
+      nextState.cityName === appliedState.cityName &&
+      nextState.locationId === appliedState.locationId
+    ) {
+      return;
+    }
+
+    const countryChanged = nextState.countryId !== appliedState.countryId;
+    appliedState = nextState;
+    draftState = { ...nextState };
+    saveState(appliedState);
+    applyStateToPage(appliedState, countryChanged);
+    updateSidebar();
+    if (modal.classList.contains('is-open')) renderCurrentStep();
+  });
 
   applyStateToPage(appliedState);
   updateSidebar();

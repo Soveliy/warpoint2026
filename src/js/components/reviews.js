@@ -58,12 +58,11 @@ export function initReviews() {
 
     if (
       !sliderElement ||
+      sliderElement.swiper ||
       !wrapper ||
       !score ||
       !cards.length ||
-      controls.length !== cards.length ||
-      !previousButton ||
-      !nextButton
+      controls.length !== cards.length
     ) {
       return;
     }
@@ -144,7 +143,7 @@ export function initReviews() {
       }
 
       slider = new Swiper(sliderElement, {
-        modules: [A11y, Keyboard, Navigation],
+        modules: previousButton && nextButton ? [A11y, Keyboard, Navigation] : [A11y, Keyboard],
         a11y: {
           enabled: true,
           firstSlideMessage: 'Это первая карточка',
@@ -159,10 +158,13 @@ export function initReviews() {
         },
         loop: slidesCount > 1,
         loopAdditionalSlides,
-        navigation: {
-          nextEl: nextButton,
-          prevEl: previousButton,
-        },
+        navigation:
+          previousButton && nextButton
+            ? {
+                nextEl: nextButton,
+                prevEl: previousButton,
+              }
+            : undefined,
         slidesPerView: isMobileMode ? 1 : 'auto',
         spaceBetween: 16,
         speed: motionQuery.matches ? 0 : 650,

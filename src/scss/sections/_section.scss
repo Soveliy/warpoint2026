@@ -19,11 +19,13 @@
   margin-bottom: $space-40;
   max-width: 46rem;
 }
+
 .section-head {
   display: flex;
   gap: $space-16;
   align-items: end;
   justify-content: space-between;
+
   &__title {
     font-size: 88px;
     line-height: 78%;
@@ -38,10 +40,12 @@
       'YTUC' 760,
       'wdth' 75,
       'opsz' 144;
+
     span {
       color: var(--red-600);
     }
   }
+
   &__lead {
     padding-left: 15px;
     border-left: 1px solid var(--red-600);
@@ -56,5 +60,26 @@
 
   .section--compact {
     padding: $space-36 0;
+  }
+}
+
+@media (max-width: $breakpoint-tablet) {
+  .section-head__title {
+    font-size: $section-title-size-tablet;
+  }
+}
+
+@media (max-width: $breakpoint-mobile) {
+  .section-head {
+    align-items: flex-start;
+
+    &__title {
+      font-size: $section-title-size-mobile;
+      line-height: $section-title-line-height;
+    }
+
+    &__lead {
+      font-size: $font-size-t1;
+    }
   }
 }

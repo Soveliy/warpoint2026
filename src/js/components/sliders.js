@@ -40,6 +40,8 @@ export function initSliders() {
   const sliders = document.querySelectorAll('[data-slider]');
 
   sliders.forEach((slider) => {
+    if (slider.swiper) return;
+
     const root = slider.closest('[data-slider-root]') ?? slider;
     const isBloggersSlider = slider.matches('[data-bloggers-slider]');
     const slidesCount = isBloggersSlider
@@ -56,6 +58,8 @@ export function initSliders() {
     new Swiper(slider, {
       a11y: {
         enabled: true,
+        nextSlideMessage: nextEl?.getAttribute('aria-label') || 'Следующий слайд',
+        prevSlideMessage: prevEl?.getAttribute('aria-label') || 'Предыдущий слайд',
       },
       keyboard: {
         enabled: true,

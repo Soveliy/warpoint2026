@@ -11,25 +11,20 @@
   background-color: var(--white);
   color: var(--black);
 
-  &::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: url('../../img/white_gradient.svg') no-repeat center center;
-    background-size: cover;
-    pointer-events: none;
-  }
-
   &__sticky {
     position: relative;
     display: flex;
+    z-index: 100;
     gap: rem(32px);
     padding-left: $container-offset;
   }
 
   &__intro {
+    display: flex;
+    flex-direction: column;
     flex-shrink: 0;
-    max-width: rem(430px);
+    max-width: rem(396px);
+    gap: 24px;
   }
 
   &__title {
@@ -37,11 +32,11 @@
   }
 
   &__lead {
-    max-width: rem(410px);
-    margin: rem(8px) 0 0;
+    margin: 0;
     font-size: rem(18px);
     font-weight: 650;
     line-height: 1.2;
+    color: var(--gray-950);
   }
 
   &__previews {
@@ -49,7 +44,7 @@
     isolation: isolate;
     display: flex;
     gap: rem(4px);
-    margin-top: rem(16px);
+    margin-top: rem(7px);
   }
 
   &__preview-indicator {
@@ -142,13 +137,10 @@
     box-sizing: border-box;
     width: 100%;
     margin-top: rem(24px);
-    padding: fluid(24px, 32px);
+    padding: fluid(24px, 34px);
     overflow: hidden;
-    border-radius: fluid(28px, 40px);
+    border-radius: 48px;
     background-color: var(--violet-500);
-    box-shadow:
-      inset 0 rem(1px) 0 rgb(var(--white-rgb) / 0.18),
-      0 rem(24px) rem(60px) rgb(var(--violet-900-rgb) / 0.18);
     color: var(--white);
   }
 
@@ -190,8 +182,10 @@
   }
 
   &__rating {
-    text-align: center;
-    margin-top: 32px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 1rem;
   }
 
   &__rating-label {
@@ -202,15 +196,11 @@
   }
 
   &__rating-value {
-    margin-top: rem(12px);
-    font-family: $font-family-heading;
-    font-size: fluid(232px, 238px);
-    font-weight: 800;
-    line-height: 0.72;
-    letter-spacing: 0;
+    flex-shrink: 0;
   }
 
   &__card {
+    container-type: inline-size;
     position: relative;
     overflow: hidden;
     flex: 0 0 var(--reviews-card-width);
@@ -235,7 +225,8 @@
     display: flex;
     align-items: flex-start;
     justify-content: space-between;
-    padding: 40px;
+    gap: rem(12px);
+    padding: clamp(#{rem(18px)}, 8%, #{rem(40px)});
     width: 100%;
     box-sizing: border-box;
   }
@@ -244,7 +235,7 @@
   &__card__value {
     font-family: $font-family-heading;
     font-weight: 800;
-    font-size: 36px;
+    font-size: clamp(#{rem(24px)}, 9cqw, #{rem(36px)});
     line-height: 92%;
     text-transform: uppercase;
 
@@ -260,61 +251,23 @@
     color: var(--white);
     margin-top: 11px;
   }
-
-  &__controls {
-    display: flex;
-    justify-content: center;
-    gap: rem(8px);
-    width: var(--reviews-card-width);
-    max-width: 100%;
-    margin-top: rem(22px);
-  }
-
-  &__arrow {
-    @include hover {
-      background-color: rgb(var(--black-rgb) / 0.08);
-      transform: translateY(rem(-2px));
-    }
-
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: fluid(56px, 64px);
-    aspect-ratio: 1;
-    border: rem(1px) solid var(--black);
-    border-radius: 50%;
-    color: var(--black);
-    transition:
-      background-color $duration-fast $ease-base,
-      opacity $duration-fast $ease-base,
-      transform $duration-fast $ease-base;
-
-    &:active {
-      transform: scale(0.96);
-    }
-
-    &:focus-visible {
-      outline: rem(2px) solid var(--focus-color);
-      outline-offset: rem(2px);
-    }
-
-    &--prev .reviews__arrow-icon {
-      transform: rotate(180deg);
-    }
-  }
-
-  &__arrow-icon {
-    width: rem(18px);
-    height: rem(18px);
-    fill: none;
-  }
 }
 
 @media (max-width: $breakpoint-tablet) {
   .reviews {
     &__sticky {
-      grid-template-columns: minmax(0, rem(330px)) minmax(0, 1fr);
       gap: rem(24px);
+    }
+
+    &__intro {
+      max-width: rem(330px);
+    }
+
+    &__content {
+      --reviews-card-width: min(
+        clamp(12.5rem, calc(56.28vh - 5.9094rem), 25.1875rem),
+        calc(100vw - 25rem)
+      );
     }
 
     &__lead {
@@ -333,10 +286,6 @@
     &__service-count,
     &__rating-label {
       font-size: rem(14px);
-    }
-
-    &__rating-value {
-      font-size: rem(240px);
     }
   }
 }
@@ -416,19 +365,14 @@
       min-height: rem(56px);
     }
 
-    &__rating-value {
-      font-size: rem(232px);
-    }
-
-    &__controls {
-      margin-top: rem(18px);
+    &__rating {
+      flex-wrap: wrap;
     }
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .reviews__preview-indicator,
-  .reviews__arrow {
+  .reviews__preview-indicator {
     transition: none;
   }
 }

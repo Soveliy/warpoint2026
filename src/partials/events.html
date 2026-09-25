@@ -22,8 +22,10 @@
       </button>
     </div>
 
-    <div class="events__states" data-events-states>
-      <article class="events__state is-active" id="event-state-birthday" role="tabpanel"
+    <div class="events__carousel">
+    <div class="events__slider swiper" data-events-slider>
+    <div class="events__states swiper-wrapper" data-events-states>
+      <article class="events__state swiper-slide is-active" id="event-state-birthday" role="tabpanel"
         aria-labelledby="event-tab-birthday" data-event-state>
         <div class="events__visual">
           <img class="events__photo" src="img/events/event-card.jpg" width="472" height="682"
@@ -43,7 +45,7 @@
         </div>
       </article>
 
-      <article class="events__state" id="event-state-corporate" role="tabpanel" aria-labelledby="event-tab-corporate"
+      <article class="events__state swiper-slide" id="event-state-corporate" role="tabpanel" aria-labelledby="event-tab-corporate"
         data-event-state>
         <div class="events__visual">
           <img class="events__photo" src="img/events/event-card-2.jpg" width="472" height="682"
@@ -62,7 +64,7 @@
         </div>
       </article>
 
-      <article class="events__state" id="event-state-graduation" role="tabpanel" aria-labelledby="event-tab-graduation"
+      <article class="events__state swiper-slide" id="event-state-graduation" role="tabpanel" aria-labelledby="event-tab-graduation"
         data-event-state>
         <div class="events__visual">
           <img class="events__photo" src="img/events/event-card-3.jpg" width="472" height="682"
@@ -81,6 +83,22 @@
           </button>
         </div>
       </article>
+    </div>
+    </div>
+    <div class="events__controls slider-controls" data-events-navigation hidden>
+      <button class="slider-arrow slider-arrow--prev button-reset" type="button"
+        aria-label="Предыдущее мероприятие" data-events-prev>
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="m9 5 7 7-7 7"></path>
+        </svg>
+      </button>
+      <button class="slider-arrow slider-arrow--next button-reset" type="button"
+        aria-label="Следующее мероприятие" data-events-next>
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="m9 5 7 7-7 7"></path>
+        </svg>
+      </button>
+    </div>
     </div>
 
     <button class="events__calculate btn btn--red button-reset" type="button" aria-haspopup="dialog"

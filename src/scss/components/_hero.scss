@@ -1,9 +1,21 @@
 @use '../vars' as *;
 @use '../fluid' as *;
+
 .hero {
   position: relative;
-  overflow: hidden;
   background-color: var(--color-bg);
+
+  &::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    height: 75%;
+    width: 100%;
+    bottom: 0;
+    background: linear-gradient(180deg, rgb(0 0 0 / 0) 64.88%, #000000 90.13%);
+    z-index: 2;
+  }
+
   &__image {
     position: absolute;
     right: 0;
@@ -12,26 +24,31 @@
     width: 100%;
     object-position: right bottom;
   }
+
   &__content {
     position: relative;
     z-index: 10;
   }
+
   &__wrap {
     position: relative;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    max-width: 34.5rem;
-    min-height: 100svh;
+    max-width: rem(640px);
+    min-height: max(100svh, #{rem(640px)});
+    padding: rem(144px) 0 rem(132px);
   }
+
   &__pretitle {
     position: relative;
     padding-left: 18px;
-    margin: 0 0 12px 0;
+    margin: 0 0 12px;
     font-weight: 600;
     font-size: 1.125rem;
     line-height: 110%;
-    &:before {
+
+    &::before {
       content: '';
       position: absolute;
       left: 0;
@@ -42,6 +59,7 @@
       background-color: var(--red-900);
     }
   }
+
   &__title {
     margin: 0;
     font-family: $font-family-second;
@@ -56,18 +74,20 @@
       'YTUC' 760,
       'wdth' 75,
       'opsz' 144;
+
     span {
       color: var(--red-600);
     }
   }
+
   &__buttons {
     position: absolute;
-    bottom: 0;
     left: 0;
     bottom: 24px;
     display: flex;
     gap: rem(12px);
   }
+
   &__button {
     border-radius: 24px;
     padding: 36px 39px;
@@ -79,23 +99,28 @@
     text-align: center;
     border: 1px solid transparent;
     transition: all 0.3s ease-in-out;
+
     &--red {
       color: var(--white);
 
       background: linear-gradient(134.84deg, var(--red-500) 0%, var(--red-800) 100%);
+
       &:hover {
         opacity: 0.8;
       }
     }
+
     &--purple {
       color: var(--white);
 
       background: linear-gradient(134.84deg, var(--violet-500) 0%, var(--violet-800) 100%);
+
       &:hover {
         opacity: 0.8;
       }
     }
   }
+
   &__allerts {
     max-width: 348px;
     position: absolute;
@@ -118,26 +143,35 @@
       align-items: flex-start;
       justify-content: flex-start;
       padding-top: rem(126px);
+      padding-bottom: rem(320px);
       gap: rem(12px);
     }
+
     &__title {
       order: -1;
+      max-width: 100%;
+      font-size: fluid(34px, 48px, 320px, 480px);
     }
+
     &__buttons {
       display: none;
     }
+
     &__pretitle {
       margin-bottom: 0;
       text-indent: rem(16px);
       padding-left: 0;
-      &:before {
+
+      &::before {
         top: 4px;
         transform: none;
       }
     }
+
     &__allerts {
       display: none;
     }
+
     &__image {
       width: 1055px;
       height: 710px;
@@ -145,5 +179,12 @@
       right: rem(-161px);
       bottom: rem(-195px);
     }
+  }
+}
+
+@media (width > $breakpoint-mobile) and (width <= $breakpoint-tablet) {
+  .hero__allerts {
+    bottom: rem(120px);
+    max-width: rem(280px);
   }
 }

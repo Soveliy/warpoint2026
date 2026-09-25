@@ -7,89 +7,89 @@
     tabindex="-1"
     data-location-dialog
   >
-    <header class="location-modal__header">
-      <h2 class="location-modal__heading" id="location-modal-title">
-        Выберите страну, город и локацию
-      </h2>
-      <button
-        class="location-modal__close button-reset"
-        type="button"
-        aria-label="Закрыть окно выбора локации"
-        data-location-close
-      >
-        <span></span>
-        <span></span>
-      </button>
-    </header>
-
-    <div class="location-modal__body">
-      <aside class="location-modal__sidebar">
-        <nav class="location-modal__steps" aria-label="Этапы выбора локации">
-          <button
-            class="location-modal__step is-active button-reset"
-            type="button"
-            data-location-step="country"
-          >
-            <img
-              class="location-modal__step-flag"
-              src="img/country/ru_flag.svg"
-              width="33"
-              height="25"
-              alt=""
-              data-location-selected-flag
-            />
-            <span data-location-country-label>Россия</span>
-            <svg class="location-modal__step-icon" aria-hidden="true">
-              <use href="/img/sprite.svg#icon-cvervron_down"></use>
-            </svg>
-          </button>
-          <button class="location-modal__step button-reset" type="button" data-location-step="city">
-            <span data-location-city-label>Екатеринбург</span>
-            <svg class="location-modal__step-icon" aria-hidden="true">
-              <use href="/img/sprite.svg#icon-cvervron_down"></use>
-            </svg>
-          </button>
-          <button
-            class="location-modal__step button-reset"
-            type="button"
-            data-location-step="location"
-          >
-            <span data-location-location-label>ТРЦ Veer Mall</span>
-            <svg class="location-modal__step-icon" aria-hidden="true">
-              <use href="/img/sprite.svg#icon-cvervron_down"></use>
-            </svg>
-          </button>
-        </nav>
-
-        <img
-          class="location-modal__person"
-          src="img/country/default.png"
-          width="292"
-          height="687"
-          alt=""
-          aria-hidden="true"
-          data-location-person
+    <button
+      class="location-modal__close button-reset"
+      type="button"
+      aria-label="Закрыть окно выбора локации"
+      data-location-close
+    >
+      <svg viewBox="0 0 32 32" aria-hidden="true"><path d="m6 6 20 20M26 6 6 26"></path></svg>
+    </button>
+    <aside class="location-modal__sidebar">
+      <img class="location-modal__logo" src="img/logo.svg" width="282" height="47" alt="Warpoint" />
+      <nav class="location-modal__steps" aria-label="Этапы выбора локации">
+        <button
+          class="location-modal__step is-active button-reset"
+          type="button"
+          data-location-step="country"
+        >
+          <span class="location-modal__step-caption">Страна</span>
+          <span class="location-modal__step-value" data-location-country-label>Россия</span>
+          <svg class="location-modal__step-icon" viewBox="0 0 20 20" aria-hidden="true">
+            <path d="m7 3 7 7-7 7"></path>
+          </svg>
+        </button>
+        <button class="location-modal__step button-reset" type="button" data-location-step="city">
+          <span class="location-modal__step-caption">Город</span>
+          <span class="location-modal__step-value" data-location-city-label>Екатеринбург</span>
+          <svg class="location-modal__step-icon" viewBox="0 0 20 20" aria-hidden="true">
+            <path d="m7 3 7 7-7 7"></path>
+          </svg>
+        </button>
+        <button
+          class="location-modal__step button-reset"
+          type="button"
+          data-location-step="location"
+        >
+          <span class="location-modal__step-caption">Локация</span>
+          <span class="location-modal__step-value" data-location-location-label>ТРЦ Veer Mall</span>
+          <svg class="location-modal__step-icon" viewBox="0 0 20 20" aria-hidden="true">
+            <path d="m7 3 7 7-7 7"></path>
+          </svg>
+        </button>
+      </nav>
+      <div class="location-modal__actions">
+        <button
+          class="location-modal__action location-modal__action--cancel button-reset"
+          type="button"
+          data-location-cancel
+        >
+          Отмена
+        </button>
+        <button
+          class="location-modal__action location-modal__action--confirm button-reset"
+          type="button"
+          data-location-confirm
+        >
+          Готово
+        </button>
+      </div>
+    </aside>
+    <div class="location-modal__main">
+      <header class="location-modal__header">
+        <h2 class="location-modal__heading" id="location-modal-title" tabindex="-1">
+          Выберите <span data-location-title>страну</span>
+        </h2>
+      </header>
+      <div class="location-modal__search-field">
+        <svg class="location-modal__search-icon" viewBox="0 0 24 24" aria-hidden="true">
+          <circle cx="10.5" cy="10.5" r="7.5"></circle>
+          <path d="m16 16 5 5"></path>
+        </svg>
+        <label class="visually-hidden" for="location-search" data-location-search-label
+          >Поиск страны</label
+        >
+        <input
+          class="location-modal__search"
+          id="location-search"
+          type="search"
+          placeholder="Поиск страны"
+          autocomplete="off"
+          spellcheck="false"
+          data-location-search
         />
-
-        <div class="location-modal__actions">
-          <button
-            class="location-modal__action location-modal__action--cancel button-reset"
-            type="button"
-            data-location-cancel
-          >
-            Отмена
-          </button>
-          <button
-            class="location-modal__action location-modal__action--confirm button-reset"
-            type="button"
-            data-location-confirm
-          >
-            ОК
-          </button>
-        </div>
-      </aside>
-
-      <div class="location-modal__content">
+      </div>
+      <div class="location-modal__content" data-location-results>
         <section
           class="location-modal__view"
           aria-labelledby="country-view-title"
@@ -98,7 +98,6 @@
           <h3 class="visually-hidden" id="country-view-title">Выберите страну</h3>
           <div class="location-modal__countries" data-location-country-list></div>
         </section>
-
         <section
           class="location-modal__view"
           aria-labelledby="city-view-title"
@@ -106,19 +105,8 @@
           hidden
         >
           <h3 class="visually-hidden" id="city-view-title">Выберите город</h3>
-          <label class="visually-hidden" for="location-city-search">Найти город</label>
-          <input
-            class="location-modal__search"
-            id="location-city-search"
-            type="search"
-            placeholder="Найти город"
-            autocomplete="off"
-            data-location-city-search
-          />
           <div class="location-modal__cities" data-location-city-list></div>
-          <p class="location-modal__empty" data-location-city-empty hidden>Город не найден</p>
         </section>
-
         <section
           class="location-modal__view"
           aria-labelledby="location-view-title"
@@ -128,6 +116,7 @@
           <h3 class="visually-hidden" id="location-view-title">Выберите локацию</h3>
           <div class="location-modal__locations" data-location-list></div>
         </section>
+        <p class="location-modal__empty" role="status" data-location-empty hidden></p>
       </div>
     </div>
   </div>

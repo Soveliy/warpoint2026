@@ -16,6 +16,8 @@ const createMapFrame = (map) => {
   frame.addEventListener(
     'load',
     () => {
+      if (!frame.isConnected) return;
+
       map.classList.add('is-loaded');
       map.setAttribute('aria-busy', 'false');
 
@@ -29,12 +31,41 @@ const createMapFrame = (map) => {
   map.append(frame);
 };
 
+export function updateYandexMap(map, { source, title }) {
+  if (!map) return;
+
+  map.dataset.mapTitle = title;
+  const frame = map.querySelector(':scope > .contacts__map-frame');
+
+  if (map.dataset.mapSrc === source) {
+    if (frame) frame.title = title;
+    return;
+  }
+
+  map.dataset.mapSrc = source;
+  map.dataset.mapLoaded = 'false';
+  map.classList.remove('is-loaded');
+  map.setAttribute('aria-busy', 'true');
+  const status = map.querySelector('[data-map-status]');
+  if (status) status.textContent = 'Карта загружается';
+
+  // Keep off-screen maps lazy; replace an already mounted map immediately.
+  if (frame) {
+    frame.remove();
+    createMapFrame(map);
+  }
+}
+
 export function initYandexMaps() {
   const maps = document.querySelectorAll('[data-yandex-map]');
   if (!maps.length) return;
 
   if (!('IntersectionObserver' in window)) {
-    window.addEventListener('load', () => maps.forEach(createMapFrame), { once: true });
+    if (document.readyState === 'complete') {
+      maps.forEach(createMapFrame);
+    } else {
+      window.addEventListener('load', () => maps.forEach(createMapFrame), { once: true });
+    }
     return;
   }
 

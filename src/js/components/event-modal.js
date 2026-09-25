@@ -31,7 +31,6 @@ export function initEventModal() {
   const progressLabel = modal.querySelector('[data-event-progress-label]');
   const progressDots = [...modal.querySelectorAll('[data-event-progress-dots] i')];
   const selectedDateLabel = modal.querySelector('[data-event-selected-date]');
-  const openButtons = [...document.querySelectorAll('[data-event-modal-open]')];
   const dateFormatter = new Intl.DateTimeFormat('ru-RU', {
     day: 'numeric',
     month: 'long',
@@ -176,8 +175,10 @@ export function initEventModal() {
     }
   };
 
-  openButtons.forEach((button) => {
-    button.addEventListener('click', () => openModal(button));
+  document.addEventListener('click', (event) => {
+    const button = event.target.closest('[data-event-modal-open]');
+
+    if (button) openModal(button);
   });
   form.addEventListener('change', updateNavigation);
   form.addEventListener('submit', (event) => event.preventDefault());

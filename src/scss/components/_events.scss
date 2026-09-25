@@ -104,6 +104,14 @@
     }
   }
 
+  &__carousel {
+    position: relative;
+  }
+
+  &__slider {
+    overflow: visible;
+  }
+
   &__states {
     position: relative;
     display: grid;
@@ -112,7 +120,9 @@
   }
 
   &__state {
+    box-sizing: border-box;
     display: grid;
+    height: auto;
     visibility: hidden;
     opacity: 0;
     grid-area: 1 / 1;
@@ -156,7 +166,7 @@
     flex-direction: column;
     min-width: 0;
     padding: fluid(24px, 36px);
-    background: url(../img/event_vector.svg) no-repeat center bottom;
+    background: url('../../img/event_vector.svg') no-repeat center bottom;
   }
 
   &__subtitle {
@@ -227,11 +237,20 @@
       display: none;
     }
 
-    &__states {
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: fluid(16px, 28px, 1025px, 1512px);
-      width: 100%;
+    &__carousel {
       margin-top: fluid(42px, 58px, 1025px, 1512px);
+    }
+
+    &__slider {
+      overflow: hidden;
+    }
+
+    &__states {
+      display: flex;
+      align-items: stretch;
+      width: 100%;
+      height: auto;
+      margin: 0;
     }
 
     &__state,
@@ -241,6 +260,7 @@
       opacity: 1;
       grid-area: auto;
       flex-direction: column;
+      width: calc((100% - #{rem(48px)}) / 3);
       pointer-events: auto;
       transform: none;
     }

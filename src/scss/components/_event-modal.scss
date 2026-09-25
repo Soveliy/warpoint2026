@@ -406,6 +406,25 @@
   }
 }
 
+@media (height <= 500px) {
+  .event-modal {
+    &__form {
+      grid-template-rows: minmax(0, 1fr) rem(76px);
+    }
+
+    &__intro {
+      width: calc(100% - #{rem(32px)});
+      font-size: rem(14px);
+    }
+
+    &__step,
+    &__step--services,
+    &__step--finish {
+      padding-top: rem(80px);
+    }
+  }
+}
+
 @media (max-width: $breakpoint-tablet) {
   .event-modal {
     &__step {

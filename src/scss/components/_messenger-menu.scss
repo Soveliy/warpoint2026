@@ -1,0 +1,104 @@
+@use '../fluid' as *;
+@use '../vars' as *;
+@use '../mixins/disable-mob-hover' as *;
+
+.messenger-menu {
+  position: relative;
+
+  &__toggle {
+    gap: rem(8px);
+    min-height: rem(40px);
+    padding: rem(8px) rem(12px);
+    border: rem(1px) solid transparent;
+    border-radius: $radius-pill;
+    transition: border-color $duration-fast $ease-base;
+
+    &[aria-expanded='true'] {
+      border-color: var(--red-600);
+    }
+
+    &:focus-visible {
+      outline: rem(2px) solid var(--focus-color);
+      outline-offset: rem(3px);
+    }
+
+    .select__button-text {
+      font-size: rem(18px);
+      line-height: 1.2;
+    }
+
+    .select__button-icon {
+      width: rem(10px);
+      height: rem(10px);
+      transition: transform $duration-fast $ease-base;
+    }
+
+    &[aria-expanded='true'] .select__button-icon {
+      transform: rotate(180deg);
+    }
+  }
+
+  &__dropdown {
+    position: absolute;
+    z-index: 4;
+    top: calc(100% + rem(8px));
+    right: 0;
+    width: rem(340px);
+    max-width: calc(100vw - rem(32px));
+    margin: 0;
+    padding: rem(20px) rem(28px);
+    border: rem(1px) solid rgb(var(--white-rgb) / 0.2);
+    border-radius: rem(40px);
+    background: rgb(var(--gray-800-rgb) / 0.95);
+    box-shadow:
+      inset 0 0 0 rem(1px) rgb(var(--white-rgb) / 0.04),
+      0 rem(18px) rem(42px) rgb(var(--black-rgb) / 0.35);
+    color: var(--white);
+    list-style: none;
+    backdrop-filter: blur(rem(16px));
+
+    &[hidden] {
+      display: none;
+    }
+  }
+
+  &__link {
+    @include hover {
+      color: var(--red-500);
+    }
+
+    display: flex;
+    align-items: center;
+    gap: rem(12px);
+    min-height: rem(50px);
+    border-radius: rem(8px);
+    color: var(--white);
+    font-size: rem(22px);
+    font-weight: 600;
+    line-height: 1.2;
+    transition: color $duration-fast $ease-base;
+
+    &:focus-visible {
+      outline: rem(2px) solid var(--focus-color);
+      outline-offset: rem(4px);
+      color: var(--red-500);
+    }
+  }
+
+  &__icon {
+    flex: 0 0 rem(22px);
+    width: rem(22px);
+    height: rem(22px);
+    color: var(--red-500);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .messenger-menu {
+    &__toggle,
+    &__toggle .select__button-icon,
+    &__link {
+      transition: none;
+    }
+  }
+}

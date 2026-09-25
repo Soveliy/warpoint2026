@@ -327,14 +327,12 @@ function setupCompactReveal(section) {
   return () => context.revert();
 }
 
-function setupSceneInteractions(section) {
+function setupSceneInteractions(section, motion = true) {
   const scene = section.querySelector('[data-about-game-scene]');
   const model = scene?.querySelector('.about-game__visual-model');
   const aura = scene?.querySelector('.about-game__visual-aura');
   const shadow = scene?.querySelector('.about-game__visual-shadow');
   const light = scene?.querySelector('.about-game__visual-light');
-  const girl = scene?.querySelector('.about-game__character--girl');
-  const boy = scene?.querySelector('.about-game__character--boy');
   const states = [...(scene?.querySelectorAll('[data-about-scene-state]') ?? [])];
   const benefits = [...section.querySelectorAll('[data-about-benefit]')];
   const stateMap = new Map(states.map((state) => [state.dataset.aboutSceneState, state]));
@@ -345,16 +343,18 @@ function setupSceneInteractions(section) {
   }
 
   const entranceByState = {
-    family: { rotationY: -3, scale: 0.975, x: 16, y: 12, z: -18 },
-    immersion: { rotationX: 3.5, scale: 0.965, x: 0, y: 18, z: -28 },
-    team: { rotationY: 4, rotationZ: -0.5, scale: 0.965, x: -18, y: 16, z: -26 },
+    family: { rotationY: -3, scale: 0.975, x: 16, y: 32, z: -18 },
+    immersion: { rotationX: 3.5, scale: 0.965, x: 0, y: 40, z: -28 },
+    team: { rotationY: 4, rotationZ: -0.5, scale: 0.965, x: -18, y: 36, z: -26 },
+    events: { rotationY: -3, rotationZ: 0.5, scale: 0.965, x: 18, y: 36, z: -26 },
   };
   const poseByState = {
     family: { rotationX: -0.3, rotationY: -2, rotationZ: 0.18, scale: 1.006, x: 5, y: -4, z: 30 },
     immersion: { rotationX: -1.5, rotationY: 0.25, rotationZ: 0, scale: 1.012, x: 0, y: -8, z: 48 },
     team: { rotationX: -0.5, rotationY: 2, rotationZ: -0.25, scale: 1.009, x: -6, y: -6, z: 38 },
+    events: { rotationX: -0.5, rotationY: -2, rotationZ: 0.25, scale: 1.009, x: 6, y: -6, z: 38 },
   };
-  const sceneElements = [model, aura, shadow, light, ...states, girl, boy].filter(Boolean);
+  const sceneElements = [model, aura, shadow, light, ...states];
   const glitchHost = document.createElement('div');
   const listenerCleanups = [];
   let activeFloat = null;
@@ -521,7 +521,7 @@ function setupSceneInteractions(section) {
 
   const startIdle = () => {
     stopIdle();
-    if (!sceneIsVisible) return;
+    if (!motion || !sceneIsVisible) return;
 
     idleTween = gsap.to(model, {
       duration: 4.2,
@@ -535,28 +535,24 @@ function setupSceneInteractions(section) {
   const startStateFloat = (name, state) => {
     stopFloat();
 
-    if (name === 'immersion' && girl && boy) {
-      activeFloat = gsap
-        .timeline({ repeat: -1, yoyo: true })
-        .to(girl, { duration: 2.8, ease: 'sine.inOut', rotationZ: -0.35, y: -5 }, 0)
-        .to(boy, { duration: 2.5, ease: 'sine.inOut', rotationZ: 0.4, y: 4 }, 0);
-    } else {
-      activeFloat = gsap.to(state, {
-        duration: name === 'team' ? 3.2 : 3.6,
-        ease: 'sine.inOut',
-        repeat: -1,
-        rotationZ: name === 'team' ? 0.12 : -0.1,
-        y: -3,
-        yoyo: true,
-      });
-    }
+    activeFloat = gsap.to(state, {
+      duration: name === 'team' ? 3.2 : 3.6,
+      ease: 'sine.inOut',
+      repeat: -1,
+      rotationZ: name === 'team' ? 0.12 : -0.1,
+      y: -3,
+      yoyo: true,
+    });
 
     if (!sceneIsVisible) activeFloat.pause();
   };
 
   const setStateClasses = (name) => {
     states.forEach((state) => {
-      state.classList.toggle('is-active', state.dataset.aboutSceneState === name);
+      const isActive = state.dataset.aboutSceneState === name;
+
+      state.classList.toggle('is-active', isActive);
+      state.setAttribute('aria-hidden', String(!isActive));
     });
   };
 
@@ -583,7 +579,13 @@ function setupSceneInteractions(section) {
     const inactiveStates = states.filter((state) => state !== targetState);
 
     activeState = name;
-    targetState.classList.add('is-active');
+    setStateClasses(name);
+    gsap.set(inactiveStates, { autoAlpha: 0 });
+
+    if (!motion) {
+      gsap.set(targetState, { autoAlpha: 1 });
+      return;
+    }
 
     transitionTimeline = gsap.timeline({
       defaults: { overwrite: true },
@@ -607,18 +609,6 @@ function setupSceneInteractions(section) {
     const timeline = transitionTimeline;
 
     if (shouldGlitch) addGlitch(timeline, targetState);
-
-    timeline.to(
-      inactiveStates,
-      {
-        autoAlpha: 0,
-        duration: 0.5,
-        ease: 'power2.inOut',
-        scale: 0.985,
-        y: 7,
-      },
-      0,
-    );
 
     if (isAlreadyVisible || targetOpacity > 0.01) {
       timeline.to(
@@ -710,7 +700,13 @@ function setupSceneInteractions(section) {
     scene.dataset.aboutSceneState = 'family';
     section.classList.remove('has-active-benefit');
     benefits.forEach((benefit) => benefit.classList.remove('is-active'));
-    familyState.classList.add('is-active');
+    setStateClasses('family');
+    gsap.set(inactiveStates, { autoAlpha: 0 });
+
+    if (!motion) {
+      gsap.set(familyState, { autoAlpha: 1 });
+      return;
+    }
 
     transitionTimeline = gsap.timeline({
       defaults: { overwrite: true },
@@ -734,18 +730,6 @@ function setupSceneInteractions(section) {
     const timeline = transitionTimeline;
 
     if (shouldGlitch) addGlitch(timeline, familyState);
-
-    timeline.to(
-      inactiveStates,
-      {
-        autoAlpha: 0,
-        duration: 0.5,
-        ease: 'power2.inOut',
-        scale: 0.985,
-        y: 7,
-      },
-      0,
-    );
 
     if (familyIsVisible) {
       timeline.to(
@@ -785,17 +769,6 @@ function setupSceneInteractions(section) {
     }
 
     timeline
-      .to(
-        [girl, boy].filter(Boolean),
-        {
-          duration: 0.64,
-          ease: 'power2.out',
-          rotationZ: 0,
-          x: 0,
-          y: 0,
-        },
-        0,
-      )
       .to(
         model,
         {
@@ -859,6 +832,7 @@ function setupSceneInteractions(section) {
 
   gsap.set(states, { autoAlpha: 0 });
   gsap.set(familyState, { autoAlpha: 1 });
+  setStateClasses('family');
   section.classList.add('is-interactive');
   scene.dataset.aboutSceneState = 'family';
   visibilityTrigger = ScrollTrigger.create({
@@ -903,7 +877,7 @@ function setupSceneInteractions(section) {
     gsap.set(sceneElements, {
       clearProps: 'opacity,scale,transform,visibility',
     });
-    states.forEach((state) => state.classList.toggle('is-active', state === familyState));
+    setStateClasses('family');
     benefits.forEach((benefit) => {
       benefit.classList.remove('is-active');
     });
@@ -957,14 +931,17 @@ export function initAboutGameSequence() {
       motion: motionQuery,
     },
     ({ conditions }) => {
-      if (!conditions.motion) return undefined;
-
-      const cleanupReveal = conditions.desktop
-        ? setupDesktopReveal(section)
-        : setupCompactReveal(section);
-      const cleanupParallax = conditions.desktop ? setupBackgroundParallax(group) : null;
+      const cleanupReveal = conditions.motion
+        ? conditions.desktop
+          ? setupDesktopReveal(section)
+          : setupCompactReveal(section)
+        : null;
+      const cleanupParallax =
+        conditions.motion && conditions.desktop ? setupBackgroundParallax(group) : null;
       const cleanupInteractions =
-        conditions.desktop && conditions.hover ? setupSceneInteractions(section) : null;
+        conditions.desktop && conditions.hover
+          ? setupSceneInteractions(section, conditions.motion)
+          : null;
 
       ScrollTrigger.refresh();
 

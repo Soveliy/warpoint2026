@@ -8,6 +8,7 @@
 @use 'base/media';
 @use 'components/typography';
 @use 'components/button';
+@use 'components/slider-controls';
 @use 'components/header';
 @use 'components/preloader';
 @use 'components/mobile-actions';
@@ -27,6 +28,7 @@
 @use 'utilities/states';
 @use 'components/menu';
 @use 'components/select';
+@use 'components/messenger-menu';
 @use 'components/hero';
 @use 'components/video-section';
 @use 'components/about-game';
@@ -42,3 +44,8 @@
 @use 'components/contacts';
 @use 'components/allerts';
 @use 'components/footer';
+
+.main {
+  position: relative;
+  overflow: hidden;
+}

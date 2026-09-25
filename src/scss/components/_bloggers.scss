@@ -4,6 +4,8 @@
 @use '../vars' as *;
 
 .bloggers {
+  --bloggers-slide-width: min(#{rem(968px)}, calc(100vw - #{rem(160px)}));
+
   @include section-spacing;
 
   position: relative;
@@ -77,7 +79,7 @@
     --bloggers-side-scale: 0.76;
     --bloggers-side-shift: 12%;
 
-    width: min(rem(968px), calc(100vw - rem(160px)));
+    width: var(--bloggers-slide-width);
     transform: scale(var(--bloggers-side-scale));
     transition: transform 650ms $ease-base;
     will-change: transform;
@@ -144,45 +146,10 @@
   }
 
   &__controls {
-    display: flex;
-    justify-content: center;
-    gap: rem(8px);
-    margin-top: rem(22px);
-  }
-
-  &__arrow {
-    @include hover {
-      background-color: rgb(var(--black-rgb) / 0.08);
-      transform: translateY(rem(-2px));
-    }
-
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: fluid(56px, 64px);
-    aspect-ratio: 1;
-    border: rem(1px) solid var(--black);
-    border-radius: 50%;
-    color: var(--black);
-
-    transition:
-      background-color $duration-fast $ease-base,
-      opacity $duration-fast $ease-base,
-      transform $duration-fast $ease-base;
-
-    &:active {
-      transform: scale(0.96);
-    }
-
-    &--prev .bloggers__arrow-icon {
-      transform: rotate(180deg);
-    }
-  }
-
-  &__arrow-icon {
-    width: rem(18px);
-    height: rem(18px);
-    fill: none;
+    right: auto;
+    left: 50%;
+    width: var(--bloggers-slide-width);
+    transform: translateX(-50%);
   }
 }
 
@@ -192,30 +159,24 @@
 
 @media (max-width: $breakpoint-tablet) {
   .bloggers {
-    min-height: auto;
+    --bloggers-slide-width: min(#{rem(760px)}, calc(100vw - #{rem(96px)}));
 
-    &__slide {
-      width: min(rem(760px), calc(100vw - rem(96px)));
-    }
+    min-height: auto;
   }
 }
 
 @media (max-width: $breakpoint-mobile) {
   .bloggers {
+    --bloggers-slide-width: calc(100vw - #{rem(48px)});
+
     &__slide {
       --bloggers-side-scale: 0.84;
       --bloggers-side-shift: 8%;
-
-      width: calc(100vw - rem(48px));
     }
 
     &__media {
       aspect-ratio: 4 / 3;
       border-radius: rem(24px);
-    }
-
-    &__controls {
-      margin-top: rem(18px);
     }
   }
 }

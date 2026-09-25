@@ -6,15 +6,17 @@
 *::after {
   box-sizing: border-box;
 }
+
 html {
   scrollbar-gutter: stable;
 }
+
 body {
   background-color: var(--color-bg);
   color: var(--color-text);
   font-family: $font-family;
   margin: 0;
-  min-width: rem(320px);
+  min-width: min(#{rem(320px)}, 100%);
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
 }

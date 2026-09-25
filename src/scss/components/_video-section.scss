@@ -15,16 +15,16 @@
   isolation: isolate;
   position: relative;
 
-  &::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    height: 20%;
-    width: 100%;
-    top: 0;
-    background: linear-gradient(180deg, var(--color-bg) 0%, rgb(var(--white-rgb) / 0) 100%);
-    z-index: 2;
-  }
+  // &::before {
+  //   content: '';
+  //   position: absolute;
+  //   left: 0;
+  //   height: 20%;
+  //   width: 100%;
+  //   top: 0;
+  //   background: linear-gradient(180deg, var(--color-bg) 0%, rgb(var(--white-rgb) / 0) 100%);
+  //   z-index: 2;
+  // }
 
   &__background {
     display: block;
