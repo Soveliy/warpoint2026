@@ -22,13 +22,14 @@ export function initCardAnimations() {
     },
     ({ conditions }) => {
       const groups = [
-        ['.events', conditions.desktop ? '.events__state' : '.events__slider', '.events__slider'],
+        ['.events', conditions.desktop ? '.events__state' : '.events__carousel', '.events__slider'],
         ['.reviews', '.reviews__card, .reviews__score', '.reviews__carousel'],
         ['.bloggers', '.bloggers__media', '.bloggers__slider'],
       ];
       const gridCards = [...document.querySelectorAll('.gallery__item, .extras__item')];
       const animatedElements = new Set(gridCards);
       const triggers = [];
+      const setupFrames = [];
       let active = true;
 
       groups.forEach(([selector, cards]) => {
@@ -92,28 +93,35 @@ export function initCardAnimations() {
         document.querySelectorAll(selector).forEach((root) => {
           if (revealedGroups.has(root)) return;
 
-          const cards = [...root.querySelectorAll(cardSelector)];
-          const controls = [...root.querySelectorAll('.slider-controls:not([hidden])')];
-          if (!cards.length) return;
-
-          gsap.set([...cards, ...controls], { opacity: 0 });
-
-          const play = () => {
+          // Swiper rebuilds and clears inline slide styles when a breakpoint changes.
+          const frame = window.requestAnimationFrame(() => {
             if (!active || revealedGroups.has(root)) return;
 
-            revealedGroups.add(root);
-            reveal(cards, controls);
-          };
-          const trigger = ScrollTrigger.create({
-            trigger: root.querySelector(triggerSelector) || root,
-            start: 'top 85%',
-            end: 'bottom 20%',
-            once: true,
-            onEnter: play,
-          });
+            const cards = [...root.querySelectorAll(cardSelector)];
+            const controls = [...root.querySelectorAll('.slider-controls:not([hidden])')];
+            if (!cards.length) return;
 
-          triggers.push(trigger);
-          if (trigger.isActive || trigger.progress > 0) play();
+            [...cards, ...controls].forEach((element) => animatedElements.add(element));
+            gsap.set([...cards, ...controls], { opacity: 0 });
+
+            const play = () => {
+              if (!active || revealedGroups.has(root)) return;
+
+              revealedGroups.add(root);
+              reveal(cards, controls);
+            };
+            const trigger = ScrollTrigger.create({
+              trigger: root.querySelector(triggerSelector) || root,
+              start: 'top 85%',
+              end: 'bottom 20%',
+              once: true,
+              onEnter: play,
+            });
+
+            triggers.push(trigger);
+            if (trigger.isActive || trigger.progress > 0) play();
+          });
+          setupFrames.push(frame);
         });
       });
 
@@ -139,6 +147,7 @@ export function initCardAnimations() {
 
       return () => {
         active = false;
+        setupFrames.forEach((frame) => window.cancelAnimationFrame(frame));
         triggers.forEach((trigger) => trigger.kill());
         clearStyles();
       };
