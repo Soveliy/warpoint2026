@@ -36,7 +36,7 @@
       justify-content: center;
       height: rem(56px);
       border-radius: $radius-pill;
-      box-shadow: 0 rem(8px) rem(24px) rgba($black, 0.2);
+      box-shadow: 0 rem(8px) rem(24px) rgb(var(--black-rgb) / 0.2);
       transition:
         background-color $duration-fast $ease-base,
         transform $duration-fast $ease-base;
@@ -46,7 +46,7 @@
       }
 
       &:focus-visible {
-        outline: $focus-outline-width solid $white;
+        outline: $focus-outline-width solid var(--white);
         outline-offset: $focus-outline-offset;
       }
     }
@@ -55,8 +55,8 @@
       flex: 1 1 auto;
       min-width: 0;
       padding: 0 rem(18px);
-      background-color: $red-500;
-      color: $white;
+      background-color: var(--red-500);
+      color: var(--white);
       font-size: rem(11px);
       font-weight: 800;
       line-height: 1;
@@ -66,14 +66,14 @@
     &__button {
       flex: 0 0 rem(56px);
       width: rem(56px);
-      color: $white;
-      background-color: $violet-500;
+      color: var(--white);
+      background-color: var(--violet-500);
     }
 
     &__icon {
       width: rem(20px);
       height: rem(20px);
-      color: $white;
+      color: var(--white);
     }
   }
 }

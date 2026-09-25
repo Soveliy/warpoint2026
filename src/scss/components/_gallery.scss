@@ -6,8 +6,8 @@
 .gallery {
   position: relative;
   overflow: hidden;
-  background-color: $gray-950;
-  color: $white;
+  background-color: var(--gray-950);
+  color: var(--white);
   scroll-snap-align: start;
 
   &__container {
@@ -28,7 +28,7 @@
     flex: 0 1 rem(760px);
 
     span {
-      color: $color-accent;
+      color: var(--color-accent);
     }
   }
 
@@ -48,7 +48,7 @@
       left: 0;
       width: rem(1px);
       border-radius: $radius-pill;
-      background-color: $color-accent;
+      background-color: var(--color-accent);
     }
   }
 
@@ -70,20 +70,20 @@
     overflow: hidden;
     aspect-ratio: 16 / 10;
     border-radius: fluid(18px, 28px);
-    background-color: $gray-900;
+    background-color: var(--gray-900);
 
     &::after {
       content: '';
       position: absolute;
       inset: 0;
       z-index: 1;
-      border: rem(1px) solid rgba($white, 0.1);
+      border: rem(1px) solid rgb(var(--white-rgb) / 0.1);
       border-radius: inherit;
       pointer-events: none;
     }
 
     &:focus-visible {
-      outline: $focus-outline-width solid $focus-color;
+      outline: $focus-outline-width solid var(--focus-color);
       outline-offset: rem(4px);
     }
   }

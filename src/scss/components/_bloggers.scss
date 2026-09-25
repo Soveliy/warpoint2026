@@ -9,8 +9,8 @@
   position: relative;
   overflow: hidden;
   min-height: 100vh;
-  background-color: $white;
-  color: $black;
+  background-color: var(--white);
+  color: var(--black);
   scroll-snap-align: start;
   &__info {
     position: absolute;
@@ -20,14 +20,14 @@
     gap: 30px;
     width: 100%;
     padding: 20px fluid(20px, 40px);
-    background: $gray-950;
+    background: var(--gray-950);
     z-index: 50;
     border-radius: 0 0 fluid(28px, 48px) fluid(28px, 48px);
     align-items: center;
   }
   &__info-item + &__info-item {
     padding-left: 30px;
-    border-left: 1px solid rgba(255, 255, 255, 0.2);
+    border-left: 1px solid rgb(var(--white-rgb) / 0.2);
   }
   &__info-item-name {
     font-weight: 700;
@@ -35,14 +35,14 @@
     line-height: 88%;
     letter-spacing: -0.02em;
     text-transform: uppercase;
-    color: $white;
+    color: var(--white);
     font-family: $font-family-heading;
   }
   &__info-item-type {
     font-weight: 600;
     font-size: fluid(14px, 18px);
     line-height: 120%;
-    color: rgba(255, 255, 255, 0.5);
+    color: rgb(var(--white-rgb) / 0.5);
   }
   &__info-item-row {
     display: flex;
@@ -102,7 +102,7 @@
     width: 100%;
     aspect-ratio: 16 / 9;
     border-radius: fluid(28px, 48px);
-    background-color: $gray-200;
+    background-color: var(--gray-200);
   }
 
   &__image {
@@ -114,7 +114,7 @@
 
   &__play {
     @include hover {
-      background-color: rgba($black, 0.72);
+      background-color: rgb(var(--black-rgb) / 0.72);
       transform: translate(-50%, -50%) scale(1.05);
     }
 
@@ -126,10 +126,10 @@
     justify-content: center;
     width: fluid(68px, 88px);
     aspect-ratio: 1;
-    border: rem(1px) solid rgba($white, 0.2);
+    border: rem(1px) solid rgb(var(--white-rgb) / 0.2);
     border-radius: fluid(18px, 24px);
-    background-color: rgba($black, 0.56);
-    color: $white;
+    background-color: rgb(var(--black-rgb) / 0.56);
+    color: var(--white);
     backdrop-filter: blur(rem(12px));
     transform: translate(-50%, -50%);
     transition:
@@ -152,7 +152,7 @@
 
   &__arrow {
     @include hover {
-      background-color: rgba($black, 0.08);
+      background-color: rgb(var(--black-rgb) / 0.08);
       transform: translateY(rem(-2px));
     }
 
@@ -161,9 +161,9 @@
     justify-content: center;
     width: fluid(56px, 64px);
     aspect-ratio: 1;
-    border: rem(1px) solid $black;
+    border: rem(1px) solid var(--black);
     border-radius: 50%;
-    color: $black;
+    color: var(--black);
 
     transition:
       background-color $duration-fast $ease-base,

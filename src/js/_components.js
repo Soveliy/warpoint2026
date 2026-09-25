@@ -1,6 +1,7 @@
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { initAboutGameSequence } from './components/about-game-sequence.js';
 import { initAnimations } from './components/animations.js';
+import { initAuthModal } from './components/auth-modal.js';
 import { initBookingPanel } from './components/booking-panel.js';
 import { initCallbackForms, initFaq } from './components/faq.js';
 import { initCityConfirm } from './components/city-confirm.js';
@@ -35,6 +36,7 @@ initMobileMenu();
 initLocationModal();
 initCityConfirm();
 initEventModal();
+initAuthModal();
 initBookingPanel();
 initPhoneMasks();
 initFancybox();

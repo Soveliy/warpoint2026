@@ -11,7 +11,7 @@
   margin: fluid(28px, 44px) auto fluid(40px, 80px);
   overflow: hidden;
   border-radius: fluid(28px, 44px);
-  background-color: $color-bg;
+  background-color: var(--color-bg);
   isolation: isolate;
   position: relative;
 
@@ -22,7 +22,7 @@
     height: 20%;
     width: 100%;
     top: 0;
-    background: linear-gradient(180deg, rgb(1 0 0 / 1) 0%, rgb(255 255 255 / 0) 100%);
+    background: linear-gradient(180deg, var(--color-bg) 0%, rgb(var(--white-rgb) / 0) 100%);
     z-index: 2;
   }
 
@@ -47,7 +47,7 @@
     height: var(--promo-play-size, var(--video-play-size));
     overflow: hidden;
     border-radius: var(--promo-play-radius, #{fluid(16px, 20px)});
-    background: linear-gradient(134.84deg, #f63d68 0%, #a11043 100%);
+    background: linear-gradient(134.84deg, var(--red-500) 0%, var(--red-800) 100%);
     opacity: 0;
     visibility: hidden;
     pointer-events: none;
@@ -70,7 +70,7 @@
     z-index: 2;
     width: fluid(11px, 13px);
     height: fluid(18px, 21px);
-    fill: $white;
+    fill: var(--white);
     opacity: 1;
     pointer-events: none;
     transform: translate(-42%, -50%) scale(1);
@@ -87,7 +87,7 @@
     width: 100%;
     height: 100%;
     border: 0;
-    background-color: $color-bg;
+    background-color: var(--color-bg);
     object-fit: contain;
     opacity: 0;
     transform: scale(1.018);
@@ -104,10 +104,10 @@
     z-index: 3;
     width: fluid(48px, 58px);
     aspect-ratio: 1;
-    border: rem(1px) solid rgb(255 255 255 / 0.4);
+    border: rem(1px) solid rgb(var(--white-rgb) / 0.4);
     border-radius: 50%;
-    background-color: rgb(1 0 0 / 0.48);
-    color: $white;
+    background-color: rgb(var(--color-bg-rgb) / 0.48);
+    color: var(--white);
     opacity: 0;
     pointer-events: none;
     backdrop-filter: blur(rem(14px));
@@ -139,19 +139,19 @@
     }
 
     &:hover {
-      border-color: rgb(255 255 255 / 0.72);
-      background-color: rgb(1 0 0 / 0.7);
+      border-color: rgb(var(--white-rgb) / 0.72);
+      background-color: rgb(var(--color-bg-rgb) / 0.7);
     }
 
     &:focus-visible {
-      outline: $focus-outline-width solid $focus-color;
+      outline: $focus-outline-width solid var(--focus-color);
       outline-offset: $focus-outline-offset;
     }
   }
 
   &__content {
     align-items: center;
-    color: $white;
+    color: var(--white);
     display: flex;
     flex-direction: column;
     inset: 0;
@@ -169,7 +169,7 @@
       left: 0;
       height: 100%;
       width: 100%;
-      background-color: rgba(#010000, 0.6);
+      background-color: rgb(var(--color-bg-rgb) / 0.6);
       pointer-events: none;
       z-index: -1;
     }
@@ -201,7 +201,7 @@
   }
 
   &__title-accent {
-    color: $red-600;
+    color: var(--red-600);
   }
 
   &__description {
@@ -233,9 +233,9 @@
     animation: video-section-play-breathe 2400ms ease-in-out infinite;
     aspect-ratio: 1;
     backdrop-filter: blur(rem(12px));
-    background: linear-gradient(134.84deg, #f63d68 0%, #a11043 100%);
+    background: linear-gradient(134.84deg, var(--red-500) 0%, var(--red-800) 100%);
     border-radius: fluid(16px, 20px);
-    color: $white;
+    color: var(--white);
     display: inline-flex;
     height: var(--video-play-size);
     justify-content: center;
@@ -251,7 +251,7 @@
 
     &::after {
       animation: video-section-play-wave 2400ms cubic-bezier(0.22, 1, 0.36, 1) infinite;
-      border: rem(1px) solid rgb(255 255 255 / 0.46);
+      border: rem(1px) solid rgb(var(--white-rgb) / 0.46);
       border-radius: inherit;
       content: '';
       inset: rem(-1px);
@@ -265,7 +265,7 @@
     }
 
     &:focus-visible {
-      outline: $focus-outline-width solid $focus-color;
+      outline: $focus-outline-width solid var(--focus-color);
       outline-offset: $focus-outline-offset;
     }
   }
@@ -282,7 +282,7 @@
   }
 
   &__duration {
-    color: rgb(255 255 255 / 0.72);
+    color: rgb(var(--white-rgb) / 0.72);
     font-size: rem(14px);
     font-weight: 800;
     letter-spacing: 0.08em;

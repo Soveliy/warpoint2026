@@ -8,7 +8,7 @@
   position: absolute;
   z-index: $z-base + 9;
   inset: auto 0 0;
-  color: var(--pixel-color, $black);
+  color: var(--pixel-color, var(--black));
   pointer-events: none;
 }
 

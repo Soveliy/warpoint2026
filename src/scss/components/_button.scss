@@ -1,5 +1,4 @@
 @use '../mixins' as *;
-@use '../vars' as *;
 @use '../fluid' as *;
 
 .btn {
@@ -15,7 +14,7 @@
   letter-spacing: 0.08em;
   text-align: center;
   text-transform: uppercase;
-  color: #fff;
+  color: var(--white);
   gap: 15px;
   border: none;
   outline: 0;
@@ -28,6 +27,6 @@
     background: linear-gradient(170.18deg, #eb3e3e 11.63%, #901ad5 188.75%);
   }
   &--purple {
-    background: linear-gradient(134.84deg, #946bff 0%, #5720b7 100%);
+    background: linear-gradient(134.84deg, #946bff 0%, var(--violet-800) 100%);
   }
 }

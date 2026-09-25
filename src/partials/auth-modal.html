@@ -1,0 +1,161 @@
+<dialog class="auth-modal" id="auth-modal" aria-labelledby="auth-modal-title" data-auth-modal>
+  <button
+    class="auth-modal__close button-reset"
+    type="button"
+    aria-label="Закрыть окно входа"
+    data-auth-close
+  >
+    <span aria-hidden="true"></span>
+  </button>
+
+  <img class="auth-modal__logo" src="img/logo.svg" width="248" height="42" alt="Warpoint" />
+
+  <div class="auth-modal__tabs" role="tablist" aria-label="Способ входа">
+    <button
+      class="auth-modal__tab button-reset"
+      id="auth-phone-tab"
+      type="button"
+      role="tab"
+      aria-selected="true"
+      aria-controls="auth-phone-panel"
+      data-auth-tab="phone"
+    >
+      По телефону
+    </button>
+    <button
+      class="auth-modal__tab button-reset"
+      id="auth-password-tab"
+      type="button"
+      role="tab"
+      aria-selected="false"
+      aria-controls="auth-password-panel"
+      tabindex="-1"
+      data-auth-tab="password"
+    >
+      Логин и пароль
+    </button>
+  </div>
+
+  <h2 class="auth-modal__title" id="auth-modal-title" tabindex="-1" autofocus>
+    Вход в личный кабинет
+  </h2>
+  <p class="auth-modal__subtitle" data-auth-subtitle>
+    Введите номер телефона — пришлём код подтверждения
+  </p>
+
+  <form
+    class="auth-modal__form"
+    id="auth-phone-panel"
+    role="tabpanel"
+    aria-labelledby="auth-phone-tab"
+    data-auth-form="phone"
+    novalidate
+  >
+    <label class="auth-modal__label" for="auth-phone">Номер телефона</label>
+    <div class="auth-modal__phone">
+      <div class="auth-modal__country">
+        <span aria-hidden="true" data-auth-prefix>+7</span>
+        <svg aria-hidden="true"><use href="/img/sprite.svg#icon-cvervron_down"></use></svg>
+        <select name="country" aria-label="Телефонный код страны" data-auth-country>
+          <option value="ru">Россия (+7)</option>
+        </select>
+      </div>
+      <input
+        class="auth-modal__input"
+        id="auth-phone"
+        name="phone"
+        type="tel"
+        inputmode="tel"
+        autocomplete="tel-national"
+        placeholder="(000) 000-00-00"
+        aria-describedby="auth-phone-status"
+        required
+      />
+    </div>
+
+    <fieldset class="auth-modal__delivery">
+      <legend class="auth-modal__label">Куда прислать код</legend>
+      <div class="auth-modal__methods">
+        <label class="auth-modal__method">
+          <input class="visually-hidden" type="radio" name="delivery" value="telegram" checked />
+          <span class="auth-modal__method-card">
+            <span class="auth-modal__badge">Рекомендуем</span>
+            <span class="auth-modal__method-icon auth-modal__method-icon--telegram">
+              <svg aria-hidden="true"><use href="/img/sprite.svg#icon-tg"></use></svg>
+            </span>
+            <span>Telegram</span>
+          </span>
+        </label>
+        <label class="auth-modal__method">
+          <input class="visually-hidden" type="radio" name="delivery" value="max" />
+          <span class="auth-modal__method-card">
+            <span class="auth-modal__method-icon auth-modal__method-icon--max">
+              <svg aria-hidden="true"><use href="/img/sprite.svg#icon-max"></use></svg>
+            </span>
+            <span>Макс</span>
+          </span>
+        </label>
+        <label class="auth-modal__method">
+          <input class="visually-hidden" type="radio" name="delivery" value="call" />
+          <span class="auth-modal__method-card">
+            <span class="auth-modal__method-icon auth-modal__method-icon--call">
+              <svg aria-hidden="true"><use href="/img/sprite.svg#icon-phone"></use></svg>
+            </span>
+            <span>Звонок</span>
+          </span>
+        </label>
+      </div>
+    </fieldset>
+
+    <p class="auth-modal__agreement">
+      Выбирая способ входа, вы соглашаетесь<br />
+      с <a href="/legal/privacy/" target="_blank" rel="noopener">Политикой конфиденциальности</a> и
+      <a href="/legal/bonuses/" target="_blank" rel="noopener">Программой лояльности</a>
+    </p>
+    <p class="auth-modal__status" id="auth-phone-status" role="status" data-auth-status hidden></p>
+    <button class="auth-modal__submit button-reset" type="submit">Получить код</button>
+  </form>
+
+  <form
+    class="auth-modal__form"
+    id="auth-password-panel"
+    role="tabpanel"
+    aria-labelledby="auth-password-tab"
+    data-auth-form="password"
+    novalidate
+    hidden
+  >
+    <label class="auth-modal__label" for="auth-login">Логин</label>
+    <input
+      class="auth-modal__input auth-modal__input--standalone"
+      id="auth-login"
+      name="login"
+      type="text"
+      autocomplete="username"
+      placeholder="Введите логин"
+      aria-describedby="auth-password-status"
+      required
+    />
+
+    <label class="auth-modal__label auth-modal__label--spaced" for="auth-password">Пароль</label>
+    <input
+      class="auth-modal__input auth-modal__input--standalone"
+      id="auth-password"
+      name="password"
+      type="password"
+      autocomplete="current-password"
+      placeholder="Введите пароль"
+      aria-describedby="auth-password-status"
+      required
+    />
+
+    <p
+      class="auth-modal__status"
+      id="auth-password-status"
+      role="status"
+      data-auth-status
+      hidden
+    ></p>
+    <button class="auth-modal__submit button-reset" type="submit">Войти</button>
+  </form>
+</dialog>

@@ -3,7 +3,7 @@
 .hero {
   position: relative;
   overflow: hidden;
-  background-color: $color-bg;
+  background-color: var(--color-bg);
   &__image {
     position: absolute;
     right: 0;
@@ -39,7 +39,7 @@
       transform: translateY(-50%);
       height: 12px;
       width: 12px;
-      background-color: $red-900;
+      background-color: var(--red-900);
     }
   }
   &__title {
@@ -57,7 +57,7 @@
       'wdth' 75,
       'opsz' 144;
     span {
-      color: $red-600;
+      color: var(--red-600);
     }
   }
   &__buttons {
@@ -80,17 +80,17 @@
     border: 1px solid transparent;
     transition: all 0.3s ease-in-out;
     &--red {
-      color: #ffffff;
+      color: var(--white);
 
-      background: linear-gradient(134.84deg, #f63d68 0%, #a11043 100%);
+      background: linear-gradient(134.84deg, var(--red-500) 0%, var(--red-800) 100%);
       &:hover {
         opacity: 0.8;
       }
     }
     &--purple {
-      color: #ffffff;
+      color: var(--white);
 
-      background: linear-gradient(134.84deg, #875bf7 0%, #5720b7 100%);
+      background: linear-gradient(134.84deg, var(--violet-500) 0%, var(--violet-800) 100%);
       &:hover {
         opacity: 0.8;
       }

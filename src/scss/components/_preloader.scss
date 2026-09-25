@@ -18,7 +18,7 @@ html.is-preloading .preloader {
   display: grid;
   place-items: center;
   overflow: hidden;
-  background-color: $white;
+  background-color: var(--white);
   will-change: opacity;
 }
 

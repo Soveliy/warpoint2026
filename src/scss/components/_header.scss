@@ -3,9 +3,9 @@
 
 .header {
   --header-top-offset: 0px;
-  --header-foreground: #{$white};
-  --header-line: #{rgba($white, 0.16)};
-  --header-control-border: #{rgba($white, 0.72)};
+  --header-foreground: var(--white);
+  --header-line: rgb(var(--white-rgb) / 0.16);
+  --header-control-border: rgb(var(--white-rgb) / 0.72);
   --header-logo-filter: none;
   --mobile-menu-top: 0px;
 
@@ -21,15 +21,15 @@
     transform 360ms cubic-bezier(0.22, 1, 0.36, 1);
 
   &[data-theme='brand'] {
-    background-color: #010000;
+    background-color: var(--color-bg);
   }
 
   &[data-theme='dark'] {
-    --header-foreground: #{$gray-950};
-    --header-line: #{rgba($black, 0.16)};
-    --header-control-border: #{rgba($black, 0.56)};
+    --header-foreground: var(--gray-950);
+    --header-line: rgb(var(--black-rgb) / 0.16);
+    --header-control-border: rgb(var(--black-rgb) / 0.56);
     --header-logo-filter: brightness(0);
-    background-color: #ffffff;
+    background-color: var(--white);
   }
 
   &--top-hidden {
@@ -37,9 +37,9 @@
   }
 
   &.header--menu-open {
-    --header-foreground: #{$white};
-    --header-line: #{rgba($white, 0.14)};
-    --header-control-border: #{rgba($white, 0.72)};
+    --header-foreground: var(--white);
+    --header-line: rgb(var(--white-rgb) / 0.14);
+    --header-control-border: rgb(var(--white-rgb) / 0.72);
     --header-logo-filter: brightness(0) invert(1);
 
     z-index: $z-overlay;
@@ -127,8 +127,8 @@
     margin-left: rem(-24px);
     padding: 0;
     border-radius: $radius-pill;
-    background-color: $red-600;
-    color: $white;
+    background-color: var(--red-600);
+    color: var(--white);
     font-size: rem(10px);
     font-weight: 800;
     line-height: 1;
@@ -148,11 +148,11 @@
       visibility 0s linear 360ms;
 
     &:hover {
-      background-color: $red-700;
+      background-color: var(--red-700);
     }
 
     &:focus-visible {
-      outline: $focus-outline-width solid $focus-color;
+      outline: $focus-outline-width solid var(--focus-color);
       outline-offset: $focus-outline-offset;
     }
   }
@@ -226,5 +226,5 @@
   height: 16px;
   width: 16px;
   flex-shrink: 0;
-  color: #e31b54;
+  color: var(--red-600);
 }

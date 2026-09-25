@@ -5,7 +5,7 @@
 }
 
 :focus-visible {
-  outline: $focus-outline-width solid $focus-color;
+  outline: $focus-outline-width solid var(--focus-color);
   outline-offset: $focus-outline-offset;
 }
 

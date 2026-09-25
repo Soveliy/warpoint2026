@@ -8,8 +8,8 @@
 
   position: relative;
   overflow: hidden;
-  background-color: $white;
-  color: $black;
+  background-color: var(--white);
+  color: var(--black);
 
   &::before {
     content: '';
@@ -60,7 +60,7 @@
     width: rem(72px);
     aspect-ratio: 1;
     border-radius: 50%;
-    background-color: $red-500;
+    background-color: var(--red-500);
     pointer-events: none;
     transform: translate3d(0, 0, 0);
     transition:
@@ -97,7 +97,7 @@
     }
 
     &:focus-visible {
-      outline: rem(2px) solid $focus-color;
+      outline: rem(2px) solid var(--focus-color);
       outline-offset: rem(2px);
     }
   }
@@ -145,11 +145,11 @@
     padding: fluid(24px, 32px);
     overflow: hidden;
     border-radius: fluid(28px, 40px);
-    background-color: $violet-500;
+    background-color: var(--violet-500);
     box-shadow:
-      inset 0 rem(1px) 0 rgb(255 255 255 / 0.18),
-      0 rem(24px) rem(60px) rgb(73 28 150 / 0.18);
-    color: $white;
+      inset 0 rem(1px) 0 rgb(var(--white-rgb) / 0.18),
+      0 rem(24px) rem(60px) rgb(var(--violet-900-rgb) / 0.18);
+    color: var(--white);
   }
 
   &__services {
@@ -163,7 +163,7 @@
     align-items: center;
     gap: rem(12px);
     min-height: rem(64px);
-    border-bottom: rem(1px) solid rgba($white, 0.16);
+    border-bottom: rem(1px) solid rgb(var(--white-rgb) / 0.16);
 
     &:last-child {
       border-bottom: 0;
@@ -219,7 +219,7 @@
     height: auto;
     aspect-ratio: 403 / 716;
     border-radius: fluid(28px, 40px);
-    background-color: $gray-900;
+    background-color: var(--gray-900);
 
     img {
       width: 100%;
@@ -248,7 +248,7 @@
     line-height: 92%;
     text-transform: uppercase;
 
-    color: $white;
+    color: var(--white);
   }
 
   &__card-place {
@@ -257,7 +257,7 @@
     line-height: 100%;
     letter-spacing: 0.08em;
     text-transform: uppercase;
-    color: $white;
+    color: var(--white);
     margin-top: 11px;
   }
 
@@ -272,7 +272,7 @@
 
   &__arrow {
     @include hover {
-      background-color: rgba($black, 0.08);
+      background-color: rgb(var(--black-rgb) / 0.08);
       transform: translateY(rem(-2px));
     }
 
@@ -281,9 +281,9 @@
     justify-content: center;
     width: fluid(56px, 64px);
     aspect-ratio: 1;
-    border: rem(1px) solid $black;
+    border: rem(1px) solid var(--black);
     border-radius: 50%;
-    color: $black;
+    color: var(--black);
     transition:
       background-color $duration-fast $ease-base,
       opacity $duration-fast $ease-base,
@@ -294,7 +294,7 @@
     }
 
     &:focus-visible {
-      outline: rem(2px) solid $focus-color;
+      outline: rem(2px) solid var(--focus-color);
       outline-offset: rem(2px);
     }
 

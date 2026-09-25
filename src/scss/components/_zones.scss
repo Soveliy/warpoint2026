@@ -7,9 +7,7 @@
   @include section-spacing;
   position: relative;
   z-index: 50;
-  min-height: 100vh;
   overflow: hidden;
-  background-color: $color-bg;
 
   &__inner {
     padding: 0 rem(24px);
@@ -26,7 +24,7 @@
   &__title {
     max-width: rem(650px);
     margin: 0;
-    color: $white;
+    color: var(--white);
     font-family: $font-family-heading;
     font-size: fluid(56px, 96px);
     font-weight: 800;
@@ -40,7 +38,7 @@
     white-space: nowrap;
 
     &:first-child {
-      color: $red-600;
+      color: var(--red-600);
     }
   }
 
@@ -48,8 +46,8 @@
     max-width: rem(420px);
     margin: 0 0 rem(-2px);
     padding-left: rem(14px);
-    border-left: rem(1px) solid $red-500;
-    color: $white;
+    border-left: rem(1px) solid var(--red-500);
+    color: var(--white);
     font-size: rem(18px);
     font-weight: 400;
     line-height: 120%;
@@ -62,10 +60,10 @@
     height: rem(78px);
     margin-bottom: rem(22px);
     overflow: hidden;
-    border: rem(1px) solid rgba($white, 0.12);
+    border: rem(1px) solid rgb(var(--white-rgb) / 0.12);
     border-radius: rem(20px);
     background-color: #1d1c21;
-    box-shadow: inset 0 rem(1px) 0 rgba($white, 0.035);
+    box-shadow: inset 0 rem(1px) 0 rgb(var(--white-rgb) / 0.035);
     transition: width $duration-base $ease-base;
   }
 
@@ -92,7 +90,7 @@
     min-width: 0;
     padding: 0 rem(32px);
     border-radius: rem(19px);
-    color: $white;
+    color: var(--white);
     font-size: rem(21px);
     font-weight: 650;
     line-height: 1;
@@ -113,7 +111,7 @@
       left: 0;
       width: rem(1px);
       height: rem(34px);
-      background-color: rgba($white, 0.1);
+      background-color: rgb(var(--white-rgb) / 0.1);
       transform: translateY(-50%);
     }
 
@@ -129,22 +127,22 @@
     }
 
     &:hover {
-      background-color: rgba($white, 0.06);
+      background-color: rgb(var(--white-rgb) / 0.06);
     }
 
     &[aria-pressed='true'],
     &.is-active {
-      background-color: $violet-500;
+      background-color: var(--violet-500);
     }
 
     &[aria-pressed='true']:hover,
     &.is-active:hover {
-      background-color: $violet-600;
+      background-color: var(--violet-600);
     }
 
     &:focus-visible {
       z-index: 1;
-      outline: $focus-outline-width solid $violet-300;
+      outline: $focus-outline-width solid var(--violet-300);
       outline-offset: rem(-4px);
     }
   }
@@ -166,7 +164,7 @@
   }
   &__price {
     padding-left: 20px;
-    border-left: 1px solid rgba(81, 82, 92, 0.5);
+    border-left: 1px solid rgb(var(--gray-600-rgb) / 0.5);
     small {
       font-weight: 600;
       font-size: 20px;
@@ -174,7 +172,7 @@
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
-      color: rgba(255, 255, 255, 0.5);
+      color: rgb(var(--white-rgb) / 0.5);
     }
     span {
       font-weight: 700;
@@ -182,32 +180,17 @@
       line-height: 88%;
       letter-spacing: -0.02em;
       text-transform: uppercase;
-      color: #fff;
+      color: var(--white);
     }
   }
-  --zone-accent: #{$red-500};
-  --zone-accent-hover: #{$red-600};
-  --zone-accent-active: #{$red-700};
-  --zone-accent-disabled-bg: #{rgba($red-800, 0.48)};
-  --zone-accent-disabled-border: #{rgba($red-800, 0.24)};
-  --zone-focus: #{$red-300};
+  --zone-accent: var(--red-500);
 
   &--red {
-    --zone-accent: #{$red-500};
-    --zone-accent-hover: #{$red-600};
-    --zone-accent-active: #{$red-700};
-    --zone-accent-disabled-bg: #{rgba($red-800, 0.48)};
-    --zone-accent-disabled-border: #{rgba($red-800, 0.24)};
-    --zone-focus: #{$red-300};
+    --zone-accent: var(--red-500);
   }
 
   &--violet {
-    --zone-accent: #{$violet-500};
-    --zone-accent-hover: #{$violet-600};
-    --zone-accent-active: #{$violet-700};
-    --zone-accent-disabled-bg: #{rgba($violet-800, 0.5)};
-    --zone-accent-disabled-border: #{rgba($violet-800, 0.26)};
-    --zone-focus: #{$violet-300};
+    --zone-accent: var(--violet-500);
   }
 
   &[hidden] {
@@ -295,13 +278,13 @@
     width: rem(76px);
     height: rem(76px);
     overflow: hidden;
-    border: rem(1px) solid rgba($white, 0.42);
+    border: rem(1px) solid rgb(var(--white-rgb) / 0.42);
     border-radius: rem(20px);
-    background-color: rgba($white, 0.18);
+    background-color: rgb(var(--white-rgb) / 0.18);
     box-shadow:
-      inset 0 rem(1px) 0 rgba($white, 0.62),
-      0 rem(10px) rem(28px) rgba($black, 0.22);
-    color: $white;
+      inset 0 rem(1px) 0 rgb(var(--white-rgb) / 0.62),
+      0 rem(10px) rem(28px) rgb(var(--black-rgb) / 0.22);
+    color: var(--white);
     backdrop-filter: blur(rem(18px)) saturate(160%);
     transition:
       background-color $duration-base $ease-base,
@@ -309,8 +292,8 @@
       transform $duration-base $ease-base;
 
     &:hover {
-      border-color: rgba($white, 0.68);
-      background-color: rgba($white, 0.26);
+      border-color: rgb(var(--white-rgb) / 0.68);
+      background-color: rgb(var(--white-rgb) / 0.26);
       transform: translateY(rem(-2px));
     }
 
@@ -319,7 +302,7 @@
     }
 
     &:focus-visible {
-      outline: $focus-outline-width solid $white;
+      outline: $focus-outline-width solid var(--white);
       outline-offset: $focus-outline-offset;
     }
   }
@@ -332,7 +315,7 @@
 
   &__content {
     padding: rem(30px);
-    background-color: $gray-800;
+    background-color: var(--gray-800);
 
     &::before {
       content: '';
@@ -350,7 +333,7 @@
     right: rem(18px);
     bottom: rem(-46px);
     z-index: 0;
-    color: rgba($white, 0.025);
+    color: rgb(var(--white-rgb) / 0.025);
     font-family: $font-family-heading;
     font-size: rem(260px);
     font-weight: 800;
@@ -370,7 +353,7 @@
   &__title {
     max-width: rem(620px);
     margin: 0 0 rem(14px);
-    color: $white;
+    color: var(--white);
     font-family: $font-family-heading;
     font-size: fluid(42px, 64px);
     font-weight: 800;
@@ -386,7 +369,7 @@
   &__desc {
     max-width: rem(610px);
     margin: 0;
-    color: $white;
+    color: var(--white);
     font-size: rem(18px);
     font-weight: 600;
     line-height: 120%;
@@ -404,9 +387,9 @@
 
   &__params-item {
     padding: rem(9px) rem(11px);
-    border: rem(1px) solid rgba($white, 0.36);
+    border: rem(1px) solid rgb(var(--white-rgb) / 0.36);
     border-radius: $radius-pill;
-    color: $white;
+    color: var(--white);
     font-size: rem(11px);
     font-weight: 700;
     letter-spacing: 0.06em;
@@ -415,19 +398,6 @@
   }
 
   &__button {
-    --btn-bg: var(--zone-accent);
-    --btn-bg-hover: var(--zone-accent-hover);
-    --btn-bg-active: var(--zone-accent-active);
-    --btn-bg-disabled: var(--zone-accent-disabled-bg);
-    --btn-border: var(--zone-accent);
-    --btn-border-hover: var(--zone-accent-hover);
-    --btn-border-active: var(--zone-accent-active);
-    --btn-border-disabled: var(--zone-accent-disabled-border);
-    --btn-color: #{$white};
-    --btn-color-hover: #{$white};
-    --btn-color-active: #{$white};
-    --btn-color-disabled: #{rgba($white, 0.28)};
-    --btn-focus: var(--zone-focus);
     --btn-height: #{rem(76px)};
     --btn-min-width: #{rem(230px)};
     --btn-padding-x: #{rem(34px)};
@@ -441,7 +411,7 @@
   position: relative;
   height: fluid(180px, 280px);
   overflow: hidden;
-  background-color: $color-bg;
+  background-color: var(--color-bg);
 }
 
 @media (max-width: $breakpoint-tablet) {
@@ -615,7 +585,7 @@
     &__mobile-label {
       display: block;
       margin-bottom: rem(7px);
-      color: rgba($white, 0.56);
+      color: rgb(var(--white-rgb) / 0.56);
       font-size: rem(14px);
       line-height: 1.2;
     }
@@ -627,18 +597,18 @@
       width: 100%;
       min-height: rem(48px);
       padding: 0 rem(18px);
-      border: rem(1px) solid $violet-500;
+      border: rem(1px) solid var(--violet-500);
       border-radius: $radius-pill;
-      background-color: rgba($gray-900, 0.82);
-      box-shadow: inset 0 rem(1px) 0 rgba($white, 0.06);
-      color: $white;
+      background-color: rgb(var(--gray-900-rgb) / 0.82);
+      box-shadow: inset 0 rem(1px) 0 rgb(var(--white-rgb) / 0.06);
+      color: var(--white);
       font-size: rem(16px);
       font-weight: 700;
       line-height: 1;
       text-transform: uppercase;
 
       &:focus-visible {
-        outline: $focus-outline-width solid $violet-300;
+        outline: $focus-outline-width solid var(--violet-300);
         outline-offset: rem(2px);
       }
     }
@@ -682,10 +652,10 @@
       gap: rem(2px);
       padding: rem(4px);
       overflow: hidden;
-      border: rem(1px) solid rgba($white, 0.06);
+      border: rem(1px) solid rgb(var(--white-rgb) / 0.06);
       border-radius: rem(24px);
-      background-color: rgba($gray-800, 0.96);
-      box-shadow: 0 rem(18px) rem(42px) rgba($black, 0.34);
+      background-color: rgb(var(--gray-800-rgb) / 0.96);
+      box-shadow: 0 rem(18px) rem(42px) rgb(var(--black-rgb) / 0.34);
       backdrop-filter: blur(rem(18px));
 
       &[hidden] {
@@ -702,7 +672,7 @@
       min-height: rem(44px);
       padding: 0 rem(16px);
       border-radius: $radius-pill;
-      color: $white;
+      color: var(--white);
       font-size: rem(16px);
       font-weight: 650;
       line-height: 1;
@@ -715,16 +685,16 @@
       }
 
       &:hover {
-        background-color: rgba($white, 0.06);
+        background-color: rgb(var(--white-rgb) / 0.06);
       }
 
       &.is-active,
       &[aria-selected='true'] {
-        background: linear-gradient(90deg, $violet-500, $violet-600);
+        background: linear-gradient(90deg, var(--violet-500), var(--violet-600));
       }
 
       &:focus-visible {
-        outline: $focus-outline-width solid $violet-300;
+        outline: $focus-outline-width solid var(--violet-300);
         outline-offset: rem(-2px);
       }
     }
@@ -735,7 +705,7 @@
       height: rem(10px);
       margin-left: auto;
       border-radius: 50%;
-      background-color: $white;
+      background-color: var(--white);
       opacity: 0;
       transition: opacity $duration-fast $ease-base;
     }

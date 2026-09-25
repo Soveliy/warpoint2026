@@ -1,11 +1,10 @@
-@use '../vars' as *;
 @use '../fluid' as *;
 .select {
   &__button {
     display: flex;
     align-items: center;
     gap: rem(4px);
-    color: $white;
+    color: var(--white);
   }
   &__button-text {
     font-size: rem(12px);

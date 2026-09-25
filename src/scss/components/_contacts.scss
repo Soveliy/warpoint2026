@@ -9,8 +9,8 @@
   position: relative;
   isolation: isolate;
   overflow: hidden;
-  background-color: $gray-950;
-  color: $white;
+  background-color: var(--gray-950);
+  color: var(--white);
   scroll-snap-align: start;
 
   &__title {
@@ -20,7 +20,7 @@
     text-align: center;
 
     span {
-      color: $red-500;
+      color: var(--red-500);
     }
   }
 
@@ -29,10 +29,10 @@
     grid-template-columns: minmax(rem(350px), 31.5%) minmax(0, 1fr);
     min-height: fluid(590px, 720px);
     overflow: hidden;
-    border: rem(1px) solid rgba($white, 0.14);
+    border: rem(1px) solid rgb(var(--white-rgb) / 0.14);
     border-radius: fluid(30px, 44px);
-    background-color: $gray-900;
-    box-shadow: 0 rem(28px) rem(70px) rgba($black, 0.22);
+    background-color: var(--gray-900);
+    box-shadow: 0 rem(28px) rem(70px) rgb(var(--black-rgb) / 0.22);
   }
 
   &__content {
@@ -42,7 +42,8 @@
     flex-direction: column;
     min-width: 0;
     padding: fluid(28px, 40px);
-    background: linear-gradient(140deg, rgba($white, 0.08), transparent 42%), $gray-800;
+    background:
+      linear-gradient(140deg, rgb(var(--white-rgb) / 0.08), transparent 42%), var(--gray-800);
   }
 
   &__city {
@@ -58,9 +59,9 @@
     align-self: flex-start;
     margin-top: rem(18px);
     padding: rem(11px) rem(16px);
-    border: rem(1px) solid rgba($white, 0.18);
+    border: rem(1px) solid rgb(var(--white-rgb) / 0.18);
     border-radius: $radius-pill;
-    background-color: rgba($white, 0.07);
+    background-color: rgb(var(--white-rgb) / 0.07);
     font-size: rem(14px);
     font-weight: 650;
     line-height: 1;
@@ -78,12 +79,12 @@
 
   &__item--requisites {
     padding-top: rem(18px);
-    border-top: rem(1px) solid rgba($white, 0.12);
+    border-top: rem(1px) solid rgb(var(--white-rgb) / 0.12);
   }
 
   &__label {
     margin-bottom: rem(7px);
-    color: rgba($white, 0.42);
+    color: rgb(var(--white-rgb) / 0.42);
     font-size: rem(10px);
     font-weight: 800;
     letter-spacing: 0.08em;
@@ -100,7 +101,7 @@
 
     a {
       @include hover {
-        color: $red-400;
+        color: var(--red-400);
       }
 
       transition: color $duration-fast $ease-base;
@@ -125,7 +126,7 @@
     }
 
     &--small {
-      color: rgba($white, 0.72);
+      color: rgb(var(--white-rgb) / 0.72);
       font-size: rem(12px);
       font-weight: 550;
     }
@@ -140,8 +141,8 @@
 
   &__social {
     @include hover {
-      border-color: rgba($white, 0.42);
-      background-color: rgba($white, 0.11);
+      border-color: rgb(var(--white-rgb) / 0.42);
+      background-color: rgb(var(--white-rgb) / 0.11);
       transform: translateY(rem(-2px));
     }
 
@@ -150,16 +151,16 @@
     justify-content: center;
     width: rem(42px);
     aspect-ratio: 1;
-    border: rem(1px) solid rgba($white, 0.2);
+    border: rem(1px) solid rgb(var(--white-rgb) / 0.2);
     border-radius: rem(12px);
-    color: $white;
+    color: var(--white);
     transition:
       border-color $duration-fast $ease-base,
       background-color $duration-fast $ease-base,
       transform $duration-fast $ease-base;
 
     &:focus-visible {
-      outline: $focus-outline-width solid $focus-color;
+      outline: $focus-outline-width solid var(--focus-color);
       outline-offset: $focus-outline-offset;
     }
   }
@@ -172,7 +173,7 @@
 
   &__booking {
     @include hover {
-      background-color: $red-600;
+      background-color: var(--red-600);
       transform: translateY(rem(-2px));
     }
 
@@ -185,8 +186,8 @@
     margin-top: auto;
     padding: rem(16px) rem(22px);
     border-radius: rem(20px);
-    background-color: $red-500;
-    color: $white;
+    background-color: var(--red-500);
+    color: var(--white);
     font-size: rem(11px);
     font-weight: 800;
     letter-spacing: 0.08em;
@@ -197,7 +198,7 @@
       transform $duration-fast $ease-base;
 
     &:focus-visible {
-      outline: $focus-outline-width solid $focus-color;
+      outline: $focus-outline-width solid var(--focus-color);
       outline-offset: $focus-outline-offset;
     }
   }
@@ -214,15 +215,15 @@
     min-width: 0;
     min-height: 100%;
     overflow: hidden;
-    background-color: $violet-200;
+    background-color: var(--violet-200);
   }
 
   &__map-placeholder {
     position: absolute;
     inset: 0;
     background-image:
-      linear-gradient(rgba($violet-600, 0.09) rem(1px), transparent rem(1px)),
-      linear-gradient(90deg, rgba($violet-600, 0.09) rem(1px), transparent rem(1px));
+      linear-gradient(rgb(var(--violet-600-rgb) / 0.09) rem(1px), transparent rem(1px)),
+      linear-gradient(90deg, rgb(var(--violet-600-rgb) / 0.09) rem(1px), transparent rem(1px));
     background-size: rem(48px) rem(48px);
     transition: opacity $duration-base $ease-base;
 
@@ -233,9 +234,9 @@
       left: 50%;
       width: rem(28px);
       aspect-ratio: 1;
-      border: rem(6px) solid $red-500;
+      border: rem(6px) solid var(--red-500);
       border-radius: 50% 50% 50% 0;
-      background-color: $white;
+      background-color: var(--white);
       transform: translate(-50%, -70%) rotate(-45deg);
     }
 
@@ -247,7 +248,7 @@
       width: rem(7px);
       aspect-ratio: 1;
       border-radius: 50%;
-      background-color: $red-500;
+      background-color: var(--red-500);
       transform: translate(-50%, -130%);
     }
   }

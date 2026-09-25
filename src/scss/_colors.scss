@@ -1,0 +1,77 @@
+// Native dialog backdrops need their own color channels because inheritance varies by browser.
+:root,
+::backdrop {
+  --black-rgb: 0 0 0;
+}
+
+:root {
+  // For translucent colors, edit the RGB channels; the solid color uses the same source.
+  --white-rgb: 255 255 255;
+  --white: rgb(var(--white-rgb));
+  --black: rgb(var(--black-rgb));
+
+  // Neutral palette.
+  --gray-25: #fcfcfc;
+  --gray-50: #fafafa;
+  --gray-100-rgb: 244 244 245;
+  --gray-100: rgb(var(--gray-100-rgb));
+  --gray-200-rgb: 228 228 231;
+  --gray-200: rgb(var(--gray-200-rgb));
+  --gray-300-rgb: 209 209 214;
+  --gray-300: rgb(var(--gray-300-rgb));
+  --gray-400: #a0a0ab;
+  --gray-500: #70707b;
+  --gray-600-rgb: 81 82 92;
+  --gray-600: rgb(var(--gray-600-rgb));
+  --gray-700: #3f3f46;
+  --gray-800-rgb: 38 39 43;
+  --gray-800: rgb(var(--gray-800-rgb));
+  --gray-900-rgb: 24 24 27;
+  --gray-900: rgb(var(--gray-900-rgb));
+  --gray-950-rgb: 19 19 22;
+  --gray-950: rgb(var(--gray-950-rgb));
+
+  // Red accents.
+  --red-300: #fea3b4;
+  --red-400: #fd6f8e;
+  --red-500-rgb: 246 61 104;
+  --red-500: rgb(var(--red-500-rgb));
+  --red-600-rgb: 227 27 84;
+  --red-600: rgb(var(--red-600-rgb));
+  --red-700: #c01048;
+  --red-800: #a11043;
+  --red-900: #f23764;
+
+  // Violet accents.
+  --violet-200: #ddd6fe;
+  --violet-300: #c3b5fd;
+  --violet-400: #9b8afb;
+  --violet-500-rgb: 135 91 247;
+  --violet-500: rgb(var(--violet-500-rgb));
+  --violet-600-rgb: 120 57 238;
+  --violet-600: rgb(var(--violet-600-rgb));
+  --violet-800: #5720b7;
+  --violet-900-rgb: 73 28 150;
+
+  // UI kit accent.
+  --cyan-500: #06aed4;
+
+  // Ratings and UI kit.
+  --yellow-400: #fac515;
+  --yellow-500: #eaaa08;
+
+  // Shared surface and text roles.
+  --color-bg-rgb: 1 0 0;
+  --color-bg: rgb(var(--color-bg-rgb));
+  --color-bg-inverse: var(--white);
+  --color-surface: var(--gray-950);
+  --color-text: var(--white);
+  --color-text-inverse: var(--black);
+  --color-muted: var(--gray-400);
+  --color-border: rgb(var(--white-rgb) / 0.16);
+  --color-accent: var(--red-500);
+  --color-secondary: var(--violet-500);
+
+  // Keyboard focus.
+  --focus-color: var(--violet-300);
+}

@@ -7,10 +7,10 @@
   place-items: center;
   width: rem(24px);
   height: rem(24px);
-  color: $white;
+  color: var(--white);
 
   &:focus-visible {
-    outline: $focus-outline-width solid $focus-color;
+    outline: $focus-outline-width solid var(--focus-color);
     outline-offset: $focus-outline-offset;
   }
 }

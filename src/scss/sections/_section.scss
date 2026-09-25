@@ -9,8 +9,8 @@
 }
 
 .section--light {
-  background-color: $color-bg-inverse;
-  color: $color-text-inverse;
+  background-color: var(--color-bg-inverse);
+  color: var(--color-text-inverse);
 }
 
 .section__header {
@@ -19,7 +19,36 @@
   margin-bottom: $space-40;
   max-width: 46rem;
 }
-
+.section-head {
+  display: flex;
+  gap: $space-16;
+  align-items: end;
+  justify-content: space-between;
+  &__title {
+    font-size: 88px;
+    line-height: 78%;
+    letter-spacing: -0.01em;
+    text-transform: uppercase;
+    font-family: $font-family-second;
+    margin: 0;
+    font-variation-settings:
+      'GRAD' 150,
+      'XOPQ' 110,
+      'YTDE' -198,
+      'YTUC' 760,
+      'wdth' 75,
+      'opsz' 144;
+    span {
+      color: var(--red-600);
+    }
+  }
+  &__lead {
+    padding-left: 15px;
+    border-left: 1px solid var(--red-600);
+    font-size: 18px;
+    line-height: 120%;
+  }
+}
 @media (max-width: $breakpoint-mobile) {
   .section {
     padding: $space-56 0;

@@ -3,12 +3,12 @@
 
 .allert {
   padding: rem(16px);
-  background-color: rgba(255, 255, 255, 0.18);
+  background-color: rgb(var(--white-rgb) / 0.18);
   border-radius: rem(24px);
   box-shadow:
-    inset 0 0.0625rem 0 rgba(255, 255, 255, 0.72),
-    inset 0 -0.0625rem 0 rgba(255, 255, 255, 0.12),
-    0 0.625rem 1.75rem rgba(0, 0, 0, 0.24);
+    inset 0 0.0625rem 0 rgb(var(--white-rgb) / 0.72),
+    inset 0 -0.0625rem 0 rgb(var(--white-rgb) / 0.12),
+    0 0.625rem 1.75rem rgb(var(--black-rgb) / 0.24);
   backdrop-filter: blur(1.125rem) saturate(170%);
   &:before {
     content: '';
@@ -18,9 +18,9 @@
     border-radius: inherit;
     background: linear-gradient(
       135deg,
-      rgba(255, 255, 255, 0.38) 0%,
-      rgba(255, 255, 255, 0.08) 48%,
-      rgba(255, 255, 255, 0.18) 100%
+      rgb(var(--white-rgb) / 0.38) 0%,
+      rgb(var(--white-rgb) / 0.08) 48%,
+      rgb(var(--white-rgb) / 0.18) 100%
     );
     pointer-events: none;
   }

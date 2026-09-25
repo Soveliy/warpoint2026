@@ -45,6 +45,6 @@ video {
 }
 
 .lazy-media {
-  background-color: rgb(255 255 255 / 0.06);
+  background-color: rgb(var(--white-rgb) / 0.06);
   min-height: rem(1px);
 }

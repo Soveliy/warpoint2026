@@ -4,8 +4,8 @@
 @use '../vars' as *;
 
 .games-group {
-  background-color: $gray-25;
-  color: $black;
+  background-color: var(--gray-25);
+  color: var(--black);
   isolation: isolate;
   position: relative;
   &::before {
@@ -36,20 +36,35 @@
     background-image:
       linear-gradient(
         124deg,
-        rgba($gray-300, 0.58) 0 9%,
+        rgb(var(--gray-300-rgb) / 0.58) 0 9%,
         transparent 9% 12%,
-        rgba($white, 0.82) 12% 15%,
+        rgb(var(--white-rgb) / 0.82) 12% 15%,
         transparent 15%
       ),
-      linear-gradient(124deg, transparent 0 28%, rgba($gray-200, 0.34) 28% 37%, transparent 37%),
-      linear-gradient(124deg, transparent 0 63%, rgba($gray-200, 0.28) 63% 70%, transparent 70%);
+      linear-gradient(
+        124deg,
+        transparent 0 28%,
+        rgb(var(--gray-200-rgb) / 0.34) 28% 37%,
+        transparent 37%
+      ),
+      linear-gradient(
+        124deg,
+        transparent 0 63%,
+        rgb(var(--gray-200-rgb) / 0.28) 63% 70%,
+        transparent 70%
+      );
     inset: -12%;
   }
 
   &__background-gradient {
     background:
-      linear-gradient(112deg, rgb(209 209 214 / 0.34), transparent 34% 66%, rgb(228 228 231 / 0.3)),
-      linear-gradient(180deg, rgb(255 255 255 / 0.14), rgb(244 244 245 / 0.08));
+      linear-gradient(
+        112deg,
+        rgb(var(--gray-300-rgb) / 0.34),
+        transparent 34% 66%,
+        rgb(var(--gray-200-rgb) / 0.3)
+      ),
+      linear-gradient(180deg, rgb(var(--white-rgb) / 0.14), rgb(var(--gray-100-rgb) / 0.08));
     inset: -18%;
   }
 }
@@ -62,7 +77,7 @@
   z-index: 1;
   isolation: isolate;
   min-height: 100vh;
-  color: $black;
+  color: var(--black);
   scroll-snap-align: start;
 
   &__title {
@@ -96,7 +111,7 @@
 
   &__arrow {
     @include hover {
-      background-color: rgba($black, 0.08);
+      background-color: rgb(var(--black-rgb) / 0.08);
       transform: translateY(rem(-2px));
     }
 
@@ -105,9 +120,9 @@
     justify-content: center;
     width: fluid(56px, 64px);
     aspect-ratio: 1;
-    border: rem(1px) solid $black;
+    border: rem(1px) solid var(--black);
     border-radius: 50%;
-    color: $black;
+    color: var(--black);
     transition:
       background-color $duration-fast $ease-base,
       opacity $duration-fast $ease-base,
@@ -146,8 +161,8 @@
   width: fluid(290px, 436px);
   aspect-ratio: 109 / 156;
   border-radius: fluid(24px, 36px);
-  background-color: $gray-300;
-  color: $white;
+  background-color: var(--gray-300);
+  color: var(--white);
 
   &::after {
     content: '';
@@ -156,9 +171,9 @@
     z-index: 1;
     background: linear-gradient(
       180deg,
-      rgba($black, 0.04) 30%,
-      rgba($black, 0.16) 55%,
-      rgba($black, 0.94) 100%
+      rgb(var(--black-rgb) / 0.04) 30%,
+      rgb(var(--black-rgb) / 0.16) 55%,
+      rgb(var(--black-rgb) / 0.94) 100%
     );
     pointer-events: none;
   }
@@ -188,7 +203,7 @@
     justify-content: center;
     min-height: rem(32px);
     padding: rem(6px) rem(12px);
-    border: rem(1px) solid rgba($white, 0.88);
+    border: rem(1px) solid rgb(var(--white-rgb) / 0.88);
     border-radius: $radius-pill;
     font-size: rem(10px);
     font-weight: 800;
@@ -198,8 +213,8 @@
     white-space: nowrap;
 
     &--accent {
-      border-color: $red-500;
-      background-color: $red-500;
+      border-color: var(--red-500);
+      background-color: var(--red-500);
     }
 
     &--age {

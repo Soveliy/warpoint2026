@@ -7,8 +7,8 @@
   z-index: $z-modal;
   inset: 0;
   display: none;
-  background-color: $black;
-  color: $white;
+  background-color: var(--black);
+  color: var(--white);
 
   &.is-open {
     display: block;
@@ -19,7 +19,7 @@
     grid-template-rows: rem(31px) minmax(0, 1fr);
     width: 100%;
     height: 100dvh;
-    background-color: $black;
+    background-color: var(--black);
   }
 
   &__header {
@@ -28,7 +28,7 @@
     align-items: center;
     min-width: 0;
     padding: 0 rem(24px);
-    border-bottom: rem(1px) solid $gray-800;
+    border-bottom: rem(1px) solid var(--gray-800);
   }
 
   &__title {
@@ -40,7 +40,7 @@
 
   &__close {
     @include hover {
-      color: $red-500;
+      color: var(--red-500);
     }
 
     position: absolute;
@@ -48,7 +48,7 @@
     right: rem(16px);
     width: rem(28px);
     height: rem(28px);
-    color: $white;
+    color: var(--white);
     transform: translateY(-50%);
     transition: color $duration-fast $ease-base;
 
@@ -81,7 +81,7 @@
     min-height: 0;
     overflow-y: auto;
     overscroll-behavior: contain;
-    scrollbar-color: $gray-700 transparent;
+    scrollbar-color: var(--gray-700) transparent;
     scrollbar-width: thin;
   }
 
@@ -166,7 +166,7 @@
 
   &__card {
     @include hover {
-      border-color: rgba($white, 0.72);
+      border-color: rgb(var(--white-rgb) / 0.72);
     }
 
     position: relative;
@@ -175,7 +175,7 @@
     justify-content: center;
     overflow: hidden;
     min-width: 0;
-    border: rem(1px) solid $gray-500;
+    border: rem(1px) solid var(--gray-500);
     border-radius: fluid(24px, 40px);
     cursor: pointer;
     transition:
@@ -183,12 +183,12 @@
       transform $duration-fast $ease-base;
 
     &:has(input:checked) {
-      border-color: $red-500;
-      box-shadow: inset 0 0 0 rem(1px) $red-500;
+      border-color: var(--red-500);
+      box-shadow: inset 0 0 0 rem(1px) var(--red-500);
     }
 
     &:has(input:focus-visible) {
-      outline: rem(2px) solid $focus-color;
+      outline: rem(2px) solid var(--focus-color);
       outline-offset: rem(3px);
     }
 
@@ -198,13 +198,13 @@
 
     &--image {
       aspect-ratio: 284 / 425;
-      background-color: $gray-950;
+      background-color: var(--gray-950);
 
       &::after {
         content: '';
         position: absolute;
         inset: 45% 0 0;
-        background: linear-gradient(transparent, rgba($black, 0.82));
+        background: linear-gradient(transparent, rgb(var(--black-rgb) / 0.82));
         pointer-events: none;
       }
 
@@ -219,13 +219,13 @@
 
     &--plain {
       aspect-ratio: 1.09;
-      background-color: $black;
+      background-color: var(--black);
     }
 
     &--service {
       grid-column: span 2;
       aspect-ratio: 1.08;
-      background-color: $black;
+      background-color: var(--black);
 
       > img {
         position: absolute;
@@ -248,7 +248,7 @@
     justify-content: center;
     min-height: rem(62px);
     padding: rem(12px) rem(14px) rem(26px);
-    color: $white;
+    color: var(--white);
     font-size: rem(18px);
     font-weight: 650;
     line-height: 1.1;
@@ -262,7 +262,7 @@
   &__selected-date {
     min-height: rem(18px);
     margin: rem(12px) 0 0;
-    color: $gray-300;
+    color: var(--gray-300);
     font-size: rem(13px);
     line-height: 1.2;
     text-align: center;
@@ -274,7 +274,7 @@
     align-items: center;
     gap: rem(20px);
     margin: 0 rem(24px);
-    border-top: rem(1px) solid $gray-800;
+    border-top: rem(1px) solid var(--gray-800);
   }
 
   &__nav {
@@ -311,15 +311,15 @@
     i {
       display: block;
       height: rem(2px);
-      background-color: $gray-300;
+      background-color: var(--gray-300);
       transition: background-color $duration-fast $ease-base;
 
       &.is-active {
-        background-color: $red-500;
+        background-color: var(--red-500);
       }
 
       &.is-complete {
-        background-color: $white;
+        background-color: var(--white);
       }
     }
   }
@@ -329,20 +329,20 @@
     padding: rem(15px) rem(22px) rem(19px);
     border: 0;
     border-radius: rem(28px);
-    background-color: $gray-800;
+    background-color: var(--gray-800);
     box-shadow: none;
-    color: $white;
+    color: var(--white);
     font-family: $font-family-primary;
   }
 
   .air-datepicker-nav {
     min-height: rem(56px);
     padding: 0;
-    border-bottom-color: rgba($white, 0.3);
+    border-bottom-color: rgb(var(--white-rgb) / 0.3);
   }
 
   .air-datepicker-nav--title {
-    color: $white;
+    color: var(--white);
     font-size: rem(18px);
     font-weight: 650;
 
@@ -353,14 +353,14 @@
 
   .air-datepicker-nav--action {
     width: rem(42px);
-    color: $white;
+    color: var(--white);
 
     path {
       stroke: currentcolor;
     }
 
     &:hover {
-      background-color: rgba($white, 0.08);
+      background-color: rgb(var(--white-rgb) / 0.08);
     }
   }
 
@@ -369,7 +369,7 @@
   }
 
   .air-datepicker-body--day-name {
-    color: $white;
+    color: var(--white);
     font-size: rem(11px);
     font-weight: 650;
   }
@@ -380,28 +380,28 @@
 
   .air-datepicker-cell {
     border-radius: 50%;
-    color: $white;
+    color: var(--white);
     font-size: rem(18px);
     font-weight: 650;
 
     &.-day-.-other-month-,
     &.-disabled- {
-      color: $gray-600;
+      color: var(--gray-600);
     }
 
     &.-current- {
-      color: $violet-300;
+      color: var(--violet-300);
     }
 
     &.-selected-,
     &.-selected-.-current- {
-      background-color: $violet-600;
-      color: $white;
+      background-color: var(--violet-600);
+      color: var(--white);
     }
 
     &:hover,
     &.-focus- {
-      background-color: rgba($violet-500, 0.28);
+      background-color: rgb(var(--violet-500-rgb) / 0.28);
     }
   }
 }

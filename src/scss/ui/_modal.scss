@@ -3,7 +3,7 @@
 
 .modal {
   align-items: center;
-  background-color: rgb(0 0 0 / 0.72);
+  background-color: rgb(var(--black-rgb) / 0.72);
   display: none;
   inset: 0;
   justify-content: center;
@@ -17,10 +17,10 @@
 }
 
 .modal__dialog {
-  background-color: $color-surface;
-  border: rem(1px) solid $color-border;
+  background-color: var(--color-surface);
+  border: rem(1px) solid var(--color-border);
   border-radius: $radius-md;
-  color: $color-text;
+  color: var(--color-text);
   max-width: rem(560px);
   padding: $space-32;
   position: relative;

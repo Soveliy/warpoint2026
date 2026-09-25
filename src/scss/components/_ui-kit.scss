@@ -3,13 +3,13 @@
 @use '../fluid' as *;
 
 .ui-kit {
-  background-color: $color-bg;
-  color: $color-text;
+  background-color: var(--color-bg);
+  color: var(--color-text);
   padding: $space-ui-kit-y 0 $space-ui-kit-y-end;
 }
 
 .ui-kit__hero {
-  border-bottom: rem(1px) solid $color-border;
+  border-bottom: rem(1px) solid var(--color-border);
   display: grid;
   gap: rem(24px);
   padding-bottom: $space-ui-kit-hero-bottom;
@@ -17,7 +17,7 @@
 
 .ui-kit__eyebrow {
   @include label-text;
-  color: $color-accent;
+  color: var(--color-accent);
 }
 
 .ui-kit__title {
@@ -25,12 +25,12 @@
 }
 
 .ui-kit__lead {
-  color: $color-muted;
+  color: var(--color-muted);
   max-width: rem(520px);
 }
 
 .ui-kit__section {
-  border-bottom: rem(1px) solid $color-border;
+  border-bottom: rem(1px) solid var(--color-border);
   display: grid;
   gap: $space-ui-kit-gap;
   grid-template-columns: rem(180px) minmax(0, 1fr);
@@ -39,7 +39,7 @@
 
 .ui-kit__section-title {
   @include label-text;
-  color: $color-muted;
+  color: var(--color-muted);
 }
 
 .ui-kit__stack {
@@ -56,7 +56,7 @@
 
 .ui-kit__type-name {
   @include label-text;
-  color: $color-muted;
+  color: var(--color-muted);
 }
 
 .ui-kit__type-sample {
@@ -64,8 +64,8 @@
 }
 
 .ui-kit__light-row {
-  background-color: $white;
-  color: $black;
+  background-color: var(--white);
+  color: var(--black);
   margin: 0 rem(-24px);
   padding: rem(28px) rem(24px);
 }
@@ -84,10 +84,10 @@
 }
 
 .ui-kit__icon-card {
-  background-color: rgb(255 255 255 / 0.04);
-  border: rem(1px) solid $color-border;
+  background-color: rgb(var(--white-rgb) / 0.04);
+  border: rem(1px) solid var(--color-border);
   border-radius: $radius-sm;
-  color: $color-text;
+  color: var(--color-text);
   display: grid;
   gap: rem(12px);
   min-height: rem(132px);
@@ -96,13 +96,13 @@
 }
 
 .ui-kit__icon {
-  color: $color-accent;
+  color: var(--color-accent);
   height: rem(36px);
   width: rem(36px);
 }
 
 .ui-kit__icon-name {
-  color: $color-muted;
+  color: var(--color-muted);
   font-size: rem(13px);
   line-height: 1.2;
   overflow-wrap: anywhere;
@@ -116,7 +116,7 @@
 }
 
 .ui-kit__swatch {
-  border: rem(1px) solid $color-border;
+  border: rem(1px) solid var(--color-border);
   border-radius: $radius-sm;
   overflow: hidden;
 }
@@ -136,20 +136,20 @@
 }
 
 .ui-kit__swatch-value {
-  color: $color-muted;
+  color: var(--color-muted);
   font-size: rem(13px);
   line-height: 1.2;
 }
 
 .ui-kit__media {
-  background-color: rgb(255 255 255 / 0.06);
-  border: rem(1px) solid $color-border;
+  background-color: rgb(var(--white-rgb) / 0.06);
+  border: rem(1px) solid var(--color-border);
   border-radius: $radius-sm;
 }
 
 .ui-kit__media-placeholder {
   align-items: center;
-  color: $color-muted;
+  color: var(--color-muted);
   display: flex;
   justify-content: center;
 }
@@ -167,10 +167,10 @@
 
 .ui-kit__slide {
   align-content: end;
-  background-color: rgb(255 255 255 / 0.06);
-  border: rem(1px) solid $color-border;
+  background-color: rgb(var(--white-rgb) / 0.06);
+  border: rem(1px) solid var(--color-border);
   border-radius: $radius-sm;
-  color: $color-text;
+  color: var(--color-text);
   display: grid;
   gap: rem(8px);
   min-height: rem(148px);
@@ -200,13 +200,13 @@
 }
 
 .ui-kit__slider-pagination .swiper-pagination-bullet {
-  background-color: $color-muted;
+  background-color: var(--color-muted);
   margin: 0;
   opacity: 0.35;
 }
 
 .ui-kit__slider-pagination .swiper-pagination-bullet-active {
-  background-color: $color-secondary;
+  background-color: var(--color-secondary);
   opacity: 1;
 }
 

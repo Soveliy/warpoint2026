@@ -3,7 +3,7 @@
 @use '../fluid' as *;
 .link {
   font-size: rem(12px);
-  color: $color-text;
+  color: var(--color-text);
   text-decoration: none;
   transition:
     color $duration-fast $ease-base,
@@ -11,11 +11,11 @@
 }
 @include hover {
   .link:hover {
-    color: $color-accent;
+    color: var(--color-accent);
     text-decoration-color: currentColor;
   }
 }
 
 .link--muted {
-  color: $color-muted;
+  color: var(--color-muted);
 }

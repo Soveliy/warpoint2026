@@ -8,7 +8,7 @@
   isolation: isolate;
   overflow: hidden;
   background: #111115;
-  color: $white;
+  color: var(--white);
 
   &::before {
     content: '';
@@ -19,9 +19,9 @@
     aspect-ratio: 1;
     background: linear-gradient(
       125deg,
-      rgba($white, 0.05) 0 18%,
+      rgb(var(--white-rgb) / 0.05) 0 18%,
       transparent 18% 34%,
-      rgba($white, 0.025) 34% 50%,
+      rgb(var(--white-rgb) / 0.025) 34% 50%,
       transparent 50%
     );
     transform: rotate(4deg);
@@ -45,14 +45,14 @@
     max-width: rem(900px);
 
     span {
-      color: $red-600;
+      color: var(--red-600);
     }
   }
 
   &__desc {
     max-width: rem(560px);
     margin: rem(18px) 0 0;
-    color: rgba($white, 0.66);
+    color: rgb(var(--white-rgb) / 0.66);
     font-size: fluid(15px, 18px);
     line-height: 1.3;
   }
@@ -64,21 +64,21 @@
     width: min(100%, rem(680px));
     margin: rem(32px) auto rem(22px);
     padding: rem(5px);
-    border: 1px solid rgba($white, 0.12);
+    border: 1px solid rgb(var(--white-rgb) / 0.12);
     border-radius: $radius-pill;
-    background: rgba($white, 0.04);
+    background: rgb(var(--white-rgb) / 0.04);
   }
 
   &__tab {
     @include hover {
-      background-color: rgba($white, 0.08);
+      background-color: rgb(var(--white-rgb) / 0.08);
     }
 
     min-width: 0;
     min-height: rem(44px);
     padding: rem(9px) rem(12px);
     border-radius: $radius-pill;
-    color: rgba($white, 0.74);
+    color: rgb(var(--white-rgb) / 0.74);
     font-size: rem(11px);
     font-weight: 800;
     line-height: 1;
@@ -90,8 +90,8 @@
       transform $duration-fast $ease-base;
 
     &.is-active {
-      background-color: $red-600;
-      color: $white;
+      background-color: var(--red-600);
+      color: var(--white);
     }
 
     &:active {
@@ -99,7 +99,7 @@
     }
 
     &:focus-visible {
-      outline: $focus-outline-width solid $focus-color;
+      outline: $focus-outline-width solid var(--focus-color);
       outline-offset: $focus-outline-offset;
     }
   }
@@ -118,10 +118,10 @@
     grid-area: 1 / 1;
     grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
     overflow: hidden;
-    border: 1px solid rgba($white, 0.07);
+    border: 1px solid rgb(var(--white-rgb) / 0.07);
     border-radius: fluid(20px, 28px);
     background: #28292d;
-    box-shadow: 0 rem(18px) rem(42px) rgba($black, 0.18);
+    box-shadow: 0 rem(18px) rem(42px) rgb(var(--black-rgb) / 0.18);
     pointer-events: none;
     transform: translateY(rem(14px));
     transition:
@@ -176,7 +176,7 @@
     line-height: 1;
 
     span {
-      color: rgba($white, 0.62);
+      color: rgb(var(--white-rgb) / 0.62);
       font-size: rem(15px);
     }
 
@@ -189,20 +189,20 @@
   &__description {
     max-width: rem(330px);
     margin: rem(22px) 0 0;
-    color: rgba($white, 0.68);
+    color: rgb(var(--white-rgb) / 0.68);
     font-size: rem(16px);
     line-height: 1.35;
   }
 
   &__more {
     @include hover {
-      color: $red-400;
+      color: var(--red-400);
     }
 
     align-self: flex-start;
     margin-top: auto;
     padding-top: rem(30px);
-    color: $red-600;
+    color: var(--red-600);
     font-size: rem(12px);
     font-weight: 800;
     letter-spacing: 0.08em;
@@ -211,7 +211,7 @@
     transition: color $duration-fast $ease-base;
 
     &:focus-visible {
-      outline: $focus-outline-width solid $focus-color;
+      outline: $focus-outline-width solid var(--focus-color);
       outline-offset: $focus-outline-offset;
     }
   }

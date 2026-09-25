@@ -7,7 +7,7 @@
 }
 
 .field__label {
-  color: $color-muted;
+  color: var(--color-muted);
   font-size: $font-size-label;
   font-weight: 800;
   line-height: $line-height-label;
@@ -16,10 +16,10 @@
 
 .field__control {
   appearance: none;
-  background-color: rgb(255 255 255 / 0.06);
-  border: rem(1px) solid $color-border;
+  background-color: rgb(var(--white-rgb) / 0.06);
+  border: rem(1px) solid var(--color-border);
   border-radius: $radius-sm;
-  color: $color-text;
+  color: var(--color-text);
   min-height: rem(48px);
   padding: 0 $space-16;
   transition:
@@ -29,15 +29,15 @@
 }
 
 .field__control::placeholder {
-  color: rgb(255 255 255 / 0.36);
+  color: rgb(var(--white-rgb) / 0.36);
 }
 
 .field__control:hover {
-  border-color: rgb(255 255 255 / 0.32);
+  border-color: rgb(var(--white-rgb) / 0.32);
 }
 
 .field__control:focus-visible {
-  border-color: $focus-color;
+  border-color: var(--focus-color);
 }
 
 textarea.field__control {
@@ -48,7 +48,7 @@ textarea.field__control {
 }
 
 .field__hint {
-  color: $color-muted;
+  color: var(--color-muted);
   font-size: $font-size-t2;
   line-height: $line-height-text;
 }

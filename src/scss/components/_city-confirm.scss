@@ -25,44 +25,44 @@
   &__answer,
   &__change {
     @include hover {
-      border-color: $red-500;
-      color: $red-300;
+      border-color: var(--red-500);
+      color: var(--red-300);
     }
 
-    border: rem(1px) solid rgba($white, 0.72);
-    color: $white;
+    border: rem(1px) solid rgb(var(--white-rgb) / 0.72);
+    color: var(--white);
     transition:
       border-color $duration-fast $ease-base,
       color $duration-fast $ease-base;
 
     &:focus-visible {
-      outline: rem(2px) solid $focus-color;
+      outline: rem(2px) solid var(--focus-color);
       outline-offset: rem(2px);
     }
   }
 
   &__selection {
     @include hover {
-      color: $red-300;
+      color: var(--red-300);
     }
 
     display: inline-flex;
     align-items: center;
     gap: rem(4px);
     min-width: 0;
-    color: $white;
+    color: var(--white);
     font: inherit;
     white-space: nowrap;
     transition: color $duration-fast $ease-base;
 
     &:focus-visible {
-      outline: rem(2px) solid $focus-color;
+      outline: rem(2px) solid var(--focus-color);
       outline-offset: rem(3px);
     }
 
     &--location {
       padding-left: rem(12px);
-      border-left: rem(1px) solid rgba($white, 0.24);
+      border-left: rem(1px) solid rgb(var(--white-rgb) / 0.24);
     }
   }
 

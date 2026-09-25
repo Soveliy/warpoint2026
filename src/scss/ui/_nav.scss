@@ -9,11 +9,11 @@
 
 .nav__link {
   @include label-text;
-  color: $color-muted;
+  color: var(--color-muted);
   transition: color $duration-fast $ease-base;
 }
 
 .nav__link:hover,
 .nav__link.is-active {
-  color: $color-text;
+  color: var(--color-text);
 }

@@ -1,5 +1,6 @@
 @use 'fluid';
 @use 'vars';
+@use 'colors';
 @use 'mixins';
 @use 'fonts';
 @use 'settings';
@@ -13,6 +14,7 @@
 @use 'components/city-confirm';
 @use 'components/location-modal';
 @use 'components/event-modal';
+@use 'components/auth-modal';
 @use 'components/booking-panel';
 @use 'components/ui-kit';
 @use 'ui/link';

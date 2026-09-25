@@ -10,8 +10,8 @@ html {
   scrollbar-gutter: stable;
 }
 body {
-  background-color: $color-bg;
-  color: $color-text;
+  background-color: var(--color-bg);
+  color: var(--color-text);
   font-family: $font-family;
   margin: 0;
   min-width: rem(320px);
@@ -46,17 +46,17 @@ a {
 }
 
 .footer {
-  border-top: rem(1px) solid $color-border;
+  border-top: rem(1px) solid var(--color-border);
   padding: rem(24px) 0;
 }
 
 .footer__copy {
-  color: $color-muted;
+  color: var(--color-muted);
 }
 
 ::selection {
-  background-color: $color-accent;
-  color: $white;
+  background-color: var(--color-accent);
+  color: var(--white);
 }
 
 .button-reset {

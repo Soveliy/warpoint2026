@@ -8,8 +8,8 @@
   overflow: hidden;
   padding: rem(32px) 0 rem(16px);
   border-top: 0;
-  background-color: $gray-950;
-  color: $white;
+  background-color: var(--gray-950);
+  color: var(--white);
   scroll-snap-align: start;
 
   .container {
@@ -23,7 +23,7 @@
     grid-template-columns: minmax(rem(250px), 1.35fr) repeat(4, minmax(0, 1fr));
     gap: fluid(24px, 48px);
     padding-top: rem(29px);
-    border-top: rem(1px) solid rgba($white, 0.28);
+    border-top: rem(1px) solid rgb(var(--white-rgb) / 0.28);
     display: flex;
     justify-content: space-between;
   }
@@ -49,10 +49,10 @@
 
   &__contact-link {
     @include hover {
-      color: $red-400;
+      color: var(--red-400);
 
       small {
-        color: $gray-300;
+        color: var(--gray-300);
       }
     }
 
@@ -60,7 +60,7 @@
     flex-direction: column;
     align-items: flex-start;
     width: fit-content;
-    color: $gray-400;
+    color: var(--gray-400);
     font-size: rem(18px);
     font-weight: 500;
     line-height: 1.2;
@@ -69,7 +69,7 @@
     small {
       margin-top: rem(5px);
       margin-left: 0;
-      color: $white;
+      color: var(--white);
       font-family: $font-family-primary;
       font-size: rem(17px);
       font-weight: 600;
@@ -99,7 +99,7 @@
   &__menu {
     display: grid;
     gap: rem(15px);
-    color: $gray-300;
+    color: var(--gray-300);
     font-size: rem(15px);
     font-weight: 500;
     line-height: 1.2;
@@ -112,12 +112,12 @@
   &__policy-list a {
     font-size: 18px;
     line-height: 120%;
-    color: rgba(255, 255, 255, 0.8);
+    color: rgb(var(--white-rgb) / 0.8);
   }
   &__menu-link,
   &__policy-list a {
     @include hover {
-      color: $red-400;
+      color: var(--red-400);
     }
 
     display: inline-block;
@@ -127,7 +127,7 @@
   &__policy-list {
     display: grid;
     gap: rem(10px);
-    color: $gray-400;
+    color: var(--gray-400);
     font-size: rem(12px);
     font-weight: 500;
     line-height: 1.2;
@@ -170,7 +170,7 @@
 
   &__app {
     @include hover {
-      border-color: $red-400;
+      border-color: var(--red-400);
       transform: translateY(rem(-2px));
     }
 
@@ -183,7 +183,7 @@
     min-height: rem(96px);
     margin-top: rem(75px);
     padding: rem(8px);
-    border: rem(1px) solid rgba($white, 0.9);
+    border: rem(1px) solid rgb(var(--white-rgb) / 0.9);
     border-radius: rem(16px);
     font-size: rem(12px);
     font-weight: 700;

@@ -14,10 +14,10 @@
   overflow: hidden;
   padding: rem(18px) rem(26px);
   padding-bottom: calc(#{rem(26px)} + env(safe-area-inset-bottom));
-  border-left: rem(1px) solid rgba($white, 0.1);
-  background-color: $black;
-  box-shadow: rem(-30px) 0 rem(80px) rgba($black, 0.55);
-  color: $white;
+  border-left: rem(1px) solid rgb(var(--white-rgb) / 0.1);
+  background-color: var(--black);
+  box-shadow: rem(-30px) 0 rem(80px) rgb(var(--black-rgb) / 0.55);
+  color: var(--white);
   visibility: hidden;
   pointer-events: none;
   transform: translate3d(102%, 0, 0);
@@ -38,11 +38,11 @@
     display: block;
     width: 100%;
     margin: 0 0 rem(26px);
-    border-top: rem(1px) solid rgba($white, 0.09);
+    border-top: rem(1px) solid rgb(var(--white-rgb) / 0.09);
   }
 
   .menu__item {
-    border-bottom: rem(1px) solid rgba($white, 0.09);
+    border-bottom: rem(1px) solid rgb(var(--white-rgb) / 0.09);
   }
 
   .menu__item--group {
@@ -56,7 +56,7 @@
     min-height: 0;
     padding: rem(17px) rem(2px);
     border-radius: 0;
-    color: $white;
+    color: var(--white);
     font-family: $font-family-primary;
     font-size: rem(19px);
     font-weight: 700;
@@ -75,7 +75,7 @@
   }
 
   .menu__toggle[aria-expanded='true'] {
-    color: $red-400;
+    color: var(--red-400);
   }
 
   .menu__toggle[aria-expanded='true'] .menu__link-icon {
@@ -112,14 +112,14 @@
   }
 
   .menu__submenu li {
-    border-top: rem(1px) solid rgba($white, 0.09);
+    border-top: rem(1px) solid rgb(var(--white-rgb) / 0.09);
   }
 
   .menu__submenu a {
     display: block;
     padding: rem(13px) rem(2px);
     border-radius: 0;
-    color: rgba($white, 0.72);
+    color: rgb(var(--white-rgb) / 0.72);
     font-size: rem(16px);
     font-weight: 500;
     line-height: 1.2;
@@ -171,8 +171,8 @@
     height: rem(52px);
     flex: 0 0 rem(52px);
     border-radius: rem(16px);
-    background-color: rgba($white, 0.07);
-    color: $white;
+    background-color: rgb(var(--white-rgb) / 0.07);
+    color: var(--white);
     transition:
       border-color $duration-fast $ease-base,
       background-color $duration-fast $ease-base,
@@ -235,12 +235,12 @@
 
   &__link {
     @include hover {
-      color: $red-400;
+      color: var(--red-400);
     }
     display: flex;
     align-items: center;
     gap: rem(4px);
-    color: $white;
+    color: var(--white);
     font-size: rem(11px);
     font-weight: 700;
     letter-spacing: 0.08em;
@@ -261,7 +261,7 @@
   }
 
   &__toggle[aria-expanded='true'] {
-    color: $red-400;
+    color: var(--red-400);
   }
 
   &__toggle[aria-expanded='true'] &__link-icon {
@@ -275,10 +275,10 @@
     z-index: 2;
     min-width: rem(264px);
     padding: rem(8px);
-    border: rem(1px) solid rgba($white, 0.1);
+    border: rem(1px) solid rgb(var(--white-rgb) / 0.1);
     border-radius: rem(18px);
-    background-color: rgba($gray-950, 0.96);
-    box-shadow: 0 rem(18px) rem(48px) rgba($black, 0.38);
+    background-color: rgb(var(--gray-950-rgb) / 0.96);
+    box-shadow: 0 rem(18px) rem(48px) rgb(var(--black-rgb) / 0.38);
     opacity: 0;
     visibility: hidden;
     pointer-events: none;
@@ -290,13 +290,13 @@
 
     a {
       @include hover {
-        background-color: rgba($white, 0.07);
-        color: $white;
+        background-color: rgb(var(--white-rgb) / 0.07);
+        color: var(--white);
       }
       display: block;
       padding: rem(11px) rem(14px);
       border-radius: rem(12px);
-      color: rgba($white, 0.74);
+      color: rgb(var(--white-rgb) / 0.74);
       font-size: rem(14px);
       font-weight: 600;
       line-height: 1.2;
@@ -324,7 +324,7 @@
   &__label {
     display: block;
     margin-bottom: rem(2px);
-    color: rgba($white, 0.4);
+    color: rgb(var(--white-rgb) / 0.4);
     font-size: rem(11px);
     font-weight: 700;
     letter-spacing: 0.14em;
@@ -334,8 +334,8 @@
 
   &__place-button {
     @include hover {
-      border-color: rgba($white, 0.22);
-      background-color: rgba($white, 0.11);
+      border-color: rgb(var(--white-rgb) / 0.22);
+      background-color: rgb(var(--white-rgb) / 0.11);
     }
     display: flex;
     align-items: center;
@@ -343,10 +343,10 @@
     width: 100%;
     min-height: rem(52px);
     padding: 0 rem(16px);
-    border: rem(1px) solid rgba($white, 0.12);
+    border: rem(1px) solid rgb(var(--white-rgb) / 0.12);
     border-radius: rem(16px);
-    background-color: rgba($white, 0.07);
-    color: $white;
+    background-color: rgb(var(--white-rgb) / 0.07);
+    color: var(--white);
     font-size: rem(15px);
     font-weight: 600;
     text-align: left;
@@ -360,7 +360,7 @@
     }
 
     &--address {
-      color: rgba($white, 0.78);
+      color: rgb(var(--white-rgb) / 0.78);
       font-size: rem(14px);
       font-weight: 500;
     }
@@ -371,7 +371,7 @@
     width: rem(14px);
     height: rem(14px);
     flex: 0 0 rem(14px);
-    border: rem(2px) solid $red-400;
+    border: rem(2px) solid var(--red-400);
     border-radius: 50% 50% 50% 0;
     transform: rotate(-45deg);
 
@@ -382,7 +382,7 @@
       width: rem(4px);
       height: rem(4px);
       border-radius: 50%;
-      background-color: $red-400;
+      background-color: var(--red-400);
       transform: translate(-50%, -50%);
     }
   }
@@ -409,7 +409,7 @@
 
   &__booking {
     @include hover {
-      background-color: $red-600;
+      background-color: var(--red-600);
       transform: translateY(rem(-2px));
     }
     display: inline-flex;
@@ -419,8 +419,8 @@
     min-height: rem(58px);
     padding: 0 rem(28px);
     border-radius: $radius-pill;
-    background-color: $red-500;
-    color: $white;
+    background-color: var(--red-500);
+    color: var(--white);
     font-size: rem(11px);
     font-weight: 800;
     letter-spacing: 0.04em;
@@ -437,9 +437,9 @@
 
   &__phone {
     @include hover {
-      color: $red-400;
+      color: var(--red-400);
     }
-    color: $white;
+    color: var(--white);
     font-family: $font-family-heading;
     font-size: rem(24px);
     font-weight: 800;

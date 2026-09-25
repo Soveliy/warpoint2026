@@ -84,7 +84,7 @@ import '../scss/main.scss';
 Порядок импортов в `main.scss`:
 
 ```scss
-fluid / vars / mixins
+fluid / vars / colors / mixins
 fonts
 settings
 base
@@ -94,6 +94,24 @@ sections
 pages
 utilities
 ```
+
+### Цвета
+
+Используемая палитра объявлена CSS-переменными в `src/scss/_colors.scss` на `:root`.
+В `src/scss/_vars.scss` остаются Sass-переменные для размеров, шрифтов, брейкпоинтов и анимаций.
+
+```scss
+.card {
+  color: var(--color-text);
+  background-color: var(--color-surface);
+  border: 1px solid rgb(var(--white-rgb) / 0.16);
+}
+```
+
+Для цветов с прозрачностью значение задаётся один раз в `--…-rgb` через пробелы:
+например, `--red-500-rgb: 246 61 104`. Обычный `--red-500` ссылается на эти же каналы.
+Меняйте исходное значение в `_colors.scss`, чтобы обновить и сплошные, и полупрозрачные варианты.
+В компонентах используйте `var(--…)` без Sass-интерполяции и `rgb(var(--…-rgb) / 0.5)` для прозрачности.
 
 ### Fluid sizes
 

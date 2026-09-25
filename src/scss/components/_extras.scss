@@ -8,8 +8,8 @@
 
   position: relative;
   overflow: hidden;
-  background-color: $gray-950;
-  color: $white;
+  background-color: var(--gray-950);
+  color: var(--white);
 
   &__grid {
     display: grid;
@@ -24,10 +24,11 @@
     min-height: fluid(292px, 340px);
     padding: fluid(28px, 38px);
     overflow: hidden;
-    border: rem(1px) solid rgba($white, 0.2);
+    border: rem(1px) solid rgb(var(--white-rgb) / 0.2);
     border-radius: fluid(28px, 44px);
-    background: linear-gradient(125deg, rgba($white, 0.035), transparent 58%), $gray-900;
-    box-shadow: inset 0 rem(1px) 0 rgba($white, 0.025);
+    background:
+      linear-gradient(125deg, rgb(var(--white-rgb) / 0.035), transparent 58%), var(--gray-900);
+    box-shadow: inset 0 rem(1px) 0 rgb(var(--white-rgb) / 0.025);
 
     &::after {
       content: '';
@@ -36,8 +37,8 @@
       z-index: -1;
       background: linear-gradient(
         90deg,
-        $gray-900 0 36%,
-        rgba($gray-900, 0.82) 52%,
+        var(--gray-900) 0 36%,
+        rgb(var(--gray-900-rgb) / 0.82) 52%,
         transparent 76%
       );
       pointer-events: none;
@@ -67,7 +68,7 @@
   &__description {
     max-width: rem(330px);
     margin: rem(12px) 0 0;
-    color: $gray-400;
+    color: var(--gray-400);
     font-size: fluid(15px, 18px);
     font-weight: 600;
     line-height: 1.22;
@@ -75,13 +76,13 @@
 
   &__link {
     @include hover {
-      color: $red-300;
+      color: var(--red-300);
       transform: translateX(rem(3px));
     }
 
     margin-top: auto;
     padding-top: rem(24px);
-    color: $red-500;
+    color: var(--red-500);
     font-size: rem(11px);
     font-weight: 800;
     letter-spacing: 0.08em;
@@ -93,7 +94,7 @@
       transform $duration-fast $ease-base;
 
     &:focus-visible {
-      outline: $focus-outline-width solid $focus-color;
+      outline: $focus-outline-width solid var(--focus-color);
       outline-offset: $focus-outline-offset;
     }
   }
@@ -118,7 +119,7 @@
     max-width: none;
     object-fit: contain;
     object-position: right center;
-    filter: drop-shadow(0 rem(22px) rem(30px) rgba($black, 0.34));
+    filter: drop-shadow(0 rem(22px) rem(30px) rgb(var(--black-rgb) / 0.34));
   }
 
   &__item--certificate &__image {
@@ -154,26 +155,30 @@
     width: fluid(122px, 158px);
     height: fluid(236px, 286px);
     padding: rem(13px);
-    border: rem(4px) solid $gray-700;
+    border: rem(4px) solid var(--gray-700);
     border-radius: fluid(24px, 34px);
     background: linear-gradient(165deg, #282932, #0c0d10 70%);
     box-shadow:
-      0 rem(26px) rem(50px) rgba($black, 0.5),
-      0 0 rem(80px) rgba($red-600, 0.12);
+      0 rem(26px) rem(50px) rgb(var(--black-rgb) / 0.5),
+      0 0 rem(80px) rgb(var(--red-600-rgb) / 0.12);
     transform: rotate(3deg);
   }
 
   &__bonus-screen {
     display: grid;
     padding: rem(14px);
-    border: rem(1px) solid rgba($white, 0.12);
+    border: rem(1px) solid rgb(var(--white-rgb) / 0.12);
     border-radius: rem(14px);
-    background: linear-gradient(145deg, rgba($white, 0.08), rgba($white, 0.015));
-    color: $white;
+    background: linear-gradient(
+      145deg,
+      rgb(var(--white-rgb) / 0.08),
+      rgb(var(--white-rgb) / 0.015)
+    );
+    color: var(--white);
     line-height: 1;
 
     small {
-      color: $gray-400;
+      color: var(--gray-400);
       font-size: rem(8px);
       font-weight: 600;
     }
@@ -191,7 +196,11 @@
     height: rem(42px);
     margin-top: rem(10px);
     border-radius: rem(12px);
-    background: linear-gradient(100deg, rgba($white, 0.08), rgba($white, 0.025));
+    background: linear-gradient(
+      100deg,
+      rgb(var(--white-rgb) / 0.08),
+      rgb(var(--white-rgb) / 0.025)
+    );
 
     &--short {
       width: 72%;
@@ -276,8 +285,8 @@
     &__item::after {
       background: linear-gradient(
         90deg,
-        $gray-900 0 42%,
-        rgba($gray-900, 0.9) 60%,
+        var(--gray-900) 0 42%,
+        rgb(var(--gray-900-rgb) / 0.9) 60%,
         transparent 88%
       );
     }
