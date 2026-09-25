@@ -1,7 +1,7 @@
 import { isEscapeKey, toggleScrollLock } from '../_functions.js';
 
 const focusableSelector = 'a[href], button:not(:disabled), [tabindex]:not([tabindex="-1"])';
-const mobileMediaQuery = '(max-width: 64rem)';
+const mobileMediaQuery = '(max-width: 75rem)';
 const backdropTransitionDuration = 300;
 
 export function initMobileMenu() {

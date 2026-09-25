@@ -83,6 +83,7 @@
   }
 
   &__logo {
+    flex-shrink: 0;
     height: rem(36px);
 
     img {

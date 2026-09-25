@@ -469,7 +469,7 @@
   }
 }
 
-@media (max-width: $breakpoint-tablet) {
+@media (width <= rem(1200px)) {
   .header__menu.menu {
     @include menu-drawer;
   }
