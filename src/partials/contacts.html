@@ -5,35 +5,18 @@
     <div class="contacts__card">
       <div class="contacts__content">
         <h3 class="contacts__city" data-contacts-city>Екатеринбург</h3>
-        <div
-          class="contacts__select"
-          data-contacts-select
-          data-country-id="ru"
-          data-city-name="Екатеринбург"
-          data-selected-location-id="raduga-park"
-        >
-          <button
-            class="contacts__location button-reset"
-            type="button"
-            aria-haspopup="listbox"
-            aria-expanded="false"
-            aria-controls="contacts-location-list"
-            aria-label="Выбрать локацию: ТРЦ «Радуга Парк»"
-            data-contacts-select-toggle
-          >
+        <div class="contacts__select" data-contacts-select data-country-id="ru" data-city-name="Екатеринбург"
+          data-selected-location-id="raduga-park">
+          <button class="contacts__location button-reset" type="button" aria-haspopup="listbox" aria-expanded="false"
+            aria-controls="contacts-location-list" aria-label="Выбрать локацию: ТРЦ «Радуга Парк»"
+            data-contacts-select-toggle>
             <span data-contacts-location>ТРЦ «Радуга Парк»</span>
             <svg viewBox="0 0 16 16" aria-hidden="true">
               <path d="m3 6 5 4 5-4" />
             </svg>
           </button>
-          <div
-            class="contacts__location-list"
-            id="contacts-location-list"
-            role="listbox"
-            aria-label="Локации в Екатеринбурге"
-            data-contacts-location-list
-            hidden
-          ></div>
+          <div class="contacts__location-list" id="contacts-location-list" role="listbox"
+            aria-label="Локации в Екатеринбурге" data-contacts-location-list hidden></div>
         </div>
 
         <div class="contacts__details">
@@ -41,11 +24,8 @@
           <address class="contacts__address">
             <div class="contacts__row">
               <svg class="contacts__icon" viewBox="0 0 32 32" aria-hidden="true">
-                <path
-                  fill="currentColor"
-                  stroke="none"
-                  d="M16 2a8 8 0 0 0-8 8c0 6 8 13 8 13s8-7 8-13a8 8 0 0 0-8-8Zm0 5a3 3 0 1 1 0 6 3 3 0 0 1 0-6Z"
-                />
+                <path fill="currentColor" stroke="none"
+                  d="M16 2a8 8 0 0 0-8 8c0 6 8 13 8 13s8-7 8-13a8 8 0 0 0-8-8Zm0 5a3 3 0 1 1 0 6 3 3 0 0 1 0-6Z" />
                 <path d="M9 20c-4 1-6 2.5-6 4.5C3 27 9 29 16 29s13-2 13-4.5c0-2-2-3.5-6-4.5" />
               </svg>
               <div>
@@ -54,17 +34,9 @@
               </div>
             </div>
             <div class="contacts__row" data-contacts-metro-row hidden>
-              <svg
-                class="contacts__icon contacts__icon--metro"
-                viewBox="0 0 32 36"
-                aria-hidden="true"
-              >
+              <svg class="contacts__icon contacts__icon--metro" viewBox="0 0 32 36" aria-hidden="true">
                 <path d="M6 25A14 14 0 1 1 26 25L16 35" />
-                <path
-                  d="m7 20 5-13 4 8 4-8 5 13h-6l-2-6-1 3-1-3-2 6Z"
-                  fill="currentColor"
-                  stroke="none"
-                />
+                <path d="m7 20 5-13 4 8 4-8 5 13h-6l-2-6-1 3-1-3-2 6Z" fill="currentColor" stroke="none" />
               </svg>
               <span data-contacts-metro></span>
             </div>
@@ -127,42 +99,25 @@
         </button>
       </div>
 
-      <div
-        class="contacts__map"
-        data-yandex-map
-        data-map-coordinates="56.817183,60.538536"
+      <div class="contacts__map" data-yandex-map data-map-coordinates="56.817183,60.538536"
         data-map-title="Warpoint в ТРЦ Радуга Парк на Яндекс Картах"
         data-map-src="https://yandex.ru/map-widget/v1/?ll=60.538536%2C56.817183&amp;pt=60.538536%2C56.817183%2Cpm2rdm&amp;z=16"
-        aria-busy="true"
-      >
+        aria-busy="true">
         <div class="contacts__map-placeholder" aria-hidden="true"></div>
         <span class="visually-hidden" data-map-status>Карта загружается</span>
 
         <noscript>
-          <iframe
-            class="contacts__map-frame contacts__map-frame--noscript"
+          <iframe class="contacts__map-frame contacts__map-frame--noscript"
             src="https://yandex.ru/map-widget/v1/?ll=60.538536%2C56.817183&amp;pt=60.538536%2C56.817183%2Cpm2rdm&amp;z=16"
-            title="Warpoint в ТРЦ Радуга Парк на Яндекс Картах"
-            loading="lazy"
-            referrerpolicy="no-referrer-when-downgrade"
-            allowfullscreen
-          ></iframe>
+            title="Warpoint в ТРЦ Радуга Парк на Яндекс Картах" loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
         </noscript>
 
         <div class="contacts__parking" data-contacts-ekaterinburg>
-          <svg class="contacts__parking-icon" viewBox="0 0 48 40" aria-hidden="true">
+          <svg width="50" height="50" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path
-              d="m8 14 5-11h22l5 11M2 16h5m34 0h5"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="3"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            />
-            <path
-              d="m8 14-4 8v12h4v4h6v-4h20v4h6v-4h4V22l-4-8Zm3 9h6v4h-6Zm20 0h6v4h-6Z"
-              fill="currentColor"
-            />
+              d="M46.875 20.3125H44.7656L39.3398 8.10547C39.0943 7.55318 38.6939 7.08394 38.187 6.75462C37.6802 6.42529 37.0888 6.25001 36.4844 6.25H13.5156C12.9112 6.25001 12.3198 6.42529 11.813 6.75462C11.3061 7.08394 10.9057 7.55318 10.6602 8.10547L5.23437 20.3125H3.125C2.7106 20.3125 2.31317 20.4771 2.02015 20.7701C1.72712 21.0632 1.5625 21.4606 1.5625 21.875C1.5625 22.2894 1.72712 22.6868 2.02015 22.9799C2.31317 23.2729 2.7106 23.4375 3.125 23.4375H4.6875V39.0625C4.6875 39.8913 5.01674 40.6862 5.60279 41.2722C6.18884 41.8583 6.9837 42.1875 7.8125 42.1875H12.5C13.3288 42.1875 14.1237 41.8583 14.7097 41.2722C15.2958 40.6862 15.625 39.8913 15.625 39.0625V37.5H34.375V39.0625C34.375 39.8913 34.7042 40.6862 35.2903 41.2722C35.8763 41.8583 36.6712 42.1875 37.5 42.1875H42.1875C43.0163 42.1875 43.8112 41.8583 44.3972 41.2722C44.9833 40.6862 45.3125 39.8913 45.3125 39.0625V23.4375H46.875C47.2894 23.4375 47.6868 23.2729 47.9799 22.9799C48.2729 22.6868 48.4375 22.2894 48.4375 21.875C48.4375 21.4606 48.2729 21.0632 47.9799 20.7701C47.6868 20.4771 47.2894 20.3125 46.875 20.3125ZM15.625 29.6875H10.9375C10.5231 29.6875 10.1257 29.5229 9.83265 29.2299C9.53962 28.9368 9.375 28.5394 9.375 28.125C9.375 27.7106 9.53962 27.3132 9.83265 27.0201C10.1257 26.7271 10.5231 26.5625 10.9375 26.5625H15.625C16.0394 26.5625 16.4368 26.7271 16.7299 27.0201C17.0229 27.3132 17.1875 27.7106 17.1875 28.125C17.1875 28.5394 17.0229 28.9368 16.7299 29.2299C16.4368 29.5229 16.0394 29.6875 15.625 29.6875ZM39.0625 29.6875H34.375C33.9606 29.6875 33.5632 29.5229 33.2701 29.2299C32.9771 28.9368 32.8125 28.5394 32.8125 28.125C32.8125 27.7106 32.9771 27.3132 33.2701 27.0201C33.5632 26.7271 33.9606 26.5625 34.375 26.5625H39.0625C39.4769 26.5625 39.8743 26.7271 40.1674 27.0201C40.4604 27.3132 40.625 27.7106 40.625 28.125C40.625 28.5394 40.4604 28.9368 40.1674 29.2299C39.8743 29.5229 39.4769 29.6875 39.0625 29.6875ZM8.6543 20.3125L13.5156 9.375H36.4844L41.3457 20.3125H8.6543Z"
+              fill="#F63D68" />
           </svg>
           <p>Удобный подъезд<br />и бесплатная парковка на 3 часа</p>
         </div>

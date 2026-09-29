@@ -67,7 +67,7 @@ export function initPreloader() {
   const imageOffset = mobileQuery.matches ? 30 : 55;
 
   gsap.set(header, { autoAlpha: 0, yPercent: -110 });
-  gsap.set(heroImage, { scale: 1.04, xPercent: imageOffset });
+  gsap.set(heroImage, { autoAlpha: 0, scale: 1.04, xPercent: imageOffset });
   gsap.set(heroCopy, { autoAlpha: 0, xPercent: -110 });
   gsap.set(heroActions, { autoAlpha: 0, x: -72, y: 20 });
   gsap.set(heroAlert, { autoAlpha: 0, x: 96 });
@@ -104,7 +104,11 @@ export function initPreloader() {
       .to({}, { duration: 0.62 })
       .addLabel('hero')
       .to(header, { autoAlpha: 1, duration: 0.5, ease: 'power3.out', yPercent: 0 }, 'hero')
-      .to(heroImage, { duration: 0.9, ease: 'power3.out', scale: 1, xPercent: 0 }, 'hero')
+      .to(
+        heroImage,
+        { autoAlpha: 1, duration: 0.9, ease: 'power3.out', scale: 1, xPercent: 0 },
+        'hero',
+      )
       .to(
         heroCopy,
         { autoAlpha: 1, duration: 0.72, ease: 'power3.out', stagger: 0.08, xPercent: 0 },

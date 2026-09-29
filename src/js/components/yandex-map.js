@@ -86,7 +86,7 @@ const createMap = async (map) => {
       {
         iconLayout: 'default#image',
         iconImageHref: new URL('img/map-pin.svg', document.baseURI).href,
-        iconImageSize: [80, 104],
+        iconImageSize: [80, 80],
         // The small dot in the SVG is the geographic anchor.
         iconImageOffset: [-40, -97],
         hasBalloon: false,

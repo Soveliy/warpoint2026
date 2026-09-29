@@ -14,7 +14,9 @@
   &__sticky {
     position: relative;
     display: flex;
-    z-index: 100;
+
+    // Keep the catalog decoration behind review content and below the header.
+    z-index: $z-base + 1;
     gap: rem(32px);
     padding-left: $container-offset;
     max-width: 120rem;

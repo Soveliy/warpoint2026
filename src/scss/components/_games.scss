@@ -7,8 +7,9 @@
   background-color: var(--gray-25);
   color: var(--black);
   isolation: isolate;
-  z-index: 50;
+  z-index: $z-base;
   position: relative;
+
   &::before {
     content: '';
     position: absolute;
@@ -17,9 +18,10 @@
     height: 956px;
     width: 1423px;
 
-    background: url(../../img/games-background.svg) no-repeat right center;
+    background: url('../../img/games-background.svg') no-repeat right center;
     pointer-events: none;
   }
+
   &__background {
     display: none;
   }
@@ -140,6 +142,7 @@
     object-fit: cover;
     transition: transform 650ms ease;
   }
+
   &__more {
     display: block;
     width: max-content;
@@ -152,6 +155,7 @@
     color: var(--red-600);
     margin-top: 30px;
   }
+
   &__meta {
     position: absolute;
     top: fluid(20px, 32px);
@@ -223,6 +227,7 @@
       display: none;
     }
   }
+
   .games-catalog {
     &__title {
       max-width: rem(660px);

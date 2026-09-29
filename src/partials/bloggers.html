@@ -10,68 +10,28 @@
     <div class="swiper-wrapper">
       <article class="bloggers__slide swiper-slide">
         <div class="bloggers__media">
-          <img
-            class="bloggers__image"
-            src="img/bloggers/1.jpg"
-            width="969"
-            height="546"
-            alt="Команда играет в шлемах виртуальной реальности"
-            loading="lazy"
-            decoding="async"
-          />
-          <button
-            class="bloggers__play button-reset"
-            type="button"
-            aria-label="Смотреть видео о командной игре"
-            data-blogger-video
-          >
-            <svg class="bloggers__play-icon" aria-hidden="true">
-              <use href="/img/sprite.svg#icon-play"></use>
-            </svg>
-          </button>
-        </div>
-        <div class="bloggers__info">
-          <div class="bloggers__info-item">
-            <div class="bloggers__info-item-row">
-              <div class="bloggers__info-item-avatar">
-                <img src="img/avatar.jpg" alt="" />
-              </div>
-              <div class="bloggers__info-item-content">
-                <div class="bloggers__info-item-name">WYLSACOM</div>
-                <div class="bloggers__info-item-type">Блогер</div>
-              </div>
-            </div>
+          <div class="bloggers__preview">
+            <img
+              class="bloggers__image"
+              src="img/bloggers/1.jpg"
+              width="969"
+              height="546"
+              alt="Команда играет в шлемах виртуальной реальности"
+              loading="lazy"
+              decoding="async"
+            />
+            <button
+              class="bloggers__play button-reset btn btn--red"
+              type="button"
+              aria-label="Смотреть видео о командной игре"
+              data-blogger-video
+            >
+              <svg class="bloggers__play-icon" aria-hidden="true">
+                <use href="/img/sprite.svg#icon-play"></use>
+              </svg>
+            </button>
           </div>
-          <div class="bloggers__info-item">
-            <div class="bloggers__info-item-content">
-              <div class="bloggers__info-item-name">10,3 млн</div>
-              <div class="bloggers__info-item-type">подписчиков</div>
-            </div>
-          </div>
-        </div>
-      </article>
 
-      <article class="bloggers__slide swiper-slide">
-        <div class="bloggers__media">
-          <img
-            class="bloggers__image"
-            src="img/bloggers/2.jpg"
-            width="1800"
-            height="1050"
-            alt="Игрок в VR-шлеме с контроллерами"
-            loading="lazy"
-            decoding="async"
-          />
-          <button
-            class="bloggers__play button-reset"
-            type="button"
-            aria-label="Смотреть обзор Warpoint"
-            data-blogger-video
-          >
-            <svg class="bloggers__play-icon" aria-hidden="true">
-              <use href="/img/sprite.svg#icon-play"></use>
-            </svg>
-          </button>
           <div class="bloggers__info">
             <div class="bloggers__info-item">
               <div class="bloggers__info-item-row">
@@ -84,9 +44,13 @@
                 </div>
               </div>
             </div>
-            <div class="bloggers__info-item">
+            <div class="bloggers__info-item bloggers__info-item--subscribers">
+              <span class="bloggers__subscribers-icon" aria-hidden="true">
+                <svg><use href="/img/sprite.svg#icon-subscribers"></use></svg>
+              </span>
+
               <div class="bloggers__info-item-content">
-                <div class="bloggers__info-item-name">10,3 млн</div>
+                <div class="bloggers__info-item-name">10,3 <small>млн</small></div>
                 <div class="bloggers__info-item-type">подписчиков</div>
               </div>
             </div>
@@ -96,25 +60,28 @@
 
       <article class="bloggers__slide swiper-slide">
         <div class="bloggers__media">
-          <img
-            class="bloggers__image"
-            src="img/bloggers/3.jpg"
-            width="1800"
-            height="1050"
-            alt="Юный игрок в шлеме виртуальной реальности"
-            loading="lazy"
-            decoding="async"
-          />
-          <button
-            class="bloggers__play button-reset"
-            type="button"
-            aria-label="Смотреть видео о VR-игре"
-            data-blogger-video
-          >
-            <svg class="bloggers__play-icon" aria-hidden="true">
-              <use href="/img/sprite.svg#icon-play"></use>
-            </svg>
-          </button>
+          <div class="bloggers__preview">
+            <img
+              class="bloggers__image"
+              src="img/bloggers/2.jpg"
+              width="1800"
+              height="1050"
+              alt="Игрок в VR-шлеме с контроллерами"
+              loading="lazy"
+              decoding="async"
+            />
+            <button
+              class="bloggers__play button-reset btn btn--red"
+              type="button"
+              aria-label="Смотреть обзор Warpoint"
+              data-blogger-video
+            >
+              <svg class="bloggers__play-icon" aria-hidden="true">
+                <use href="/img/sprite.svg#icon-play"></use>
+              </svg>
+            </button>
+          </div>
+
           <div class="bloggers__info">
             <div class="bloggers__info-item">
               <div class="bloggers__info-item-row">
@@ -127,9 +94,63 @@
                 </div>
               </div>
             </div>
-            <div class="bloggers__info-item">
+            <div class="bloggers__info-item bloggers__info-item--subscribers">
+              <span class="bloggers__subscribers-icon" aria-hidden="true">
+                <svg><use href="/img/sprite.svg#icon-subscribers"></use></svg>
+              </span>
+
               <div class="bloggers__info-item-content">
-                <div class="bloggers__info-item-name">10,3 млн</div>
+                <div class="bloggers__info-item-name">10,3 <small>млн</small></div>
+                <div class="bloggers__info-item-type">подписчиков</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="bloggers__slide swiper-slide">
+        <div class="bloggers__media">
+          <div class="bloggers__preview">
+            <img
+              class="bloggers__image"
+              src="img/bloggers/3.jpg"
+              width="1800"
+              height="1050"
+              alt="Юный игрок в шлеме виртуальной реальности"
+              loading="lazy"
+              decoding="async"
+            />
+            <button
+              class="bloggers__play button-reset btn btn--red"
+              type="button"
+              aria-label="Смотреть видео о VR-игре"
+              data-blogger-video
+            >
+              <svg class="bloggers__play-icon" aria-hidden="true">
+                <use href="/img/sprite.svg#icon-play"></use>
+              </svg>
+            </button>
+          </div>
+
+          <div class="bloggers__info">
+            <div class="bloggers__info-item">
+              <div class="bloggers__info-item-row">
+                <div class="bloggers__info-item-avatar">
+                  <img src="img/avatar.jpg" alt="" />
+                </div>
+                <div class="bloggers__info-item-content">
+                  <div class="bloggers__info-item-name">WYLSACOM</div>
+                  <div class="bloggers__info-item-type">Блогер</div>
+                </div>
+              </div>
+            </div>
+            <div class="bloggers__info-item bloggers__info-item--subscribers">
+              <span class="bloggers__subscribers-icon" aria-hidden="true">
+                <svg><use href="/img/sprite.svg#icon-subscribers"></use></svg>
+              </span>
+
+              <div class="bloggers__info-item-content">
+                <div class="bloggers__info-item-name">10,3 <small>млн</small></div>
                 <div class="bloggers__info-item-type">подписчиков</div>
               </div>
             </div>
@@ -137,27 +158,27 @@
         </div>
       </article>
     </div>
-  <div class="bloggers__controls slider-controls">
-    <button
-      class="slider-arrow slider-arrow--prev button-reset"
-      type="button"
-      aria-label="Предыдущее видео"
-      data-slider-prev
-    >
-      <svg viewBox="0 0 24 24" aria-hidden="true">
-        <path d="m9 5 7 7-7 7"></path>
-      </svg>
-    </button>
-    <button
-      class="slider-arrow slider-arrow--next button-reset"
-      type="button"
-      aria-label="Следующее видео"
-      data-slider-next
-    >
-      <svg viewBox="0 0 24 24" aria-hidden="true">
-        <path d="m9 5 7 7-7 7"></path>
-      </svg>
-    </button>
-  </div>
+    <div class="bloggers__controls slider-controls">
+      <button
+        class="slider-arrow slider-arrow--prev button-reset"
+        type="button"
+        aria-label="Предыдущее видео"
+        data-slider-prev
+      >
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="m9 5 7 7-7 7"></path>
+        </svg>
+      </button>
+      <button
+        class="slider-arrow slider-arrow--next button-reset"
+        type="button"
+        aria-label="Следующее видео"
+        data-slider-next
+      >
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="m9 5 7 7-7 7"></path>
+        </svg>
+      </button>
+    </div>
   </div>
 </section>

@@ -1,18 +1,22 @@
 import Swiper from 'swiper';
 import { A11y, Keyboard, Navigation, Pagination } from 'swiper/modules';
 
-const BLOGGERS_LOOP_SETS = 3;
+const LOOP_SETS = 3;
 
-const prepareBloggersLoopSlides = (slider) => {
+const prepareLoopSlides = (slider, copyAttribute) => {
   const wrapper = slider.querySelector('.swiper-wrapper');
 
   if (!wrapper) return 0;
 
   const originalSlides = [...wrapper.children].filter(
-    (slide) => slide.matches('.swiper-slide') && !slide.hasAttribute('data-bloggers-loop-copy'),
+    (slide) => slide.matches('.swiper-slide') && !slide.hasAttribute(copyAttribute),
   );
-  const existingCopies = [...wrapper.querySelectorAll('[data-bloggers-loop-copy]')];
-  const copiesCount = originalSlides.length * (BLOGGERS_LOOP_SETS - 1);
+
+  if (originalSlides.length < 2) return originalSlides.length;
+
+  const existingCopies = [...wrapper.querySelectorAll(`[${copyAttribute}]`)];
+  // Keep enough slides for a continuous loop even on the widest desktop layout.
+  const copiesCount = originalSlides.length * (LOOP_SETS - 1);
   const fragment = document.createDocumentFragment();
 
   for (let index = existingCopies.length; index < copiesCount; index += 1) {
@@ -20,7 +24,7 @@ const prepareBloggersLoopSlides = (slider) => {
 
     if (!clone) continue;
 
-    clone.setAttribute('data-bloggers-loop-copy', '');
+    clone.setAttribute(copyAttribute, '');
     clone.querySelectorAll('[data-fancybox]').forEach((trigger, triggerIndex) => {
       const group = trigger.dataset.fancybox;
 
@@ -44,8 +48,13 @@ export function initSliders() {
 
     const root = slider.closest('[data-slider-root]') ?? slider;
     const isBloggersSlider = slider.matches('[data-bloggers-slider]');
-    const slidesCount = isBloggersSlider
-      ? prepareBloggersLoopSlides(slider)
+    const isGamesSlider = slider.matches('[data-games-slider]');
+    const isLoopSlider = isBloggersSlider || isGamesSlider;
+    const slidesCount = isLoopSlider
+      ? prepareLoopSlides(
+          slider,
+          isBloggersSlider ? 'data-bloggers-loop-copy' : 'data-games-loop-copy',
+        )
       : slider.querySelectorAll('.swiper-slide').length;
     const nextEl = root.querySelector('[data-slider-next]');
     const paginationEl = root.querySelector('[data-slider-pagination]');
@@ -68,7 +77,7 @@ export function initSliders() {
       modules,
       centeredSlides: isBloggersSlider,
       initialSlide: isBloggersSlider ? 1 : 0,
-      loop: isBloggersSlider && slidesCount > 1,
+      loop: isLoopSlider && slidesCount > 1,
       loopAdditionalSlides: isBloggersSlider ? 2 : 0,
       navigation:
         nextEl && prevEl
