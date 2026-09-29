@@ -7,14 +7,14 @@
 
   &__toggle {
     gap: rem(8px);
-    min-height: rem(40px);
-    padding: rem(8px) rem(12px);
+    padding: rem(6.5px) rem(7.5px);
     border: rem(1px) solid transparent;
     border-radius: $radius-pill;
-    transition: border-color $duration-fast $ease-base;
+    transition: $duration-fast $ease-base;
 
     &[aria-expanded='true'] {
       border-color: var(--red-600);
+      background: var(--gray-900);
     }
 
     &:focus-visible {
@@ -23,7 +23,7 @@
     }
 
     .select__button-icon {
-      transition: transform $duration-fast $ease-base;
+      transition: transform $duration-base cubic-bezier(0.2, 0.8, 0.2, 1);
     }
 
     &[aria-expanded='true'] .select__button-icon {
@@ -49,6 +49,22 @@
     flex-direction: column;
     gap: rem(15px);
     backdrop-filter: blur(rem(16px));
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transform: translate3d(102%, 0, 0);
+    transition:
+      opacity $duration-base $ease-base,
+      transform 380ms cubic-bezier(0.2, 0.8, 0.2, 1),
+      visibility 0s linear 380ms;
+
+    &[aria-hidden='false'] {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+      transform: none;
+      transition-delay: 0s;
+    }
 
     &[hidden] {
       display: none;
@@ -89,6 +105,7 @@
   .messenger-menu {
     &__toggle,
     &__toggle .select__button-icon,
+    &__dropdown,
     &__link {
       transition: none;
     }

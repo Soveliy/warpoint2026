@@ -2,10 +2,12 @@ import AirDatepicker from 'air-datepicker';
 import localeRu from 'air-datepicker/locale/ru';
 
 import { toggleScrollLock } from '../_functions.js';
+import { getLocation, getLocations } from '../data/location-data.js';
+import { isPhoneComplete } from './phone-mask.js';
 
 const STEP_COUNT = 5;
 const focusableSelector =
-  'a[href], button:not(:disabled), input:not(:disabled), [tabindex]:not([tabindex="-1"])';
+  'a[href], button:not(:disabled), input:not(:disabled), select:not(:disabled), [tabindex]:not([tabindex="-1"])';
 
 const formatDateKey = (date) => {
   const year = date.getFullYear();
@@ -31,6 +33,12 @@ export function initEventModal() {
   const progressLabel = modal.querySelector('[data-event-progress-label]');
   const progressDots = [...modal.querySelectorAll('[data-event-progress-dots] i')];
   const selectedDateLabel = modal.querySelector('[data-event-selected-date]');
+  const locationField = modal.querySelector('[data-event-location-field]');
+  const locationSelect = modal.querySelector('[data-event-location]');
+  const nameInput = form.elements.namedItem('name');
+  const phoneInput = form.elements.namedItem('phone');
+  const emailInput = form.elements.namedItem('email');
+  const consentInput = form.elements.namedItem('consent');
   const dateFormatter = new Intl.DateTimeFormat('ru-RU', {
     day: 'numeric',
     month: 'long',
@@ -40,6 +48,36 @@ export function initEventModal() {
   let currentStep = 1;
   let selectedDate = null;
   let activeTrigger = null;
+
+  const pageLocation = () => ({
+    countryId: document.documentElement.dataset.country || 'ru',
+    cityName: document.documentElement.dataset.city || '',
+    locationId: document.documentElement.dataset.location || '',
+  });
+
+  const syncLocations = () => {
+    const state = pageLocation();
+    const confirmed = document.documentElement.dataset.locationConfirmed === 'true';
+    const selected = confirmed ? getLocation(state) : null;
+    const placeholder = new Option('Выберите локацию', '');
+    placeholder.disabled = true;
+    locationSelect.replaceChildren(placeholder);
+    getLocations(state.countryId, state.cityName).forEach((location) => {
+      locationSelect.add(new Option(`${location.name} — ${location.address}`, location.id));
+    });
+    locationSelect.value = selected?.id || '';
+    locationField.hidden = Boolean(selected);
+    locationSelect.required = !selected;
+    modal.querySelector('[data-event-location-city]').textContent = `(${state.cityName})`;
+  };
+
+  const validateContacts = () => {
+    nameInput.setCustomValidity(nameInput.value.trim() ? '' : 'Укажите ваше имя');
+    phoneInput.setCustomValidity(isPhoneComplete(phoneInput) ? '' : 'Введите телефон полностью');
+    return [nameInput, phoneInput, emailInput, locationSelect, consentInput].every(
+      (input) => input.validity.valid,
+    );
+  };
 
   const isStepComplete = () => {
     if (currentStep === 1) {
@@ -65,6 +103,7 @@ export function initEventModal() {
     });
     backButton.disabled = currentStep === 1;
     nextButton.disabled = !isStepComplete();
+    nextButton.textContent = currentStep === STEP_COUNT ? 'Отправить' : 'Далее';
   };
 
   const setStep = (step, focusHeading = true) => {
@@ -104,6 +143,9 @@ export function initEventModal() {
 
   const resetQuiz = () => {
     form.reset();
+    nameInput.setCustomValidity('');
+    phoneInput.setCustomValidity('');
+    syncLocations();
     selectedDate = null;
     selectedDateLabel.textContent = '';
     datepicker.clear({ silent: true });
@@ -115,7 +157,10 @@ export function initEventModal() {
     modal.classList.remove('is-open');
     modal.setAttribute('aria-hidden', 'true');
     toggleScrollLock(false);
-    activeTrigger?.focus();
+    const restoreTarget = activeTrigger?.closest('[data-mobile-menu]')
+      ? document.querySelector('[data-mobile-menu-toggle]')
+      : activeTrigger;
+    restoreTarget?.focus();
   };
 
   const openModal = (trigger) => {
@@ -128,7 +173,13 @@ export function initEventModal() {
   };
 
   const completeQuiz = () => {
+    if (!validateContacts()) {
+      form.reportValidity();
+      return;
+    }
+
     const formData = new FormData(form);
+    const state = { ...pageLocation(), locationId: locationSelect.value };
 
     document.dispatchEvent(
       new CustomEvent('warpoint:event-quiz-complete', {
@@ -139,6 +190,12 @@ export function initEventModal() {
           eventType: formData.get('eventType'),
           guestCount: formData.get('guestCount'),
           services: formData.getAll('services'),
+          name: nameInput.value.trim(),
+          phone: phoneInput.value,
+          email: emailInput.value.trim(),
+          consent: consentInput.checked,
+          locationId: state.locationId,
+          location: getLocation(state),
         },
       }),
     );
@@ -156,7 +213,7 @@ export function initEventModal() {
       return;
     }
 
-    const focusableElements = [...modal.querySelectorAll(focusableSelector)].filter(
+    const focusableElements = [...dialog.querySelectorAll(focusableSelector)].filter(
       (element) => !element.closest('[hidden]') && element.getClientRects().length,
     );
     const firstElement = focusableElements[0];
@@ -166,7 +223,10 @@ export function initEventModal() {
       return;
     }
 
-    if (event.shiftKey && document.activeElement === firstElement) {
+    if (
+      event.shiftKey &&
+      (document.activeElement === firstElement || document.activeElement === dialog)
+    ) {
       event.preventDefault();
       lastElement.focus();
     } else if (!event.shiftKey && document.activeElement === lastElement) {
@@ -181,7 +241,14 @@ export function initEventModal() {
     if (button) openModal(button);
   });
   form.addEventListener('change', updateNavigation);
-  form.addEventListener('submit', (event) => event.preventDefault());
+  form.addEventListener('input', () => {
+    if (currentStep === STEP_COUNT) validateContacts();
+  });
+  form.addEventListener('submit', (event) => {
+    event.preventDefault();
+    if (currentStep === STEP_COUNT) completeQuiz();
+  });
+  document.addEventListener('warpoint:location-change', syncLocations);
   backButton.addEventListener('click', () => setStep(currentStep - 1));
   nextButton.addEventListener('click', () => {
     if (!isStepComplete()) {

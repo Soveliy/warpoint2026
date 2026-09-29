@@ -23,10 +23,12 @@ export function initCardAnimations() {
     ({ conditions }) => {
       const groups = [
         ['.events', conditions.desktop ? '.events__state' : '.events__carousel', '.events__slider'],
-        ['.reviews', '.reviews__card, .reviews__score', '.reviews__carousel'],
+        ['.reviews', '.reviews__card', '.reviews__carousel'],
         ['.bloggers', '.bloggers__media', '.bloggers__slider'],
       ];
-      const gridCards = [...document.querySelectorAll('.gallery__item, .extras__item')];
+      const gridCards = [
+        ...document.querySelectorAll('.gallery__item, .extras__item, .reviews__score'),
+      ];
       const animatedElements = new Set(gridCards);
       const triggers = [];
       const setupFrames = [];

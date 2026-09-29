@@ -70,6 +70,24 @@
       background-color: var(--violet-500);
     }
 
+    &__messengers.messenger-menu {
+      position: static;
+      flex: 0 0 rem(56px);
+
+      .messenger-menu__dropdown {
+        top: auto;
+        right: 0;
+        bottom: calc(100% + #{rem(12px)});
+        width: 100%;
+        max-width: none;
+      }
+
+      [aria-expanded='true'] {
+        background-color: var(--violet-600);
+        outline: rem(2px) solid var(--violet-300);
+      }
+    }
+
     &__icon {
       width: rem(20px);
       height: rem(20px);

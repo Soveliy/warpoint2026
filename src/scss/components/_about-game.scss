@@ -55,7 +55,7 @@
   position: relative;
   z-index: 1;
   overflow: hidden;
-  min-height: max(100svh, #{fluid(800px, 982px, 1025px, 1512px)});
+  min-height: clamp(#{rem(800px)}, 65vw, #{rem(1100px)});
   isolation: isolate;
   scroll-snap-align: start;
 
@@ -131,7 +131,7 @@
     bottom: 1.5%;
     left: 50%;
     z-index: 3;
-    width: min(40%, rem(650px));
+    width: min(43%, rem(650px));
     aspect-ratio: 638 / 727;
     isolation: isolate;
     pointer-events: none;
@@ -441,6 +441,12 @@
       opacity: 0.84;
       filter: saturate(0.82) brightness(0.9);
     }
+  }
+}
+
+@media (width > 1920px) {
+  .about-game__visual-wrap {
+    width: min(48%, #{rem(730px)});
   }
 }
 

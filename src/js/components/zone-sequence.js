@@ -7,7 +7,6 @@ const mobileValueSelector = '[data-zone-mobile-value]';
 const mobileMenuSelector = '[data-zone-mobile-menu]';
 const initializedAttribute = 'data-zone-tabs-initialized';
 const mobileBreakpoint = '(max-width: 47.9375rem)';
-const compactMotion = window.matchMedia(mobileBreakpoint);
 const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 const cubeGridSize = 5;
 const cubeGridCenter = (cubeGridSize - 1) / 2;
@@ -15,7 +14,7 @@ const cubeGridCenter = (cubeGridSize - 1) / 2;
 function playZoneAssembly(panel) {
   const imageContainer = panel.querySelector('.zone__image-container');
   const image = imageContainer?.querySelector('.zone__image');
-  const content = panel.querySelector('.zone__content');
+  const content = panel.querySelector('.zone__wrap');
 
   if (reducedMotion.matches || typeof Element.prototype.animate !== 'function') {
     return null;
@@ -38,27 +37,18 @@ function playZoneAssembly(panel) {
   };
 
   if (content) {
-    const contentStartTransform = compactMotion.matches
-      ? 'translate3d(0, 40px, 0)'
-      : 'translate3d(64px, 0, 0)';
-
     animations.push(
-      content.animate(
-        [
-          { opacity: 0.08, transform: contentStartTransform },
-          { opacity: 1, transform: 'translate3d(0, 0, 0)' },
-        ],
-        {
-          delay: 40,
-          duration: 560,
-          easing: 'cubic-bezier(0.16, 1, 0.3, 1)',
-          fill: 'both',
-        },
-      ),
+      content.animate([{ opacity: 0 }, { opacity: 1 }], {
+        delay: 40,
+        duration: 560,
+        easing: 'ease-out',
+        fill: 'both',
+      }),
     );
   }
 
   if (imageContainer && image?.complete && image.naturalWidth > 0) {
+    const { objectFit, objectPosition } = window.getComputedStyle(image);
     cubeLayer = document.createElement('div');
     cubeLayer.className = 'zone__cube-layer';
     cubeLayer.setAttribute('aria-hidden', 'true');
@@ -78,6 +68,9 @@ function playZoneAssembly(panel) {
         cube.style.setProperty('--zone-cube-column', String(column));
         cube.style.setProperty('--zone-cube-row', String(row));
         imageFragment.className = 'zone__cube-image';
+        // Match the original crop so removing the assembled tiles cannot shift the photo.
+        imageFragment.style.objectFit = objectFit;
+        imageFragment.style.objectPosition = objectPosition;
         imageFragment.alt = '';
         imageFragment.removeAttribute('id');
         imageFragment.removeAttribute('loading');

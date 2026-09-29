@@ -216,15 +216,61 @@
           hidden
         >
           <h3 class="event-modal__heading" id="event-step-5-title" tabindex="-1">Почти готово</h3>
-          <p class="visually-hidden">
-            Ответы сохранены. Нажмите «Далее», чтобы завершить расчёт стоимости.
-          </p>
+          <div class="event-modal__contact-fields">
+            <p class="event-modal__contact-intro">
+              Оставьте контакты для расчёта стоимости мероприятия
+            </p>
+            <label class="event-modal__field">
+              <span>Имя <span aria-hidden="true">*</span></span>
+              <input
+                name="name"
+                type="text"
+                autocomplete="name"
+                placeholder="Ваше имя"
+                required
+                maxlength="100"
+              />
+            </label>
+            <label class="event-modal__field">
+              <span>Телефон <span aria-hidden="true">*</span></span>
+              <input
+                name="phone"
+                type="tel"
+                autocomplete="tel"
+                inputmode="tel"
+                data-phone-mask
+                required
+              />
+            </label>
+            <label class="event-modal__field">
+              <span>Email</span>
+              <input name="email" type="email" autocomplete="email" placeholder="mail@example.ru" />
+            </label>
+            <label class="event-modal__field" data-event-location-field>
+              <span
+                >Локация <span data-event-location-city></span>
+                <span aria-hidden="true">*</span></span
+              >
+              <select name="locationId" data-event-location required>
+                <option value="" disabled selected>Выберите локацию</option>
+              </select>
+            </label>
+            <label class="event-modal__consent">
+              <input name="consent" type="checkbox" required />
+              <span
+                >Согласен с
+                <a href="/legal/privacy/" target="_blank" rel="noopener"
+                  >обработкой персональных данных</a
+                ></span
+              >
+            </label>
+          </div>
         </section>
       </main>
 
       <footer class="event-modal__footer">
         <button
-          class="event-modal__nav event-modal__nav--back btn btn--m btn--red-outline"
+          class="event-modal__nav event-modal__nav--back btn btn--m"
           type="button"
           data-event-back
         >

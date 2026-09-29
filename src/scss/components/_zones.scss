@@ -7,18 +7,24 @@
   @include section-spacing;
   position: relative;
   z-index: 50;
-  overflow: hidden;
+
   background-color: #131316;
+  &:before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: 0;
+    height: 1121px;
+    width: 929px;
+    background: url('../../img/zones_before.svg') no-repeat right center;
+    pointer-events: none;
+  }
 
   &__inner {
     padding: 0 rem(24px);
   }
 
   &__heading {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(rem(320px), rem(420px));
-    gap: rem(48px);
-    align-items: end;
     margin-bottom: rem(48px);
   }
 
@@ -92,7 +98,7 @@
     padding: 0 rem(32px);
     border-radius: rem(19px);
     color: var(--white);
-    font-size: rem(21px);
+    font-size: rem(20px);
     font-weight: 650;
     line-height: 1;
     text-transform: uppercase;
@@ -150,8 +156,9 @@
 
   &__tab-icon {
     flex: 0 0 auto;
-    width: rem(31px);
-    height: rem(31px);
+    width: 100%;
+    max-width: rem(25px);
+    height: rem(25px);
     color: currentColor;
   }
 }
@@ -347,9 +354,20 @@
     max-width: rem(620px);
     margin: 0 0 rem(14px);
     color: var(--white);
-    font-family: $font-family-heading;
-    font-size: fluid(42px, 64px);
-    font-weight: 800;
+    font-family: $font-family-second;
+    font-variation-settings:
+      'GRAD' 150,
+      'XOPQ' 110,
+      'XTRA' 468,
+      'YOPQ' 79,
+      'YTAS' 750,
+      'YTDE' -198,
+      'YTFI' 738,
+      'YTLC' 514,
+      'YTUC' 760,
+      'slnt' 0,
+      'wdth' 74;
+    font-size: fluid(42px, 50px);
     line-height: 88%;
     text-transform: uppercase;
   }
@@ -360,10 +378,10 @@
   }
 
   &__desc {
-    max-width: rem(610px);
+    max-width: rem(463px);
     margin: 0;
-    color: var(--white);
-    font-size: rem(18px);
+    color: #a2a2a2;
+    font-size: fluid(15px, 18px);
     font-weight: 600;
     line-height: 120%;
   }
@@ -461,7 +479,7 @@
   .zone {
     &__row {
       grid-template-columns: minmax(0, 1fr);
-      gap: rem(16px);
+      gap: 0;
       height: auto;
     }
 
@@ -469,9 +487,12 @@
       aspect-ratio: 16 / 9;
     }
 
-    &__image-container,
+    &__image-container {
+      border-radius: rem(36px) rem(36px) 0 0;
+    }
+
     &__content {
-      border-radius: rem(36px);
+      border-radius: 0 0 rem(36px) rem(36px);
     }
 
     &__content {
@@ -480,8 +501,8 @@
     }
 
     &__image-zoom {
-      bottom: rem(24px);
-      left: rem(24px);
+      top: 50%;
+      left: 50%;
       width: rem(68px);
       height: rem(68px);
       border-radius: rem(18px);
@@ -715,21 +736,24 @@
 
   .zone {
     &__row {
-      gap: rem(12px);
+      gap: 0;
     }
 
     &__image-container {
       aspect-ratio: 1.15;
     }
 
-    &__image-container,
+    &__image-container {
+      border-radius: rem(28px) rem(28px) 0 0;
+    }
+
     &__content {
-      border-radius: rem(28px);
+      border-radius: 0 0 rem(28px) rem(28px);
     }
 
     &__image-zoom {
-      bottom: rem(18px);
-      left: rem(18px);
+      top: 50%;
+      left: 50%;
       width: rem(60px);
       height: rem(60px);
       border-radius: rem(16px);

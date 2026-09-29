@@ -310,7 +310,6 @@
     @include hover {
       border-color: var(--red-500);
       background-color: rgb(var(--white-rgb) / 0.08);
-      transform: translateY(rem(-2px));
     }
 
     display: inline-flex;
@@ -323,8 +322,7 @@
     color: var(--white);
     transition:
       border-color $duration-fast $ease-base,
-      background-color $duration-fast $ease-base,
-      transform $duration-fast $ease-base;
+      background-color $duration-fast $ease-base;
   }
 
   &__social-icon {
@@ -336,7 +334,6 @@
   &__booking {
     @include hover {
       filter: brightness(1.1);
-      transform: translateY(rem(-2px));
     }
 
     display: inline-flex;
@@ -360,9 +357,7 @@
     letter-spacing: 0.06em;
     line-height: 1.2;
     text-transform: uppercase;
-    transition:
-      filter $duration-fast $ease-base,
-      transform $duration-fast $ease-base;
+    transition: filter $duration-fast $ease-base;
   }
 
   &__booking-icon {
@@ -403,28 +398,15 @@
       position: absolute;
       top: 50%;
       left: 50%;
-      width: rem(28px);
-      aspect-ratio: 1;
-      border: rem(6px) solid var(--red-500);
-      border-radius: 50% 50% 50% 0;
-      background-color: var(--white);
-      transform: translate(-50%, -70%) rotate(-45deg);
-    }
-
-    &::after {
-      content: '';
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      width: rem(7px);
-      aspect-ratio: 1;
-      border-radius: 50%;
-      background-color: var(--red-500);
-      transform: translate(-50%, -130%);
+      width: rem(80px);
+      height: rem(104px);
+      background: url('../../img/map-pin.svg') center / contain no-repeat;
+      transform: translate(-50%, -93.27%);
     }
   }
 
-  &__map-frame {
+  &__map-frame,
+  &__map-canvas {
     position: absolute;
     inset: 0;
     width: 100%;
@@ -433,7 +415,7 @@
     opacity: 0;
     transition: opacity $duration-base $ease-base;
 
-    &--noscript {
+    &.contacts__map-frame--noscript {
       opacity: 1;
     }
   }
@@ -444,7 +426,8 @@
       pointer-events: none;
     }
 
-    .contacts__map-frame {
+    .contacts__map-frame,
+    .contacts__map-canvas {
       opacity: 1;
     }
   }
@@ -577,6 +560,7 @@
     &__social,
     &__booking,
     &__map-placeholder,
+    &__map-canvas,
     &__map-frame {
       transition: none;
     }

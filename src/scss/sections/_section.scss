@@ -1,5 +1,5 @@
 @use '../vars' as *;
-
+@use '../fluid' as *;
 .section {
   padding: $space-80 0;
 }
@@ -28,7 +28,7 @@
 
   &__title {
     font-size: 88px;
-    line-height: 78%;
+    line-height: 82%;
     letter-spacing: -0.01em;
     text-transform: uppercase;
     font-family: $font-family-second;
@@ -49,15 +49,26 @@
   &__lead {
     padding-left: 15px;
     border-left: 1px solid var(--red-600);
-    font-size: 18px;
+    font-size: fluid(15px, 18px);
     line-height: 120%;
+    margin: 0;
+    &--big-width {
+      max-width: 26.375rem;
+    }
+    &--lit-width {
+      max-width: 18.75rem;
+    }
   }
 }
 @media (max-width: $breakpoint-mobile) {
   .section {
     padding: $space-56 0;
   }
-
+  .section-head {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: $space-16;
+  }
   .section--compact {
     padding: $space-36 0;
   }

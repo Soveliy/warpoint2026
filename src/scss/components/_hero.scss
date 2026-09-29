@@ -24,6 +24,7 @@
     object-fit: contain;
     width: 100%;
     object-position: right bottom;
+    max-width: 1700px;
   }
 
   &__content {
@@ -133,7 +134,7 @@
 @media (width > $breakpoint-tablet) {
   .hero {
     &__image {
-      right: max($container-offset, calc((100vw - $content-width) / 2));
+      right: max($container-offset, calc((100vw - 94.5rem) / 2));
     }
   }
 }
@@ -143,7 +144,7 @@
     &__wrap {
       align-items: flex-start;
       justify-content: flex-start;
-      min-height: max(100svh, #{rem(760px)});
+      min-height: rem(760px);
       padding-top: rem(126px);
       padding-bottom: rem(320px);
       gap: rem(12px);
@@ -170,8 +171,14 @@
       }
     }
 
+    &__city {
+      display: block;
+      text-indent: 0;
+    }
+
     &__allerts {
-      display: none;
+      right: $container-offset;
+      max-width: min(#{rem(348px)}, calc(100% - #{$container-offset * 2}));
     }
 
     &__image {
@@ -179,7 +186,7 @@
       height: 710px;
       max-width: initial;
       right: rem(-161px);
-      bottom: rem(-195px);
+      bottom: rem(-70px);
     }
   }
 }

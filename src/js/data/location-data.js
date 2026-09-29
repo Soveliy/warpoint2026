@@ -266,6 +266,7 @@ export const countries = [
 const ekaterinburgLocations = [
   {
     id: 'alatyr',
+    coordinates: [56.832969, 60.582374],
     name: 'ТРЦ Алатырь',
     address: 'ул. Малышева, 5',
     details: 'Метро: Площадь 1905 года',
@@ -276,6 +277,7 @@ const ekaterinburgLocations = [
   },
   {
     id: 'veer-mall',
+    coordinates: [56.916713, 60.613258],
     name: 'ТРЦ Veer Mall',
     address: 'пр. Космонавтов, 108д',
     details: 'Метро: Проспект Космонавтов',
@@ -286,6 +288,7 @@ const ekaterinburgLocations = [
   },
   {
     id: 'raduga-park',
+    coordinates: [56.817183, 60.538536],
     name: 'ТРЦ Радуга Парк',
     address: 'ул. Репина, 94',
     details: '',

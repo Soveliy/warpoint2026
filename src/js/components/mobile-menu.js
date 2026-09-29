@@ -3,6 +3,7 @@ import { isEscapeKey, toggleScrollLock } from '../_functions.js';
 const focusableSelector = 'a[href], button:not(:disabled), [tabindex]:not([tabindex="-1"])';
 const mobileMediaQuery = '(max-width: 75rem)';
 const backdropTransitionDuration = 300;
+const drawerTransitionDuration = 380;
 
 export function initMobileMenu() {
   const header = document.querySelector('.header');
@@ -32,6 +33,7 @@ export function initMobileMenu() {
   let isOpen = false;
   let backdropTimer = null;
   let resizeFrame = null;
+  let drawerTimer = null;
 
   const setSubmenuOpen = (entry, nextOpen) => {
     const { submenu, toggle: submenuToggle } = entry;
@@ -98,7 +100,7 @@ export function initMobileMenu() {
   };
 
   const syncClosedAccessibility = () => {
-    const isUnavailable = mobileQuery.matches && !isOpen;
+    const isUnavailable = !isOpen && (mobileQuery.matches || menu.classList.contains('is-drawer'));
 
     menu.setAttribute('aria-hidden', String(isUnavailable));
     menu.inert = isUnavailable;
@@ -107,6 +109,18 @@ export function initMobileMenu() {
   const setOpen = (nextOpen, { restoreFocus = true } = {}) => {
     if (isOpen === nextOpen) {
       return;
+    }
+
+    window.clearTimeout(drawerTimer);
+    drawerTimer = null;
+
+    if (nextOpen && !menu.classList.contains('is-drawer')) {
+      // Desktop navigation and the drawer share markup. Commit the closed drawer
+      // layout first so opening has a real off-screen starting position.
+      menu.style.transition = 'none';
+      menu.classList.add('is-drawer');
+      menu.getBoundingClientRect();
+      menu.style.removeProperty('transition');
     }
 
     isOpen = nextOpen;
@@ -135,7 +149,7 @@ export function initMobileMenu() {
       showBackdrop();
 
       window.requestAnimationFrame(() => {
-        closeButton?.focus();
+        if (isOpen) closeButton?.focus({ preventScroll: true });
       });
 
       return;
@@ -146,8 +160,16 @@ export function initMobileMenu() {
     toggleScrollLock(false);
     hideBackdrop();
 
+    const restoreNavigation = () => {
+      menu.classList.remove('is-drawer');
+      syncClosedAccessibility();
+      drawerTimer = null;
+    };
+    if (reducedMotionQuery.matches) restoreNavigation();
+    else drawerTimer = window.setTimeout(restoreNavigation, drawerTransitionDuration);
+
     if (restoreFocus) {
-      toggle.focus();
+      toggle.focus({ preventScroll: true });
     }
   };
 

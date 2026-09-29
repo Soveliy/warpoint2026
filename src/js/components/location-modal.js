@@ -54,6 +54,8 @@ function normalizeState(state) {
     cityName,
     countryId: country.id,
     locationId,
+    locationConfirmed:
+      state?.locationId === locationId && (state?.locationConfirmed ?? Boolean(state?.locationId)),
   };
 }
 
@@ -61,9 +63,9 @@ function loadState() {
   try {
     const storedState = JSON.parse(localStorage.getItem(STORAGE_KEY));
 
-    return normalizeState(storedState ?? defaultLocationState);
+    return normalizeState(storedState ?? { ...defaultLocationState, locationConfirmed: false });
   } catch {
-    return { ...defaultLocationState };
+    return { ...defaultLocationState, locationConfirmed: false };
   }
 }
 
@@ -152,6 +154,7 @@ export function initLocationModal() {
     document.documentElement.dataset.country = country.id;
     document.documentElement.dataset.city = state.cityName;
     document.documentElement.dataset.location = state.locationId;
+    document.documentElement.dataset.locationConfirmed = String(state.locationConfirmed);
     setPhoneCountry(country.id, { clearValue: clearPhoneValue });
   };
 
@@ -356,7 +359,7 @@ export function initLocationModal() {
       }
 
       const countryChanged = appliedState.countryId !== draftState.countryId;
-      appliedState = normalizeState(draftState);
+      appliedState = normalizeState({ ...draftState, locationConfirmed: true });
       saveState(appliedState);
       applyStateToPage(appliedState, countryChanged);
       document.dispatchEvent(
@@ -450,11 +453,12 @@ export function initLocationModal() {
 
   // A contact dropdown can select a location without opening this dialog.
   document.addEventListener('warpoint:location-change', (event) => {
-    const nextState = normalizeState(event.detail);
+    const nextState = normalizeState({ ...event.detail, locationConfirmed: true });
     if (
       nextState.countryId === appliedState.countryId &&
       nextState.cityName === appliedState.cityName &&
-      nextState.locationId === appliedState.locationId
+      nextState.locationId === appliedState.locationId &&
+      nextState.locationConfirmed === appliedState.locationConfirmed
     ) {
       return;
     }

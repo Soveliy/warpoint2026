@@ -172,6 +172,7 @@ export default defineConfig(({ mode }) => {
 
   return {
     root: 'src',
+    envDir: projectRoot,
     base: './',
     publicDir: '../public',
     server: {

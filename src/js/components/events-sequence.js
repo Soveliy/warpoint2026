@@ -162,6 +162,11 @@ function setupTabs(root) {
 
     activeIndex = index;
     setCompactState(states, controls, activeIndex);
+    controls[index].scrollIntoView({
+      block: 'nearest',
+      inline: 'nearest',
+      behavior: motionMedia.matches ? 'instant' : 'smooth',
+    });
   };
 
   controls.forEach((control, index) => {
@@ -181,6 +186,7 @@ function setupTabs(root) {
       controls[nextIndex].focus();
       activeIndex = nextIndex;
       setCompactState(states, controls, activeIndex);
+      controls[nextIndex].scrollIntoView({ block: 'nearest', inline: 'nearest' });
     });
   });
 

@@ -11,15 +11,18 @@ export function initMessengerMenus() {
     menu.dataset.messengerReady = 'true';
 
     const setOpen = (open, { restoreFocus = false } = {}) => {
-      toggle.setAttribute('aria-expanded', String(open));
-      dropdown.hidden = !open;
-
       if (restoreFocus) {
         toggle.focus({ preventScroll: true });
       }
+
+      toggle.setAttribute('aria-expanded', String(open));
+      dropdown.setAttribute('aria-hidden', String(!open));
+      dropdown.inert = !open;
     };
 
-    toggle.addEventListener('click', () => setOpen(dropdown.hidden));
+    toggle.addEventListener('click', () =>
+      setOpen(toggle.getAttribute('aria-expanded') !== 'true'),
+    );
     toggle.addEventListener('keydown', (event) => {
       if (event.key !== 'ArrowDown' && event.key !== 'ArrowUp') {
         return;
@@ -31,7 +34,7 @@ export function initMessengerMenus() {
     });
 
     menu.addEventListener('keydown', (event) => {
-      if (event.key === 'Escape' && !dropdown.hidden) {
+      if (event.key === 'Escape' && toggle.getAttribute('aria-expanded') === 'true') {
         event.preventDefault();
         event.stopPropagation();
         setOpen(false, { restoreFocus: true });
@@ -91,5 +94,6 @@ export function initMessengerMenus() {
     window.addEventListener('resize', () => setOpen(false), { passive: true });
     window.addEventListener('scroll', () => setOpen(false), { passive: true });
     setOpen(false);
+    dropdown.hidden = false;
   });
 }

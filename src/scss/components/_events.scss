@@ -6,9 +6,19 @@
 .events {
   position: relative;
   isolation: isolate;
-  overflow: hidden;
   background-color: #131316;
   color: var(--white);
+  &:after {
+    content: '';
+    background: linear-gradient(165.58deg, rgba(50, 53, 73, 0) 2.32%, #fff 174.16%);
+    transform: rotate(-33deg);
+    opacity: 0.3;
+    position: absolute;
+    z-index: -1;
+    width: 142px;
+    height: 703px;
+    left: 0;
+  }
 
   // &::before {
   //   content: '';
@@ -58,8 +68,10 @@
   }
 
   &__tabs {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    display: flex;
+    overflow-x: auto;
+    scrollbar-width: thin;
+    scrollbar-color: var(--red-500) transparent;
     gap: rem(5px);
     width: min(100%, rem(680px));
     margin: rem(32px) auto rem(22px);
@@ -70,6 +82,9 @@
   }
 
   &__tab {
+    flex: 1 0 auto;
+    white-space: nowrap;
+    scroll-margin-inline: rem(5px);
     @include hover {
       background-color: rgb(var(--white-rgb) / 0.08);
     }
@@ -128,10 +143,9 @@
     grid-area: 1 / 1;
     grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
     overflow: hidden;
-    border: 1px solid rgb(var(--white-rgb) / 0.07);
     border-radius: fluid(20px, 28px);
     background: #28292d;
-    box-shadow: 0 rem(18px) rem(42px) rgb(var(--black-rgb) / 0.18);
+
     pointer-events: none;
     transform: translateY(rem(14px));
     transition:
@@ -165,6 +179,7 @@
   &__details {
     display: flex;
     flex-direction: column;
+    gap: 1rem;
     min-width: 0;
     padding: 24px fluid(24px, 50px);
     background: url('../../img/event_vector.svg') no-repeat center bottom;
@@ -182,17 +197,21 @@
     font-variation-settings:
       'GRAD' 150,
       'XOPQ' 110,
+      'XTRA' 468,
+      'YOPQ' 79,
+      'YTAS' 750,
       'YTDE' -198,
+      'YTFI' 738,
+      'YTLC' 514,
       'YTUC' 760,
-      'wdth' 75,
-      'opsz' 144;
+      'slnt' 0,
+      'wdth' 74;
   }
 
   &__price {
     display: flex;
     align-items: baseline;
     gap: rem(6px);
-    margin-top: rem(11px);
     line-height: 1;
 
     span {
@@ -207,11 +226,11 @@
   }
 
   &__description {
-    max-width: rem(330px);
-    margin: rem(22px) 0 0;
-    color: rgb(var(--white-rgb) / 0.68);
-    font-size: rem(16px);
-    line-height: 1.35;
+    max-width: rem(290px);
+    margin: 0;
+    color: #a2a2a2;
+    font-size: rem(18px);
+    line-height: 120%;
   }
 
   &__more {
@@ -221,12 +240,12 @@
 
     align-self: flex-start;
     margin-top: auto;
-    padding-top: rem(30px);
+    padding: rem(14px) 0;
     color: var(--red-600);
-    font-size: rem(12px);
-    font-weight: 800;
+    font-weight: 700;
+    font-size: 0.875rem;
+    line-height: 100%;
     letter-spacing: 0.08em;
-    line-height: 1;
     text-transform: uppercase;
     transition: color $duration-fast $ease-base;
 
@@ -274,10 +293,6 @@
       pointer-events: auto;
       transform: none;
     }
-
-    &__description {
-      font-size: fluid(14px, 16px, 1025px, 1512px);
-    }
   }
 }
 
@@ -298,7 +313,7 @@
 
     &__tabs {
       overflow-x: auto;
-      grid-template-columns: repeat(3, minmax(rem(132px), 1fr));
+      width: 100%;
       margin-top: rem(26px);
       border-radius: rem(18px);
       scrollbar-width: none;
@@ -317,20 +332,8 @@
       padding: rem(24px);
     }
 
-    &__price {
-      margin-top: rem(18px);
-    }
-
-    &__description {
-      margin-top: rem(16px);
-      font-size: rem(15px);
-    }
-
-    &__more {
-      padding-top: rem(24px);
-    }
-
     &__calculate {
+      width: 100%;
       min-height: rem(64px);
       margin-top: rem(24px);
     }

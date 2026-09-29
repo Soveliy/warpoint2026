@@ -2,16 +2,52 @@
   <button class="mobile-actions__booking button-reset" type="button" data-booking-open>
     Забронировать
   </button>
-  <a
-    class="mobile-actions__button mobile-actions__button--message"
-    href="#contacts"
-    aria-label="Перейти к мессенджерам"
-    title="Мессенджеры"
-  >
-    <svg class="mobile-actions__icon" aria-hidden="true">
-      <use href="/img/sprite.svg#icon-mess"></use>
-    </svg>
-  </a>
+  <div class="mobile-actions__messengers messenger-menu" data-messenger-menu>
+    <button
+      class="mobile-actions__button mobile-actions__button--message button-reset"
+      type="button"
+      aria-label="Мессенджеры"
+      aria-expanded="false"
+      aria-controls="mobile-messengers"
+      data-messenger-toggle
+    >
+      <svg class="mobile-actions__icon" aria-hidden="true">
+        <use href="/img/sprite.svg#icon-mess"></use>
+      </svg>
+    </button>
+    <ul
+      class="messenger-menu__dropdown"
+      id="mobile-messengers"
+      aria-label="Мессенджеры Warpoint"
+      data-messenger-dropdown
+      hidden
+    >
+      <li>
+        <a class="messenger-menu__link" href="#" data-messenger-link="vk">
+          <svg class="messenger-menu__icon" aria-hidden="true">
+            <use href="/img/sprite.svg#icon-vk"></use>
+          </svg>
+          <span>Написать во ВКонтакте</span>
+        </a>
+      </li>
+      <li>
+        <a class="messenger-menu__link" href="#" data-messenger-link="max">
+          <svg class="messenger-menu__icon" aria-hidden="true">
+            <use href="/img/sprite.svg#icon-max"></use>
+          </svg>
+          <span>Написать в Макс</span>
+        </a>
+      </li>
+      <li>
+        <a class="messenger-menu__link" href="#" data-messenger-link="telegram">
+          <svg class="messenger-menu__icon" aria-hidden="true">
+            <use href="/img/sprite.svg#icon-tg"></use>
+          </svg>
+          <span>Написать в Telegram</span>
+        </a>
+      </li>
+    </ul>
+  </div>
   <a
     class="mobile-actions__button mobile-actions__button--phone"
     href="tel:+73433000000"

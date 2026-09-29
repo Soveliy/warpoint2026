@@ -10,7 +10,7 @@
 
   position: relative;
   overflow: hidden;
-  min-height: 100vh;
+  min-height: 0;
   background-color: var(--white);
   color: var(--black);
   scroll-snap-align: start;
@@ -53,7 +53,6 @@
   }
   &__info-item-avatar {
     height: fluid(40px, 60px);
-    height: fluid(40px, 60px);
     flex-shrink: 0;
     border-radius: 50%;
     position: relative;
@@ -71,8 +70,9 @@
   }
 
   &__slider {
+    max-width: 1920px;
+    margin: $section-title-gap auto 0;
     overflow: visible;
-    margin-top: $section-title-gap;
   }
 
   &__slide {
@@ -178,5 +178,11 @@
       aspect-ratio: 4 / 3;
       border-radius: rem(24px);
     }
+  }
+}
+
+@media (width > 1920px) {
+  .bloggers {
+    --bloggers-slide-width: min(58vw, #{rem(1440px)});
   }
 }

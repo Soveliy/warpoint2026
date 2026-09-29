@@ -27,7 +27,10 @@ export function initContacts() {
     content: element.innerHTML,
   }));
   const markupMetroHidden = metroRow.hidden;
-  const markupMap = { source: map.dataset.mapSrc, title: map.dataset.mapTitle };
+  const markupMap = {
+    coordinates: map.dataset.mapCoordinates.split(',').map(Number),
+    title: map.dataset.mapTitle,
+  };
 
   const closeSelect = (restoreFocus = false) => {
     toggle.setAttribute('aria-expanded', 'false');
@@ -89,7 +92,6 @@ export function initContacts() {
       cityName: state.cityName,
       locationId: state.locationId,
     };
-    const country = getCountry(state.countryId);
     city.textContent = state.cityName;
     locationName.textContent = location.name;
     address.textContent = location.address;
@@ -98,11 +100,8 @@ export function initContacts() {
     metroRow.hidden = !hasMetro;
     metro.textContent = hasMetro ? location.details.replace(/^Метро:\s*/, 'Метро «') + '»' : '';
 
-    const query = ['Warpoint', country.name, state.cityName, location.address].join(', ');
-    const source = new URL('https://yandex.ru/map-widget/v1/');
-    source.search = new URLSearchParams({ mode: 'search', text: query, z: '16' });
     updateYandexMap(map, {
-      source: source.href,
+      coordinates: location.coordinates,
       title: `${location.name}, ${state.cityName} — Warpoint на Яндекс Картах`,
     });
     renderOptions();

@@ -18,7 +18,6 @@
 
 @mixin heading-text {
   font-family: $font-family-heading;
-  font-weight: 800;
   letter-spacing: 0;
   line-height: $line-height-heading;
   text-transform: uppercase;
@@ -41,10 +40,17 @@
 
 @mixin section-title {
   @include heading-text;
-
+  font-family: $font-family-second;
   margin: 0;
   font-size: $section-title-size;
   line-height: $section-title-line-height;
+  font-variation-settings:
+    'GRAD' 150,
+    'XOPQ' 110,
+    'YTDE' -198,
+    'YTUC' 760,
+    'wdth' 75,
+    'opsz' 144;
 
   @media (max-width: $breakpoint-tablet) {
     font-size: $section-title-size-tablet;

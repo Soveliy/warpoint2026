@@ -162,7 +162,7 @@
 
   &__close {
     @include hover {
-      transform: translateY(rem(-1px));
+      background-color: rgb(var(--white-rgb) / 0.15);
     }
     position: relative;
     display: grid;
@@ -175,8 +175,7 @@
     color: var(--white);
     transition:
       border-color $duration-fast $ease-base,
-      background-color $duration-fast $ease-base,
-      transform $duration-fast $ease-base;
+      background-color $duration-fast $ease-base;
   }
 
   &__close-icon,
@@ -368,23 +367,11 @@
 
   &__place-marker {
     position: relative;
-    width: rem(14px);
-    height: rem(14px);
+    width: rem(16px);
+    height: rem(16px);
     flex: 0 0 rem(14px);
-    border: rem(2px) solid var(--red-400);
-    border-radius: 50% 50% 50% 0;
-    transform: rotate(-45deg);
-
-    &::after {
-      content: '';
-      position: absolute;
-      inset: 50% auto auto 50%;
-      width: rem(4px);
-      height: rem(4px);
-      border-radius: 50%;
-      background-color: var(--red-400);
-      transform: translate(-50%, -50%);
-    }
+    flex-shrink: 0;
+    color: var(--red-600);
   }
 
   &__place-chevron {
@@ -410,7 +397,6 @@
   &__booking {
     @include hover {
       background-color: var(--red-600);
-      transform: translateY(rem(-2px));
     }
     display: inline-flex;
     align-items: center;
@@ -432,6 +418,14 @@
 
     &:active {
       transform: scale(0.98);
+    }
+  }
+
+  &__booking--event {
+    background-color: var(--violet-500);
+
+    &:hover {
+      background-color: var(--violet-600);
     }
   }
 
@@ -475,9 +469,11 @@
   }
 }
 
-.header__menu.menu.is-open {
+.header__menu.menu.is-drawer {
   @include menu-drawer;
+}
 
+.header__menu.menu.is-open {
   visibility: visible;
   pointer-events: auto;
   transform: none;
@@ -486,6 +482,7 @@
 
 @media (width <= rem(900px)) {
   .header__menu.menu,
+  .header__menu.menu.is-drawer,
   .header__menu.menu.is-open {
     width: 100%;
     padding: rem(14px) rem(18px);
@@ -506,6 +503,7 @@
 
 @media (prefers-reduced-motion: reduce) {
   .header__menu.menu,
+  .header__menu.menu.is-drawer,
   .header__menu.menu.is-open,
   .menu__submenu,
   .menu__link-icon,

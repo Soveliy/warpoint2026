@@ -76,7 +76,10 @@ export function initBookingPanel() {
       return;
     }
 
-    if (event.shiftKey && document.activeElement === firstElement) {
+    if (
+      event.shiftKey &&
+      (document.activeElement === firstElement || document.activeElement === dialog)
+    ) {
       event.preventDefault();
       lastElement.focus();
     } else if (!event.shiftKey && document.activeElement === lastElement) {

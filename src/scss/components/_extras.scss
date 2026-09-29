@@ -74,7 +74,7 @@
   }
 
   &__description {
-    max-width: 50%;
+    max-width: 46%;
     margin: rem(12px) 0 0;
     color: var(--gray-400);
     font-size: fluid(15px, 18px);
@@ -109,14 +109,14 @@
 
   &__image-container {
     position: absolute;
-    top: rem(100px);
+    top: rem(78px);
     right: 0;
     bottom: 0;
     z-index: 0;
     display: flex;
     align-items: center;
     justify-content: flex-end;
-    width: 46%;
+    width: 56%;
     pointer-events: none;
   }
 
@@ -127,14 +127,14 @@
   }
 
   &__item--certificate &__image {
-    width: 96%;
+    width: 100%;
     height: auto;
     margin-right: fluid(4px, 20px);
     transform: rotate(-4deg);
   }
 
   &__item--merch &__image {
-    width: 94%;
+    width: 100%;
     height: auto;
     margin-right: fluid(4px, 18px);
   }
@@ -220,10 +220,6 @@
       font-size: fluid(28px, 34px, 768px, 1024px);
     }
 
-    &__description {
-      font-size: rem(15px);
-    }
-
     &__bonus-device {
       right: rem(32px);
     }
@@ -251,16 +247,12 @@
       font-size: fluid(24px, 36px, 320px, 767px);
     }
 
-    &__description {
-      font-size: rem(14px);
-    }
-
     &__image-container {
-      width: 44%;
+      width: 56%;
     }
 
     &__item--tournaments &__image-container {
-      width: 44%;
+      width: 56%;
     }
 
     &__bonus-device {
@@ -283,7 +275,7 @@
     }
 
     &__description {
-      max-width: 52%;
+      max-width: 46%;
     }
   }
 }

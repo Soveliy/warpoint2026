@@ -135,10 +135,13 @@
               <span class="menu__label">Ваш город и локация</span>
               <button class="menu__place-button button-reset" type="button" aria-haspopup="dialog"
                 aria-controls="location-modal" data-location-open="city" data-mobile-menu-close>
-                <span class="menu__place-marker" aria-hidden="true"></span>
+
+                <svg class="menu__place-marker" aria-hidden="true">
+                  <use href="/img/sprite.svg#icon-mappin"></use>
+                </svg>
                 <span data-header-city>Екатеринбург</span>
                 <svg class="icon menu__place-chevron" aria-hidden="true">
-                  <use href="/img/sprite.svg#icon-mappin"></use>
+                  <use href="/img/sprite.svg#icon-cvervron_down"></use>
                 </svg>
               </button>
               <button class="menu__place-button menu__place-button--address button-reset" type="button"
@@ -155,6 +158,10 @@
               <a class="menu__phone" href="tel:+73433000000">+7 (343) 300-00-00</a>
               <button class="menu__booking button-reset" type="button" data-booking-open data-mobile-menu-close>
                 Забронировать
+              </button>
+              <button class="menu__booking menu__booking--event button-reset" type="button" aria-haspopup="dialog"
+                aria-controls="event-modal" data-event-modal-open data-mobile-menu-close>
+                Провести мероприятие
               </button>
             </div>
           </div>

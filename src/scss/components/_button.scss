@@ -1,7 +1,15 @@
 @use '../mixins' as *;
 @use '../fluid' as *;
+@use '../vars' as *;
+@use '../mixins/disable-mob-hover' as *;
 
 .btn {
+  @include hover {
+    &:not(:disabled, [aria-disabled='true']) {
+      filter: brightness(1.12);
+      box-shadow: 0 0 rem(24px) rgb(var(--white-rgb) / 0.12);
+    }
+  }
   display: flex;
   align-items: center;
   justify-content: center;
@@ -18,14 +26,25 @@
   gap: 15px;
   border: none;
   outline: 0;
+  transition:
+    filter $duration-base $ease-base,
+    box-shadow $duration-base $ease-base;
+
+  &:focus-visible {
+    outline: $focus-outline-width solid var(--focus-color);
+    outline-offset: $focus-outline-offset;
+  }
+
   &__icon {
     height: 30px;
     width: 30px;
     flex-shrink: 0;
   }
+
   &--red {
     background: linear-gradient(170.18deg, #eb3e3e 11.63%, #901ad5 188.75%);
   }
+
   &--purple {
     background: linear-gradient(134.84deg, #946bff 0%, var(--violet-800) 100%);
   }

@@ -1,7 +1,7 @@
 import Swiper from 'swiper';
 import { A11y, Keyboard, Navigation, Pagination } from 'swiper/modules';
 
-const BLOGGERS_LOOP_SETS = 2;
+const BLOGGERS_LOOP_SETS = 3;
 
 const prepareBloggersLoopSlides = (slider) => {
   const wrapper = slider.querySelector('.swiper-wrapper');

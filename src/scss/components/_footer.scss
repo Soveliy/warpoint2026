@@ -120,7 +120,6 @@
     @include hover {
       border-color: var(--red-500);
       background-color: rgb(var(--white-rgb) / 0.08);
-      transform: translateY(rem(-2px));
     }
 
     display: inline-flex;
@@ -133,8 +132,7 @@
     color: var(--white);
     transition:
       border-color $duration-fast $ease-base,
-      background-color $duration-fast $ease-base,
-      transform $duration-fast $ease-base;
+      background-color $duration-fast $ease-base;
 
     svg {
       fill: currentcolor;
@@ -326,18 +324,25 @@
     &__art {
       margin-top: rem(24px);
     }
+
+    &__wordmark {
+      min-width: inherit;
+    }
   }
 }
 
 @media (width <= rem(480px)) {
   .footer {
-    &__top,
     &__meta {
       grid-template-columns: minmax(0, 1fr);
     }
 
     &__contacts {
-      grid-column: auto;
+      order: 1;
+    }
+
+    &__heading {
+      font-size: fluid(17px, 21px, 320px, 390px);
     }
 
     &__menu {
