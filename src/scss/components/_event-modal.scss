@@ -103,23 +103,18 @@
     flex-direction: column;
     align-items: center;
     min-height: 100%;
-    padding: fluid(132px, 180px) rem(24px) rem(32px);
+    padding: clamp(#{rem(64px)}, 9dvh, #{rem(112px)}) rem(24px) rem(20px);
 
     &[hidden] {
       display: none;
-    }
-
-    &--services,
-    &--finish {
-      padding-top: fluid(104px, 112px);
     }
   }
 
   &__heading {
     max-width: rem(980px);
-    margin: 0 0 fluid(38px, 48px);
+    margin: 0 0 clamp(#{rem(16px)}, 3dvh, #{rem(36px)});
     font-family: $font-family-heading;
-    font-size: fluid(46px, 62px);
+    font-size: clamp(#{rem(40px)}, 6dvh, #{rem(62px)});
     font-weight: 800;
     line-height: 0.9;
     text-align: center;
@@ -199,7 +194,7 @@
     }
 
     &--image {
-      aspect-ratio: 284 / 425;
+      height: clamp(#{rem(160px)}, 42dvh, #{rem(425px)});
       background-color: var(--gray-950);
 
       &::after {
@@ -220,7 +215,7 @@
     }
 
     &--plain {
-      aspect-ratio: 1.09;
+      height: clamp(#{rem(140px)}, 32dvh, #{rem(320px)});
       align-items: center;
       background-color: var(--black);
 
@@ -233,7 +228,7 @@
 
     &--service {
       grid-column: span 2;
-      aspect-ratio: 1.08;
+      height: clamp(#{rem(120px)}, 23dvh, #{rem(240px)});
       background-color: var(--black);
 
       > img {
@@ -256,7 +251,7 @@
     align-items: flex-end;
     justify-content: center;
     min-height: rem(62px);
-    padding: rem(12px) rem(14px) rem(26px);
+    padding: rem(12px) rem(14px) rem(16px);
     color: var(--white);
     font-size: rem(18px);
     font-weight: 650;
@@ -321,7 +316,7 @@
 
   &__contact-fields {
     display: grid;
-    gap: rem(18px);
+    gap: rem(14px);
     width: min(100%, #{rem(520px)});
   }
 
@@ -411,8 +406,9 @@
   }
 
   .air-datepicker {
+    box-sizing: border-box;
     width: 100%;
-    padding: rem(15px) rem(22px) rem(19px);
+    padding: rem(12px) rem(22px);
     border: 0;
     border-radius: rem(28px);
     background-color: var(--gray-800);
@@ -422,7 +418,7 @@
   }
 
   .air-datepicker-nav {
-    min-height: rem(56px);
+    min-height: rem(44px);
     padding: 0;
     border-bottom-color: rgb(var(--white-rgb) / 0.3);
   }
@@ -451,7 +447,7 @@
   }
 
   .air-datepicker-body--day-names {
-    margin: rem(16px) 0 rem(8px);
+    margin: rem(10px) 0 rem(6px);
   }
 
   .air-datepicker-body--day-name {
@@ -461,7 +457,7 @@
   }
 
   .air-datepicker-body--cells.-days- {
-    grid-auto-rows: rem(48px);
+    grid-auto-rows: clamp(#{rem(32px)}, 5dvh, #{rem(48px)});
   }
 
   .air-datepicker-cell {
@@ -506,7 +502,7 @@
     &__step,
     &__step--services,
     &__step--finish {
-      padding-top: rem(80px);
+      padding-top: rem(64px);
     }
   }
 }
@@ -519,7 +515,7 @@
     }
 
     &__heading {
-      font-size: rem(48px);
+      font-size: clamp(#{rem(36px)}, 5dvh, #{rem(48px)});
     }
 
     &__options--events,
@@ -531,10 +527,12 @@
 
     &__options--events .event-modal__card {
       flex: 0 1 calc(33.333% - rem(10px));
+      height: clamp(#{rem(120px)}, 27dvh, #{rem(280px)});
     }
 
     &__options--services .event-modal__card {
       flex: 0 1 calc(33.333% - rem(10px));
+      height: clamp(#{rem(100px)}, 17dvh, #{rem(180px)});
     }
   }
 }
@@ -568,12 +566,12 @@
     &__step--services,
     &__step--finish {
       min-height: auto;
-      padding: rem(90px) rem(16px) rem(28px);
+      padding: rem(72px) rem(16px) rem(20px);
     }
 
     &__heading {
-      margin-bottom: rem(30px);
-      font-size: rem(38px);
+      margin-bottom: rem(20px);
+      font-size: clamp(#{rem(30px)}, 4.5dvh, #{rem(38px)});
     }
 
     &__options--events,
@@ -588,6 +586,14 @@
       grid-column: auto;
     }
 
+    &__options--events .event-modal__card {
+      height: clamp(#{rem(100px)}, 18dvh, #{rem(160px)});
+    }
+
+    &__options--services .event-modal__card {
+      height: clamp(#{rem(88px)}, 11dvh, #{rem(120px)});
+    }
+
     &__options--guests {
       grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: rem(10px);
@@ -596,9 +602,8 @@
     &__card {
       border-radius: rem(24px);
 
-      &--plain,
-      &--service {
-        aspect-ratio: 1;
+      &--plain {
+        height: clamp(#{rem(110px)}, 22dvh, #{rem(180px)});
       }
     }
 
@@ -638,11 +643,17 @@
     }
 
     .air-datepicker-body--cells.-days- {
-      grid-auto-rows: rem(42px);
+      grid-auto-rows: clamp(#{rem(32px)}, 5dvh, #{rem(42px)});
     }
 
     .air-datepicker-cell {
       font-size: rem(15px);
     }
   }
+}
+.air-datepicker-nav--title {
+  transition: 0.3s;
+}
+.air-datepicker-nav--title:hover {
+  background-color: rgb(var(--white-rgb) / 0.08);
 }

@@ -11,6 +11,24 @@
   background-color: var(--white);
   color: var(--black);
 
+  &__service[href] {
+    @include hover {
+      .reviews__service-count {
+        color: var(--red-500);
+      }
+    }
+
+    // .reviews__service-count {
+    //   text-decoration: underline;
+    //   text-underline-offset: rem(3px);
+    // }
+
+    &:focus-visible {
+      outline: $focus-outline-width solid var(--focus-color);
+      outline-offset: $focus-outline-offset;
+    }
+  }
+
   &__sticky {
     position: relative;
     display: flex;

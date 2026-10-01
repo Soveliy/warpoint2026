@@ -13,6 +13,23 @@
   color: var(--white);
   color-scheme: dark;
 
+  &__skip {
+    @include hover {
+      color: var(--red-500);
+    }
+    margin-top: rem(24px);
+    padding: rem(10px) 0;
+    color: var(--gray-400);
+    font-size: rem(14px);
+    text-decoration: underline;
+    text-underline-offset: rem(4px);
+
+    &:focus-visible {
+      outline: $focus-outline-width solid var(--focus-color);
+      outline-offset: $focus-outline-offset;
+    }
+  }
+
   &.is-open {
     display: block;
   }

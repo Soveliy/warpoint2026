@@ -10,27 +10,40 @@
             <button class="city-confirm__answer button-reset" type="button" data-city-confirm-yes>
               Да
             </button>
-            <button class="city-confirm__change button-reset" type="button" aria-haspopup="dialog"
-              aria-controls="location-modal" data-location-open="city">
+            <button
+              class="city-confirm__change button-reset"
+              type="button"
+              aria-haspopup="dialog"
+              aria-controls="location-modal"
+              data-location-open="city"
+            >
               Выбрать другой
             </button>
           </div>
 
           <div class="city-confirm__current" data-city-confirm-current hidden>
-            <button class="city-confirm__selection button-reset" type="button" aria-haspopup="dialog"
-              aria-controls="location-modal" data-location-open="city">
+            <button
+              class="city-confirm__selection button-reset"
+              type="button"
+              aria-haspopup="dialog"
+              aria-controls="location-modal"
+              data-location-open="city"
+            >
               <svg class="city-confirm__icon">
                 <use href="/img/sprite.svg#icon-mappin"></use>
               </svg>
-              <span data-header-city>
-                Екатеринбург
-              </span>
+              <span data-header-city> Екатеринбург </span>
               <svg class="city-confirm__selection-icon" aria-hidden="true">
                 <use href="/img/sprite.svg#icon-cvervron_down"></use>
               </svg>
             </button>
-            <button class="city-confirm__selection city-confirm__selection--location button-reset" type="button"
-              aria-haspopup="dialog" aria-controls="location-modal" data-location-open="location">
+            <button
+              class="city-confirm__selection city-confirm__selection--location button-reset"
+              type="button"
+              aria-haspopup="dialog"
+              aria-controls="location-modal"
+              data-location-open="location"
+            >
               <span class="city-confirm__address" data-header-address>
                 пр-т Космонавтов, 108 Д
               </span>
@@ -42,15 +55,25 @@
         </div>
         <div class="header__item header__item--desk">
           <div class="select header__select messenger-menu" data-messenger-menu>
-            <button class="select__button messenger-menu__toggle button-reset" type="button" aria-expanded="false"
-              aria-controls="header-messengers" data-messenger-toggle>
+            <button
+              class="select__button messenger-menu__toggle button-reset"
+              type="button"
+              aria-expanded="false"
+              aria-controls="header-messengers"
+              data-messenger-toggle
+            >
               <span class="select__button-text">Мессенджеры</span>
               <svg class="icon select__button-icon" aria-hidden="true">
                 <use href="/img/sprite.svg#icon-cvervron_down"></use>
               </svg>
             </button>
-            <ul class="messenger-menu__dropdown" id="header-messengers" aria-label="Мессенджеры Warpoint"
-              data-messenger-dropdown hidden>
+            <ul
+              class="messenger-menu__dropdown"
+              id="header-messengers"
+              aria-label="Мессенджеры Warpoint"
+              data-messenger-dropdown
+              hidden
+            >
               <li>
                 <a class="messenger-menu__link" href="#" data-messenger-link="vk">
                   <svg class="messenger-menu__icon" aria-hidden="true">
@@ -75,6 +98,14 @@
                   <span>Написать в Telegram</span>
                 </a>
               </li>
+              <li>
+                <a class="messenger-menu__link" href="#" data-messenger-link="whatsapp">
+                  <svg class="messenger-menu__icon" aria-hidden="true">
+                    <use href="/img/sprite.svg#icon-whatsapp"></use>
+                  </svg>
+                  <span>Написать в WhatsApp</span>
+                </a>
+              </li>
             </ul>
           </div>
           <a href="tel:+73433000000" class="header__link link">+7 (343) 300-00-00</a>
@@ -86,12 +117,22 @@
         <a href="/" class="header__logo">
           <img src="img/logo.svg" alt="" />
         </a>
-        <nav class="header__menu menu" id="header-navigation" aria-label="Основная навигация" data-mobile-menu>
+        <nav
+          class="header__menu menu"
+          id="header-navigation"
+          aria-label="Основная навигация"
+          data-mobile-menu
+        >
           <div class="menu__top">
             <a class="menu__logo" href="/" aria-label="Warpoint — на главную">
               <img src="img/logo.svg" alt="" />
             </a>
-            <button class="menu__close button-reset" type="button" aria-label="Закрыть меню" data-mobile-menu-close>
+            <button
+              class="menu__close button-reset"
+              type="button"
+              aria-label="Закрыть меню"
+              data-mobile-menu-close
+            >
               <span class="menu__close-icon" aria-hidden="true"></span>
             </button>
           </div>
@@ -101,30 +142,64 @@
               <li class="menu__item">
                 <a href="/games/" class="menu__link">Игры</a>
               </li>
-              <li class="menu__item">
-                <a href="/tariffs/" class="menu__link">Тарифы</a>
+              <li class="menu__item menu__item--group">
+                <button
+                  class="menu__link menu__toggle button-reset"
+                  type="button"
+                  aria-expanded="false"
+                  aria-controls="header-tariffs-submenu"
+                  data-menu-submenu-toggle
+                >
+                  <span>Тарифы</span>
+                  <svg class="icon menu__link-icon" aria-hidden="true">
+                    <use href="/img/sprite.svg#icon-cvervron_down"></use>
+                  </svg>
+                </button>
+                <ul
+                  class="menu__submenu"
+                  id="header-tariffs-submenu"
+                  aria-label="Тарифы и акции"
+                  aria-hidden="true"
+                  data-menu-submenu
+                  inert
+                >
+                  <li><a href="/tariffs/">Тарифы</a></li>
+                  <li><a href="/promotions/">Наши акции</a></li>
+                </ul>
               </li>
               <li class="menu__item menu__item--group">
-                <button class="menu__link menu__toggle button-reset" type="button" aria-expanded="false"
-                  aria-controls="header-events-submenu" data-menu-submenu-toggle>
+                <button
+                  class="menu__link menu__toggle button-reset"
+                  type="button"
+                  aria-expanded="false"
+                  aria-controls="header-events-submenu"
+                  data-menu-submenu-toggle
+                >
                   <span>Мероприятия</span>
                   <svg class="icon menu__link-icon" aria-hidden="true">
                     <use href="/img/sprite.svg#icon-cvervron_down"></use>
                   </svg>
                 </button>
-                <ul class="menu__submenu" id="header-events-submenu" aria-label="Разделы мероприятий" aria-hidden="true"
-                  data-menu-submenu inert>
-                  <li><a href="/events/">Все мероприятия</a></li>
-                  <li><a href="/events/birthday/">День рождения</a></li>
+                <ul
+                  class="menu__submenu"
+                  id="header-events-submenu"
+                  aria-label="Разделы мероприятий"
+                  aria-hidden="true"
+                  data-menu-submenu
+                  inert
+                >
+                  <li><a href="/events/birthday/">Детский день рождения</a></li>
+                  <li><a href="/events/adult-birthday/">Взрослый день рождения</a></li>
                   <li><a href="/events/corporate/">Корпоратив и тимбилдинг</a></li>
                   <li><a href="/events/graduation/">Школьный выпускной</a></li>
+                  <li><a href="/events/">Анонс мероприятий</a></li>
                 </ul>
               </li>
               <li class="menu__item">
                 <a href="/certificates/" class="menu__link">Сертификаты</a>
               </li>
               <li class="menu__item">
-                <a href="/about/" class="menu__link">О компании</a>
+                <a href="/franchise/" class="menu__link">Франшиза</a>
               </li>
               <li class="menu__item">
                 <a href="#contacts" class="menu__link">Контакты</a>
@@ -133,9 +208,14 @@
 
             <div class="menu__place">
               <span class="menu__label">Ваш город и локация</span>
-              <button class="menu__place-button button-reset" type="button" aria-haspopup="dialog"
-                aria-controls="location-modal" data-location-open="city" data-mobile-menu-close>
-
+              <button
+                class="menu__place-button button-reset"
+                type="button"
+                aria-haspopup="dialog"
+                aria-controls="location-modal"
+                data-location-open="city"
+                data-mobile-menu-close
+              >
                 <svg class="menu__place-marker" aria-hidden="true">
                   <use href="/img/sprite.svg#icon-mappin"></use>
                 </svg>
@@ -144,9 +224,14 @@
                   <use href="/img/sprite.svg#icon-cvervron_down"></use>
                 </svg>
               </button>
-              <button class="menu__place-button menu__place-button--address button-reset" type="button"
-                aria-haspopup="dialog" aria-controls="location-modal" data-location-open="location"
-                data-mobile-menu-close>
+              <button
+                class="menu__place-button menu__place-button--address button-reset"
+                type="button"
+                aria-haspopup="dialog"
+                aria-controls="location-modal"
+                data-location-open="location"
+                data-mobile-menu-close
+              >
                 <span class="menu__place-address" data-header-address>пр-т Космонавтов, 108 Д</span>
                 <svg class="icon menu__place-chevron" aria-hidden="true">
                   <use href="/img/sprite.svg#icon-cvervron_down"></use>
@@ -156,25 +241,48 @@
 
             <div class="menu__footer">
               <a class="menu__phone" href="tel:+73433000000">+7 (343) 300-00-00</a>
-              <button class="menu__booking button-reset" type="button" data-booking-open data-mobile-menu-close>
+              <button
+                class="menu__booking button-reset"
+                type="button"
+                data-booking-open
+                data-mobile-menu-close
+              >
                 Забронировать
               </button>
-              <button class="menu__booking menu__booking--event button-reset" type="button" aria-haspopup="dialog"
-                aria-controls="event-modal" data-event-modal-open data-mobile-menu-close>
+              <button
+                class="menu__booking menu__booking--event button-reset"
+                type="button"
+                aria-haspopup="dialog"
+                aria-controls="event-modal"
+                data-event-modal-open
+                data-mobile-menu-close
+              >
                 Провести мероприятие
               </button>
             </div>
           </div>
         </nav>
         <div class="header__buttons">
-          <button class="header__button button-reset" type="button" aria-label="Личный кабинет" aria-haspopup="dialog"
-            aria-controls="auth-modal" data-js-auth>
+          <button
+            class="header__button button-reset"
+            type="button"
+            aria-label="Личный кабинет"
+            aria-haspopup="dialog"
+            aria-controls="auth-modal"
+            data-js-auth
+          >
             <svg class="icon header__button-icon" aria-hidden="true">
               <use href="/img/sprite.svg#icon-user"></use>
             </svg>
           </button>
-          <button class="header__burger burger button-reset" type="button" aria-label="Открыть меню"
-            aria-expanded="false" aria-controls="header-navigation" data-mobile-menu-toggle>
+          <button
+            class="header__burger burger button-reset"
+            type="button"
+            aria-label="Открыть меню"
+            aria-expanded="false"
+            aria-controls="header-navigation"
+            data-mobile-menu-toggle
+          >
             <span class="burger__line" aria-hidden="true"></span>
           </button>
           <button class="header__booking button-reset" type="button" data-booking-open>

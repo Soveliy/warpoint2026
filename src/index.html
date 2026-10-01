@@ -292,14 +292,14 @@
             data-zone-panel>
             <div class="zone__row">
               <div class="zone__image-container">
-                <img class="zone__image" src="img/zones/1.jpg" alt="Игроки на арене WARPOINT" loading="lazy"
-                  decoding="async" />
-                <a class="zone__image-zoom" href="img/zones/1.jpg" data-fancybox="zones"
-                  data-caption="Арена для командных сражений" aria-label="Открыть фото зоны «Арена»">
+                <img class="zone__image" src="img/zones/арена.jpg" width="3000" height="1996"
+                  alt="Игроки на арене WARPOINT" loading="lazy" decoding="async" />
+                <button class="zone__image-zoom button-reset" type="button" data-zone-video="arena"
+                  aria-label="Смотреть видео зоны «Арена»">
                   <svg class="zone__image-zoom-icon" aria-hidden="true">
                     <use href="/img/sprite.svg#icon-play"></use>
                   </svg>
-                </a>
+                </button>
               </div>
               <div class="zone__content">
                 <div class="zone__wrap">
@@ -342,12 +342,12 @@
               <div class="zone__image-container">
                 <img class="zone__image" src="img/zones/2.jpg" alt="Игроки на VR-станции WARPOINT" loading="lazy"
                   decoding="async" />
-                <a class="zone__image-zoom" href="img/zones/2.jpg" data-fancybox="zones"
-                  data-caption="VR-станция: игры на прохождение" aria-label="Открыть фото VR-станции">
+                <button class="zone__image-zoom button-reset" type="button" data-zone-video="vr"
+                  aria-label="Смотреть видео VR-станции">
                   <svg class="zone__image-zoom-icon" aria-hidden="true">
                     <use href="/img/sprite.svg#icon-play"></use>
                   </svg>
-                </a>
+                </button>
               </div>
               <div class="zone__content">
                 <div class="zone__wrap">
@@ -391,12 +391,12 @@
               <div class="zone__image-container">
                 <img class="zone__image" src="img/zones/3.jpg" alt="Игроки в экстрим-зоне WARPOINT" loading="lazy"
                   decoding="async" />
-                <a class="zone__image-zoom" href="img/zones/3.jpg" data-fancybox="zones"
-                  data-caption="Экстрим-зона для любителей острых ощущений" aria-label="Открыть фото экстрим-зоны">
+                <button class="zone__image-zoom button-reset" type="button" data-zone-video="extreme"
+                  aria-label="Смотреть видео экстрим-зоны">
                   <svg class="zone__image-zoom-icon" aria-hidden="true">
                     <use href="/img/sprite.svg#icon-play"></use>
                   </svg>
-                </a>
+                </button>
               </div>
               <div class="zone__content">
                 <div class="zone__wrap">
@@ -440,12 +440,12 @@
               <div class="zone__image-container">
                 <img class="zone__image" src="img/zones/4.jpg" alt="Автосимуляторы WARPOINT" loading="lazy"
                   decoding="async" />
-                <a class="zone__image-zoom" href="img/zones/4.jpg" data-fancybox="zones"
-                  data-caption="Симуляторы для фанатов скорости" aria-label="Открыть фото зоны симуляторов">
+                <button class="zone__image-zoom button-reset" type="button" data-zone-video="simulators"
+                  aria-label="Смотреть видео зоны симуляторов">
                   <svg class="zone__image-zoom-icon" aria-hidden="true">
                     <use href="/img/sprite.svg#icon-play"></use>
                   </svg>
-                </a>
+                </button>
               </div>
               <div class="zone__content">
                 <div class="zone__wrap">
@@ -484,14 +484,14 @@
             data-zone-panel hidden>
             <div class="zone__row">
               <div class="zone__image-container">
-                <img class="zone__image" src="img/zones/5.jpg" alt="Праздник в лаунж-зоне WARPOINT" loading="lazy"
-                  decoding="async" />
-                <a class="zone__image-zoom" href="img/zones/5.jpg" data-fancybox="zones"
-                  data-caption="Лаунж-зона для проведения мероприятий" aria-label="Открыть фото лаунж-зоны">
+                <img class="zone__image" src="img/zones/лаунж.jpg" width="3000" height="1996"
+                  alt="Праздник в лаунж-зоне WARPOINT" loading="lazy" decoding="async" />
+                <button class="zone__image-zoom button-reset" type="button" data-zone-video="lounge"
+                  aria-label="Смотреть видео лаунж-зоны">
                   <svg class="zone__image-zoom-icon" aria-hidden="true">
                     <use href="/img/sprite.svg#icon-play"></use>
                   </svg>
-                </a>
+                </button>
               </div>
               <div class="zone__content">
                 <div class="zone__wrap">
@@ -505,6 +505,15 @@
                     <li class="zone__params-item">ТВ с приставкой</li>
                     <li class="zone__params-item">до 30 человек</li>
                   </ul>
+                  <div class="zone__bottom">
+                    <button class="zone__button zone__button--calculate btn btn--red" type="button"
+                      aria-haspopup="dialog" aria-controls="event-modal" data-event-modal-open>
+                      <svg width="24" height="28" aria-hidden="true" style="color:#fff;stroke: none;fill: none;">
+                        <use href="/img/sprite.svg#icon-calc"></use>
+                      </svg>
+                      Рассчитать стоимость
+                    </button>
+                  </div>
                 </div>
                 <span class="zone__watermark" aria-hidden="true">05</span>
               </div>
@@ -530,98 +539,110 @@
           <div class="games-catalog__slider swiper" data-slider data-games-slider>
             <div class="swiper-wrapper">
               <article class="game-card swiper-slide">
-                <img class="game-card__image" src="img/games/1.jpg" width="436" height="624"
-                  alt="Команда игроков на виртуальной арене" loading="lazy" decoding="async" />
+                <img class="game-card__image" src="img/games/1.jpg" width="436" height="624" alt="WARPOINT АРЕНА"
+                  loading="lazy" decoding="async" />
                 <div class="game-card__meta">
                   <span class="game-card__tag game-card__tag--accent">Арена</span>
                   <span class="game-card__tag">Стрелялка</span>
-                  <span class="game-card__tag">2–10 человек</span>
+                  <span class="game-card__tag">2–10 игроков</span>
                   <span class="game-card__tag game-card__tag--age">12+</span>
                 </div>
                 <div class="game-card__content">
-                  <h3 class="game-card__title">Warpoint арена</h3>
-                  <p class="game-card__description">
-                    Для фанатов реалистичных шутеров, мощного оружия, стратегии и тактики
-                  </p>
-                  <a href="#" class="game-card__more">
-                    Подробнее
-                  </a>
+                  <h3 class="game-card__title">WARPOINT АРЕНА</h3>
+                  <p class="game-card__description">Для фанатов реалистичных шутеров, мощного оружия, стратегии и
+                    тактики</p>
+                  <a href="#" class="game-card__more">Подробнее</a>
                 </div>
               </article>
               <article class="game-card swiper-slide">
-                <img class="game-card__image" src="img/games/2.jpg" width="436" height="624"
-                  alt="Героини фэнтезийного приключения" loading="lazy" decoding="async" />
+                <img class="game-card__image" src="img/games/vert/snow-battle.png" width="1080" height="1920"
+                  alt="СНЕЖНАЯ БИТВА" loading="lazy" decoding="async" />
                 <div class="game-card__meta">
                   <span class="game-card__tag game-card__tag--accent">Арена</span>
                   <span class="game-card__tag">Активная</span>
-                  <span class="game-card__tag">2–6 человек</span>
-                  <span class="game-card__tag game-card__tag--age">10+</span>
+                  <span class="game-card__tag">2–10 игроков</span>
+                  <span class="game-card__tag game-card__tag--age">6+</span>
                 </div>
                 <div class="game-card__content">
-                  <h3 class="game-card__title">Аниме станция</h3>
-                  <p class="game-card__description">
-                    Яркое командное приключение в мире парящих островов и магических технологий
-                  </p>
-                  <a href="#" class="game-card__more">
-                    Подробнее
-                  </a>
+                  <h3 class="game-card__title">СНЕЖНАЯ БИТВА</h3>
+                  <p class="game-card__description">Постройте снежную крепость и разбейте снеговиков противника</p>
+                  <a href="#" class="game-card__more">Подробнее</a>
                 </div>
               </article>
               <article class="game-card swiper-slide">
-                <img class="game-card__image" src="img/games/3.jpg" width="436" height="624"
-                  alt="Космический пехотинец и его инопланетный союзник" loading="lazy" decoding="async" />
+                <img class="game-card__image" src="img/games/vert/farm.png" width="1080" height="1920"
+                  alt="ВЕСЕЛАЯ ФЕРМА" loading="lazy" decoding="async" />
+                <div class="game-card__meta">
+                  <span class="game-card__tag game-card__tag--accent">Арена</span>
+                  <span class="game-card__tag">Казуал</span>
+                  <span class="game-card__tag">2–10 игроков</span>
+                  <span class="game-card__tag game-card__tag--age">6+</span>
+                </div>
+                <div class="game-card__content">
+                  <h3 class="game-card__title">ВЕСЕЛАЯ ФЕРМА</h3>
+                  <p class="game-card__description">Вырастите урожай всей командой и сдайте его раньше соперника</p>
+                  <a href="#" class="game-card__more">Подробнее</a>
+                </div>
+              </article>
+              <article class="game-card swiper-slide">
+                <img class="game-card__image" src="img/games/vert/diamonds.png" width="1080" height="1920"
+                  alt="ПОИСК АЛМАЗОВ" loading="lazy" decoding="async" />
+                <div class="game-card__meta">
+                  <span class="game-card__tag game-card__tag--accent">Арена</span>
+                  <span class="game-card__tag">Активная</span>
+                  <span class="game-card__tag">2–10 игроков</span>
+                  <span class="game-card__tag game-card__tag--age">6+</span>
+                </div>
+                <div class="game-card__content">
+                  <h3 class="game-card__title">ПОИСК АЛМАЗОВ</h3>
+                  <p class="game-card__description">Прорубайте туннели в скале и добывайте алмазы быстрее соперника</p>
+                  <a href="#" class="game-card__more">Подробнее</a>
+                </div>
+              </article>
+              <article class="game-card swiper-slide">
+                <img class="game-card__image" src="img/games/vert/paint-battle.png" width="1080" height="1920"
+                  alt="БИТВА КРАСОК" loading="lazy" decoding="async" />
+                <div class="game-card__meta">
+                  <span class="game-card__tag game-card__tag--accent">Арена</span>
+                  <span class="game-card__tag">Активная</span>
+                  <span class="game-card__tag">2–10 игроков</span>
+                  <span class="game-card__tag game-card__tag--age">6+</span>
+                </div>
+                <div class="game-card__content">
+                  <h3 class="game-card__title">БИТВА КРАСОК</h3>
+                  <p class="game-card__description">Захватите арену своим цветом — и не дайте закрасить её обратно</p>
+                  <a href="#" class="game-card__more">Подробнее</a>
+                </div>
+              </article>
+              <article class="game-card swiper-slide">
+                <img class="game-card__image" src="img/games/vert/flying-saucers.jpg" width="557" height="714"
+                  alt="ЛЕТАЮЩИЕ ТАРЕЛКИ" loading="lazy" decoding="async" />
+                <div class="game-card__meta">
+                  <span class="game-card__tag game-card__tag--accent">Арена</span>
+                  <span class="game-card__tag">Казуал</span>
+                  <span class="game-card__tag">2–10 игроков</span>
+                  <span class="game-card__tag game-card__tag--age">6+</span>
+                </div>
+                <div class="game-card__content">
+                  <h3 class="game-card__title">ЛЕТАЮЩИЕ ТАРЕЛКИ</h3>
+                  <p class="game-card__description">Похищайте добычу гравитационным лучом с борта НЛО</p>
+                  <a href="#" class="game-card__more">Подробнее</a>
+                </div>
+              </article>
+              <article class="game-card swiper-slide">
+                <img class="game-card__image" src="img/games/vert/kids-arena.png" width="1080" height="1920"
+                  alt="ДЕТСКАЯ АРЕНА" loading="lazy" decoding="async" />
                 <div class="game-card__meta">
                   <span class="game-card__tag game-card__tag--accent">Арена</span>
                   <span class="game-card__tag">Стрелялка</span>
-                  <span class="game-card__tag">2–10 человек</span>
-                  <span class="game-card__tag game-card__tag--age">12+</span>
+                  <span class="game-card__tag">2–10 игроков</span>
+                  <span class="game-card__tag game-card__tag--age">6+</span>
                 </div>
                 <div class="game-card__content">
-                  <h3 class="game-card__title">Военная станция</h3>
-                  <p class="game-card__description">
-                    Тактическая миссия на орбитальной станции с динамичными командными боями
-                  </p>
-                  <a href="#" class="game-card__more">
-                    Подробнее
-                  </a>
-                </div>
-              </article>
-              <article class="game-card swiper-slide">
-                <img class="game-card__image" src="img/games/4.jpg" width="436" height="624"
-                  alt="Исследователи на поверхности далекой планеты" loading="lazy" decoding="async" />
-                <div class="game-card__meta">
-                  <span class="game-card__tag game-card__tag--accent">Арена</span>
-                  <span class="game-card__tag">Приключение</span>
-                  <span class="game-card__tag">2–6 человек</span>
-                  <span class="game-card__tag game-card__tag--age">8+</span>
-                </div>
-                <div class="game-card__content">
-                  <h3 class="game-card__title">Космо станция</h3>
-                  <p class="game-card__description">
-                    Гонка через порталы и неизведанные миры для дружной команды исследователей
-                  </p>
-                  <a href="#" class="game-card__more">
-                    Подробнее
-                  </a>
-                </div>
-              </article>
-              <article class="game-card swiper-slide">
-                <img class="game-card__image" src="img/games/5.jpg" width="436" height="624"
-                  alt="Исследователи на поверхности далекой планеты" loading="lazy" decoding="async" />
-                <div class="game-card__meta">
-                  <span class="game-card__tag game-card__tag--accent">Арена</span>
-                  <span class="game-card__tag">Приключение</span>
-                  <span class="game-card__tag">2–6 человек</span>
-                  <span class="game-card__tag game-card__tag--age">8+</span>
-                </div>
-                <div class="game-card__content">
-                  <h3 class="game-card__title">Космо станция</h3>
-                  <p class="game-card__description">
-                    Гонка через порталы и неизведанные миры для дружной команды исследователей
-                  </p>
-                  <a href="#" class="game-card__more">
-                    Подробнее
-                  </a>
+                  <h3 class="game-card__title">ДЕТСКАЯ АРЕНА</h3>
+                  <p class="game-card__description">Мультяшные герои, разнообразные пушки и командный бой на всю
+                    площадку</p>
+                  <a href="#" class="game-card__more">Подробнее</a>
                 </div>
               </article>
             </div>

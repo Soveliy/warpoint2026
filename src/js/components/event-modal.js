@@ -120,7 +120,7 @@ export function initEventModal() {
         `[data-event-step="${currentStep}"] .event-modal__heading`,
       );
 
-      requestAnimationFrame(() => heading?.focus());
+      requestAnimationFrame(() => heading?.focus({ preventScroll: true }));
     }
   };
 

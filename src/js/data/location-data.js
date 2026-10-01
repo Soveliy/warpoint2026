@@ -266,6 +266,8 @@ export const countries = [
 const ekaterinburgLocations = [
   {
     id: 'alatyr',
+    // Official review page URLs for this club; leave empty until supplied.
+    reviewLinks: { '2gis': '', yandex: '' },
     coordinates: [56.832969, 60.582374],
     name: 'ТРЦ Алатырь',
     address: 'ул. Малышева, 5',
@@ -277,6 +279,7 @@ const ekaterinburgLocations = [
   },
   {
     id: 'veer-mall',
+    reviewLinks: { '2gis': '', yandex: '' },
     coordinates: [56.916713, 60.613258],
     name: 'ТРЦ Veer Mall',
     address: 'пр. Космонавтов, 108д',
@@ -288,6 +291,7 @@ const ekaterinburgLocations = [
   },
   {
     id: 'raduga-park',
+    reviewLinks: { '2gis': '', yandex: '' },
     coordinates: [56.817183, 60.538536],
     name: 'ТРЦ Радуга Парк',
     address: 'ул. Репина, 94',

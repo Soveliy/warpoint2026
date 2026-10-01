@@ -447,6 +447,7 @@ export function initLocationModal() {
     }
   });
   modal.querySelector('[data-location-cancel]').addEventListener('click', () => closeModal());
+  modal.querySelector('[data-location-skip]').addEventListener('click', () => closeModal());
   modal.querySelector('[data-location-close]').addEventListener('click', () => closeModal());
   confirmButton.addEventListener('click', () => closeModal(true));
   modal.addEventListener('keydown', trapFocus);
