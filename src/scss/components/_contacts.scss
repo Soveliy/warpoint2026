@@ -500,6 +500,14 @@
   }
 }
 
+.contacts__route {
+  display: none;
+
+  svg {
+    fill: none;
+  }
+}
+
 @media (max-width: $breakpoint-mobile) {
   .contacts {
     &__card {
@@ -513,6 +521,14 @@
 
     &__location {
       font-size: rem(16px);
+    }
+
+    &__booking:not(.contacts__route) {
+      display: none;
+    }
+
+    &__route {
+      display: inline-flex;
     }
 
     &__booking {

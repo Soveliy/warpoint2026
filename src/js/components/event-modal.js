@@ -38,6 +38,7 @@ export function initEventModal() {
   const nameInput = form.elements.namedItem('name');
   const phoneInput = form.elements.namedItem('phone');
   const emailInput = form.elements.namedItem('email');
+  const messengerSelect = form.elements.namedItem('messenger');
   const consentInput = form.elements.namedItem('consent');
   const dateFormatter = new Intl.DateTimeFormat('ru-RU', {
     day: 'numeric',
@@ -74,7 +75,7 @@ export function initEventModal() {
   const validateContacts = () => {
     nameInput.setCustomValidity(nameInput.value.trim() ? '' : 'Укажите ваше имя');
     phoneInput.setCustomValidity(isPhoneComplete(phoneInput) ? '' : 'Введите телефон полностью');
-    return [nameInput, phoneInput, emailInput, locationSelect, consentInput].every(
+    return [nameInput, phoneInput, emailInput, locationSelect, messengerSelect, consentInput].every(
       (input) => input.validity.valid,
     );
   };
@@ -103,7 +104,7 @@ export function initEventModal() {
     });
     backButton.disabled = currentStep === 1;
     nextButton.disabled = !isStepComplete();
-    nextButton.textContent = currentStep === STEP_COUNT ? 'Отправить' : 'Далее';
+    nextButton.textContent = currentStep === STEP_COUNT ? 'Получить расчёт' : 'Далее';
   };
 
   const setStep = (step, focusHeading = true) => {
@@ -193,6 +194,7 @@ export function initEventModal() {
           name: nameInput.value.trim(),
           phone: phoneInput.value,
           email: emailInput.value.trim(),
+          messenger: messengerSelect.value,
           consent: consentInput.checked,
           locationId: state.locationId,
           location: getLocation(state),

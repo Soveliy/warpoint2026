@@ -103,7 +103,7 @@
     flex-direction: column;
     align-items: center;
     min-height: 100%;
-    padding: clamp(#{rem(64px)}, 9dvh, #{rem(112px)}) rem(24px) rem(20px);
+    padding: clamp(#{rem(96px)}, 14dvh, #{rem(160px)}) rem(24px) rem(20px);
 
     &[hidden] {
       display: none;
@@ -566,7 +566,7 @@
     &__step--services,
     &__step--finish {
       min-height: auto;
-      padding: rem(72px) rem(16px) rem(20px);
+      padding: rem(88px) rem(16px) rem(20px);
     }
 
     &__heading {
@@ -624,11 +624,14 @@
     }
 
     &__nav {
-      min-width: rem(82px);
+      min-width: rem(64px);
+      max-width: rem(132px);
+      white-space: normal;
+      line-height: 1.2;
       min-height: rem(48px);
+      height: rem(48px);
       font-size: rem(11px);
-      padding-right: rem(14px);
-      padding-left: rem(14px);
+      padding: rem(8px) rem(12px);
       border-radius: rem(12px);
     }
 
@@ -651,9 +654,11 @@
     }
   }
 }
+
 .air-datepicker-nav--title {
   transition: 0.3s;
 }
+
 .air-datepicker-nav--title:hover {
   background-color: rgb(var(--white-rgb) / 0.08);
 }

@@ -2,8 +2,6 @@
 @use '../vars' as *;
 
 .video-section {
-  --video-play-size: #{fluid(64px, 76px)};
-
   width: calc(100% - #{rem(48px)});
   max-width: $content-width;
   height: clamp(#{rem(620px)}, 54vw, #{rem(856px)});
@@ -43,11 +41,11 @@
     top: var(--promo-play-y, 50%);
     left: var(--promo-play-x, 50%);
     z-index: 11;
-    width: var(--promo-play-size, var(--video-play-size));
-    height: var(--promo-play-size, var(--video-play-size));
+    width: var(--promo-play-size, var(--play-button-size));
+    height: var(--promo-play-size, var(--play-button-size));
     overflow: hidden;
-    border-radius: var(--promo-play-radius, #{fluid(16px, 20px)});
-    background: linear-gradient(134.84deg, var(--red-500) 0%, var(--red-800) 100%);
+    border-radius: var(--promo-play-radius, var(--play-button-radius));
+    background: var(--play-button-background);
     opacity: 0;
     visibility: hidden;
     pointer-events: none;
@@ -68,8 +66,6 @@
     top: 50%;
     left: 50%;
     z-index: 2;
-    width: fluid(11px, 13px);
-    height: fluid(18px, 21px);
     fill: var(--white);
     opacity: 1;
     pointer-events: none;
@@ -156,7 +152,7 @@
     flex-direction: column;
     inset: 0;
     justify-content: center;
-    padding: 82px 0 0 0;
+    padding: 82px 0 0;
     pointer-events: none;
     position: absolute;
     text-align: center;
@@ -194,6 +190,7 @@
       'YTUC' 760,
       'wdth' 75,
       'opsz' 144;
+
     span {
       display: block;
       white-space: nowrap;
@@ -224,61 +221,12 @@
     align-items: center;
     display: flex;
     flex-direction: column;
-    min-height: var(--video-play-size);
+    min-height: var(--play-button-size);
     margin-top: rem(24px);
   }
 
   &__play {
-    align-items: center;
-    animation: video-section-play-breathe 2400ms ease-in-out infinite;
-    aspect-ratio: 1;
-    backdrop-filter: blur(rem(12px));
-    background: linear-gradient(134.84deg, var(--red-500) 0%, var(--red-800) 100%);
-    border-radius: fluid(16px, 20px);
-    color: var(--white);
-    display: inline-flex;
-    height: var(--video-play-size);
-    justify-content: center;
     pointer-events: auto;
-    position: relative;
-    transform-origin: center;
-    transition:
-      background-color $duration-base $ease-base,
-      border-color $duration-base $ease-base,
-      opacity $duration-base $ease-base,
-      transform $duration-base $ease-base;
-    will-change: transform;
-
-    &::after {
-      animation: video-section-play-wave 2400ms cubic-bezier(0.22, 1, 0.36, 1) infinite;
-      border: rem(1px) solid rgb(var(--white-rgb) / 0.46);
-      border-radius: inherit;
-      content: '';
-      inset: rem(-1px);
-      opacity: 0;
-      pointer-events: none;
-      position: absolute;
-    }
-
-    &:hover {
-      opacity: 0.8;
-    }
-
-    &:focus-visible {
-      outline: $focus-outline-width solid var(--focus-color);
-      outline-offset: $focus-outline-offset;
-    }
-  }
-
-  &__play-icon {
-    fill: currentcolor;
-    height: fluid(18px, 21px);
-    opacity: 1;
-    transform: translateX(8%);
-    transition:
-      opacity 220ms ease,
-      transform 420ms cubic-bezier(0.16, 1, 0.3, 1);
-    width: fluid(11px, 13px);
   }
 
   &__duration {
@@ -299,7 +247,6 @@
     }
 
     .video-section__play {
-      animation-play-state: paused;
       opacity: 0;
     }
   }
@@ -345,38 +292,8 @@
   }
 }
 
-@keyframes video-section-play-breathe {
-  0%,
-  100% {
-    transform: scale(1);
-  }
-
-  50% {
-    transform: scale(1.055);
-  }
-}
-
-@keyframes video-section-play-wave {
-  0% {
-    opacity: 0;
-    transform: scale(0.96);
-  }
-
-  18% {
-    opacity: 0.52;
-  }
-
-  78%,
-  100% {
-    opacity: 0;
-    transform: scale(1.52);
-  }
-}
-
 @media (max-width: $breakpoint-mobile) {
   .video-section {
-    --video-play-size: #{rem(64px)};
-
     width: calc(100% - #{rem(24px)});
     height: min(#{rem(640px)}, 82svh);
     min-height: rem(520px);
@@ -409,10 +326,6 @@
       margin-top: rem(22px);
     }
 
-    &__play {
-      border-radius: rem(16px);
-    }
-
     &__duration {
       font-size: rem(10px);
       margin-top: rem(10px);
@@ -422,8 +335,6 @@
 
 @media (width >= rem(768px)) and (height <= rem(640px)) {
   .video-section {
-    --video-play-size: #{rem(60px)};
-
     &__title {
       font-size: clamp(#{rem(36px)}, 11svh, #{rem(64px)});
     }
@@ -454,15 +365,6 @@
     &__title,
     &__description {
       transition: none;
-    }
-
-    &__play {
-      animation: none;
-      transition: none;
-
-      &::after {
-        display: none;
-      }
     }
   }
 }

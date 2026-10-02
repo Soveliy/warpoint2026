@@ -4,7 +4,7 @@
 
 .bloggers {
   --bloggers-slide-width: min(#{rem(968px)}, calc(100vw - #{rem(160px)}));
-  --bloggers-preview-ratio: 16 / 8.6;
+  --bloggers-preview-ratio: 16 / 9;
 
   @include section-spacing;
 
@@ -160,27 +160,6 @@
     transition: transform 650ms $ease-base;
   }
 
-  &__play {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: fluid(68px, 88px);
-    aspect-ratio: 1;
-    padding: 0;
-    border-radius: fluid(18px, 24px);
-    color: var(--white);
-    transform: translate(-50%, -50%);
-  }
-
-  &__play-icon {
-    width: fluid(22px, 28px);
-    height: fluid(22px, 28px);
-    fill: currentcolor;
-  }
-
   &__controls {
     right: auto;
     bottom: auto;
@@ -206,7 +185,6 @@
 @media (max-width: $breakpoint-mobile) {
   .bloggers {
     --bloggers-slide-width: calc(100vw - #{rem(48px)});
-    --bloggers-preview-ratio: 4 / 3;
 
     &__slide {
       --bloggers-side-scale: 0.84;
@@ -232,7 +210,7 @@
     }
 
     &__info-item-name {
-      font-size: rem(22px);
+      font-size: fluid(19px, 22px, 320px, 480px);
     }
 
     &__info-item-type {

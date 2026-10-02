@@ -69,6 +69,8 @@ export function initReviews() {
       slidesPerView: 'auto',
       spaceBetween: 16,
       speed: motionQuery.matches ? 0 : 650,
+      // Restoring focus to a visible review must not make it the first slide.
+      watchSlidesProgress: true,
       watchOverflow: true,
     });
   });

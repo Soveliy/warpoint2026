@@ -144,9 +144,9 @@
     &__wrap {
       align-items: flex-start;
       justify-content: flex-start;
-      min-height: rem(760px);
+      min-height: 0;
       padding-top: rem(126px);
-      padding-bottom: rem(320px);
+      padding-bottom: 0;
       gap: rem(12px);
     }
 
@@ -176,9 +176,21 @@
       text-indent: 0;
     }
 
+    &__content {
+      min-height: 100svh;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding-bottom: rem(96px);
+    }
+
     &__allerts {
-      right: $container-offset;
-      max-width: min(#{rem(348px)}, calc(100% - #{$container-offset * 2}));
+      position: relative;
+      right: auto;
+      bottom: auto;
+      width: 100%;
+      max-width: none;
+      margin-top: rem(24px);
     }
 
     &__image {

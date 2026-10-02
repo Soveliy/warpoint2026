@@ -13,6 +13,11 @@ export function initContacts() {
   const metroRow = contacts.querySelector('[data-contacts-metro-row]');
   const metro = contacts.querySelector('[data-contacts-metro]');
   const map = contacts.querySelector('[data-yandex-map]');
+  const route = contacts.querySelector('[data-contacts-route]');
+  const updateRoute = (coordinates) => {
+    if (!route || !coordinates?.every(Number.isFinite) || coordinates.length !== 2) return;
+    route.href = `https://yandex.ru/maps/?rtext=~${coordinates.join(',')}&rtt=auto`;
+  };
   const select = contacts.querySelector('[data-contacts-select]');
   const toggle = select.querySelector('[data-contacts-select-toggle]');
   const list = select.querySelector('[data-contacts-location-list]');
@@ -83,6 +88,7 @@ export function initContacts() {
       });
       metroRow.hidden = markupMetroHidden;
       updateYandexMap(map, markupMap);
+      updateRoute(markupMap.coordinates);
       renderOptions();
       return;
     }
@@ -100,6 +106,7 @@ export function initContacts() {
     metroRow.hidden = !hasMetro;
     metro.textContent = hasMetro ? location.details.replace(/^Метро:\s*/, 'Метро «') + '»' : '';
 
+    updateRoute(location.coordinates);
     updateYandexMap(map, {
       coordinates: location.coordinates,
       title: `${location.name}, ${state.cityName} — Warpoint на Яндекс Картах`,
