@@ -193,6 +193,7 @@ export default defineConfig(({ mode }) => {
       rollupOptions: {
         input: {
           index: path.resolve(__dirname, 'src/index.html'),
+          event_dr: path.resolve(__dirname, 'src/event_dr.html'),
         },
         output: {
           assetFileNames(assetInfo) {

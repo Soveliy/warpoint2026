@@ -32,4 +32,21 @@ export function initAnimations() {
       },
     );
   });
+
+  document.querySelectorAll('[data-reveal-image]').forEach((image) => {
+    gsap.fromTo(
+      image,
+      { autoAlpha: 0 },
+      {
+        autoAlpha: 1,
+        duration: 0.9,
+        ease: 'power2.out',
+        scrollTrigger: {
+          once: true,
+          start: 'top 85%',
+          trigger: image,
+        },
+      },
+    );
+  });
 }

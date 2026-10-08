@@ -1,5 +1,6 @@
 @use '../vars' as *;
 @use '../fluid' as *;
+
 .section {
   padding: $space-80 0;
 }
@@ -52,23 +53,41 @@
     font-size: fluid(15px, 18px);
     line-height: 120%;
     margin: 0;
+
     &--big-width {
       max-width: 26.375rem;
     }
+
     &--lit-width {
       max-width: 18.75rem;
     }
   }
 }
+
+.section-head--center {
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+
+  .section-head__lead {
+    max-width: rem(480px);
+    padding-left: 0;
+    border-left: 0;
+  }
+}
+
 @media (max-width: $breakpoint-mobile) {
   .section {
     padding: $space-56 0;
   }
+
   .section-head {
     flex-direction: column;
     align-items: flex-start;
     gap: $space-16;
   }
+
   .section--compact {
     padding: $space-36 0;
   }
@@ -92,5 +111,9 @@
     &__lead {
       font-size: $font-size-t1;
     }
+  }
+
+  .section-head--center {
+    align-items: center;
   }
 }

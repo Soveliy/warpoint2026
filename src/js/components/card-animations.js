@@ -11,6 +11,7 @@ let initialized = false;
 export function initCardAnimations() {
   if (initialized) return;
   initialized = true;
+  const onEventPage = Boolean(document.querySelector('.page--event'));
 
   const media = gsap.matchMedia();
 
@@ -64,7 +65,11 @@ export function initCardAnimations() {
         // Independent translate preserves the scale of blogger slides and carousel transforms.
         gsap.fromTo(
           cards,
-          { opacity: 0, translate: '0px 180px' },
+          {
+            opacity: 0,
+            translate: (_, element) =>
+              onEventPage && element.matches('.gallery__item') ? '0px 0px' : '0px 180px',
+          },
           {
             opacity: 1,
             translate: '0px 0px',

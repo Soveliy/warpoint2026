@@ -80,21 +80,31 @@
 
         <div class="contacts__socials" aria-label="Социальные сети" data-contacts-ekaterinburg>
           <a class="contacts__social" href="#" aria-label="ВКонтакте">
-            <svg class="contacts__social-icon" aria-hidden="true">
-              <use href="/img/sprite.svg#icon-vk"></use>
-            </svg>
+            <svg class="contacts__social-icon" aria-hidden="true"><use href="/img/sprite.svg#icon-vk"></use></svg>
           </a>
-          <a class="contacts__social" href="#" aria-label="Макс">
-            <svg class="contacts__social-icon" aria-hidden="true">
-              <use href="/img/sprite.svg#icon-max"></use>
-            </svg>
+          <a class="contacts__social" href="#" aria-label="Instagram">
+            <svg class="contacts__social-icon" aria-hidden="true"><use href="/img/sprite.svg#icon-inst"></use></svg>
+          </a>
+          <a class="contacts__social" href="#" aria-label="Telegram">
+            <svg class="contacts__social-icon" aria-hidden="true"><use href="/img/sprite.svg#icon-tg"></use></svg>
+          </a>
+          <a class="contacts__social" href="#" aria-label="Max">
+            <svg class="contacts__social-icon" aria-hidden="true"><use href="/img/sprite.svg#icon-max"></use></svg>
+          </a>
+          <a class="contacts__social" href="#" aria-label="WhatsApp">
+            <svg class="contacts__social-icon" aria-hidden="true"><use href="/img/sprite.svg#icon-whatsapp"></use></svg>
           </a>
         </div>
 
-        <a class="contacts__booking button-reset" type="button" data-contacts-rout
-          href="https://yandex.ru/maps/?rtext=~56.817183,60.538536&amp;rtt=auto" target="_blank"
-          rel="noopener noreferrer">
-
+        <button class="contacts__booking button-reset" type="button" data-booking-open>
+          <svg class="contacts__booking-icon" aria-hidden="true"><use href="/img/sprite.svg#icon-game"></use></svg>
+          <span>Забронировать</span>
+        </button>
+        <a class="contacts__booking contacts__route" data-contacts-route
+          href="https://yandex.ru/maps/?rtext=~56.817183,60.538536&amp;rtt=auto" target="_blank" rel="noopener noreferrer">
+          <svg class="contacts__booking-icon" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="m21 3-7 18-3-8-8-3 18-7Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" />
+          </svg>
           <span>Проложить маршрут</span>
         </a>
 

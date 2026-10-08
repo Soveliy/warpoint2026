@@ -8,9 +8,13 @@ import { initCallbackForms, initFaq } from './components/faq.js';
 import { initCityConfirm } from './components/city-confirm.js';
 import { initContacts } from './components/contacts.js';
 import { initEventModal } from './components/event-modal.js';
+import { initEventAddons } from './components/event-addons.js';
+import { initEventHero } from './components/event-hero.js';
 import { initEventsSequence } from './components/events-sequence.js';
 import { initFancybox } from './components/fancybox.js';
 import { initGamesSequence } from './components/games-sequence.js';
+import { initGameModal } from './components/game-modal.js';
+import { initSiteNotices } from './components/site-notices.js';
 import { initHeaderScroll } from './components/header-scroll.js';
 import { initHeaderTheme } from './components/header-theme.js';
 import { initLocationModal } from './components/location-modal.js';
@@ -31,6 +35,7 @@ ScrollTrigger.config({
   ignoreMobileResize: true,
 });
 
+initEventHero();
 initPreloader();
 initPageState();
 initHeaderScroll();
@@ -41,8 +46,11 @@ initLocationModal();
 initContacts();
 initCityConfirm();
 initEventModal();
+initEventAddons();
 initAuthModal();
 initBookingPanel();
+initGameModal();
+initSiteNotices();
 initPhoneMasks();
 initFancybox();
 initAnimations();

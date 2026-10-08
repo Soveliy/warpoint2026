@@ -58,7 +58,7 @@ export function initContacts() {
       name.textContent = location.name;
       const details = document.createElement('span');
       details.className = 'contacts__location-option-details';
-      details.textContent = `${location.type} — ${location.rating}/5 — ${location.address}`;
+      details.textContent = `${location.address} (${location.type})`;
       option.append(name, details);
       return option;
     });

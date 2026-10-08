@@ -44,6 +44,9 @@
           </div>
         </div>
         <div class="hero__allerts allerts">
+          <div class="hero__announcement" data-announcement-slot>
+            @include('partials/announcement.html')
+          </div>
           <div class="allert">
             <div class="allert__row">
               <div class="allert__pic">
@@ -551,7 +554,7 @@
                   <h3 class="game-card__title">WARPOINT АРЕНА</h3>
                   <p class="game-card__description">Для фанатов реалистичных шутеров, мощного оружия, стратегии и
                     тактики</p>
-                  <a href="#" class="game-card__more">Подробнее</a>
+                  <button class="game-card__more button-reset" type="button" data-game-open="warpoint-arena" aria-haspopup="dialog" aria-controls="game-modal">Подробнее</button>
                 </div>
               </article>
               <article class="game-card swiper-slide">
@@ -566,7 +569,7 @@
                 <div class="game-card__content">
                   <h3 class="game-card__title">СНЕЖНАЯ БИТВА</h3>
                   <p class="game-card__description">Постройте снежную крепость и разбейте снеговиков противника</p>
-                  <a href="#" class="game-card__more">Подробнее</a>
+                  <button class="game-card__more button-reset" type="button" data-game-open="snow-battle" aria-haspopup="dialog" aria-controls="game-modal">Подробнее</button>
                 </div>
               </article>
               <article class="game-card swiper-slide">
@@ -581,7 +584,7 @@
                 <div class="game-card__content">
                   <h3 class="game-card__title">ВЕСЕЛАЯ ФЕРМА</h3>
                   <p class="game-card__description">Вырастите урожай всей командой и сдайте его раньше соперника</p>
-                  <a href="#" class="game-card__more">Подробнее</a>
+                  <button class="game-card__more button-reset" type="button" data-game-open="farm" aria-haspopup="dialog" aria-controls="game-modal">Подробнее</button>
                 </div>
               </article>
               <article class="game-card swiper-slide">
@@ -596,7 +599,7 @@
                 <div class="game-card__content">
                   <h3 class="game-card__title">ПОИСК АЛМАЗОВ</h3>
                   <p class="game-card__description">Прорубайте туннели в скале и добывайте алмазы быстрее соперника</p>
-                  <a href="#" class="game-card__more">Подробнее</a>
+                  <button class="game-card__more button-reset" type="button" data-game-open="diamonds" aria-haspopup="dialog" aria-controls="game-modal">Подробнее</button>
                 </div>
               </article>
               <article class="game-card swiper-slide">
@@ -611,7 +614,7 @@
                 <div class="game-card__content">
                   <h3 class="game-card__title">БИТВА КРАСОК</h3>
                   <p class="game-card__description">Захватите арену своим цветом — и не дайте закрасить её обратно</p>
-                  <a href="#" class="game-card__more">Подробнее</a>
+                  <button class="game-card__more button-reset" type="button" data-game-open="paint-battle" aria-haspopup="dialog" aria-controls="game-modal">Подробнее</button>
                 </div>
               </article>
               <article class="game-card swiper-slide">
@@ -626,7 +629,7 @@
                 <div class="game-card__content">
                   <h3 class="game-card__title">ЛЕТАЮЩИЕ ТАРЕЛКИ</h3>
                   <p class="game-card__description">Похищайте добычу гравитационным лучом с борта НЛО</p>
-                  <a href="#" class="game-card__more">Подробнее</a>
+                  <button class="game-card__more button-reset" type="button" data-game-open="flying-saucers" aria-haspopup="dialog" aria-controls="game-modal">Подробнее</button>
                 </div>
               </article>
               <article class="game-card swiper-slide">
@@ -642,7 +645,7 @@
                   <h3 class="game-card__title">ДЕТСКАЯ АРЕНА</h3>
                   <p class="game-card__description">Мультяшные герои, разнообразные пушки и командный бой на всю
                     площадку</p>
-                  <a href="#" class="game-card__more">Подробнее</a>
+                  <button class="game-card__more button-reset" type="button" data-game-open="kids-arena" aria-haspopup="dialog" aria-controls="game-modal">Подробнее</button>
                 </div>
               </article>
             </div>
@@ -673,6 +676,8 @@
   @include('partials/event-modal.html') @include('partials/booking-panel.html')
   @include('partials/auth-modal.html')
   @include('partials/mobile-actions.html')
+  @include('partials/game-modal.html')
+  @include('partials/cookie-notice.html')
 
   <script type="module" src="/js/main.js"></script>
 </body>

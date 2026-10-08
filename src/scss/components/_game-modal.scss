@@ -1,0 +1,348 @@
+@use '../fluid' as *;
+@use '../vars' as *;
+@use '../mixins/disable-mob-hover' as *;
+
+.game-modal {
+  width: min(#{rem(1080px)}, calc(100% - #{rem(48px)}));
+  max-width: none;
+  max-height: calc(100dvh - #{rem(48px)});
+  padding: 0;
+  overflow-x: hidden;
+  overscroll-behavior: contain;
+  border: rem(1px) solid var(--gray-700);
+  border-radius: rem(40px);
+  background: var(--gray-950);
+  color: var(--white);
+  scrollbar-width: thin;
+  scrollbar-color: var(--gray-600) transparent;
+
+  &::backdrop {
+    background: rgb(var(--black-rgb) / 0.78);
+    backdrop-filter: blur(rem(6px));
+  }
+
+  [hidden] {
+    display: none;
+  }
+
+  &__close,
+  &__arrow {
+    @include hover {
+      background: var(--gray-700);
+    }
+
+    position: absolute;
+    z-index: 5;
+    display: grid;
+    place-items: center;
+    width: rem(56px);
+    height: rem(56px);
+    border: rem(1px) solid rgb(var(--white-rgb) / 0.3);
+    border-radius: 50%;
+    background: rgb(var(--gray-950-rgb) / 0.85);
+    color: var(--white);
+    transition: background $duration-fast $ease-base;
+
+    svg {
+      width: rem(24px);
+      height: rem(24px);
+      fill: none;
+      stroke: currentcolor;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+  }
+
+  &__close {
+    top: rem(20px);
+    right: rem(20px);
+  }
+
+  &__close-wrap {
+    position: sticky;
+    z-index: 6;
+    top: 0;
+    height: 0;
+  }
+
+  &__arrow {
+    top: 50%;
+    transform: translateY(-50%);
+
+    &--prev {
+      left: rem(20px);
+    }
+
+    &--next {
+      right: rem(20px);
+    }
+
+    &.swiper-button-disabled {
+      opacity: 0.3;
+      pointer-events: none;
+    }
+
+    &.swiper-button-lock {
+      display: none;
+    }
+  }
+
+  &__gallery {
+    width: 100%;
+    background: var(--black);
+  }
+
+  &__slide {
+    position: relative;
+    aspect-ratio: 16 / 9;
+    max-height: 50dvh;
+    overflow: hidden;
+  }
+
+  &__image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+
+    &--cover {
+      object-fit: cover;
+    }
+  }
+
+  &__play {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: rem(18px);
+    background: rgb(var(--black-rgb) / 0.15);
+    pointer-events: none;
+
+    button {
+      pointer-events: auto;
+    }
+
+    span {
+      font-size: rem(14px);
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      text-shadow: 0 rem(2px) rem(8px) var(--black);
+    }
+  }
+
+  &__video {
+    position: absolute;
+    inset: 0;
+    z-index: 3;
+    width: 100%;
+    height: 100%;
+    border: 0;
+    background: var(--black);
+  }
+
+  &__pagination {
+    position: absolute;
+    z-index: 4;
+    bottom: rem(16px);
+    display: flex;
+    justify-content: center;
+    gap: rem(10px);
+    width: 100%;
+
+    .swiper-pagination-bullet {
+      width: rem(10px);
+      height: rem(10px);
+      border-radius: rem(8px);
+      background: var(--white);
+      opacity: 0.45;
+      cursor: pointer;
+    }
+
+    .swiper-pagination-bullet-active {
+      width: rem(28px);
+      opacity: 1;
+    }
+
+    &.swiper-pagination-lock {
+      display: none;
+    }
+  }
+
+  &__content {
+    padding: fluid(24px, 48px) fluid(20px, 64px);
+  }
+
+  &__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: rem(6px);
+    margin: 0 0 rem(24px);
+    padding: 0;
+    list-style: none;
+
+    li {
+      padding: rem(10px) rem(12px);
+      border: rem(1px) solid rgb(var(--white-rgb) / 0.5);
+      border-radius: $radius-pill;
+      font-size: rem(13px);
+      font-weight: 700;
+      text-transform: uppercase;
+
+      &:first-child {
+        border-color: var(--red-600);
+        background: var(--red-600);
+      }
+    }
+  }
+
+  &__title {
+    margin: 0 0 rem(24px);
+    font-family: $font-family-second;
+    font-size: fluid(34px, 52px);
+    font-weight: 700;
+    font-variation-settings:
+      'GRAD' 150,
+      'XOPQ' 110,
+      'YTDE' -198,
+      'YTUC' 760,
+      'wdth' 75,
+      'opsz' 144;
+    line-height: 1;
+    text-transform: uppercase;
+  }
+
+  &__description {
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    color: var(--gray-400);
+    font-size: fluid(16px, 22px);
+    line-height: 1.5;
+
+    p {
+      margin: 0 0 rem(16px);
+    }
+
+    p:last-child {
+      margin-bottom: 0;
+    }
+
+    &.is-expanded {
+      display: block;
+    }
+  }
+
+  &__expand {
+    margin-top: rem(16px);
+    color: var(--red-500);
+    font-weight: 600;
+    text-decoration: underline;
+    text-underline-offset: rem(4px);
+  }
+
+  &__navigation {
+    display: flex;
+    justify-content: space-between;
+    gap: rem(20px);
+    margin-top: rem(32px);
+    padding-top: rem(28px);
+    border-top: rem(1px) solid var(--color-border);
+  }
+
+  &__game {
+    @include hover {
+      color: var(--red-500);
+    }
+
+    display: flex;
+    align-items: center;
+    gap: rem(10px);
+    color: var(--gray-200);
+    font-size: rem(18px);
+    font-weight: 700;
+
+    &:disabled {
+      opacity: 0.3;
+      cursor: default;
+    }
+
+    svg {
+      flex: 0 0 rem(20px);
+      width: rem(20px);
+      height: rem(20px);
+      fill: none;
+      stroke: currentcolor;
+      stroke-width: 2;
+    }
+  }
+}
+
+@media (max-width: $breakpoint-mobile) {
+  .game-modal {
+    width: calc(100% - #{rem(20px)});
+    max-height: calc(100dvh - #{rem(24px)});
+    border-radius: rem(24px);
+
+    &__close,
+    &__arrow {
+      width: rem(36px);
+      height: rem(36px);
+    }
+
+    &__close {
+      top: rem(10px);
+      right: rem(10px);
+    }
+
+    &__arrow--prev {
+      left: rem(8px);
+    }
+
+    &__arrow--next {
+      right: rem(8px);
+    }
+
+    &__play {
+      gap: rem(8px);
+    }
+
+    &__play span {
+      font-size: rem(10px);
+    }
+
+    &__pagination {
+      bottom: rem(10px);
+    }
+
+    &__tags {
+      gap: rem(4px);
+      margin-bottom: rem(20px);
+    }
+
+    &__tags li {
+      padding: rem(7px) rem(9px);
+      font-size: rem(10px);
+    }
+
+    &__navigation {
+      gap: rem(12px);
+    }
+
+    &__game {
+      gap: rem(4px);
+      font-size: rem(13px);
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .game-modal__close,
+  .game-modal__arrow {
+    transition: none;
+  }
+}

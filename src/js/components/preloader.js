@@ -33,16 +33,35 @@ export function initPreloader() {
   const preloaderLogo = preloader?.querySelector('[data-preloader-logo]');
   const logoFill = preloader?.querySelector('[data-preloader-fill]');
   const header = document.querySelector('.header');
-  const hero = document.querySelector('.hero');
-  const heroImage = hero?.querySelector('.hero__image');
-  const heroCopy = [
-    hero?.querySelector('.hero__pretitle'),
-    hero?.querySelector('.hero__title'),
+  const hero = document.querySelector('.hero, .hero-event');
+  const isEventHero = hero?.classList.contains('hero-event');
+  const heroImages = isEventHero
+    ? [...hero.querySelectorAll('.hero-event__character')]
+    : [hero?.querySelector('.hero__image')].filter(Boolean);
+  const heroCopy = isEventHero
+    ? [
+        hero?.querySelector('.hero-event__title'),
+        hero?.querySelector('.hero-event__desc'),
+        hero?.querySelector('.hero-event__params'),
+      ].filter(Boolean)
+    : [hero?.querySelector('.hero__pretitle'), hero?.querySelector('.hero__title')].filter(Boolean);
+  const heroActions = hero?.querySelector(isEventHero ? '.hero-event__buttons' : '.hero__buttons');
+  const heroAlert = hero?.querySelector(isEventHero ? '.hero-event__allerts' : '.hero__allerts');
+  const animatedElements = [
+    header,
+    ...(isEventHero ? [] : heroImages),
+    ...heroCopy,
+    heroActions,
+    heroAlert,
   ].filter(Boolean);
-  const heroActions = hero?.querySelector('.hero__buttons');
-  const heroAlert = hero?.querySelector('.hero__allerts');
-  const animatedElements = [header, heroImage, ...heroCopy, heroActions, heroAlert].filter(Boolean);
   let isComplete = false;
+  let eventHeroRevealed = false;
+
+  const revealEventHero = () => {
+    if (!isEventHero || eventHeroRevealed) return;
+    eventHeroRevealed = true;
+    hero.dispatchEvent(new Event('event-hero:reveal'));
+  };
 
   const complete = () => {
     if (isComplete) return;
@@ -51,10 +70,11 @@ export function initPreloader() {
     gsap.set(animatedElements, { clearProps: 'opacity,transform,visibility' });
     root.classList.remove('is-preloading');
     preloader?.remove();
+    revealEventHero();
     refreshPage();
   };
 
-  if (!preloader || !preloaderLogo || !logoFill || !hero || !heroImage) {
+  if (!preloader || !preloaderLogo || !logoFill || !hero || !heroImages.length) {
     complete();
     return;
   }
@@ -67,15 +87,19 @@ export function initPreloader() {
   const imageOffset = mobileQuery.matches ? 30 : 55;
 
   gsap.set(header, { autoAlpha: 0, yPercent: -110 });
-  gsap.set(heroImage, { autoAlpha: 0, scale: 1.04, xPercent: imageOffset });
+  if (!isEventHero) {
+    gsap.set(heroImages, { autoAlpha: 0, scale: 1.04, xPercent: imageOffset });
+  }
   gsap.set(heroCopy, { autoAlpha: 0, xPercent: -110 });
   gsap.set(heroActions, { autoAlpha: 0, x: -72, y: 20 });
   gsap.set(heroAlert, { autoAlpha: 0, x: 96 });
 
   const play = async () => {
-    const assets = [...preloader.querySelectorAll('img'), heroImage, document.fonts?.ready].filter(
-      Boolean,
-    );
+    const assets = [
+      ...preloader.querySelectorAll('img'),
+      ...heroImages,
+      document.fonts?.ready,
+    ].filter(Boolean);
     const assetPromises = assets.map((asset) =>
       asset instanceof HTMLImageElement ? waitForImage(asset) : asset,
     );
@@ -89,7 +113,7 @@ export function initPreloader() {
         window.innerHeight / Math.max(logoBounds.height, 1),
       ) * 1.45;
 
-    gsap
+    const timeline = gsap
       .timeline({ onComplete: complete })
       .fromTo(
         preloaderLogo,
@@ -103,12 +127,18 @@ export function initPreloader() {
       .set(preloader, { display: 'none' })
       .to({}, { duration: 0.62 })
       .addLabel('hero')
-      .to(header, { autoAlpha: 1, duration: 0.5, ease: 'power3.out', yPercent: 0 }, 'hero')
-      .to(
-        heroImage,
+      .call(revealEventHero, [], 'hero')
+      .to(header, { autoAlpha: 1, duration: 0.5, ease: 'power3.out', yPercent: 0 }, 'hero');
+
+    if (!isEventHero) {
+      timeline.to(
+        heroImages,
         { autoAlpha: 1, duration: 0.9, ease: 'power3.out', scale: 1, xPercent: 0 },
         'hero',
-      )
+      );
+    }
+
+    timeline
       .to(
         heroCopy,
         { autoAlpha: 1, duration: 0.72, ease: 'power3.out', stagger: 0.08, xPercent: 0 },

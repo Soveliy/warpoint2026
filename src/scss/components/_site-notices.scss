@@ -1,0 +1,216 @@
+@use '../fluid' as *;
+@use '../vars' as *;
+@use '../mixins/disable-mob-hover' as *;
+
+.hero__announcement {
+  margin-bottom: rem(12px);
+}
+
+.announcement,
+.cookie-notice {
+  border: rem(1px) solid var(--gray-700);
+  background: var(--gray-900);
+  color: var(--white);
+  box-shadow: 0 rem(12px) rem(36px) rgb(var(--black-rgb) / 0.2);
+
+  &[hidden] {
+    display: none;
+  }
+}
+
+.announcement {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: rem(14px);
+  width: 100%;
+  padding: rem(18px) rem(40px) rem(18px) rem(18px);
+  border-radius: rem(24px);
+
+  &.is-floating {
+    position: fixed;
+    z-index: $z-header - 2;
+    right: rem(24px);
+    bottom: rem(24px);
+    width: rem(390px);
+    max-width: calc(100% - #{rem(32px)});
+  }
+
+  &__image {
+    flex: 0 0 rem(72px);
+    width: rem(72px);
+    height: rem(90px);
+    border-radius: rem(18px);
+    object-fit: cover;
+  }
+
+  &__content {
+    min-width: 0;
+    font-size: rem(14px);
+    line-height: 1.35;
+    font-weight: 650;
+
+    p {
+      margin: 0 0 rem(12px);
+    }
+  }
+
+  &__link {
+    @include hover {
+      color: var(--red-300);
+    }
+
+    color: var(--red-500);
+    font-size: rem(12px);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+}
+
+.announcement__close,
+.cookie-notice__close {
+  @include hover {
+    color: var(--red-500);
+  }
+
+  position: absolute;
+  top: rem(8px);
+  right: rem(8px);
+  display: grid;
+  place-items: center;
+  width: rem(32px);
+  height: rem(32px);
+  border-radius: rem(10px);
+  color: var(--gray-300);
+
+  svg {
+    width: rem(20px);
+    height: rem(20px);
+    fill: none;
+    stroke: currentcolor;
+    stroke-width: 2;
+    stroke-linecap: round;
+  }
+}
+
+.cookie-notice {
+  position: fixed;
+  z-index: $z-header - 1;
+  bottom: rem(24px);
+  left: rem(24px);
+  display: flex;
+  align-items: flex-start;
+  gap: rem(20px);
+  width: rem(560px);
+  max-width: calc(100% - #{rem(48px)});
+  max-height: calc(100dvh - #{rem(120px)});
+  padding: rem(28px) rem(40px) rem(28px) rem(24px);
+  overflow-y: auto;
+  border-radius: rem(28px);
+
+  &__icon {
+    display: grid;
+    place-items: center;
+    flex: 0 0 rem(48px);
+    width: rem(48px);
+    height: rem(48px);
+    border: rem(1px) solid rgb(var(--red-500-rgb) / 0.5);
+    border-radius: rem(16px);
+    background: rgb(var(--red-500-rgb) / 0.1);
+    color: var(--red-500);
+
+    svg {
+      width: rem(30px);
+      height: rem(30px);
+      fill: none;
+      stroke: currentcolor;
+      stroke-width: 1.8;
+    }
+  }
+
+  &__content {
+    min-width: 0;
+    color: var(--gray-300);
+    font-size: rem(16px);
+    line-height: 1.45;
+
+    p {
+      margin: 0;
+    }
+
+    a {
+      color: var(--white);
+      text-decoration: underline;
+      text-underline-offset: rem(3px);
+    }
+  }
+
+  &__actions {
+    margin-top: rem(20px);
+  }
+
+  &__accept {
+    min-height: rem(44px);
+    padding: rem(12px) rem(28px);
+    font-size: rem(14px);
+  }
+}
+
+@media (width <= rem(1024px)) {
+  .announcement.is-floating {
+    bottom: calc(#{rem(24px)} + var(--cookie-notice-height, 0px));
+  }
+}
+
+@media (max-width: $breakpoint-mobile) {
+  .announcement {
+    padding: rem(14px) rem(38px) rem(14px) rem(14px);
+    gap: rem(12px);
+
+    &.is-floating {
+      right: rem(16px);
+      bottom: calc(#{rem(92px)} + env(safe-area-inset-bottom) + var(--cookie-notice-height, 0px));
+    }
+
+    &__image {
+      flex-basis: rem(64px);
+      width: rem(64px);
+      height: rem(80px);
+    }
+
+    &__content {
+      font-size: rem(13px);
+    }
+  }
+
+  .cookie-notice {
+    right: rem(12px);
+    bottom: calc(#{rem(88px)} + env(safe-area-inset-bottom));
+    left: rem(12px);
+    width: auto;
+    max-width: none;
+    gap: rem(12px);
+    padding: rem(20px) rem(32px) rem(20px) rem(16px);
+    border-radius: rem(24px);
+
+    &__icon {
+      flex-basis: rem(32px);
+      width: rem(32px);
+      height: rem(32px);
+      border-radius: rem(10px);
+    }
+
+    &__icon svg {
+      width: rem(24px);
+      height: rem(24px);
+    }
+
+    &__content {
+      font-size: rem(13px);
+    }
+
+    &__actions {
+      margin-top: rem(14px);
+    }
+  }
+}

@@ -49,11 +49,16 @@ export function initSliders() {
     const root = slider.closest('[data-slider-root]') ?? slider;
     const isBloggersSlider = slider.matches('[data-bloggers-slider]');
     const isGamesSlider = slider.matches('[data-games-slider]');
-    const isLoopSlider = isBloggersSlider || isGamesSlider;
+    const isEventTariffsSlider = slider.matches('[data-event-tariffs-slider]');
+    const isLoopSlider = isBloggersSlider || isGamesSlider || isEventTariffsSlider;
     const slidesCount = isLoopSlider
       ? prepareLoopSlides(
           slider,
-          isBloggersSlider ? 'data-bloggers-loop-copy' : 'data-games-loop-copy',
+          isBloggersSlider
+            ? 'data-bloggers-loop-copy'
+            : isEventTariffsSlider
+              ? 'data-event-tariffs-loop-copy'
+              : 'data-games-loop-copy',
         )
       : slider.querySelectorAll('.swiper-slide').length;
     const nextEl = root.querySelector('[data-slider-next]');
@@ -96,6 +101,7 @@ export function initSliders() {
       slideToClickedSlide: isBloggersSlider,
       spaceBetween: 16,
       speed: 650,
+      watchSlidesProgress: isGamesSlider || isEventTariffsSlider,
       watchOverflow: true,
     });
   });

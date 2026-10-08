@@ -9,6 +9,8 @@
 @use 'components/typography';
 @use 'components/button';
 @use 'components/play-button';
+@use 'components/game-modal';
+@use 'components/site-notices';
 @use 'components/slider-controls';
 @use 'components/header';
 @use 'components/preloader';
@@ -45,6 +47,9 @@
 @use 'components/contacts';
 @use 'components/allerts';
 @use 'components/footer';
+@use 'components/hero-event';
+@use 'components/event-sections';
+@use 'components/event-addons';
 
 .main {
   position: relative;

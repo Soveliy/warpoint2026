@@ -1,0 +1,57 @@
+<dialog class="game-modal" id="game-modal" aria-labelledby="game-modal-title" data-game-modal>
+  <div class="game-modal__close-wrap">
+    <button
+      class="game-modal__close button-reset"
+      type="button"
+      aria-label="Закрыть описание игры"
+      data-game-close
+    >
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18" /></svg>
+    </button>
+  </div>
+  <div class="game-modal__gallery swiper" aria-label="Галерея игры" data-game-gallery>
+    <div class="swiper-wrapper" data-game-slides></div>
+    <button
+      class="game-modal__arrow game-modal__arrow--prev button-reset"
+      type="button"
+      aria-label="Предыдущее изображение"
+      data-game-slide-prev
+    >
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 5-7 7 7 7" /></svg>
+    </button>
+    <button
+      class="game-modal__arrow game-modal__arrow--next button-reset"
+      type="button"
+      aria-label="Следующее изображение"
+      data-game-slide-next
+    >
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 5 7 7-7 7" /></svg>
+    </button>
+    <div class="game-modal__pagination" data-game-pagination></div>
+  </div>
+  <div class="game-modal__content">
+    <ul class="game-modal__tags" aria-label="Характеристики игры" data-game-tags></ul>
+    <h2 class="game-modal__title" id="game-modal-title" data-game-title></h2>
+    <div class="game-modal__description" id="game-modal-description" data-game-description></div>
+    <button
+      class="game-modal__expand button-reset"
+      type="button"
+      aria-expanded="false"
+      aria-controls="game-modal-description"
+      data-game-expand
+      hidden
+    >
+      Читать полностью
+    </button>
+    <nav class="game-modal__navigation" aria-label="Выбор игры">
+      <button class="game-modal__game button-reset" type="button" data-game-prev>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 5-7 7 7 7" /></svg>
+        <span>Предыдущая игра</span>
+      </button>
+      <button class="game-modal__game button-reset" type="button" data-game-next>
+        <span>Следующая игра</span>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 5 7 7-7 7" /></svg>
+      </button>
+    </nav>
+  </div>
+</dialog>
