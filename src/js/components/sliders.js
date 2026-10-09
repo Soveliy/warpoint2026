@@ -50,6 +50,7 @@ export function initSliders() {
     const isBloggersSlider = slider.matches('[data-bloggers-slider]');
     const isGamesSlider = slider.matches('[data-games-slider]');
     const isEventTariffsSlider = slider.matches('[data-event-tariffs-slider]');
+    const isImmersiveSlider = slider.matches('[data-immersive-slider]');
     const isLoopSlider = isBloggersSlider || isGamesSlider || isEventTariffsSlider;
     const slidesCount = isLoopSlider
       ? prepareLoopSlides(
@@ -82,7 +83,7 @@ export function initSliders() {
       modules,
       centeredSlides: isBloggersSlider,
       initialSlide: isBloggersSlider ? 1 : 0,
-      loop: isLoopSlider && slidesCount > 1,
+      loop: (isLoopSlider || isImmersiveSlider) && slidesCount > 1,
       loopAdditionalSlides: isBloggersSlider ? 2 : 0,
       navigation:
         nextEl && prevEl
