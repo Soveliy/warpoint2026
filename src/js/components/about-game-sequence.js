@@ -74,17 +74,14 @@ function setupDesktopReveal(section) {
   const context = gsap.context(() => {
     gsap.set(titleLines, {
       autoAlpha: 0,
-      clipPath: 'inset(0 0 100% 0)',
+      clipPath: 'inset(100% 0 0 0)',
       willChange: 'transform, opacity, clip-path',
-      x: -44,
-      y: 24,
+      y: 36,
     });
     gsap.set(lead, {
       autoAlpha: 0,
-      scaleY: 0.78,
-      transformOrigin: '0% 0%',
       willChange: 'transform, opacity',
-      x: 28,
+      y: 22,
     });
     gsap.set(visual, {
       autoAlpha: 0,
@@ -126,23 +123,21 @@ function setupDesktopReveal(section) {
     timeline
       .to(titleLines, {
         autoAlpha: 1,
-        clipPath: 'inset(0 0 0% 0)',
-        duration: 0.76,
-        ease: 'power4.out',
-        stagger: 0.07,
-        x: 0,
+        clipPath: 'inset(0 0 0 0)',
+        duration: 0.88,
+        ease: 'power3.out',
+        stagger: 0.14,
         y: 0,
       })
       .to(
         lead,
         {
           autoAlpha: 1,
-          duration: 0.68,
+          duration: 0.72,
           ease: 'power3.out',
-          scaleY: 1,
-          x: 0,
+          y: 0,
         },
-        0.16,
+        0.28,
       )
       .to(
         visual,
@@ -155,7 +150,7 @@ function setupDesktopReveal(section) {
           xPercent: -50,
           y: 0,
         },
-        0.22,
+        0.32,
       );
 
     benefits.forEach((benefit, index) => {
@@ -213,15 +208,14 @@ function setupCompactReveal(section) {
 
     gsap.set(titleLines, {
       autoAlpha: 0,
-      clipPath: 'inset(0 0 100% 0)',
+      clipPath: 'inset(100% 0 0 0)',
       willChange: 'transform, opacity, clip-path',
-      x: -30,
-      y: 20,
+      y: 28,
     });
     gsap.set(lead, {
       autoAlpha: 0,
       willChange: 'transform, opacity',
-      x: 22,
+      y: 18,
     });
     gsap.set(visual, {
       autoAlpha: 0,
@@ -240,22 +234,21 @@ function setupCompactReveal(section) {
     headingTimeline
       .to(titleLines, {
         autoAlpha: 1,
-        clipPath: 'inset(0 0 0% 0)',
-        duration: 0.7,
-        ease: 'power4.out',
-        stagger: 0.07,
-        x: 0,
+        clipPath: 'inset(0 0 0 0)',
+        duration: 0.82,
+        ease: 'power3.out',
+        stagger: 0.12,
         y: 0,
       })
       .to(
         lead,
         {
           autoAlpha: 1,
-          duration: 0.6,
+          duration: 0.68,
           ease: 'power3.out',
-          x: 0,
+          y: 0,
         },
-        0.14,
+        0.24,
       )
       .to(
         visual,
@@ -267,7 +260,7 @@ function setupCompactReveal(section) {
           xPercent: 0,
           y: 0,
         },
-        0.22,
+        0.3,
       );
 
     addOnceTrigger(headingTimeline, section, 'top 78%');
@@ -345,9 +338,11 @@ function setupSceneInteractions(section, motion = true) {
   const states = [...(scene?.querySelectorAll('[data-about-scene-state]') ?? [])];
   const benefits = [...section.querySelectorAll('[data-about-benefit]')];
   const stateMap = new Map(states.map((state) => [state.dataset.aboutSceneState, state]));
-  const familyState = stateMap.get('family');
+  const requestedInitialState = section.dataset.aboutInitialState;
+  const initialName = stateMap.has(requestedInitialState) ? requestedInitialState : 'family';
+  const initialState = stateMap.get(initialName);
 
-  if (!scene || !model || !aura || !shadow || !light || !familyState || !benefits.length) {
+  if (!scene || !model || !aura || !shadow || !light || !initialState || !benefits.length) {
     return null;
   }
 
@@ -367,7 +362,7 @@ function setupSceneInteractions(section, motion = true) {
   const glitchHost = document.createElement('div');
   const listenerCleanups = [];
   let activeFloat = null;
-  let activeState = 'family';
+  let activeState = initialName;
   let idleTween = null;
   let resetTimer = 0;
   let sceneIsVisible = false;
@@ -696,24 +691,24 @@ function setupSceneInteractions(section, motion = true) {
   };
 
   const resetScene = () => {
-    const shouldGlitch = activeState !== 'family';
-    const familyIsVisible =
-      activeState === 'family' || Number(gsap.getProperty(familyState, 'opacity')) > 0.01;
-    const inactiveStates = states.filter((state) => state !== familyState);
+    const shouldGlitch = activeState !== initialName;
+    const initialIsVisible =
+      activeState === initialName || Number(gsap.getProperty(initialState, 'opacity')) > 0.01;
+    const inactiveStates = states.filter((state) => state !== initialState);
 
     stopFloat();
     stopIdle();
     stopTransition();
     gsap.killTweensOf(sceneElements);
-    activeState = 'family';
-    scene.dataset.aboutSceneState = 'family';
+    activeState = initialName;
+    scene.dataset.aboutSceneState = initialName;
     section.classList.remove('has-active-benefit');
     benefits.forEach((benefit) => benefit.classList.remove('is-active'));
-    setStateClasses('family');
+    setStateClasses(initialName);
     gsap.set(inactiveStates, { autoAlpha: 0 });
 
     if (!motion) {
-      gsap.set(familyState, { autoAlpha: 1 });
+      gsap.set(initialState, { autoAlpha: 1 });
       return;
     }
 
@@ -721,7 +716,7 @@ function setupSceneInteractions(section, motion = true) {
       defaults: { overwrite: true },
       onComplete: () => {
         clearGlitch();
-        setStateClasses('family');
+        setStateClasses(initialName);
         gsap.set(inactiveStates, {
           autoAlpha: 0,
           rotationX: 0,
@@ -738,11 +733,11 @@ function setupSceneInteractions(section, motion = true) {
     });
     const timeline = transitionTimeline;
 
-    if (shouldGlitch) addGlitch(timeline, familyState);
+    if (shouldGlitch) addGlitch(timeline, initialState);
 
-    if (familyIsVisible) {
+    if (initialIsVisible) {
       timeline.to(
-        familyState,
+        initialState,
         {
           autoAlpha: 1,
           duration: 0.62,
@@ -759,8 +754,8 @@ function setupSceneInteractions(section, motion = true) {
       );
     } else {
       timeline.fromTo(
-        familyState,
-        { autoAlpha: 0, ...entranceByState.family },
+        initialState,
+        { autoAlpha: 0, ...entranceByState[initialName] },
         {
           autoAlpha: 1,
           duration: 0.88,
@@ -840,10 +835,10 @@ function setupSceneInteractions(section, motion = true) {
   };
 
   gsap.set(states, { autoAlpha: 0 });
-  gsap.set(familyState, { autoAlpha: 1 });
-  setStateClasses('family');
+  gsap.set(initialState, { autoAlpha: 1 });
+  setStateClasses(initialName);
   section.classList.add('is-interactive');
-  scene.dataset.aboutSceneState = 'family';
+  scene.dataset.aboutSceneState = initialName;
   visibilityTrigger = ScrollTrigger.create({
     end: 'bottom top',
     onToggle: ({ isActive }) => {
@@ -886,7 +881,7 @@ function setupSceneInteractions(section, motion = true) {
     gsap.set(sceneElements, {
       clearProps: 'opacity,scale,transform,visibility',
     });
-    setStateClasses('family');
+    setStateClasses(initialName);
     benefits.forEach((benefit) => {
       benefit.classList.remove('is-active');
     });

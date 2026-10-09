@@ -79,7 +79,12 @@
             </div>
           </article>
           <article class="event-tariffs__card event-tariffs__card--popular swiper-slide">
-            <span class="event-tariffs__card-popular-slot" aria-hidden="true"></span>
+            <div class="event-tariffs__card-popular-icon-container">
+              <svg class="event-tariffs__card-popular-icon" aria-hidden="true">
+                <use href="/img/sprite.svg#icon-fire"></use>
+              </svg>
+            </div>
+
             <div class="event-tariffs__card-tags">
               <span>1ч 45 мин</span><span>До 8 человек</span>
             </div>
@@ -120,7 +125,9 @@
           aria-label="Предыдущий тариф"
           data-slider-prev
         >
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 4-8 8 8 8" /></svg>
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="m15 4-8 8 8 8" />
+          </svg>
         </button>
         <button
           class="event-tariffs__arrow button-reset"
@@ -128,7 +135,9 @@
           aria-label="Следующий тариф"
           data-slider-next
         >
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 4 8 8-8 8" /></svg>
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="m9 4 8 8-8 8" />
+          </svg>
         </button>
       </div>
     </div>

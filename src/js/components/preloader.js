@@ -92,7 +92,9 @@ export function initPreloader() {
   }
   gsap.set(heroCopy, { autoAlpha: 0, xPercent: -110 });
   gsap.set(heroActions, { autoAlpha: 0, x: -72, y: 20 });
-  gsap.set(heroAlert, { autoAlpha: 0, x: 96 });
+  if (heroAlert) {
+    gsap.set(heroAlert, { autoAlpha: 0, x: 96 });
+  }
 
   const play = async () => {
     const assets = [
@@ -148,8 +150,15 @@ export function initPreloader() {
         heroActions,
         { autoAlpha: 1, duration: 0.65, ease: 'power3.out', x: 0, y: 0 },
         'hero+=0.2',
-      )
-      .to(heroAlert, { autoAlpha: 1, duration: 0.68, ease: 'power3.out', x: 0 }, 'hero+=0.26');
+      );
+
+    if (heroAlert) {
+      timeline.to(
+        heroAlert,
+        { autoAlpha: 1, duration: 0.68, ease: 'power3.out', x: 0 },
+        'hero+=0.26',
+      );
+    }
   };
 
   play().catch(complete);

@@ -1,7 +1,7 @@
 import gsap from 'gsap';
 
 const lineDuration = 2.2;
-const imageWaypoints = [
+const birthdayImageWaypoints = [
   ['girl', 0.06],
   ['cake', 0.23],
   ['boy', 0.53],
@@ -16,13 +16,22 @@ export function initEventHero() {
   const images = [...hero.querySelectorAll('.hero-event__character')];
   const linePath = hero.querySelector('.hero-event__line-path');
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const imageWaypoints = images.some((image) => image.hasAttribute('data-line-progress'))
+    ? images
+        .map((image) => [image, Number.parseFloat(image.dataset.lineProgress)])
+        .filter(([, progress]) => Number.isFinite(progress))
+        .sort((a, b) => a[1] - b[1])
+    : birthdayImageWaypoints.map(([name, progress]) => [
+        hero.querySelector(`.hero-event__character--${name}`),
+        progress,
+      ]);
 
   if (!reducedMotion) {
     gsap.set(images, { autoAlpha: 0 });
   }
 
   const line = new Image();
-  line.src = 'img/events-hero/birthday/line.png';
+  line.src = hero.dataset.eventLineSrc || 'img/events-hero/birthday/line.png';
   let lineReady = false;
   let revealRequested = false;
   let hasRevealed = false;
@@ -51,8 +60,7 @@ export function initEventHero() {
           nextImage < imageWaypoints.length &&
           (progress >= imageWaypoints[nextImage][1] || elapsed >= 1.2)
         ) {
-          const [name] = imageWaypoints[nextImage];
-          const image = hero.querySelector(`.hero-event__character--${name}`);
+          const [image] = imageWaypoints[nextImage];
 
           if (image) {
             gsap.to(image, {

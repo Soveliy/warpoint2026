@@ -1,0 +1,1180 @@
+<!doctype html>
+<html class="is-preloading" lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/img/favicon.svg" />
+    <link rel="preload" as="image" href="img/events-hero/corp/line.png" />
+    <title>Warpoint</title>
+    <script>
+      window.setTimeout(() => document.documentElement.classList.remove('is-preloading'), 8000);
+    </script>
+  </head>
+
+  <body class="page page--event page--corporate">
+    @include('partials/preloader.html') @include('partials/header.html')
+
+    <main class="main">
+      <section
+        class="hero-event hero-event--purple hero-event--corporate"
+        data-event-hero
+        data-event-line-src="img/events-hero/corp/line.png"
+      >
+        <div class="hero-event__scene" aria-hidden="true">
+          <svg class="hero-event__line" viewBox="0 0 919 795" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <mask id="corporate-line-reveal" maskUnits="userSpaceOnUse">
+                <path
+                  class="hero-event__line-path"
+                  d="M 935 160 C 905 40 820 -20 725 80 C 625 180 560 330 415 420 C 300 460 10 480 80 575 C 120 635 290 585 380 610 C 500 650 575 780 665 835"
+                  pathLength="1"
+                  fill="none"
+                  stroke="white"
+                  stroke-width="360"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+                <rect
+                  class="hero-event__line-finish"
+                  x="0"
+                  y="0"
+                  width="919"
+                  height="795"
+                  fill="white"
+                />
+              </mask>
+            </defs>
+            <image
+              href="img/events-hero/corp/line.png"
+              width="919"
+              height="795"
+              mask="url(#corporate-line-reveal)"
+            />
+          </svg>
+          <img
+            class="hero-event__character hero-event__character--corp-balloon"
+            src="img/events-hero/corp/1.png"
+            width="299"
+            height="357"
+            alt=""
+            decoding="async"
+            data-line-progress="0.08"
+          />
+          <img
+            class="hero-event__character hero-event__character--corp-woman"
+            src="img/events-hero/corp/3.png"
+            width="436"
+            height="756"
+            alt=""
+            fetchpriority="high"
+            decoding="async"
+            data-line-progress="0.24"
+          />
+          <img
+            class="hero-event__character hero-event__character--corp-man"
+            src="img/events-hero/corp/2.png"
+            width="476"
+            height="820"
+            alt=""
+            fetchpriority="high"
+            decoding="async"
+            data-line-progress="0.46"
+          />
+          <img
+            class="hero-event__character hero-event__character--corp-cocktail"
+            src="img/events-hero/corp/4.png"
+            width="278"
+            height="278"
+            alt=""
+            decoding="async"
+            data-line-progress="0.72"
+          />
+        </div>
+        <div class="container hero-event__content">
+          <div class="hero-event__wrap">
+            <h1 class="hero-event__title">
+              <span>Захватывающий</span>
+              <span>корпоратив</span>
+              <span>в парке виртуальной</span>
+              <span>реальности</span>
+            </h1>
+            <p class="hero-event__desc">
+              Тимбилдинг, праздник или турнир между отделами — проведём мероприятие, которое команда
+              будет вспоминать весь год
+            </p>
+            <ul class="hero-event__params">
+              <li class="hero-event__param"><small>от</small> 15 900 ₽</li>
+            </ul>
+            <div class="hero-event__buttons">
+              <button
+                class="hero-event__request btn button-reset"
+                type="button"
+                aria-haspopup="dialog"
+                aria-controls="event-modal"
+                data-event-modal-open
+              >
+                <svg class="btn__icon" aria-hidden="true">
+                  <use href="/img/sprite.svg#icon-martini"></use>
+                </svg>
+                ОСТАВИТЬ ЗАЯВКУ
+              </button>
+              <button
+                class="hero-event__calculate btn btn--outline button-reset"
+                type="button"
+                aria-haspopup="dialog"
+                aria-controls="event-modal"
+                data-event-modal-open
+              >
+                <svg
+                  class="btn__icon"
+                  width="30"
+                  height="30"
+                  viewBox="0 0 30 30"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M23.4375 2.8125H6.5625C6.06522 2.8125 5.58831 3.01004 5.23667 3.36167C4.88504 3.71331 4.6875 4.19022 4.6875 4.6875V25.3125C4.6875 25.8098 4.88504 26.2867 5.23667 26.6383C5.58831 26.99 6.06522 27.1875 6.5625 27.1875H23.4375C23.9348 27.1875 24.4117 26.99 24.7633 26.6383C25.115 26.2867 25.3125 25.8098 25.3125 25.3125V4.6875C25.3125 4.19022 25.115 3.71331 24.7633 3.36167C24.4117 3.01004 23.9348 2.8125 23.4375 2.8125ZM10.3125 23.4375C10.0344 23.4375 9.76249 23.355 9.53123 23.2005C9.29997 23.046 9.11973 22.8264 9.01329 22.5694C8.90686 22.3124 8.87901 22.0297 8.93327 21.7569C8.98753 21.4841 9.12146 21.2335 9.31813 21.0369C9.5148 20.8402 9.76537 20.7063 10.0382 20.652C10.3109 20.5978 10.5937 20.6256 10.8506 20.732C11.1076 20.8385 11.3272 21.0187 11.4818 21.25C11.6363 21.4812 11.7188 21.7531 11.7188 22.0312C11.7188 22.4042 11.5706 22.7619 11.3069 23.0256C11.0431 23.2893 10.6855 23.4375 10.3125 23.4375ZM10.3125 18.75C10.0344 18.75 9.76249 18.6675 9.53123 18.513C9.29997 18.3585 9.11973 18.1389 9.01329 17.8819C8.90686 17.6249 8.87901 17.3422 8.93327 17.0694C8.98753 16.7966 9.12146 16.546 9.31813 16.3494C9.5148 16.1527 9.76537 16.0188 10.0382 15.9645C10.3109 15.9103 10.5937 15.9381 10.8506 16.0445C11.1076 16.151 11.3272 16.3312 11.4818 16.5625C11.6363 16.7937 11.7188 17.0656 11.7188 17.3438C11.7188 17.7167 11.5706 18.0744 11.3069 18.3381C11.0431 18.6018 10.6855 18.75 10.3125 18.75ZM15 23.4375C14.7219 23.4375 14.45 23.355 14.2187 23.2005C13.9875 23.046 13.8072 22.8264 13.7008 22.5694C13.5944 22.3124 13.5665 22.0297 13.6208 21.7569C13.675 21.4841 13.809 21.2335 14.0056 21.0369C14.2023 20.8402 14.4529 20.7063 14.7257 20.652C14.9984 20.5978 15.2812 20.6256 15.5381 20.732C15.7951 20.8385 16.0147 21.0187 16.1693 21.25C16.3238 21.4812 16.4062 21.7531 16.4062 22.0312C16.4062 22.4042 16.2581 22.7619 15.9944 23.0256C15.7306 23.2893 15.373 23.4375 15 23.4375ZM15 18.75C14.7219 18.75 14.45 18.6675 14.2187 18.513C13.9875 18.3585 13.8072 18.1389 13.7008 17.8819C13.5944 17.6249 13.5665 17.3422 13.6208 17.0694C13.675 16.7966 13.809 16.546 14.0056 16.3494C14.2023 16.1527 14.4529 16.0188 14.7257 15.9645C14.9984 15.9103 15.2812 15.9381 15.5381 16.0445C15.7951 16.151 16.0147 16.3312 16.1693 16.5625C16.3238 16.7937 16.4062 17.0656 16.4062 17.3438C16.4062 17.7167 16.2581 18.0744 15.9944 18.3381C15.7306 18.6018 15.373 18.75 15 18.75ZM19.6875 23.4375C19.4094 23.4375 19.1375 23.355 18.9062 23.2005C18.675 23.046 18.4947 22.8264 18.3883 22.5694C18.2819 22.3124 18.254 22.0297 18.3083 21.7569C18.3625 21.4841 18.4965 21.2335 18.6931 21.0369C18.8898 20.8402 19.1404 20.7063 19.4132 20.652C19.6859 20.5978 19.9687 20.6256 20.2256 20.732C20.4826 20.8385 20.7022 21.0187 20.8568 21.25C21.0113 21.4812 21.0938 21.7531 21.0938 22.0312C21.0938 22.4042 20.9456 22.7619 20.6819 23.0256C20.4181 23.2893 20.0605 23.4375 19.6875 23.4375ZM19.6875 18.75C19.4094 18.75 19.1375 18.6675 18.9062 18.513C18.675 18.3585 18.4947 18.1389 18.3883 17.8819C18.2819 17.6249 18.254 17.3422 18.3083 17.0694C18.3625 16.7966 18.4965 16.546 18.6931 16.3494C18.8898 16.1527 19.1404 16.0188 19.4132 15.9645C19.6859 15.9103 19.9687 15.9381 20.2256 16.0445C20.4826 16.151 20.7022 16.3312 20.8568 16.5625C21.0113 16.7937 21.0938 17.0656 21.0938 17.3438C21.0938 17.7167 20.9456 18.0744 20.6819 18.3381C20.4181 18.6018 20.0605 18.75 19.6875 18.75ZM21.5625 12.1875C21.5625 12.4361 21.4637 12.6746 21.2879 12.8504C21.1121 13.0262 20.8736 13.125 20.625 13.125H9.375C9.12636 13.125 8.8879 13.0262 8.71209 12.8504C8.53627 12.6746 8.4375 12.4361 8.4375 12.1875V7.5C8.4375 7.25136 8.53627 7.0129 8.71209 6.83709C8.8879 6.66127 9.12636 6.5625 9.375 6.5625H20.625C20.8736 6.5625 21.1121 6.66127 21.2879 6.83709C21.4637 7.0129 21.5625 7.25136 21.5625 7.5V12.1875Z"
+                    fill="white"
+                  />
+                </svg>
+                РАССЧИТАТЬ СТОИМОСТЬ
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section
+        class="video-section"
+        data-header-theme="brand"
+        aria-labelledby="promo-video-title"
+        data-promo-video-section
+      >
+        <img
+          class="video-section__background"
+          src="img/posters/2.jpg"
+          width="1512"
+          height="982"
+          alt=""
+        />
+        <div
+          class="video-section__player"
+          id="promo-video-player"
+          aria-hidden="true"
+          data-promo-video-player
+        >
+          <svg class="video-section__player-icon play-button__icon" aria-hidden="true">
+            <use href="/img/sprite.svg#icon-play"></use>
+          </svg>
+          <video
+            class="video-section__video"
+            playsinline
+            preload="metadata"
+            poster="img/posters/2.jpg"
+            data-promo-video-media
+          ></video>
+          <button
+            class="video-section__close button-reset"
+            type="button"
+            aria-label="Закрыть видео"
+            tabindex="-1"
+            data-promo-video-close
+          ></button>
+        </div>
+        <div class="video-section__content">
+          <h2 class="video-section__title" id="promo-video-title">
+            <span>Праздник,</span>
+            <span>который точно</span>
+            <span class="video-section__title-accent">запомнится!</span>
+          </h2>
+          <p class="video-section__description">
+            <span>Командные игры, яркие эмоции и отдых вместе —</span>
+            <span>событие, которое коллеги будут вспоминать весь год.</span>
+          </p>
+          <div class="video-section__control">
+            <button
+              class="video-section__play play-button"
+              type="button"
+              aria-label="Открыть видео"
+              aria-controls="promo-video-player"
+              aria-expanded="false"
+              data-promo-video
+            >
+              <svg class="play-button__icon" aria-hidden="true">
+                <use href="/img/sprite.svg#icon-play"></use>
+              </svg>
+            </button>
+            <span class="video-section__duration">Смотреть видео</span>
+          </div>
+        </div>
+      </section>
+
+      <div class="about-game-group" data-about-game-group>
+        <section
+          class="about-game"
+          data-about-initial-state="team"
+          data-header-theme="brand"
+          aria-labelledby="about-game-title"
+        >
+          <div class="about-game__inner container">
+            <div class="about-game__heading">
+              <h2 class="about-game__title" id="about-game-title">
+                <span>Почему компании</span>
+                <span>выбирают <em class="about-game__title-accent">WARPOINT</em></span>
+              </h2>
+              <p class="about-game__lead">
+                Командные VR-игры, которые объединяют коллег и дают повод для общих побед.
+              </p>
+            </div>
+            <div class="about-game__stage">
+              <div class="about-game__visual-wrap" data-about-game-scene>
+                <span class="about-game__visual-aura" aria-hidden="true"></span>
+                <span class="about-game__visual-shadow" aria-hidden="true"></span>
+                <div class="about-game__visual-model">
+                  <div
+                    class="about-game__visual-state about-game__visual-state--team is-active"
+                    data-about-scene-state="team"
+                  >
+                    <img
+                      class="about-game__visual"
+                      src="img/about/2.png"
+                      width="1080"
+                      height="1440"
+                      alt="Командная игра в виртуальной реальности"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  </div>
+                  <div
+                    class="about-game__visual-state about-game__visual-state--immersion"
+                    data-about-scene-state="immersion"
+                    aria-hidden="true"
+                  >
+                    <img
+                      class="about-game__visual"
+                      src="img/about/4.png"
+                      width="1080"
+                      height="1440"
+                      alt="Погружение в виртуальный игровой мир"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  </div>
+                  <div
+                    class="about-game__visual-state about-game__visual-state--family"
+                    data-about-scene-state="family"
+                    aria-hidden="true"
+                  >
+                    <img
+                      class="about-game__visual"
+                      src="img/about/1.png"
+                      width="1080"
+                      height="1440"
+                      alt="Семья играет в виртуальной реальности"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  </div>
+                  <div
+                    class="about-game__visual-state about-game__visual-state--events"
+                    data-about-scene-state="events"
+                    aria-hidden="true"
+                  >
+                    <img
+                      class="about-game__visual"
+                      src="img/about/3.png"
+                      width="1080"
+                      height="1440"
+                      alt="День рождения в парке виртуальной реальности"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  </div>
+                  <span class="about-game__visual-light" aria-hidden="true"></span>
+                </div>
+              </div>
+              <ol class="about-game__benefits">
+                <li class="about-game__benefit about-game__benefit--one" data-about-benefit="team">
+                  <span class="about-game__number"
+                    ><svg
+                      width="44"
+                      height="51"
+                      viewBox="0 0 44 51"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M0 33.2518V17.8159C0 12.1493 1.06449 7.7633 3.19347 4.65798C5.32246 1.55266 8.30472 0 12.1403 0C15.9927 0 18.9834 1.52999 21.1124 4.58998C23.2583 7.64996 24.3312 12.0586 24.3312 17.8159V33.2518C24.3312 39.0091 23.2245 43.4178 21.011 46.4778C18.7976 49.5151 15.8406 51.0224 12.1403 50.9997C8.27093 50.9997 5.28022 49.4811 3.16813 46.4438C1.05604 43.3838 0 38.9865 0 33.2518ZM9.90991 35.1898C9.90991 37.3205 10.0873 38.9411 10.4422 40.0518C10.8139 41.1625 11.3884 41.7178 12.1656 41.7178C12.9429 41.7178 13.5089 41.1625 13.8637 40.0518C14.2355 38.9411 14.4213 37.3205 14.4213 35.1898V16.0479C14.4213 13.8719 14.2355 12.2286 13.8637 11.1179C13.492 10.0073 12.926 9.45195 12.1656 9.45195C11.3884 9.45195 10.8139 10.0073 10.4422 11.1179C10.0873 12.2286 9.90991 13.8719 9.90991 16.0479V35.1898Z"
+                        fill="var(--red-600)"
+                      />
+                      <path
+                        d="M33.938 50.2518V12.2059L25.6248 16.2179V5.77997L36.2191 0.475998H44V50.2518H33.938Z"
+                        fill="var(--red-600)"
+                      /></svg
+                  ></span>
+                  <div class="about-game__benefit-content">
+                    <h3 class="about-game__benefit-title">Захватывающие командные игры</h3>
+                    <p class="about-game__benefit-description">
+                      Совместные миссии, одиночные игры или соревнования между командами. Играйте в
+                      команде или друг против друга.
+                    </p>
+                  </div>
+                </li>
+                <li
+                  class="about-game__benefit about-game__benefit--two"
+                  data-about-benefit="immersion"
+                >
+                  <span class="about-game__number">
+                    <svg
+                      width="44"
+                      height="51"
+                      viewBox="0 0 44 51"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M0 33.2518V17.8159C0 12.1493 0.956007 7.7633 2.86802 4.65798C4.78004 1.55266 7.45837 0 10.903 0C14.3629 0 17.0488 1.52999 18.9608 4.58998C20.888 7.64996 21.8516 12.0586 21.8516 17.8159V33.2518C21.8516 39.0091 20.8576 43.4178 18.8698 46.4778C16.8819 49.5151 14.2263 51.0224 10.903 50.9997C7.42802 50.9997 4.7421 49.4811 2.84526 46.4438C0.94842 43.3838 0 38.9865 0 33.2518ZM8.89997 35.1898C8.89997 37.3205 9.05931 38.9411 9.37797 40.0518C9.71182 41.1625 10.2278 41.7178 10.9258 41.7178C11.6238 41.7178 12.1322 41.1625 12.4509 40.0518C12.7847 38.9411 12.9516 37.3205 12.9516 35.1898V16.0479C12.9516 13.8719 12.7847 12.2286 12.4509 11.1179C12.117 10.0073 11.6087 9.45195 10.9258 9.45195C10.2278 9.45195 9.71182 10.0073 9.37797 11.1179C9.05931 12.2286 8.89997 13.8719 8.89997 16.0479V35.1898Z"
+                        fill="var(--red-600)"
+                      />
+                      <path
+                        d="M22.0118 50.2518V41.8198L31.8223 23.6639C32.5658 22.0546 33.2184 20.4226 33.7798 18.7679C34.3565 17.1132 34.6448 15.4359 34.6448 13.7359C34.6448 12.0359 34.5082 10.9026 34.2351 10.3359C33.9771 9.76929 33.4384 9.48595 32.619 9.48595C31.7844 9.48595 31.2532 9.90528 31.0256 10.7439C30.8132 11.5599 30.7069 13.1353 30.7069 15.4699V17.9859H21.9208V14.9259C21.9208 10.3019 22.8768 6.66397 24.7888 4.01198C26.7008 1.33733 29.3488 0 32.7328 0C36.4051 0 39.1213 1.14466 40.8816 3.43398C42.6419 5.70064 43.5296 8.94196 43.5448 13.1579C43.5448 16.8299 43.1123 19.9012 42.2473 22.3719C41.3824 24.8425 40.2746 27.3245 38.9241 29.8179L34.3261 39.8818H44V50.2518H22.0118Z"
+                        fill="var(--red-600)"
+                      />
+                    </svg>
+                  </span>
+                  <div class="about-game__benefit-content">
+                    <h3 class="about-game__benefit-title">Подходит любой команде</h3>
+                    <p class="about-game__benefit-description">
+                      Специальная подготовка не нужна: правила объясняем на месте, играют и новички,
+                      и опытные геймеры.
+                    </p>
+                  </div>
+                </li>
+                <li
+                  class="about-game__benefit about-game__benefit--three"
+                  data-about-benefit="family"
+                >
+                  <span class="about-game__number">
+                    <svg
+                      width="44"
+                      height="51"
+                      viewBox="0 0 44 51"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M0 33.0278V18.0059C0 12.3769 0.941197 7.96871 2.82359 4.78123C4.72081 1.59374 7.38877 0 10.8275 0C14.2958 0 16.9712 1.58244 18.8536 4.74732C20.7508 7.88959 21.6994 12.3091 21.6994 18.0059V33.0278C21.6994 38.7245 20.7286 43.1554 18.7869 46.3203C16.8452 49.4625 14.1921 51.0224 10.8275 50.9998C7.35912 50.9998 4.68375 49.4286 2.80136 46.2863C0.933786 43.1441 0 38.7245 0 33.0278ZM8.6931 34.7911C8.6931 37.0065 8.86356 38.7245 9.20446 39.9453C9.54537 41.1434 10.0938 41.7425 10.8497 41.7425C11.6204 41.7425 12.1763 41.1434 12.5172 39.9453C12.8581 38.7245 13.0285 37.0065 13.0285 34.7911V16.4122C13.0285 14.1515 12.8507 12.4221 12.4949 11.224C12.154 10.0033 11.6056 9.39291 10.8497 9.39291C10.0938 9.39291 9.54537 10.0033 9.20446 11.224C8.86356 12.4221 8.6931 14.1515 8.6931 16.4122V34.7911Z"
+                        fill="var(--red-600)"
+                      />
+                      <path
+                        d="M21.4113 36.4526V34.1468H29.882V36.4526C29.882 38.2837 30.1118 39.6514 30.5713 40.5557C31.0456 41.4373 31.7793 41.8781 32.7723 41.8781C33.7802 41.8781 34.4546 41.4147 34.7955 40.4878C35.1513 39.561 35.3291 37.8203 35.3291 35.2658C35.3291 32.8017 35.092 31.1062 34.6177 30.1794C34.1434 29.2299 33.1799 28.7552 31.7274 28.7552H28.6592V20.4474H31.5495C32.839 20.4474 33.6765 19.9839 34.0619 19.0571C34.4472 18.1076 34.6399 16.593 34.6399 14.5132C34.6399 12.5239 34.5065 11.1449 34.2397 10.3763C33.9877 9.58506 33.4245 9.18945 32.55 9.18945C31.7052 9.18945 31.1123 9.59636 30.7714 10.4102C30.4305 11.224 30.26 12.5126 30.26 14.2759V16.0392H21.9226V14.1402C21.9226 9.89025 22.8861 6.4767 24.8129 3.89958C26.7546 1.29986 29.4003 0 32.7501 0C36.2629 0 38.879 1.19813 40.5984 3.5944C42.3325 5.96806 43.1996 9.11033 43.1996 13.0212C43.1996 15.8244 42.8142 18.1415 42.0435 19.9726C41.2876 21.8038 40.1537 23.194 38.6418 24.1435V24.2791C40.213 24.8895 41.4951 26.1442 42.4882 28.0431C43.4961 29.9194 44 32.5191 44 35.8423C44 40.4765 43.0366 44.1614 41.1097 46.8967C39.1828 49.6321 36.3889 50.9998 32.7279 50.9998C29.2595 50.9998 26.5175 49.6999 24.5017 47.1002C22.5007 44.4778 21.4706 40.9287 21.4113 36.4526Z"
+                        fill="var(--red-600)"
+                      />
+                    </svg>
+                  </span>
+                  <div class="about-game__benefit-content">
+                    <h3 class="about-game__benefit-title">Организация под ключ</h3>
+                    <p class="about-game__benefit-description about-game__benefit-description--lit">
+                      Подберём сценарий, проведём инструктаж и турнир — вам останется играть и
+                      болеть за коллег.
+                    </p>
+                  </div>
+                </li>
+                <li
+                  class="about-game__benefit about-game__benefit--four"
+                  data-about-benefit="events"
+                >
+                  <span class="about-game__number">
+                    <svg
+                      width="44"
+                      height="51"
+                      viewBox="0 0 44 51"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M0 33.0278V18.0059C0 12.3769 0.939299 7.96871 2.8179 4.78123C4.71129 1.59374 7.37386 0 10.8056 0C14.267 0 16.937 1.58244 18.8156 4.74732C20.7089 7.88959 21.6556 12.3091 21.6556 18.0059V33.0278C21.6556 38.7245 20.6868 43.1554 18.749 46.3203C16.8112 49.4625 14.1634 51.0224 10.8056 50.9998C7.34428 50.9998 4.6743 49.4286 2.79571 46.2863C0.931903 43.1441 0 38.7245 0 33.0278ZM8.67557 34.7911C8.67557 37.0065 8.84568 38.7245 9.1859 39.9453C9.52612 41.1434 10.0734 41.7425 10.8278 41.7425C11.597 41.7425 12.1517 41.1434 12.4919 39.9453C12.8322 38.7245 13.0023 37.0065 13.0023 34.7911V16.4122C13.0023 14.1515 12.8248 12.4221 12.4697 11.224C12.1295 10.0033 11.5822 9.39291 10.8278 9.39291C10.0734 9.39291 9.52612 10.0033 9.1859 11.224C8.84568 12.4221 8.67557 14.1515 8.67557 16.4122V34.7911Z"
+                        fill="var(--red-600)"
+                      />
+                      <path
+                        d="M32.9947 50.1859V36.9273L33.15 35.8423V18.3111H32.9503L28.6902 30.5863H35.5685L36.5892 30.2811H44V40.4878H21.235V31.2984L33.6603 0.813826H41.4262V50.1859H32.9947Z"
+                        fill="var(--red-600)"
+                      />
+                    </svg>
+                  </span>
+                  <div class="about-game__benefit-content">
+                    <h3 class="about-game__benefit-title">Уютная лаунж-зона</h3>
+                    <p class="about-game__benefit-description">
+                      Комфортное пространство для фуршета и общения. Можно со своей едой и напитками
+                      или заказать кейтеринг.
+                    </p>
+                  </div>
+                </li>
+              </ol>
+            </div>
+          </div>
+        </section>
+      </div>
+      @include('partials/immersive-showcase.html') @include('partials/gallery.html')
+      @include('partials/event-addons.html') @include('partials/event-program-corp.html')
+
+      <section class="zones" data-header-theme="brand" data-zone-tabs aria-labelledby="zones-title">
+        <div class="zones__inner container">
+          <div class="zones__heading section-head">
+            <h2 class="section-head__title" id="zones-title">
+              <span>Игровые зоны</span> <br />
+              в нашем парке
+            </h2>
+            <div class="section-head__lead section-head__lead--big-width">
+              Выберите свою зону и погрузитесь в мир технологий, адреналина и незабываемых эмоций
+            </div>
+          </div>
+
+          <span class="visually-hidden" id="zones-navigation-label">Доступные игровые зоны</span>
+          <div class="zones__navigation">
+            <div
+              class="zones__tabs"
+              id="zones-activity-tabs"
+              role="group"
+              aria-labelledby="zones-navigation-label"
+            >
+              <button
+                class="zones__tab button-reset is-active"
+                id="zone-tab-arena"
+                type="button"
+                aria-pressed="true"
+                aria-controls="zone-panel-arena"
+                data-zone-tab
+              >
+                <svg class="zones__tab-icon" aria-hidden="true">
+                  <use href="/img/sprite.svg#icon-arena"></use>
+                </svg>
+                <span>Арена</span>
+              </button>
+              <button
+                class="zones__tab button-reset"
+                id="zone-tab-vr"
+                type="button"
+                aria-pressed="false"
+                aria-controls="zone-panel-vr"
+                tabindex="-1"
+                data-zone-tab
+              >
+                <svg class="zones__tab-icon" aria-hidden="true">
+                  <use href="/img/sprite.svg#icon-vr"></use>
+                </svg>
+                <span>Вр станция</span>
+              </button>
+              <button
+                class="zones__tab button-reset"
+                id="zone-tab-extreme"
+                type="button"
+                aria-pressed="false"
+                aria-controls="zone-panel-extreme"
+                tabindex="-1"
+                data-zone-tab
+              >
+                <svg class="zones__tab-icon" aria-hidden="true">
+                  <use href="/img/sprite.svg#icon-lightning"></use>
+                </svg>
+                <span>Экстрим</span>
+              </button>
+              <button
+                class="zones__tab button-reset"
+                id="zone-tab-simulators"
+                type="button"
+                aria-pressed="false"
+                aria-controls="zone-panel-simulators"
+                tabindex="-1"
+                data-zone-tab
+              >
+                <svg class="zones__tab-icon" aria-hidden="true">
+                  <use href="/img/sprite.svg#icon-wheel"></use>
+                </svg>
+                <span>Симуляторы</span>
+              </button>
+              <button
+                class="zones__tab button-reset"
+                id="zone-tab-lounge"
+                type="button"
+                aria-pressed="false"
+                aria-controls="zone-panel-lounge"
+                tabindex="-1"
+                data-zone-tab
+              >
+                <svg class="zones__tab-icon" aria-hidden="true">
+                  <use href="/img/sprite.svg#icon-confeti"></use>
+                </svg>
+                <span>Лаунж</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="zones__mobile-select" data-zone-mobile-select>
+            <span class="zones__mobile-label" id="zones-mobile-select-label">
+              Выберите свою игровую зону
+            </span>
+            <button
+              class="zones__mobile-trigger button-reset"
+              type="button"
+              aria-haspopup="listbox"
+              aria-expanded="false"
+              aria-controls="zones-mobile-options"
+              aria-labelledby="zones-mobile-select-label zones-mobile-select-value"
+              data-zone-mobile-trigger
+            >
+              <span
+                class="zones__mobile-value"
+                id="zones-mobile-select-value"
+                data-zone-mobile-value
+              >
+                <svg class="zones__tab-icon" aria-hidden="true">
+                  <use href="/img/sprite.svg#icon-gun"></use>
+                </svg>
+                <span>Арена</span>
+              </span>
+              <span class="zones__mobile-chevron" aria-hidden="true"></span>
+            </button>
+            <div
+              class="zones__mobile-dropdown"
+              id="zones-mobile-options"
+              role="listbox"
+              aria-labelledby="zones-mobile-select-label"
+              data-zone-mobile-menu
+              hidden
+            ></div>
+          </div>
+
+          <div class="zones__panels">
+            <section
+              class="zone zone--red"
+              id="zone-panel-arena"
+              role="region"
+              aria-labelledby="zone-tab-arena"
+              data-zone-panel
+            >
+              <div class="zone__row">
+                <div class="zone__image-container">
+                  <img
+                    class="zone__image"
+                    src="img/zones/арена.jpg"
+                    width="3000"
+                    height="1996"
+                    alt="Игроки на арене WARPOINT"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                  <button
+                    class="play-button play-button--centered"
+                    type="button"
+                    data-zone-video="arena"
+                    aria-label="Смотреть видео зоны «Арена»"
+                  >
+                    <svg class="play-button__icon" aria-hidden="true">
+                      <use href="/img/sprite.svg#icon-play"></use>
+                    </svg>
+                  </button>
+                </div>
+                <div class="zone__content">
+                  <div class="zone__wrap">
+                    <h3 class="zone__title"><span>Арена</span> для командных сражений</h3>
+                    <p class="zone__desc">
+                      Совместные игры на большой площадке, по которой участники могут свободно
+                      перемещаться. В виртуальном мире все участники видят персонажей друг друга и
+                      могут взаимодействовать между собой
+                    </p>
+                    <ul class="zone__params">
+                      <li class="zone__params-item">площадь 350 м²</li>
+                      <li class="zone__params-item">2–10 человек</li>
+                      <li class="zone__params-item">от 1000 ₽</li>
+                      <li class="zone__params-item">12+</li>
+                    </ul>
+                    <div class="zone__bottom">
+                      <button class="zone__button btn btn--red" type="button" data-booking-open>
+                        <svg
+                          width="30"
+                          height="30"
+                          viewBox="0 0 30 30"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            d="M28.9968 20.3613C28.9973 20.3559 28.9973 20.3504 28.9968 20.3449L27.0761 10.4813C27.0761 10.4742 27.0761 10.4672 27.0761 10.4602C26.7796 8.84069 25.9249 7.37634 24.6606 6.32169C23.3964 5.26705 21.8025 4.68881 20.1561 4.6875H9.83074C8.17974 4.68687 6.58138 5.26839 5.31678 6.3298C4.05218 7.39121 3.20232 8.86452 2.91668 10.4906L1.00535 20.3449C1.00479 20.3504 1.00479 20.3559 1.00535 20.3613C0.849775 21.2447 0.979813 22.1547 1.37658 22.9592C1.77335 23.7636 2.4162 24.4207 3.2118 24.8349C4.00739 25.2492 4.91432 25.3991 5.80089 25.2628C6.68747 25.1266 7.50755 24.7114 8.14207 24.0773L8.18308 24.034L12.8343 18.75H17.1702L21.8237 24.034C21.8366 24.0492 21.8507 24.0633 21.8647 24.0773C22.6555 24.8664 23.7265 25.3105 24.8436 25.3125C25.4594 25.3121 26.0677 25.1769 26.6256 24.9164C27.1836 24.6559 27.6778 24.2764 28.0735 23.8045C28.4692 23.3327 28.7567 22.7799 28.916 22.1851C29.0753 21.5903 29.1025 20.9678 28.9956 20.3613H28.9968ZM12.1874 13.125H11.2499V14.0625C11.2499 14.3111 11.1511 14.5496 10.9753 14.7254C10.7995 14.9012 10.561 15 10.3124 15C10.0637 15 9.82528 14.9012 9.64947 14.7254C9.47365 14.5496 9.37488 14.3111 9.37488 14.0625V13.125H8.43738C8.18874 13.125 7.95028 13.0262 7.77447 12.8504C7.59865 12.6746 7.49988 12.4361 7.49988 12.1875C7.49988 11.9389 7.59865 11.7004 7.77447 11.5246C7.95028 11.3488 8.18874 11.25 8.43738 11.25H9.37488V10.3125C9.37488 10.0639 9.47365 9.8254 9.64947 9.64959C9.82528 9.47377 10.0637 9.375 10.3124 9.375C10.561 9.375 10.7995 9.47377 10.9753 9.64959C11.1511 9.8254 11.2499 10.0639 11.2499 10.3125V11.25H12.1874C12.436 11.25 12.6745 11.3488 12.8503 11.5246C13.0261 11.7004 13.1249 11.9389 13.1249 12.1875C13.1249 12.4361 13.0261 12.6746 12.8503 12.8504C12.6745 13.0262 12.436 13.125 12.1874 13.125ZM16.8749 12.1875C16.8749 11.9389 16.9737 11.7004 17.1495 11.5246C17.3253 11.3488 17.5637 11.25 17.8124 11.25H20.6249C20.8735 11.25 21.112 11.3488 21.2878 11.5246C21.4636 11.7004 21.5624 11.9389 21.5624 12.1875C21.5624 12.4361 21.4636 12.6746 21.2878 12.8504C21.112 13.0262 20.8735 13.125 20.6249 13.125H17.8124C17.5637 13.125 17.3253 13.0262 17.1495 12.8504C16.9737 12.6746 16.8749 12.4361 16.8749 12.1875ZM26.762 22.4379C26.5864 22.6907 26.3624 22.9062 26.1029 23.0717C25.8433 23.2373 25.5536 23.3497 25.2503 23.4023C24.8834 23.4665 24.5065 23.4427 24.1506 23.3329C23.7947 23.2231 23.47 23.0304 23.203 22.7707L19.6639 18.75H20.1561C21.353 18.7502 22.5302 18.4448 23.5761 17.8628C24.6219 17.2808 25.5019 16.4414 26.1327 15.4242L27.1569 20.6977C27.2091 20.9994 27.201 21.3086 27.1332 21.6072C27.0655 21.9059 26.9393 22.1882 26.762 22.4379Z"
+                            fill="white"
+                          />
+                        </svg>
+                        забронировать игру
+                      </button>
+
+                      <div class="zone__price">
+                        <small>от</small>
+                        <span> 1000 ₽</span>
+                      </div>
+                    </div>
+                  </div>
+                  <span class="zone__watermark" aria-hidden="true">01</span>
+                </div>
+              </div>
+            </section>
+
+            <section
+              class="zone zone--violet"
+              id="zone-panel-vr"
+              role="region"
+              aria-labelledby="zone-tab-vr"
+              data-zone-panel
+              hidden
+            >
+              <div class="zone__row">
+                <div class="zone__image-container">
+                  <img
+                    class="zone__image"
+                    src="img/zones/2.jpg"
+                    alt="Игроки на VR-станции WARPOINT"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                  <button
+                    class="play-button play-button--centered"
+                    type="button"
+                    data-zone-video="vr"
+                    aria-label="Смотреть видео VR-станции"
+                  >
+                    <svg class="play-button__icon" aria-hidden="true">
+                      <use href="/img/sprite.svg#icon-play"></use>
+                    </svg>
+                  </button>
+                </div>
+                <div class="zone__content">
+                  <div class="zone__wrap">
+                    <h3 class="zone__title"><span>VR станция</span> игры на прохождение</h3>
+                    <p class="zone__desc">
+                      Большой выбор игр разных жанров: победите плохих парней, спасите мир от зомби
+                      или пройдите увлекательный квест
+                    </p>
+                    <ul class="zone__params">
+                      <li class="zone__params-item">1–4 человека</li>
+                      <li class="zone__params-item">Oculus Quest</li>
+                      <li class="zone__params-item">Valve Index</li>
+                      <li class="zone__params-item">от 700 ₽</li>
+                      <li class="zone__params-item">6+</li>
+                    </ul>
+                    <div class="zone__bottom">
+                      <button class="zone__button btn btn--red" type="button" data-booking-open>
+                        <svg
+                          width="30"
+                          height="30"
+                          viewBox="0 0 30 30"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            d="M28.9968 20.3613C28.9973 20.3559 28.9973 20.3504 28.9968 20.3449L27.0761 10.4813C27.0761 10.4742 27.0761 10.4672 27.0761 10.4602C26.7796 8.84069 25.9249 7.37634 24.6606 6.32169C23.3964 5.26705 21.8025 4.68881 20.1561 4.6875H9.83074C8.17974 4.68687 6.58138 5.26839 5.31678 6.3298C4.05218 7.39121 3.20232 8.86452 2.91668 10.4906L1.00535 20.3449C1.00479 20.3504 1.00479 20.3559 1.00535 20.3613C0.849775 21.2447 0.979813 22.1547 1.37658 22.9592C1.77335 23.7636 2.4162 24.4207 3.2118 24.8349C4.00739 25.2492 4.91432 25.3991 5.80089 25.2628C6.68747 25.1266 7.50755 24.7114 8.14207 24.0773L8.18308 24.034L12.8343 18.75H17.1702L21.8237 24.034C21.8366 24.0492 21.8507 24.0633 21.8647 24.0773C22.6555 24.8664 23.7265 25.3105 24.8436 25.3125C25.4594 25.3121 26.0677 25.1769 26.6256 24.9164C27.1836 24.6559 27.6778 24.2764 28.0735 23.8045C28.4692 23.3327 28.7567 22.7799 28.916 22.1851C29.0753 21.5903 29.1025 20.9678 28.9956 20.3613H28.9968ZM12.1874 13.125H11.2499V14.0625C11.2499 14.3111 11.1511 14.5496 10.9753 14.7254C10.7995 14.9012 10.561 15 10.3124 15C10.0637 15 9.82528 14.9012 9.64947 14.7254C9.47365 14.5496 9.37488 14.3111 9.37488 14.0625V13.125H8.43738C8.18874 13.125 7.95028 13.0262 7.77447 12.8504C7.59865 12.6746 7.49988 12.4361 7.49988 12.1875C7.49988 11.9389 7.59865 11.7004 7.77447 11.5246C7.95028 11.3488 8.18874 11.25 8.43738 11.25H9.37488V10.3125C9.37488 10.0639 9.47365 9.8254 9.64947 9.64959C9.82528 9.47377 10.0637 9.375 10.3124 9.375C10.561 9.375 10.7995 9.47377 10.9753 9.64959C11.1511 9.8254 11.2499 10.0639 11.2499 10.3125V11.25H12.1874C12.436 11.25 12.6745 11.3488 12.8503 11.5246C13.0261 11.7004 13.1249 11.9389 13.1249 12.1875C13.1249 12.4361 13.0261 12.6746 12.8503 12.8504C12.6745 13.0262 12.436 13.125 12.1874 13.125ZM16.8749 12.1875C16.8749 11.9389 16.9737 11.7004 17.1495 11.5246C17.3253 11.3488 17.5637 11.25 17.8124 11.25H20.6249C20.8735 11.25 21.112 11.3488 21.2878 11.5246C21.4636 11.7004 21.5624 11.9389 21.5624 12.1875C21.5624 12.4361 21.4636 12.6746 21.2878 12.8504C21.112 13.0262 20.8735 13.125 20.6249 13.125H17.8124C17.5637 13.125 17.3253 13.0262 17.1495 12.8504C16.9737 12.6746 16.8749 12.4361 16.8749 12.1875ZM26.762 22.4379C26.5864 22.6907 26.3624 22.9062 26.1029 23.0717C25.8433 23.2373 25.5536 23.3497 25.2503 23.4023C24.8834 23.4665 24.5065 23.4427 24.1506 23.3329C23.7947 23.2231 23.47 23.0304 23.203 22.7707L19.6639 18.75H20.1561C21.353 18.7502 22.5302 18.4448 23.5761 17.8628C24.6219 17.2808 25.5019 16.4414 26.1327 15.4242L27.1569 20.6977C27.2091 20.9994 27.201 21.3086 27.1332 21.6072C27.0655 21.9059 26.9393 22.1882 26.762 22.4379Z"
+                            fill="white"
+                          />
+                        </svg>
+                        забронировать игру
+                      </button>
+
+                      <div class="zone__price">
+                        <small>от</small>
+                        <span> 1000 ₽</span>
+                      </div>
+                    </div>
+                  </div>
+                  <span class="zone__watermark" aria-hidden="true">02</span>
+                </div>
+              </div>
+            </section>
+
+            <section
+              class="zone zone--red"
+              id="zone-panel-extreme"
+              role="region"
+              aria-labelledby="zone-tab-extreme"
+              data-zone-panel
+              hidden
+            >
+              <div class="zone__row">
+                <div class="zone__image-container">
+                  <img
+                    class="zone__image"
+                    src="img/zones/3.jpg"
+                    alt="Игроки в экстрим-зоне WARPOINT"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                  <button
+                    class="play-button play-button--centered"
+                    type="button"
+                    data-zone-video="extreme"
+                    aria-label="Смотреть видео экстрим-зоны"
+                  >
+                    <svg class="play-button__icon" aria-hidden="true">
+                      <use href="/img/sprite.svg#icon-play"></use>
+                    </svg>
+                  </button>
+                </div>
+                <div class="zone__content">
+                  <div class="zone__wrap">
+                    <h3 class="zone__title">
+                      <span>Экстрим-зона</span> для любителей острых ощущений
+                    </h3>
+                    <p class="zone__desc">
+                      Зона с аттракционами, от которых захватывает дух! Прокатитесь на безумных
+                      американских горках, полетайте на дельтаплане, погрузитесь на дно океана или
+                      покорите космос
+                    </p>
+                    <ul class="zone__params">
+                      <li class="zone__params-item">1–4 человека</li>
+                      <li class="zone__params-item">от 700 ₽</li>
+                      <li class="zone__params-item">6+</li>
+                    </ul>
+                    <div class="zone__bottom">
+                      <button class="zone__button btn btn--red" type="button" data-booking-open>
+                        <svg
+                          width="30"
+                          height="30"
+                          viewBox="0 0 30 30"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            d="M28.9968 20.3613C28.9973 20.3559 28.9973 20.3504 28.9968 20.3449L27.0761 10.4813C27.0761 10.4742 27.0761 10.4672 27.0761 10.4602C26.7796 8.84069 25.9249 7.37634 24.6606 6.32169C23.3964 5.26705 21.8025 4.68881 20.1561 4.6875H9.83074C8.17974 4.68687 6.58138 5.26839 5.31678 6.3298C4.05218 7.39121 3.20232 8.86452 2.91668 10.4906L1.00535 20.3449C1.00479 20.3504 1.00479 20.3559 1.00535 20.3613C0.849775 21.2447 0.979813 22.1547 1.37658 22.9592C1.77335 23.7636 2.4162 24.4207 3.2118 24.8349C4.00739 25.2492 4.91432 25.3991 5.80089 25.2628C6.68747 25.1266 7.50755 24.7114 8.14207 24.0773L8.18308 24.034L12.8343 18.75H17.1702L21.8237 24.034C21.8366 24.0492 21.8507 24.0633 21.8647 24.0773C22.6555 24.8664 23.7265 25.3105 24.8436 25.3125C25.4594 25.3121 26.0677 25.1769 26.6256 24.9164C27.1836 24.6559 27.6778 24.2764 28.0735 23.8045C28.4692 23.3327 28.7567 22.7799 28.916 22.1851C29.0753 21.5903 29.1025 20.9678 28.9956 20.3613H28.9968ZM12.1874 13.125H11.2499V14.0625C11.2499 14.3111 11.1511 14.5496 10.9753 14.7254C10.7995 14.9012 10.561 15 10.3124 15C10.0637 15 9.82528 14.9012 9.64947 14.7254C9.47365 14.5496 9.37488 14.3111 9.37488 14.0625V13.125H8.43738C8.18874 13.125 7.95028 13.0262 7.77447 12.8504C7.59865 12.6746 7.49988 12.4361 7.49988 12.1875C7.49988 11.9389 7.59865 11.7004 7.77447 11.5246C7.95028 11.3488 8.18874 11.25 8.43738 11.25H9.37488V10.3125C9.37488 10.0639 9.47365 9.8254 9.64947 9.64959C9.82528 9.47377 10.0637 9.375 10.3124 9.375C10.561 9.375 10.7995 9.47377 10.9753 9.64959C11.1511 9.8254 11.2499 10.0639 11.2499 10.3125V11.25H12.1874C12.436 11.25 12.6745 11.3488 12.8503 11.5246C13.0261 11.7004 13.1249 11.9389 13.1249 12.1875C13.1249 12.4361 13.0261 12.6746 12.8503 12.8504C12.6745 13.0262 12.436 13.125 12.1874 13.125ZM16.8749 12.1875C16.8749 11.9389 16.9737 11.7004 17.1495 11.5246C17.3253 11.3488 17.5637 11.25 17.8124 11.25H20.6249C20.8735 11.25 21.112 11.3488 21.2878 11.5246C21.4636 11.7004 21.5624 11.9389 21.5624 12.1875C21.5624 12.4361 21.4636 12.6746 21.2878 12.8504C21.112 13.0262 20.8735 13.125 20.6249 13.125H17.8124C17.5637 13.125 17.3253 13.0262 17.1495 12.8504C16.9737 12.6746 16.8749 12.4361 16.8749 12.1875ZM26.762 22.4379C26.5864 22.6907 26.3624 22.9062 26.1029 23.0717C25.8433 23.2373 25.5536 23.3497 25.2503 23.4023C24.8834 23.4665 24.5065 23.4427 24.1506 23.3329C23.7947 23.2231 23.47 23.0304 23.203 22.7707L19.6639 18.75H20.1561C21.353 18.7502 22.5302 18.4448 23.5761 17.8628C24.6219 17.2808 25.5019 16.4414 26.1327 15.4242L27.1569 20.6977C27.2091 20.9994 27.201 21.3086 27.1332 21.6072C27.0655 21.9059 26.9393 22.1882 26.762 22.4379Z"
+                            fill="white"
+                          />
+                        </svg>
+                        забронировать игру
+                      </button>
+
+                      <div class="zone__price">
+                        <small>от</small>
+                        <span> 1000 ₽</span>
+                      </div>
+                    </div>
+                  </div>
+                  <span class="zone__watermark" aria-hidden="true">03</span>
+                </div>
+              </div>
+            </section>
+
+            <section
+              class="zone zone--violet"
+              id="zone-panel-simulators"
+              role="region"
+              aria-labelledby="zone-tab-simulators"
+              data-zone-panel
+              hidden
+            >
+              <div class="zone__row">
+                <div class="zone__image-container">
+                  <img
+                    class="zone__image"
+                    src="img/zones/4.jpg"
+                    alt="Автосимуляторы WARPOINT"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                  <button
+                    class="play-button play-button--centered"
+                    type="button"
+                    data-zone-video="simulators"
+                    aria-label="Смотреть видео зоны симуляторов"
+                  >
+                    <svg class="play-button__icon" aria-hidden="true">
+                      <use href="/img/sprite.svg#icon-play"></use>
+                    </svg>
+                  </button>
+                </div>
+                <div class="zone__content">
+                  <div class="zone__wrap">
+                    <h3 class="zone__title"><span>Симуляторы</span> для фанатов скорости</h3>
+                    <p class="zone__desc">
+                      Игровая зона с профессиональными автосимуляторами, где можно устроить
+                      соревновательные заезды с друзьями и показать, кто настоящий король скорости
+                    </p>
+                    <ul class="zone__params">
+                      <li class="zone__params-item">1–4 человека</li>
+                      <li class="zone__params-item">от 700 ₽</li>
+                      <li class="zone__params-item">6+</li>
+                    </ul>
+                    <div class="zone__bottom">
+                      <button class="zone__button btn btn--red" type="button" data-booking-open>
+                        <svg
+                          width="30"
+                          height="30"
+                          viewBox="0 0 30 30"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            d="M28.9968 20.3613C28.9973 20.3559 28.9973 20.3504 28.9968 20.3449L27.0761 10.4813C27.0761 10.4742 27.0761 10.4672 27.0761 10.4602C26.7796 8.84069 25.9249 7.37634 24.6606 6.32169C23.3964 5.26705 21.8025 4.68881 20.1561 4.6875H9.83074C8.17974 4.68687 6.58138 5.26839 5.31678 6.3298C4.05218 7.39121 3.20232 8.86452 2.91668 10.4906L1.00535 20.3449C1.00479 20.3504 1.00479 20.3559 1.00535 20.3613C0.849775 21.2447 0.979813 22.1547 1.37658 22.9592C1.77335 23.7636 2.4162 24.4207 3.2118 24.8349C4.00739 25.2492 4.91432 25.3991 5.80089 25.2628C6.68747 25.1266 7.50755 24.7114 8.14207 24.0773L8.18308 24.034L12.8343 18.75H17.1702L21.8237 24.034C21.8366 24.0492 21.8507 24.0633 21.8647 24.0773C22.6555 24.8664 23.7265 25.3105 24.8436 25.3125C25.4594 25.3121 26.0677 25.1769 26.6256 24.9164C27.1836 24.6559 27.6778 24.2764 28.0735 23.8045C28.4692 23.3327 28.7567 22.7799 28.916 22.1851C29.0753 21.5903 29.1025 20.9678 28.9956 20.3613H28.9968ZM12.1874 13.125H11.2499V14.0625C11.2499 14.3111 11.1511 14.5496 10.9753 14.7254C10.7995 14.9012 10.561 15 10.3124 15C10.0637 15 9.82528 14.9012 9.64947 14.7254C9.47365 14.5496 9.37488 14.3111 9.37488 14.0625V13.125H8.43738C8.18874 13.125 7.95028 13.0262 7.77447 12.8504C7.59865 12.6746 7.49988 12.4361 7.49988 12.1875C7.49988 11.9389 7.59865 11.7004 7.77447 11.5246C7.95028 11.3488 8.18874 11.25 8.43738 11.25H9.37488V10.3125C9.37488 10.0639 9.47365 9.8254 9.64947 9.64959C9.82528 9.47377 10.0637 9.375 10.3124 9.375C10.561 9.375 10.7995 9.47377 10.9753 9.64959C11.1511 9.8254 11.2499 10.0639 11.2499 10.3125V11.25H12.1874C12.436 11.25 12.6745 11.3488 12.8503 11.5246C13.0261 11.7004 13.1249 11.9389 13.1249 12.1875C13.1249 12.4361 13.0261 12.6746 12.8503 12.8504C12.6745 13.0262 12.436 13.125 12.1874 13.125ZM16.8749 12.1875C16.8749 11.9389 16.9737 11.7004 17.1495 11.5246C17.3253 11.3488 17.5637 11.25 17.8124 11.25H20.6249C20.8735 11.25 21.112 11.3488 21.2878 11.5246C21.4636 11.7004 21.5624 11.9389 21.5624 12.1875C21.5624 12.4361 21.4636 12.6746 21.2878 12.8504C21.112 13.0262 20.8735 13.125 20.6249 13.125H17.8124C17.5637 13.125 17.3253 13.0262 17.1495 12.8504C16.9737 12.6746 16.8749 12.4361 16.8749 12.1875ZM26.762 22.4379C26.5864 22.6907 26.3624 22.9062 26.1029 23.0717C25.8433 23.2373 25.5536 23.3497 25.2503 23.4023C24.8834 23.4665 24.5065 23.4427 24.1506 23.3329C23.7947 23.2231 23.47 23.0304 23.203 22.7707L19.6639 18.75H20.1561C21.353 18.7502 22.5302 18.4448 23.5761 17.8628C24.6219 17.2808 25.5019 16.4414 26.1327 15.4242L27.1569 20.6977C27.2091 20.9994 27.201 21.3086 27.1332 21.6072C27.0655 21.9059 26.9393 22.1882 26.762 22.4379Z"
+                            fill="white"
+                          />
+                        </svg>
+                        забронировать игру
+                      </button>
+
+                      <div class="zone__price">
+                        <small>от</small>
+                        <span> 1000 ₽</span>
+                      </div>
+                    </div>
+                  </div>
+                  <span class="zone__watermark" aria-hidden="true">04</span>
+                </div>
+              </div>
+            </section>
+
+            <section
+              class="zone zone--red"
+              id="zone-panel-lounge"
+              role="region"
+              aria-labelledby="zone-tab-lounge"
+              data-zone-panel
+              hidden
+            >
+              <div class="zone__row">
+                <div class="zone__image-container">
+                  <img
+                    class="zone__image"
+                    src="img/zones/лаунж.jpg"
+                    width="3000"
+                    height="1996"
+                    alt="Праздник в лаунж-зоне WARPOINT"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                  <button
+                    class="play-button play-button--centered"
+                    type="button"
+                    data-zone-video="lounge"
+                    aria-label="Смотреть видео лаунж-зоны"
+                  >
+                    <svg class="play-button__icon" aria-hidden="true">
+                      <use href="/img/sprite.svg#icon-play"></use>
+                    </svg>
+                  </button>
+                </div>
+                <div class="zone__content">
+                  <div class="zone__wrap">
+                    <h3 class="zone__title"><span>Лаунж-зона</span> для проведения мероприятий</h3>
+                    <p class="zone__desc">
+                      Комфортное пространство, где можно весело провести время с друзьями и отметить
+                      любой праздник: день рождения, школьный выпускной или корпоратив с коллегами
+                    </p>
+                    <ul class="zone__params">
+                      <li class="zone__params-item">площадь 40 м²</li>
+                      <li class="zone__params-item">ТВ с приставкой</li>
+                      <li class="zone__params-item">до 30 человек</li>
+                    </ul>
+                    <div class="zone__bottom">
+                      <button
+                        class="zone__button zone__button--calculate btn btn--red"
+                        type="button"
+                        aria-haspopup="dialog"
+                        aria-controls="event-modal"
+                        data-event-modal-open
+                      >
+                        <svg
+                          width="24"
+                          height="28"
+                          aria-hidden="true"
+                          style="color: #fff; stroke: none; fill: none"
+                        >
+                          <use href="/img/sprite.svg#icon-calc"></use>
+                        </svg>
+                        Рассчитать стоимость
+                      </button>
+                    </div>
+                  </div>
+                  <span class="zone__watermark" aria-hidden="true">05</span>
+                </div>
+              </div>
+            </section>
+          </div>
+        </div>
+      </section>
+
+      @include('partials/mobile-arena.html') @include('partials/event-tariffs-corp.html')
+
+      <div class="games-group" data-games-group data-pixel-section>
+        <div class="games-group__background" aria-hidden="true">
+          <span class="games-group__background-pattern"></span>
+          <span class="games-group__background-gradient"></span>
+        </div>
+        <section
+          class="games-catalog"
+          data-header-theme="dark"
+          aria-labelledby="games-catalog-title"
+          data-slider-root
+        >
+          <h2 class="games-catalog__title" id="games-catalog-title">
+            <span>Выберите своё</span>
+            <span>виртуальное приключение</span>
+          </h2>
+          <div class="games-catalog__track">
+            <div class="games-catalog__slider swiper" data-slider data-games-slider>
+              <div class="swiper-wrapper">
+                <article class="game-card swiper-slide">
+                  <img
+                    class="game-card__image"
+                    src="img/games/1.jpg"
+                    width="436"
+                    height="624"
+                    alt="WARPOINT АРЕНА"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                  <div class="game-card__meta">
+                    <span class="game-card__tag game-card__tag--accent">Арена</span>
+                    <span class="game-card__tag">Стрелялка</span>
+                    <span class="game-card__tag">2–10 игроков</span>
+                    <span class="game-card__tag game-card__tag--age">12+</span>
+                  </div>
+                  <div class="game-card__content">
+                    <h3 class="game-card__title">WARPOINT АРЕНА</h3>
+                    <p class="game-card__description">
+                      Для фанатов реалистичных шутеров, мощного оружия, стратегии и тактики
+                    </p>
+                    <button
+                      class="game-card__more button-reset"
+                      type="button"
+                      data-game-open="warpoint-arena"
+                      aria-haspopup="dialog"
+                      aria-controls="game-modal"
+                    >
+                      Подробнее
+                    </button>
+                  </div>
+                </article>
+                <article class="game-card swiper-slide">
+                  <img
+                    class="game-card__image"
+                    src="img/games/vert/snow-battle.png"
+                    width="1080"
+                    height="1920"
+                    alt="СНЕЖНАЯ БИТВА"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                  <div class="game-card__meta">
+                    <span class="game-card__tag game-card__tag--accent">Арена</span>
+                    <span class="game-card__tag">Активная</span>
+                    <span class="game-card__tag">2–10 игроков</span>
+                    <span class="game-card__tag game-card__tag--age">6+</span>
+                  </div>
+                  <div class="game-card__content">
+                    <h3 class="game-card__title">СНЕЖНАЯ БИТВА</h3>
+                    <p class="game-card__description">
+                      Постройте снежную крепость и разбейте снеговиков противника
+                    </p>
+                    <button
+                      class="game-card__more button-reset"
+                      type="button"
+                      data-game-open="snow-battle"
+                      aria-haspopup="dialog"
+                      aria-controls="game-modal"
+                    >
+                      Подробнее
+                    </button>
+                  </div>
+                </article>
+                <article class="game-card swiper-slide">
+                  <img
+                    class="game-card__image"
+                    src="img/games/vert/farm.png"
+                    width="1080"
+                    height="1920"
+                    alt="ВЕСЕЛАЯ ФЕРМА"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                  <div class="game-card__meta">
+                    <span class="game-card__tag game-card__tag--accent">Арена</span>
+                    <span class="game-card__tag">Казуал</span>
+                    <span class="game-card__tag">2–10 игроков</span>
+                    <span class="game-card__tag game-card__tag--age">6+</span>
+                  </div>
+                  <div class="game-card__content">
+                    <h3 class="game-card__title">ВЕСЕЛАЯ ФЕРМА</h3>
+                    <p class="game-card__description">
+                      Вырастите урожай всей командой и сдайте его раньше соперника
+                    </p>
+                    <button
+                      class="game-card__more button-reset"
+                      type="button"
+                      data-game-open="farm"
+                      aria-haspopup="dialog"
+                      aria-controls="game-modal"
+                    >
+                      Подробнее
+                    </button>
+                  </div>
+                </article>
+                <article class="game-card swiper-slide">
+                  <img
+                    class="game-card__image"
+                    src="img/games/vert/diamonds.png"
+                    width="1080"
+                    height="1920"
+                    alt="ПОИСК АЛМАЗОВ"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                  <div class="game-card__meta">
+                    <span class="game-card__tag game-card__tag--accent">Арена</span>
+                    <span class="game-card__tag">Активная</span>
+                    <span class="game-card__tag">2–10 игроков</span>
+                    <span class="game-card__tag game-card__tag--age">6+</span>
+                  </div>
+                  <div class="game-card__content">
+                    <h3 class="game-card__title">ПОИСК АЛМАЗОВ</h3>
+                    <p class="game-card__description">
+                      Прорубайте туннели в скале и добывайте алмазы быстрее соперника
+                    </p>
+                    <button
+                      class="game-card__more button-reset"
+                      type="button"
+                      data-game-open="diamonds"
+                      aria-haspopup="dialog"
+                      aria-controls="game-modal"
+                    >
+                      Подробнее
+                    </button>
+                  </div>
+                </article>
+                <article class="game-card swiper-slide">
+                  <img
+                    class="game-card__image"
+                    src="img/games/vert/paint-battle.png"
+                    width="1080"
+                    height="1920"
+                    alt="БИТВА КРАСОК"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                  <div class="game-card__meta">
+                    <span class="game-card__tag game-card__tag--accent">Арена</span>
+                    <span class="game-card__tag">Активная</span>
+                    <span class="game-card__tag">2–10 игроков</span>
+                    <span class="game-card__tag game-card__tag--age">6+</span>
+                  </div>
+                  <div class="game-card__content">
+                    <h3 class="game-card__title">БИТВА КРАСОК</h3>
+                    <p class="game-card__description">
+                      Захватите арену своим цветом — и не дайте закрасить её обратно
+                    </p>
+                    <button
+                      class="game-card__more button-reset"
+                      type="button"
+                      data-game-open="paint-battle"
+                      aria-haspopup="dialog"
+                      aria-controls="game-modal"
+                    >
+                      Подробнее
+                    </button>
+                  </div>
+                </article>
+                <article class="game-card swiper-slide">
+                  <img
+                    class="game-card__image"
+                    src="img/games/vert/flying-saucers.jpg"
+                    width="557"
+                    height="714"
+                    alt="ЛЕТАЮЩИЕ ТАРЕЛКИ"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                  <div class="game-card__meta">
+                    <span class="game-card__tag game-card__tag--accent">Арена</span>
+                    <span class="game-card__tag">Казуал</span>
+                    <span class="game-card__tag">2–10 игроков</span>
+                    <span class="game-card__tag game-card__tag--age">6+</span>
+                  </div>
+                  <div class="game-card__content">
+                    <h3 class="game-card__title">ЛЕТАЮЩИЕ ТАРЕЛКИ</h3>
+                    <p class="game-card__description">
+                      Похищайте добычу гравитационным лучом с борта НЛО
+                    </p>
+                    <button
+                      class="game-card__more button-reset"
+                      type="button"
+                      data-game-open="flying-saucers"
+                      aria-haspopup="dialog"
+                      aria-controls="game-modal"
+                    >
+                      Подробнее
+                    </button>
+                  </div>
+                </article>
+                <article class="game-card swiper-slide">
+                  <img
+                    class="game-card__image"
+                    src="img/games/vert/kids-arena.png"
+                    width="1080"
+                    height="1920"
+                    alt="ДЕТСКАЯ АРЕНА"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                  <div class="game-card__meta">
+                    <span class="game-card__tag game-card__tag--accent">Арена</span>
+                    <span class="game-card__tag">Стрелялка</span>
+                    <span class="game-card__tag">2–10 игроков</span>
+                    <span class="game-card__tag game-card__tag--age">6+</span>
+                  </div>
+                  <div class="game-card__content">
+                    <h3 class="game-card__title">ДЕТСКАЯ АРЕНА</h3>
+                    <p class="game-card__description">
+                      Мультяшные герои, разнообразные пушки и командный бой на всю площадку
+                    </p>
+                    <button
+                      class="game-card__more button-reset"
+                      type="button"
+                      data-game-open="kids-arena"
+                      aria-haspopup="dialog"
+                      aria-controls="game-modal"
+                    >
+                      Подробнее
+                    </button>
+                  </div>
+                </article>
+              </div>
+            </div>
+            <div class="games-catalog__controls slider-controls">
+              <button
+                class="slider-arrow slider-arrow--prev button-reset"
+                type="button"
+                aria-label="Предыдущая игра"
+                data-slider-prev
+              >
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="m9 5 7 7-7 7"></path>
+                </svg>
+              </button>
+              <button
+                class="slider-arrow slider-arrow--next button-reset"
+                type="button"
+                aria-label="Следующая игра"
+                data-slider-next
+              >
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="m9 5 7 7-7 7"></path>
+                </svg>
+              </button>
+            </div>
+          </div>
+        </section>
+      </div>
+      @include('partials/reviews.html') @include('partials/contacts.html')
+    </main>
+
+    @include('partials/footer.html') @include('partials/location-modal.html')
+    @include('partials/event-modal.html') @include('partials/booking-panel.html')
+    @include('partials/auth-modal.html') @include('partials/mobile-actions.html')
+    @include('partials/game-modal.html') @include('partials/cookie-notice.html')
+
+    <script type="module" src="/js/main.js"></script>
+  </body>
+</html>

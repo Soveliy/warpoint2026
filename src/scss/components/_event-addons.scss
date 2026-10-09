@@ -41,6 +41,11 @@
     width: rem(30px);
     height: rem(30px);
     filter: brightness(0) invert(1);
+
+    &--corporate,
+    &--graduation {
+      display: none;
+    }
   }
 
   &__showcase {
@@ -88,6 +93,11 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
+
+    &--corporate,
+    &--graduation {
+      display: none;
+    }
   }
 
   &__details {
@@ -287,5 +297,29 @@
     &__arrow {
       transition: none;
     }
+  }
+}
+
+.page--corporate {
+  .event-addons__request-icon--birthday,
+  .event-addons__image--birthday {
+    display: none;
+  }
+
+  .event-addons__request-icon--corporate,
+  .event-addons__image--corporate {
+    display: block;
+  }
+}
+
+.page--graduation {
+  .event-addons__request-icon--birthday,
+  .event-addons__image--birthday {
+    display: none;
+  }
+
+  .event-addons__request-icon--graduation,
+  .event-addons__image--graduation {
+    display: block;
   }
 }
