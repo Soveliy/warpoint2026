@@ -104,14 +104,15 @@
             </p>
             <ul class="hero-event__params">
               <li class="hero-event__param"><small>от</small> 15 900 ₽</li>
+              <li class="hero-event__param">До 30 гостей</li>
             </ul>
             <div class="hero-event__buttons">
               <button
                 class="hero-event__request btn button-reset"
                 type="button"
                 aria-haspopup="dialog"
-                aria-controls="event-modal"
-                data-event-modal-open
+                aria-controls="event-request-modal"
+                data-event-request-open
               >
                 <svg class="btn__icon" aria-hidden="true">
                   <use href="/img/sprite.svg#icon-martini"></use>
@@ -188,8 +189,8 @@
             <span class="video-section__title-accent">запомнится!</span>
           </h2>
           <p class="video-section__description">
-            <span>Командные игры, яркие эмоции и отдых вместе —</span>
-            <span>событие, которое коллеги будут вспоминать весь год.</span>
+            <span>Эпичные командные игры, живые эмоции,</span>
+            <span>соревновательный азарт и общая победа вместо привычного банкета.</span>
           </p>
           <div class="video-section__control">
             <button
@@ -1167,11 +1168,13 @@
           </div>
         </section>
       </div>
-      @include('partials/reviews.html') @include('partials/contacts.html')
+      @include('partials/reviews.html') @include('partials/faq.html')
+      @include('partials/contacts.html')
     </main>
 
     @include('partials/footer.html') @include('partials/location-modal.html')
-    @include('partials/event-modal.html') @include('partials/booking-panel.html')
+    @include('partials/event-modal.html') @include('partials/event-request-modal.html')
+    @include('partials/booking-panel.html')
     @include('partials/auth-modal.html') @include('partials/mobile-actions.html')
     @include('partials/game-modal.html') @include('partials/cookie-notice.html')
 

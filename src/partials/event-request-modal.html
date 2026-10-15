@@ -1,0 +1,69 @@
+<div
+  class="event-request-modal"
+  id="event-request-modal"
+  aria-hidden="true"
+  data-event-request-modal
+>
+  <div
+    class="event-request-modal__dialog"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="event-request-title"
+    tabindex="-1"
+    data-event-request-dialog
+  >
+    <button
+      class="event-request-modal__close button-reset"
+      type="button"
+      aria-label="Закрыть заявку"
+      data-event-request-close
+    >
+      <span></span><span></span>
+    </button>
+    <h2 class="event-request-modal__title" id="event-request-title">Оставить заявку</h2>
+    <p class="event-request-modal__lead">
+      Расскажите, когда планируете мероприятие. Менеджер свяжется с вами и поможет с организацией.
+    </p>
+    <form class="event-request-modal__form" data-event-request-form>
+      <label class="event-request-modal__field">
+        <span>Ваше имя</span>
+        <input name="name" type="text" autocomplete="name" minlength="2" maxlength="100" required />
+      </label>
+      <label class="event-request-modal__field">
+        <span>Телефон</span>
+        <input
+          name="phone"
+          type="tel"
+          autocomplete="tel"
+          inputmode="tel"
+          data-phone-mask
+          required
+        />
+      </label>
+      <label class="event-request-modal__field">
+        <span>E-mail</span>
+        <input name="email" type="email" autocomplete="email" required />
+      </label>
+      <label class="event-request-modal__field">
+        <span>Дата мероприятия</span>
+        <input name="date" type="date" required />
+      </label>
+      <label class="event-request-modal__consent">
+        <input name="consent" type="checkbox" required />
+        <span>
+          Согласен с
+          <a href="/legal/privacy/" target="_blank" rel="noopener noreferrer"
+            >политикой конфиденциальности</a
+          >
+          и
+          <a href="/legal/consent/" target="_blank" rel="noopener noreferrer"
+            >обработкой персональных данных</a
+          >
+        </span>
+      </label>
+      <button class="event-request-modal__submit btn btn--red" type="submit">
+        Оставить заявку
+      </button>
+    </form>
+  </div>
+</div>

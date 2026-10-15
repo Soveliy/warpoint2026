@@ -162,6 +162,17 @@
     align-items: flex-end;
   }
 
+  &__item--bonus &__image-container {
+    right: rem(-12px);
+    width: 61%;
+  }
+
+  &__item--bonus &__image {
+    width: 100%;
+    height: 100%;
+    object-position: right bottom;
+  }
+
   &__bonus-device {
     position: absolute;
     right: fluid(42px, 86px);
@@ -271,6 +282,11 @@
 
     &__item--tournaments &__image-container {
       width: 56%;
+    }
+
+    &__item--bonus &__image-container {
+      right: rem(-8px);
+      width: 62%;
     }
 
     &__bonus-device {

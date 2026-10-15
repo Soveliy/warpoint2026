@@ -12,8 +12,9 @@
   justify-content: center;
   border-radius: rem(10px);
   background: var(--red-500);
+
   svg {
-    color: #fff;
+    color: #ffffff;
     height: 1.5rem;
     width: 1.5rem;
   }
@@ -530,7 +531,9 @@
     display: grid;
     place-items: center;
     border: rem(1px) solid var(--red-500);
+    background: transparent;
     color: var(--red-500);
+    cursor: pointer;
   }
 
   &-request {

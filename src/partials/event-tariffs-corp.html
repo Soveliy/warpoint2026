@@ -4,6 +4,7 @@
   aria-labelledby="event-tariffs-title"
   data-header-theme="brand"
   data-slider-root
+  data-tariff-context="corporate"
 >
   <div class="container">
     <div class="event-tariffs__head section-head section-head--center" data-reveal>
@@ -34,13 +35,21 @@
               </div>
             </dl>
             <div class="event-tariffs__card-actions">
-              <a class="event-tariffs__card-more" href="/tariffs/#start">Подробнее</a>
+              <button
+                class="event-tariffs__card-more"
+                type="button"
+                aria-haspopup="dialog"
+                aria-controls="tariff-modal"
+                data-tariff-open="start"
+              >
+                Подробнее
+              </button>
               <button
                 class="event-tariffs__card-request btn btn--red"
                 type="button"
                 aria-haspopup="dialog"
-                aria-controls="event-modal"
-                data-event-modal-open
+                aria-controls="event-request-modal"
+                data-event-request-open
               >
                 Оставить заявку
               </button>
@@ -72,13 +81,21 @@
               </div>
             </dl>
             <div class="event-tariffs__card-actions">
-              <a class="event-tariffs__card-more" href="/tariffs/#standard">Подробнее</a>
+              <button
+                class="event-tariffs__card-more"
+                type="button"
+                aria-haspopup="dialog"
+                aria-controls="tariff-modal"
+                data-tariff-open="standard"
+              >
+                Подробнее
+              </button>
               <button
                 class="event-tariffs__card-request btn btn--red"
                 type="button"
                 aria-haspopup="dialog"
-                aria-controls="event-modal"
-                data-event-modal-open
+                aria-controls="event-request-modal"
+                data-event-request-open
               >
                 Оставить заявку
               </button>
@@ -104,13 +121,21 @@
               </div>
             </dl>
             <div class="event-tariffs__card-actions">
-              <a class="event-tariffs__card-more" href="/tariffs/#basic">Подробнее</a>
+              <button
+                class="event-tariffs__card-more"
+                type="button"
+                aria-haspopup="dialog"
+                aria-controls="tariff-modal"
+                data-tariff-open="basic"
+              >
+                Подробнее
+              </button>
               <button
                 class="event-tariffs__card-request btn btn--red"
                 type="button"
                 aria-haspopup="dialog"
-                aria-controls="event-modal"
-                data-event-modal-open
+                aria-controls="event-request-modal"
+                data-event-request-open
               >
                 Оставить заявку
               </button>
@@ -143,3 +168,4 @@
     </div>
   </div>
 </section>
+@include('tariff-modal.html')

@@ -1,12 +1,12 @@
-// Replace the temporary trailer and add game screenshots to images when supplied.
+// Replace the remaining temporary trailers and add screenshots when supplied.
 export const games = [
   {
     id: 'warpoint-arena',
     title: 'WARPOINT ARENA',
     tags: ['Арена', 'Стрелялка', '2–10 игроков', '12+'],
-    cover: 'img/games/1.jpg',
+    cover: 'img/games/hor/warpoint-arena.webp',
     images: [],
-    trailer: 'https://www.youtube.com/watch?v=dQw4w9WgXc',
+    trailer: 'https://rutube.ru/video/17c3489c23ff376f806f92c195bdeb12/?r=wd',
     description: [
       'Командно-тактический шутер, в который одновременно могут играть от 2 до 10 человек. Современный аналог лазертага и пейнтбола только в формате виртуальной реальности. Зарабатывайте очки, уничтожая противников. Ваша цель – одержать победу над командой соперников, для этого вам придется активно двигаться и слаженно работать в команде',
       'Сражения проходят на большой площадке, по которой все игроки могут свободно перемещаться, а в виртуальном мире все участники видят персонажей друг друга и могут взаимодействовать между собой',

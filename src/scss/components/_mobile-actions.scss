@@ -21,6 +21,12 @@
       transform $duration-base $ease-base,
       visibility 0s linear 0s;
 
+    .page--event:not(.is-event-hero-past) & {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+
     .is-mobile-menu-open & {
       opacity: 0;
       visibility: hidden;

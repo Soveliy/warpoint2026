@@ -2,16 +2,20 @@
 @use '../vars' as *;
 
 .page--event .header {
-  &:not([data-theme='dark']) {
+  &:not([data-theme='dark'], .header--scrolled, .header--menu-open) {
     background-color: transparent;
   }
 
-  &__top {
-    display: none;
+  &.header--scrolled:not(.header--menu-open) {
+    background-color: var(--gray-950);
+  }
+
+  &.header--scrolled[data-theme='dark']:not(.header--menu-open) {
+    background-color: var(--white);
   }
 
   &__bottom {
-    padding-top: rem(24px);
+    padding-top: rem(12px);
   }
 }
 
@@ -397,17 +401,19 @@
   }
 
   .hero-event {
-    min-height: rem(950px);
+    min-height: max(100svh, #{rem(820px)});
 
     &__wrap {
       justify-content: flex-start;
-      min-height: rem(950px);
-      padding-top: rem(110px);
-      padding-bottom: rem(260px);
+      min-height: max(100svh, #{rem(820px)});
+      padding-top: rem(132px);
+      padding-bottom: rem(248px);
     }
 
     &__title {
       max-width: 100%;
+      font-size: clamp(#{rem(38px)}, 10vw, #{rem(46px)});
+      line-height: 0.9;
 
       span {
         white-space: normal;
@@ -416,54 +422,67 @@
 
     &__desc {
       max-width: rem(360px);
+      font-size: rem(15px);
+      line-height: 1.3;
+    }
+
+    &__param {
+      padding: rem(8px) rem(10px);
+      font-size: rem(20px);
+
+      small {
+        font-size: rem(14px);
+      }
     }
 
     &__line {
-      top: 40%;
-      left: 30%;
-      width: rem(760px);
+      top: 43%;
+      left: 25%;
+      width: clamp(#{rem(600px)}, 150vw, #{rem(760px)});
     }
 
     &__character {
       &--boy {
-        top: 38%;
-        left: 42%;
-        width: rem(180px);
+        top: 43%;
+        left: 41%;
+        width: clamp(#{rem(145px)}, 38vw, #{rem(200px)});
       }
 
       &--girl {
-        top: 47%;
-        left: 44%;
-        width: rem(290px);
+        top: 49%;
+        left: 43%;
+        width: clamp(#{rem(220px)}, 57vw, #{rem(300px)});
       }
 
       &--cake {
         top: 67%;
-        left: 3%;
-        width: rem(180px);
+        left: 4%;
+        width: clamp(#{rem(120px)}, 32vw, #{rem(180px)});
       }
 
       &--balloon {
         top: 44%;
-        right: -20%;
-        width: rem(230px);
+        right: -15%;
+        width: clamp(#{rem(170px)}, 45vw, #{rem(230px)});
       }
     }
 
     &__buttons {
       right: 0;
-      bottom: rem(20px);
+      bottom: calc(#{rem(20px)} + env(safe-area-inset-bottom));
       display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
+      grid-template-columns: minmax(0, 1fr);
       gap: rem(8px);
     }
 
     &__request,
     &__calculate {
-      min-height: rem(64px);
+      width: 100%;
+      min-width: 0;
+      min-height: rem(60px);
       padding: rem(10px);
       border-radius: rem(18px);
-      font-size: rem(10px);
+      font-size: rem(12px);
       gap: rem(8px);
 
       .btn__icon {
@@ -473,21 +492,37 @@
     }
 
     &__allerts {
-      right: 0;
-      bottom: rem(100px);
-      width: min(100%, #{rem(270px)});
+      right: rem(16px);
+      bottom: calc(#{rem(162px)} + env(safe-area-inset-bottom));
+      left: rem(16px);
+      width: auto;
+
+      .allert {
+        padding: rem(10px) rem(14px);
+      }
+
+      .allert__row {
+        justify-content: flex-start;
+        gap: rem(12px);
+      }
+
+      .allert__pic {
+        width: rem(52px);
+        height: rem(56px);
+      }
+
+      .allert__title {
+        font-size: rem(28px);
+      }
+
+      .allert__desc {
+        font-size: rem(12px);
+      }
     }
 
     &--corporate {
-      min-height: rem(900px);
-
-      .hero-event__wrap {
-        min-height: rem(900px);
-        padding-bottom: rem(380px);
-      }
-
       .hero-event__title {
-        font-size: clamp(#{rem(38px)}, 8vw, #{rem(56px)});
+        font-size: clamp(#{rem(38px)}, 10vw, #{rem(46px)});
       }
 
       .hero-event__desc {
@@ -497,44 +532,37 @@
       .hero-event__line {
         top: 47%;
         left: 7%;
-        width: rem(650px);
+        width: clamp(#{rem(540px)}, 140vw, #{rem(720px)});
       }
 
       .hero-event__character--corp-balloon {
-        top: 44%;
-        right: -17%;
-        width: rem(180px);
+        top: 42%;
+        right: -12%;
+        width: clamp(#{rem(125px)}, 32vw, #{rem(180px)});
       }
 
       .hero-event__character--corp-woman {
-        top: 55%;
-        left: 5%;
-        width: rem(240px);
+        top: 53%;
+        left: 7%;
+        width: clamp(#{rem(185px)}, 48vw, #{rem(260px)});
       }
 
       .hero-event__character--corp-man {
-        top: 49%;
-        left: 33%;
-        width: rem(260px);
+        top: 48%;
+        left: 40%;
+        width: clamp(#{rem(205px)}, 52vw, #{rem(285px)});
       }
 
       .hero-event__character--corp-cocktail {
         top: 75%;
         left: 0;
-        width: rem(150px);
+        width: clamp(#{rem(95px)}, 26vw, #{rem(150px)});
       }
     }
 
     &--graduation {
-      min-height: rem(960px);
-
-      .hero-event__wrap {
-        min-height: rem(960px);
-        padding-bottom: rem(400px);
-      }
-
       .hero-event__title {
-        font-size: clamp(#{rem(38px)}, 8vw, #{rem(56px)});
+        font-size: clamp(#{rem(38px)}, 10vw, #{rem(46px)});
 
         span {
           transform: none;
@@ -550,71 +578,51 @@
       }
 
       .hero-event__line {
-        top: 49%;
-        left: 7%;
-        width: rem(816px);
+        top: 52%;
+        left: 12%;
+        width: clamp(#{rem(450px)}, 120vw, #{rem(650px)});
       }
 
       .hero-event__character--grad-backpack {
-        top: 40%;
-        left: 3%;
-        width: rem(150px);
+        top: 44%;
+        left: 7%;
+        width: clamp(#{rem(90px)}, 25vw, #{rem(150px)});
       }
 
       .hero-event__character--grad-girl {
-        top: 44%;
-        left: 37%;
-        width: rem(240px);
+        top: 37%;
+        left: 51%;
+        width: clamp(#{rem(180px)}, 45vw, #{rem(250px)});
       }
 
       .hero-event__character--grad-boy {
-        top: 53%;
-        left: -8%;
-        width: rem(290px);
+        top: 46%;
+        left: -5%;
+        width: clamp(#{rem(225px)}, 58vw, #{rem(315px)});
       }
 
       .hero-event__character--grad-cap {
-        top: 69%;
-        left: 58%;
-        width: rem(160px);
+        top: 55%;
+        left: 71%;
+        width: clamp(#{rem(85px)}, 23vw, #{rem(140px)});
       }
 
       .hero-event__allerts {
-        bottom: rem(100px);
-        width: min(100%, #{rem(245px)});
+        right: rem(16px);
       }
     }
   }
 }
 
-@media (width <= rem(390px)) {
+@media (width >= rem(560px)) and (max-width: $breakpoint-mobile) {
   .hero-event {
     &__buttons {
-      grid-template-columns: 1fr;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
     &__allerts {
-      bottom: rem(158px);
+      bottom: calc(#{rem(94px)} + env(safe-area-inset-bottom));
     }
-  }
-}
-
-@media (width <= rem(560px)) {
-  .hero-event--corporate,
-  .hero-event--graduation {
-    .hero-event__buttons {
-      grid-template-columns: minmax(0, 1fr);
-    }
-
-    .hero-event__request,
-    .hero-event__calculate {
-      width: 100%;
-      min-width: 0;
-    }
-  }
-
-  .hero-event--graduation .hero-event__allerts {
-    bottom: rem(170px);
   }
 }
 

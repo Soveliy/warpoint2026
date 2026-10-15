@@ -82,7 +82,7 @@ export function initSliders() {
       },
       modules,
       centeredSlides: isBloggersSlider,
-      initialSlide: isBloggersSlider ? 1 : 0,
+      initialSlide: 0,
       loop: (isLoopSlider || isImmersiveSlider) && slidesCount > 1,
       loopAdditionalSlides: isBloggersSlider ? 2 : 0,
       navigation:

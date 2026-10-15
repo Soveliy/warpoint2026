@@ -85,15 +85,12 @@
 
   &__visual {
     position: relative;
-    overflow: hidden;
     isolation: isolate;
     min-width: 0;
     min-height: rem(553px);
     margin: 0;
     overflow: hidden;
     border-radius: rem(24px);
-    padding: 1px;
-    background: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, rgba(227, 27, 84, 1) 100%);
 
     &::after {
       position: absolute;
@@ -130,6 +127,7 @@
     font-size: fluid(15px, 17px);
     font-weight: 600;
     line-height: 1.22;
+
     svg {
       flex: 0 0 rem(50px);
       width: rem(50px);
@@ -181,6 +179,14 @@
 
 @media (max-width: $breakpoint-mobile) {
   .mobile-arena {
+    &__layout {
+      gap: 0;
+    }
+
+    &__content {
+      display: contents;
+    }
+
     &__head {
       .section-head__title {
         font-size: $section-title-size-mobile;
@@ -192,7 +198,15 @@
     }
 
     &__visual {
+      order: 1;
+      margin-top: rem(32px);
       aspect-ratio: 1.25;
+    }
+
+    &__button {
+      order: 2;
+      width: 100%;
+      margin-top: rem(32px);
     }
 
     &__caption {

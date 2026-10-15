@@ -13,6 +13,13 @@ export function initEventHero() {
 
   if (!hero) return;
 
+  const updateMobileActions = () => {
+    document.body.classList.toggle('is-event-hero-past', hero.getBoundingClientRect().bottom <= 0);
+  };
+
+  window.addEventListener('scroll', updateMobileActions, { passive: true });
+  updateMobileActions();
+
   const images = [...hero.querySelectorAll('.hero-event__character')];
   const linePath = hero.querySelector('.hero-event__line-path');
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;

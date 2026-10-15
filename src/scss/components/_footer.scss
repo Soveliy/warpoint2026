@@ -139,6 +139,13 @@
     }
   }
 
+  &__social-label {
+    font-size: rem(8px);
+    font-weight: 800;
+    line-height: 1;
+    text-transform: uppercase;
+  }
+
   &__requisites {
     margin: 0;
     padding-right: rem(24px);

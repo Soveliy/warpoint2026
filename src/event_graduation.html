@@ -247,7 +247,51 @@
         </div>
       </section>
     </div>
-    @include('partials/gallery.html') @include('partials/event-addons.html')
+    <section class="gallery" data-header-theme="brand" aria-labelledby="gallery-title">
+      <div class="gallery__container container">
+        <div class="gallery__section-head section-head" data-reveal>
+          <h2 class="section-head__title" id="gallery-title">Яркие <br /><span>моменты</span></h2>
+
+          <p class="section-head__lead section-head__lead--lit-width">
+            Осторожно! Фото с игр повышают адреналин в крови!
+          </p>
+        </div>
+
+        <div class="gallery__grid">
+          <a class="gallery__item" href="img/grad/1.jpg" data-fancybox="moments">
+            <img class="gallery__image gallery__image--birthday" src="img/grad/1.jpg" width="3000" height="1996"
+              alt="Игроки с VR-шлемами на синей арене Warpoint" loading="lazy" decoding="async" />
+          </a>
+
+          <a class="gallery__item" href="img/grad/2.jpg" data-fancybox="moments">
+            <img class="gallery__image gallery__image--corporate" src="img/grad/2.jpg" width="3000" height="1996"
+              alt="Участница командной VR-игры с контроллерами" loading="lazy" decoding="async" />
+          </a>
+
+          <a class="gallery__item" href="img/grad/3.jpg" data-fancybox="moments">
+            <img class="gallery__image gallery__image--graduation" src="img/grad/3.jpg" width="3000" height="1996"
+              alt="Команда игроков на красной стороне арены" loading="lazy" decoding="async" />
+          </a>
+
+          <a class="gallery__item" href="img/grad/4.jpg" data-fancybox="moments">
+            <img class="gallery__image gallery__image--arena" src="img/grad/4.jpg" width="3000" height="1996"
+              alt="Игроки на большой VR-арене Warpoint" loading="lazy" decoding="async" />
+          </a>
+
+          <a class="gallery__item" href="img/grad/5.jpg" data-fancybox="moments">
+            <img class="gallery__image gallery__image--station" src="img/grad/5.jpg" width="3000" height="1996"
+              alt="Командное сражение на площадке Warpoint" loading="lazy" decoding="async" />
+          </a>
+
+          <a class="gallery__item" href="img/grad/6.jpg" data-fancybox="moments">
+            <img class="gallery__image gallery__image--extreme" src="img/grad/6.jpg" width="3000" height="1996"
+              alt="Гости играют в виртуальной реальности на арене" loading="lazy" decoding="async" />
+          </a>
+        </div>
+      </div>
+    </section>
+
+    @include('partials/event-addons.html')
     @include('partials/event-program-graduation.html')
 
     <section class="zones" data-header-theme="brand" data-zone-tabs aria-labelledby="zones-title">
@@ -556,6 +600,7 @@
         </div>
       </div>
     </section>
+    @include('partials/program-picker.html')
 
     @include('partials/event-tariffs-graduation.html')
 
@@ -731,7 +776,8 @@
         </div>
       </section>
     </div>
-    @include('partials/reviews.html') @include('partials/contacts.html')
+    @include('partials/reviews.html') @include('partials/faq.html')
+    @include('partials/contacts.html')
   </main>
 
   @include('partials/footer.html') @include('partials/location-modal.html')

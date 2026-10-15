@@ -65,7 +65,10 @@ export function initSiteNotices() {
 
   const positionAnnouncement = () => {
     frame = null;
-    const shouldFloat = hero.getBoundingClientRect().bottom <= window.innerHeight * 0.45;
+    const heroBottom = hero.getBoundingClientRect().bottom;
+    const shouldFloat = window.matchMedia('(max-width: 767px)').matches
+      ? heroBottom <= 0
+      : heroBottom <= window.innerHeight * 0.45;
     if (shouldFloat === floating) return;
     floating = shouldFloat;
     if (floating) {

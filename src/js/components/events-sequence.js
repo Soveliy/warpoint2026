@@ -152,6 +152,7 @@ function setupTabs(root) {
     }
 
     destroySlider();
+    if (activeIndex >= controls.filter((control) => !control.hidden).length) activeIndex = 0;
     setCompactState(states, controls, activeIndex);
   };
 
@@ -176,7 +177,11 @@ function setupTabs(root) {
         return;
       }
 
-      const nextIndex = getNextIndex(event, index, controls.length);
+      const nextIndex = getNextIndex(
+        event,
+        index,
+        controls.filter((control) => !control.hidden).length,
+      );
 
       if (nextIndex === null) {
         return;

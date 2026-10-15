@@ -77,18 +77,9 @@
       <legend class="auth-modal__label">Куда прислать код</legend>
       <div class="auth-modal__methods">
         <label class="auth-modal__method">
-          <input class="visually-hidden" type="radio" name="delivery" value="telegram" checked />
+          <input class="visually-hidden" type="radio" name="delivery" value="max" checked />
           <span class="auth-modal__method-card">
             <span class="auth-modal__badge">Рекомендуем</span>
-            <span class="auth-modal__method-icon auth-modal__method-icon--telegram">
-              <svg aria-hidden="true"><use href="/img/sprite.svg#icon-tg"></use></svg>
-            </span>
-            <span>Telegram</span>
-          </span>
-        </label>
-        <label class="auth-modal__method">
-          <input class="visually-hidden" type="radio" name="delivery" value="max" />
-          <span class="auth-modal__method-card">
             <span class="auth-modal__method-icon auth-modal__method-icon--max">
               <svg aria-hidden="true"><use href="/img/sprite.svg#icon-max"></use></svg>
             </span>
@@ -102,6 +93,15 @@
               <svg aria-hidden="true"><use href="/img/sprite.svg#icon-phone"></use></svg>
             </span>
             <span>Звонок</span>
+          </span>
+        </label>
+        <label class="auth-modal__method">
+          <input class="visually-hidden" type="radio" name="delivery" value="sms" />
+          <span class="auth-modal__method-card">
+            <span class="auth-modal__method-icon auth-modal__method-icon--sms">
+              <svg aria-hidden="true"><use href="/img/sprite.svg#icon-mess"></use></svg>
+            </span>
+            <span>СМС</span>
           </span>
         </label>
       </div>

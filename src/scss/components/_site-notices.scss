@@ -95,7 +95,7 @@
 
 .cookie-notice {
   position: fixed;
-  z-index: $z-header - 1;
+  z-index: $z-overlay;
   bottom: rem(24px);
   left: rem(24px);
   display: flex;
@@ -163,6 +163,10 @@
 }
 
 @media (max-width: $breakpoint-mobile) {
+  .hero__announcement {
+    display: none;
+  }
+
   .announcement {
     padding: rem(14px) rem(38px) rem(14px) rem(14px);
     gap: rem(12px);
@@ -184,14 +188,14 @@
   }
 
   .cookie-notice {
-    right: rem(12px);
-    bottom: calc(#{rem(88px)} + env(safe-area-inset-bottom));
-    left: rem(12px);
-    width: auto;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 100%;
     max-width: none;
     gap: rem(12px);
-    padding: rem(20px) rem(32px) rem(20px) rem(16px);
-    border-radius: rem(24px);
+    padding: rem(20px) rem(32px) calc(#{rem(20px)} + env(safe-area-inset-bottom)) rem(16px);
+    border-radius: rem(24px) rem(24px) 0 0;
 
     &__icon {
       flex-basis: rem(32px);

@@ -31,6 +31,10 @@
     outline-offset: rem(3px);
   }
 
+  &__phone &__input:focus-visible {
+    outline: none;
+  }
+
   &__close {
     @include hover {
       color: var(--white);
@@ -286,7 +290,7 @@
       height: rem(22px);
     }
 
-    &--telegram {
+    &--sms {
       background: #22a4ee;
     }
 

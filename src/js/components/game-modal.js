@@ -143,9 +143,12 @@ export function initGameModal() {
     const game = games[currentIndex];
     const url = new URL(game.trailer);
     const videoId = url.searchParams.get('v') || url.pathname.split('/').filter(Boolean).at(-1);
+    const isRutube = url.hostname === 'rutube.ru' || url.hostname.endsWith('.rutube.ru');
     const frame = document.createElement('iframe');
     frame.className = 'game-modal__video';
-    frame.src = `https://www.youtube.com/embed/${encodeURIComponent(videoId)}?autoplay=1&rel=0`;
+    frame.src = isRutube
+      ? `https://rutube.ru/play/embed/${encodeURIComponent(videoId)}?autoplay=1`
+      : `https://www.youtube.com/embed/${encodeURIComponent(videoId)}?autoplay=1&rel=0`;
     frame.title = `Трейлер: ${game.title}`;
     frame.allow = 'autoplay; encrypted-media; picture-in-picture; fullscreen';
     frame.allowFullscreen = true;

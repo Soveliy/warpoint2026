@@ -1,0 +1,49 @@
+<div class="tariff-modal" id="tariff-modal" aria-hidden="true" data-tariff-modal>
+  <div
+    class="tariff-modal__dialog"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="tariff-modal-title"
+    tabindex="-1"
+    data-tariff-dialog
+  >
+    <button
+      class="tariff-modal__close button-reset"
+      type="button"
+      aria-label="Закрыть информацию о тарифе"
+      data-tariff-close
+    >
+      <span></span><span></span>
+    </button>
+    <div class="tariff-modal__tags" data-tariff-tags></div>
+    <h2 class="tariff-modal__title" id="tariff-modal-title" data-tariff-title></h2>
+    <p class="tariff-modal__description" data-tariff-description></p>
+    <div class="tariff-modal__details">
+      <section class="tariff-modal__panel" aria-labelledby="tariff-modal-included-title">
+        <h3 class="tariff-modal__panel-title" id="tariff-modal-included-title">
+          В программу включено
+        </h3>
+        <ul class="tariff-modal__list" data-tariff-included></ul>
+      </section>
+      <section class="tariff-modal__panel" aria-labelledby="tariff-modal-benefits-title">
+        <h3 class="tariff-modal__panel-title" id="tariff-modal-benefits-title">
+          Преимущества тарифа
+        </h3>
+        <ul class="tariff-modal__list" data-tariff-benefits></ul>
+      </section>
+    </div>
+    <div class="tariff-modal__footer">
+      <dl class="tariff-modal__prices" data-tariff-prices></dl>
+      <button
+        class="tariff-modal__request btn btn--red"
+        type="button"
+        data-tariff-request
+        data-event-modal-open
+        aria-haspopup="dialog"
+        aria-controls="event-modal"
+      >
+        Оставить заявку
+      </button>
+    </div>
+  </div>
+</div>

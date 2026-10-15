@@ -18,6 +18,7 @@
 @use 'components/city-confirm';
 @use 'components/location-modal';
 @use 'components/event-modal';
+@use 'components/event-request-modal';
 @use 'components/auth-modal';
 @use 'components/booking-panel';
 @use 'components/ui-kit';
@@ -49,7 +50,9 @@
 @use 'components/footer';
 @use 'components/hero-event';
 @use 'components/event-sections';
+@use 'components/tariff-modal';
 @use 'components/event-addons';
+@use 'components/program-picker';
 @use 'components/immersive-showcase';
 @use 'components/mobile-arena';
 
